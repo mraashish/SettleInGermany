@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Web shell for Round 3 screens</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Noto+Sans+Devanagari:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<style>body{margin:0}</style>
+</helmet>
+<div style="width: 100%; position: relative; background: #F6F4F0; color: #1F1D1A; font-family: Inter, 'Noto Sans Devanagari', system-ui, sans-serif">
+
+  <sc-if value="{{ desktop }}" hint-placeholder-val="{{ true }}">
+    <header style="background: #FFFFFF; border-bottom: 1px solid #E4E0D8">
+      <div style="max-width: 1200px; margin: 0 auto; padding: 0 32px; min-height: 68px; display: flex; align-items: center; gap: 32px; flex-wrap: wrap">
+        <a href="web-home-desktop.dc.html" style="display: flex; align-items: center; gap: 10px; text-decoration: none; color: #1F1D1A; font-size: 17px; font-weight: 700"><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="9" fill="#0F5C63"></rect><path d="M9 23c0-5 14-3 14-9 0-3-3-5-7-5" fill="none" stroke="#FFFFFF" stroke-width="2.6" stroke-linecap="round"></path><circle cx="9" cy="23" r="2.6" fill="#E8A33D"></circle></svg>Settle in Germany</a>
+        <nav aria-label="Main" style="display: flex; gap: 4px; flex: 1">
+          <sc-for list="{{ nav }}" as="n" hint-placeholder-count="4">
+            <a href="{{ n.href }}" aria-current="{{ n.cur }}" style="min-height: 44px; padding: 0 14px; display: flex; align-items: center; gap: 6px; border-radius: 10px; background: {{ n.bg }}; color: {{ n.color }}; font-size: 15px; font-weight: {{ n.weight }}; text-decoration: none">{{ n.label }}</a>
+          </sc-for>
+        </nav>
+        <div style="display: flex; align-items: center; gap: 10px">
+          <button style="min-height: 44px; padding: 0 12px; border-radius: 10px; border: 1px solid #E4E0D8; background: #FFFFFF; font: 500 14px Inter, sans-serif; color: #1F1D1A">English ▾</button>
+          <a href="web-me-desktop.dc.html" aria-label="Your account: Sujan" style="width: 44px; height: 44px; border-radius: 999px; background: #0F5C63; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 700; text-decoration: none">S</a>
+        </div>
+      </div>
+    </header>
+  </sc-if>
+  <sc-if value="{{ mobile }}" hint-placeholder-val="{{ false }}">
+    <header style="background: #FFFFFF; border-bottom: 1px solid #E4E0D8; min-height: 56px; display: flex; align-items: center; justify-content: space-between; padding: 0 12px 0 16px">
+      <a href="web-home-mobile.dc.html" style="display: flex; align-items: center; gap: 8px; text-decoration: none; color: #1F1D1A; font-size: 16px; font-weight: 700"><svg width="28" height="28" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="9" fill="#0F5C63"></rect><path d="M9 23c0-5 14-3 14-9 0-3-3-5-7-5" fill="none" stroke="#FFFFFF" stroke-width="2.6" stroke-linecap="round"></path><circle cx="9" cy="23" r="2.6" fill="#E8A33D"></circle></svg>Settle in Germany</a>
+      <a href="web-me-mobile.dc.html" aria-label="Your account: Sujan" style="width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; text-decoration: none"><span style="width: 32px; height: 32px; border-radius: 999px; background: #0F5C63; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700">S</span></a>
+    </header>
+  </sc-if>
+
+  <div style="max-width: 1200px; margin: 0 auto; padding: {{ pad }}; box-sizing: border-box; display: flex; flex-direction: column; gap: 16px">
+    <nav aria-label="Breadcrumb" style="font-size: 14px; color: #6B655C; display: flex; gap: 6px; flex-wrap: wrap; padding: 0 {{ crumbPad }}"><a href="#section" style="color: #0F5C63">{{ m.section }}</a><span aria-hidden="true">›</span><span aria-current="page">{{ m.title }}</span></nav>
+
+    <div style="display: flex; gap: 32px; flex-wrap: wrap; align-items: flex-start">
+      <main style="flex: 999 1 560px; min-width: 0; max-width: 760px; display: flex; flex-direction: column; gap: 4px">
+        <sc-if value="{{ m.showTitle }}" hint-placeholder-val="{{ true }}">
+        <div style="display: flex; flex-direction: column; gap: 6px; padding: 0 16px 8px">
+          <h1 style="margin: 0; font-size: {{ h1 }}; line-height: 1.15; font-weight: 700; letter-spacing: -0.02em; display: flex; align-items: center; gap: 10px; flex-wrap: wrap">{{ m.title }}<sc-if value="{{ m.ai }}" hint-placeholder-val="{{ false }}"><span style="font-size: 12px; font-weight: 700; background: #E8A33D; color: #2A1A00; border-radius: 4px; padding: 2px 6px; letter-spacing: 0">AI</span></sc-if></h1>
+          <p style="margin: 0; font-size: 16px; line-height: 24px; color: #3B3833">{{ m.intro }}</p>
+        </div>
+        </sc-if>
+        <div style="background: {{ cardBg }}; border: {{ cardBorder }}; border-radius: {{ cardR }}; overflow: hidden">
+          <sc-if value="{{ is.city }}" hint-placeholder-val="{{ false }}"><dc-import name="CityPage" platform="web" dark="false" hint-size="100%,1600px"></dc-import></sc-if>
+          <sc-if value="{{ is.budget }}" hint-placeholder-val="{{ false }}"><dc-import name="Calculators" platform="web" tool="budget" dark="false" hint-size="100%,900px"></dc-import></sc-if>
+          <sc-if value="{{ is.netpay }}" hint-placeholder-val="{{ false }}"><dc-import name="Calculators" platform="web" tool="netpay" dark="false" hint-size="100%,900px"></dc-import></sc-if>
+          <sc-if value="{{ is.worklimit }}" hint-placeholder-val="{{ false }}"><dc-import name="Calculators" platform="web" tool="worklimit" dark="false" hint-size="100%,900px"></dc-import></sc-if>
+          <sc-if value="{{ is.phrasebook }}" hint-placeholder-val="{{ false }}"><dc-import name="Reference" platform="web" screen="phrasebook" dark="false" hint-size="100%,1100px"></dc-import></sc-if>
+          <sc-if value="{{ is.safety }}" hint-placeholder-val="{{ false }}"><dc-import name="Reference" platform="web" screen="safety" dark="false" hint-size="100%,1000px"></dc-import></sc-if>
+          <sc-if value="{{ is.alerts }}" hint-placeholder-val="{{ false }}"><dc-import name="Reference" platform="web" screen="alerts" dark="false" hint-size="100%,900px"></dc-import></sc-if>
+          <sc-if value="{{ is.chat }}" hint-placeholder-val="{{ false }}"><dc-import name="AiTools" platform="web" tool="chat" dark="false" hint-size="100%,900px"></dc-import></sc-if>
+          <sc-if value="{{ is.scam }}" hint-placeholder-val="{{ false }}"><dc-import name="AiTools" platform="web" tool="scam" dark="false" hint-size="100%,1100px"></dc-import></sc-if>
+          <sc-if value="{{ is.contract }}" hint-placeholder-val="{{ false }}"><dc-import name="AiTools" platform="web" tool="contract" dark="false" hint-size="100%,1100px"></dc-import></sc-if>
+          <sc-if value="{{ is.form }}" hint-placeholder-val="{{ false }}"><dc-import name="AiTools" platform="web" tool="form" dark="false" hint-size="100%,900px"></dc-import></sc-if>
+          <sc-if value="{{ is.jobkit }}" hint-placeholder-val="{{ false }}"><dc-import name="AiTools" platform="web" tool="jobkit" dark="false" hint-size="100%,700px"></dc-import></sc-if>
+          <sc-if value="{{ is.practice }}" hint-placeholder-val="{{ false }}"><dc-import name="AiTools" platform="web" tool="practice" dark="false" hint-size="100%,900px"></dc-import></sc-if>
+          <sc-if value="{{ is.summary }}" hint-placeholder-val="{{ false }}"><dc-import name="AiTools" platform="web" tool="summary" dark="false" hint-size="100%,900px"></dc-import></sc-if>
+          <sc-if value="{{ is.me }}" hint-placeholder-val="{{ false }}"><dc-import name="MeScreens" platform="web" screen="me" dark="false" hint-size="100%,1200px"></dc-import></sc-if>
+          <sc-if value="{{ is.privacy }}" hint-placeholder-val="{{ false }}"><dc-import name="MeScreens" platform="web" screen="privacy" dark="false" hint-size="100%,1000px"></dc-import></sc-if>
+          <sc-if value="{{ is.subscription }}" hint-placeholder-val="{{ false }}"><dc-import name="MeScreens" platform="web" screen="subscription" dark="false" hint-size="100%,700px"></dc-import></sc-if>
+          <sc-if value="{{ is.money }}" hint-placeholder-val="{{ false }}"><dc-import name="InfoPages" platform="web" page="money" dark="false" hint-size="100%,1400px"></dc-import></sc-if>
+          <sc-if value="{{ is.help }}" hint-placeholder-val="{{ false }}"><dc-import name="InfoPages" platform="web" page="help" dark="false" hint-size="100%,1700px"></dc-import></sc-if>
+          <sc-if value="{{ is.onboard1 }}" hint-placeholder-val="{{ false }}"><dc-import name="Onboarding" platform="web" step="1" dark="false" hint-size="100%,844px"></dc-import></sc-if>
+          <sc-if value="{{ is.onboard2 }}" hint-placeholder-val="{{ false }}"><dc-import name="Onboarding" platform="web" step="2" dark="false" hint-size="100%,844px"></dc-import></sc-if>
+          <sc-if value="{{ is.onboard3 }}" hint-placeholder-val="{{ false }}"><dc-import name="Onboarding" platform="web" step="3" dark="false" hint-size="100%,844px"></dc-import></sc-if>
+          <sc-if value="{{ is.onboard4 }}" hint-placeholder-val="{{ false }}"><dc-import name="Onboarding" platform="web" step="4" dark="false" hint-size="100%,844px"></dc-import></sc-if>
+          <sc-if value="{{ is.onboard5 }}" hint-placeholder-val="{{ false }}"><dc-import name="Onboarding" platform="web" step="5" dark="false" hint-size="100%,844px"></dc-import></sc-if>
+          <sc-if value="{{ is.onboard6 }}" hint-placeholder-val="{{ false }}"><dc-import name="Onboarding" platform="web" step="6" dark="false" hint-size="100%,844px"></dc-import></sc-if>
+          <sc-if value="{{ is.onboard7 }}" hint-placeholder-val="{{ false }}"><dc-import name="Onboarding" platform="web" step="7" dark="false" hint-size="100%,844px"></dc-import></sc-if>
+          <sc-if value="{{ is.onboard8 }}" hint-placeholder-val="{{ false }}"><dc-import name="Onboarding" platform="web" step="8" dark="false" hint-size="100%,844px"></dc-import></sc-if>
+          <sc-if value="{{ is.onboard9 }}" hint-placeholder-val="{{ false }}"><dc-import name="Onboarding" platform="web" step="9" dark="false" hint-size="100%,844px"></dc-import></sc-if>
+          <sc-if value="{{ is.roadmap }}" hint-placeholder-val="{{ false }}"><dc-import name="RoadmapScreen" platform="web"  dark="false" hint-size="100%,1200px"></dc-import></sc-if>
+          <sc-if value="{{ is.guides }}" hint-placeholder-val="{{ false }}"><dc-import name="GuidesScreen" platform="web"  dark="false" hint-size="100%,1200px"></dc-import></sc-if>
+          <sc-if value="{{ is.reminders }}" hint-placeholder-val="{{ false }}"><dc-import name="RemindersScreen" platform="web"  dark="false" hint-size="100%,1200px"></dc-import></sc-if>
+          <sc-if value="{{ is.addReminder }}" hint-placeholder-val="{{ false }}"><dc-import name="AddReminderSheet" platform="web"  dark="false" hint-size="100%,844px"></dc-import></sc-if>
+          <sc-if value="{{ is.assist }}" hint-placeholder-val="{{ false }}"><dc-import name="AssistHub" platform="web"  dark="false" hint-size="100%,1000px"></dc-import></sc-if>
+          <sc-if value="{{ is.upload }}" hint-placeholder-val="{{ false }}"><dc-import name="LetterFlow" platform="web" step="upload" dark="false" hint-size="100%,700px"></dc-import></sc-if>
+          <sc-if value="{{ is.processing }}" hint-placeholder-val="{{ false }}"><dc-import name="LetterFlow" platform="web" step="processing" dark="false" hint-size="100%,844px"></dc-import></sc-if>
+          <sc-if value="{{ is.result }}" hint-placeholder-val="{{ false }}"><dc-import name="LetterResult" platform="web"  dark="false" hint-size="100%,1500px"></dc-import></sc-if>
+          <sc-if value="{{ is.resultUrgent }}" hint-placeholder-val="{{ false }}"><dc-import name="LetterResult" platform="web" urgent="true" dark="false" hint-size="100%,1600px"></dc-import></sc-if>
+          <sc-if value="{{ is.reply }}" hint-placeholder-val="{{ false }}"><dc-import name="ReplyWriter" platform="web"  dark="false" hint-size="100%,1300px"></dc-import></sc-if>
+          <sc-if value="{{ is.stateLimit }}" hint-placeholder-val="{{ false }}"><dc-import name="LetterResult" platform="web" last-free="true" dark="false" hint-size="100%,1600px"></dc-import></sc-if>
+          <sc-if value="{{ is.stateEmpty }}" hint-placeholder-val="{{ false }}"><dc-import name="States" platform="web" state="empty" dark="false" hint-size="100%,600px"></dc-import></sc-if>
+          <sc-if value="{{ is.stateLoading }}" hint-placeholder-val="{{ false }}"><dc-import name="States" platform="web" state="loading" dark="false" hint-size="100%,600px"></dc-import></sc-if>
+          <sc-if value="{{ is.stateError }}" hint-placeholder-val="{{ false }}"><dc-import name="States" platform="web" state="error" dark="false" hint-size="100%,600px"></dc-import></sc-if>
+          <sc-if value="{{ is.stateOffline }}" hint-placeholder-val="{{ false }}"><dc-import name="States" platform="web" state="offline" dark="false" hint-size="100%,600px"></dc-import></sc-if>
+          <sc-if value="{{ is.stateOutdated }}" hint-placeholder-val="{{ false }}"><dc-import name="States" platform="web" state="outdated" dark="false" hint-size="100%,600px"></dc-import></sc-if>
+        </div>
+      </main>
+
+      <aside style="flex: 1 1 280px; min-width: 0; display: flex; flex-direction: column; gap: 16px; padding: {{ asidePad }}">
+        <sc-if value="{{ aside.account }}" hint-placeholder-val="{{ false }}">
+          <nav aria-label="Account" style="background: #FFFFFF; border: 1px solid #E4E0D8; border-radius: 16px; padding: 8px; display: flex; flex-direction: column">
+            <sc-for list="{{ accountNav }}" as="a" hint-placeholder-count="5">
+              <a href="{{ a.href }}" aria-current="{{ a.cur }}" style="min-height: 44px; padding: 0 12px; display: flex; align-items: center; border-radius: 10px; background: {{ a.bg }}; color: {{ a.color }}; font-size: 15px; font-weight: {{ a.weight }}; text-decoration: none">{{ a.label }}</a>
+            </sc-for>
+          </nav>
+        </sc-if>
+        <sc-if value="{{ aside.ai }}" hint-placeholder-val="{{ false }}">
+          <section style="background: #FFFFFF; border: 1px solid #E4E0D8; border-radius: 16px; padding: 18px; display: flex; flex-direction: column; gap: 10px">
+            <span style="display: flex; align-items: center; gap: 8px; font-size: 15px; font-weight: 600"><span role="img" aria-label="3 of 3 free uses left" style="display: flex; gap: 3px"><span style="width: 8px; height: 18px; border-radius: 3px; background: #0F5C63"></span><span style="width: 8px; height: 18px; border-radius: 3px; background: #0F5C63"></span><span style="width: 8px; height: 18px; border-radius: 3px; background: #0F5C63"></span></span>3 free uses left this month</span>
+            <a href="web-paywall-desktop.dc.html" style="color: #0F5C63; font-size: 15px; font-weight: 700; min-height: 32px; display: flex; align-items: center">See Premium</a>
+          </section>
+          <section style="background: #FBF1DF; border: 1px solid #B7791F; border-radius: 16px; padding: 18px; display: flex; flex-direction: column; gap: 8px; font-size: 14px; line-height: 21px; color: #5C3D08">
+            <strong style="font-size: 15px">Need advice on your own case?</strong>
+            <span>Answers here are general information. A person can look at your situation.</span>
+            <a href="#help" style="color: #0F5C63; font-weight: 700; min-height: 32px; display: flex; align-items: center">Where to get help</a>
+          </section>
+        </sc-if>
+        <sc-if value="{{ aside.tools }}" hint-placeholder-val="{{ true }}">
+          <section style="background: #FFFFFF; border: 1px solid #E4E0D8; border-radius: 16px; padding: 16px 18px; display: flex; flex-direction: column; gap: 4px">
+            <h2 style="margin: 0 0 6px; font-size: 16px; font-weight: 700">Related</h2>
+            <sc-for list="{{ related }}" as="r" hint-placeholder-count="3">
+              <a href="#related" style="min-height: 44px; display: flex; align-items: center; justify-content: space-between; border-top: {{ r.line }}; color: #1F1D1A; text-decoration: none; font-size: 15px">{{ r.label }}<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6B655C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"></path></svg></a>
+            </sc-for>
+          </section>
+        </sc-if>
+        <sc-if value="{{ aside.ad }}" hint-placeholder-val="{{ false }}">
+          <aside aria-label="Advertisement" style="height: 250px; box-sizing: border-box; border: 1px solid #E4E0D8; border-radius: 16px; background: #FFFFFF; padding: 14px; display: flex; flex-direction: column; gap: 10px">
+            <span style="align-self: flex-start; font-size: 11px; font-weight: 700; color: #6B655C; border: 1px solid #CFC9BE; border-radius: 4px; padding: 0 5px">Ad</span>
+            <span style="flex: 1; border-radius: 10px; background: #EFECE6; display: flex; align-items: center; justify-content: center; font-size: 13px; color: #6B655C">[Ad · 300 × 250]</span>
+          </aside>
+        </sc-if>
+        <sc-if value="{{ aside.app }}" hint-placeholder-val="{{ false }}">
+          <section style="background: #0F5C63; color: #FFFFFF; border-radius: 16px; padding: 18px; display: flex; flex-direction: column; gap: 10px">
+            <strong style="font-size: 16px">Take it with you</strong>
+            <span style="font-size: 14px; line-height: 20px; color: #D3E6E6">Saved phrases and emergency numbers work offline in the app.</span>
+            <div style="display: flex; gap: 8px"><a href="#appstore" style="flex: 1; min-height: 44px; border-radius: 10px; background: #000000; color: #FFFFFF; text-decoration: none; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600">[App Store badge]</a><a href="#play" style="flex: 1; min-height: 44px; border-radius: 10px; background: #000000; color: #FFFFFF; text-decoration: none; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600">[Google Play badge]</a></div>
+          </section>
+        </sc-if>
+      </aside>
+    </div>
+  </div>
+
+  <footer style="border-top: 1px solid #E4E0D8; background: #FFFFFF; margin-top: 24px">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 24px 32px {{ footBottom }}; display: flex; gap: 12px 24px; flex-wrap: wrap; align-items: center; font-size: 14px; color: #6B655C; box-sizing: border-box">
+      <span style="flex: 1 1 280px">General information, not legal advice. © 2026 Settle in Germany</span>
+      <a href="#impressum" style="color: #3B3833; min-height: 32px; display: flex; align-items: center">Impressum</a>
+      <a href="#privacy" style="color: #3B3833; min-height: 32px; display: flex; align-items: center">Privacy</a>
+      <a href="#terms" style="color: #3B3833; min-height: 32px; display: flex; align-items: center">Terms</a>
+      <a href="#money" style="color: #3B3833; min-height: 32px; display: flex; align-items: center">How we make money</a>
+      <a href="#cookies" style="color: #3B3833; min-height: 32px; display: flex; align-items: center">Cookie settings</a>
+    </div>
+  </footer>
+
+  <sc-if value="{{ mobile }}" hint-placeholder-val="{{ false }}">
+    <div style="position: absolute; left: 0; right: 0; bottom: 0">
+      <dc-import name="TabBar" platform="ios" active="{{ tab }}" dark="false" hint-size="390px,84px"></dc-import>
+    </div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"size":{"editor":"enum","options":["desktop","mobile"],"default":"desktop"},"screen":{"editor":"enum","options":["onboard-1","onboard-2","onboard-3","onboard-4","onboard-5","onboard-6","onboard-7","onboard-8","onboard-9","roadmap","guides","reminders","add-reminder","assist","upload","processing","result","result-urgent","reply","state-limit","city","budget","netpay","worklimit","phrasebook","safety","alerts","chat","scam","contract","form","jobkit","practice","summary","me","privacy","subscription","money","help","state-empty","state-loading","state-error","state-offline","state-outdated"],"default":"budget"},"$preview":{"width":1440,"height":1300}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const mobile = this.props.size === 'mobile';
+    const screen = this.props.screen ?? 'budget';
+    const M = {
+      city: ['Leipzig', 'Guides', 'guides', 'tools', 'Offices, rent and your community in Leipzig.', false],
+      budget: ['Monthly budget', 'Tools', 'tools', 'toolsAd', 'Plan your month. Change any number to match your life.', false],
+      netpay: ['Net pay for student jobs', 'Tools', 'tools', 'toolsAd', 'See what reaches your bank account from a student job.', false],
+      worklimit: ['Work-day limit', 'Tools', 'tools', 'tools', 'Track your work days so you stay inside your permit’s limit.', false],
+      phrasebook: ['Phrasebook', 'Tools', 'tools', 'app', 'Short German phrases for offices, the doctor and your landlord.', false],
+      safety: ['Safety and emergency', 'Tools', 'tools', 'app', 'Emergency numbers, embassies and common scams.', false],
+      alerts: ['Rule changes', 'Home', 'home', 'tools', 'Changes to rules that affect students from Nepal and India.', false],
+      chat: ['Ask a question', 'Assist', 'assist', 'ai', 'Ask in English, Nepali or Hindi. Answers come from our guides.', true],
+      scam: ['Housing scam checker', 'Assist', 'assist', 'ai', 'Paste a flat listing or message to check it for warning signs.', true],
+      contract: ['Rental contract explainer', 'Assist', 'assist', 'ai', 'Upload your contract and read it clause by clause in plain words.', true],
+      form: ['Form assistant', 'Assist', 'assist', 'ai', 'Fill an official form field by field, with examples.', true],
+      jobkit: ['Job application kit', 'Assist', 'assist', 'ai', 'Build a German-style CV, cover letter and practise interviews.', true],
+      practice: ['Conversation practice', 'Assist', 'assist', 'ai', 'Practise talking to an official before the real appointment.', true],
+      summary: ['Practice results', 'Assist', 'assist', 'ai', 'Your corrections and useful phrases from this session.', true],
+      me: ['Your account', 'Me', 'me', 'account', 'Your profile, reminders, settings and help.', false],
+      privacy: ['Privacy and data', 'Me', 'me', 'account', 'See what we store and choose what we do with it.', false],
+      subscription: ['Subscription', 'Me', 'me', 'account', 'Your Premium plan and how to manage it.', false],
+      money: ['How we make money', 'Me', 'me', 'account', 'Guides and tools are free. Here is exactly how we pay for them.', false],
+      help: ['Where to get help', 'Me', 'me', 'account', 'For your own case, talk to a person. Many of these services are free.', false],
+      'onboard-1': ['Get started', 'Home', 'home', 'none', 'Set up your personal roadmap in a few steps.', false, false],
+      'onboard-2': ['Get started', 'Home', 'home', 'none', 'Set up your personal roadmap in a few steps.', false, false],
+      'onboard-3': ['Get started', 'Home', 'home', 'none', 'Set up your personal roadmap in a few steps.', false, false],
+      'onboard-4': ['Get started', 'Home', 'home', 'none', 'Set up your personal roadmap in a few steps.', false, false],
+      'onboard-5': ['Get started', 'Home', 'home', 'none', 'Set up your personal roadmap in a few steps.', false, false],
+      'onboard-6': ['Get started', 'Home', 'home', 'none', 'Set up your personal roadmap in a few steps.', false, false],
+      'onboard-7': ['Get started', 'Home', 'home', 'none', 'Set up your personal roadmap in a few steps.', false, false],
+      'onboard-8': ['Get started', 'Home', 'home', 'none', 'Set up your personal roadmap in a few steps.', false, false],
+      'onboard-9': ['Get started', 'Home', 'home', 'none', 'Set up your personal roadmap in a few steps.', false, false],
+      'roadmap': ['Roadmap', 'Home', 'home', 'tools', '', false, false],
+      'guides': ['Guides', 'Guides', 'guides', 'tools', '', false, false],
+      'reminders': ['Reminders', 'Me', 'me', 'account', '', false, false],
+      'add-reminder': ['New reminder', 'Me', 'me', 'account', '', false, false],
+      'assist': ['Assist', 'Assist', 'assist', 'ai', '', true, false],
+      'upload': ['Upload a letter', 'Assist', 'assist', 'ai', '', true, false],
+      'processing': ['Understanding your letter', 'Assist', 'assist', 'ai', '', true, false],
+      'result': ['Your letter', 'Assist', 'assist', 'ai', '', true, false],
+      'result-urgent': ['Your letter', 'Assist', 'assist', 'ai', '', true, false],
+      'reply': ['Reply writer', 'Assist', 'assist', 'ai', '', true, false],
+      'state-limit': ['Your letter', 'Assist', 'assist', 'ai', 'State: free limit reached.', true, false],
+      'state-empty': ['Reminders', 'Me', 'me', 'account', 'State: empty.', false],
+      'state-loading': ['Guides', 'Guides', 'guides', 'tools', 'State: loading.', false],
+      'state-error': ['Register your address', 'Guides', 'guides', 'tools', 'State: error.', false],
+      'state-offline': ['Home', 'Home', 'home', 'tools', 'State: offline.', false],
+      'state-outdated': ['Open a bank account', 'Guides', 'guides', 'tools', 'State: outdated guide.', false]
+    };
+    const m0 = M[screen] || M.budget;
+    const m = { title: m0[0], section: m0[1], intro: m0[4], ai: m0[5], showTitle: m0[6] !== false };
+    const navKey = m0[2], asideKind = m0[3];
+    const sfx = mobile ? '-mobile.dc.html' : '-desktop.dc.html';
+    const navItems = [['home', 'Home', 'web-home'], ['guides', 'Guides', 'web-guide'], ['assist', 'Assist', 'web-chat'], ['tools', 'Tools', 'web-budget']];
+    const keyMap = { 'onboard-1': 'onboard1', 'onboard-2': 'onboard2', 'onboard-3': 'onboard3', 'onboard-4': 'onboard4', 'onboard-5': 'onboard5', 'onboard-6': 'onboard6', 'onboard-7': 'onboard7', 'onboard-8': 'onboard8', 'onboard-9': 'onboard9', 'roadmap': 'roadmap', 'guides': 'guides', 'reminders': 'reminders', 'add-reminder': 'addReminder', 'assist': 'assist', 'upload': 'upload', 'processing': 'processing', 'result': 'result', 'result-urgent': 'resultUrgent', 'reply': 'reply', 'state-limit': 'stateLimit', city: 'city', budget: 'budget', netpay: 'netpay', worklimit: 'worklimit', phrasebook: 'phrasebook', safety: 'safety', alerts: 'alerts', chat: 'chat', scam: 'scam', contract: 'contract', form: 'form', jobkit: 'jobkit', practice: 'practice', summary: 'summary', me: 'me', privacy: 'privacy', subscription: 'subscription', money: 'money', help: 'help', 'state-empty': 'stateEmpty', 'state-loading': 'stateLoading', 'state-error': 'stateError', 'state-offline': 'stateOffline', 'state-outdated': 'stateOutdated' };
+    const is = {};
+    Object.keys(keyMap).forEach((k) => { is[keyMap[k]] = k === screen; });
+    const acct = [['Your account', 'me'], ['Reminders', 'state-empty'], ['Privacy and data', 'privacy'], ['Subscription', 'subscription'], ['How we make money', 'money'], ['Where to get help', 'help']];
+    const tabMap = { home: 'home', guides: 'guides', assist: 'assist', tools: 'tools', me: 'me' };
+    return {
+      desktop: !mobile, mobile: mobile, m: m, is: is,
+      nav: navItems.map((n) => {
+        const on = n[0] === navKey;
+        return { label: n[1], href: n[2] + sfx, cur: on ? 'page' : 'false', bg: on ? '#E6F0F0' : 'transparent', color: on ? '#0F5C63' : '#3B3833', weight: on ? 700 : 500 };
+      }),
+      accountNav: acct.map((a) => {
+        const on = a[1] === screen;
+        return { label: a[0], href: 'web-' + a[1] + sfx, cur: on ? 'page' : 'false', bg: on ? '#E6F0F0' : 'transparent', color: on ? '#0F5C63' : '#1F1D1A', weight: on ? 700 : 500 };
+      }),
+      aside: {
+        account: asideKind === 'account', ai: asideKind === 'ai',
+        tools: asideKind === 'tools' || asideKind === 'toolsAd' || asideKind === 'app',
+        ad: asideKind === 'toolsAd', app: asideKind === 'app'
+      },
+      related: [['Compare bank accounts'], ['Monthly budget'], ['Guide: student jobs']].map((r, i) => ({ label: r[0], line: i === 0 ? 'none' : '1px solid #EFECE6' })),
+      tab: tabMap[navKey] || 'home',
+      pad: mobile ? '16px 0 24px' : '24px 32px 48px',
+      crumbPad: mobile ? '16px' : '16px',
+      asidePad: mobile ? '0 16px' : '0',
+      h1: mobile ? '28px' : '36px',
+      cardBg: mobile ? 'transparent' : '#F6F4F0',
+      cardBorder: mobile ? 'none' : '1px solid #E4E0D8',
+      cardR: mobile ? '0' : '20px',
+      footBottom: mobile ? '108px' : '24px'
+    };
+  }
+}
+</script>
+</body>
+</html>

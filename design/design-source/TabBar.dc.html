@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Tab bar</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>body{margin:0}</style>
+</helmet>
+<nav aria-label="Main" style="width: 390px; height: {{ h }}; box-sizing: border-box; background: {{ t.bar }}; border-top: 1px solid {{ t.border }}; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); padding: {{ pad }}; font-family: Inter, system-ui, sans-serif">
+  <a href="{{ href.home }}" aria-current="{{ cur.home }}" style="display: flex; flex-direction: column; align-items: center; gap: {{ gap }}; text-decoration: none; color: {{ col.home }}; font-size: {{ fs }}; font-weight: {{ fw.home }}"><span style="display: flex; padding: 4px 20px; border-radius: 999px; background: {{ pill.home }}"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10l9-7 9 7v10a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"></path></svg></span>Home</a>
+  <a href="{{ href.guides }}" aria-current="{{ cur.guides }}" style="display: flex; flex-direction: column; align-items: center; gap: {{ gap }}; text-decoration: none; color: {{ col.guides }}; font-size: {{ fs }}; font-weight: {{ fw.guides }}"><span style="display: flex; padding: 4px 20px; border-radius: 999px; background: {{ pill.guides }}"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 4h6a4 4 0 0 1 4 4v13a3 3 0 0 0-3-3H2z"></path><path d="M22 4h-6a4 4 0 0 0-4 4v13a3 3 0 0 1 3-3h7z"></path></svg></span>Guides</a>
+  <a href="{{ href.assist }}" style="display: flex; flex-direction: column; align-items: center; gap: 2px; text-decoration: none; color: {{ t.text }}; font-size: {{ fs }}; font-weight: 600"><span style="width: 52px; height: 52px; margin-top: -20px; border-radius: 999px; background: {{ t.accent }}; color: #2A1A00; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0,0,0,0.18); border: 3px solid {{ t.bar }}"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"></path></svg></span>Assist</a>
+  <a href="{{ href.tools }}" style="display: flex; flex-direction: column; align-items: center; gap: {{ gap }}; text-decoration: none; color: {{ col.tools }}; font-size: {{ fs }}; font-weight: {{ fw.tools }}"><span style="display: flex; padding: 4px 20px; border-radius: 999px; background: {{ pill.tools }}"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="2" width="16" height="20" rx="2"></rect><path d="M8 6h8M8 11h2M14 11h2M8 15h2M14 15h2M8 19h2M14 19h2"></path></svg></span>Tools</a>
+  <a href="{{ href.me }}" aria-current="{{ cur.me }}" style="display: flex; flex-direction: column; align-items: center; gap: {{ gap }}; text-decoration: none; color: {{ col.me }}; font-size: {{ fs }}; font-weight: {{ fw.me }}"><span style="display: flex; padding: 4px 20px; border-radius: 999px; background: {{ pill.me }}"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"></circle><path d="M4 21a8 8 0 0 1 16 0"></path></svg></span>Me</a>
+</nav>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"platform":{"editor":"enum","options":["ios","android"],"default":"ios"},"active":{"editor":"enum","options":["home","guides","tools","me"],"default":"home"},"dark":{"editor":"boolean","default":false},"$preview":{"width":390,"height":84}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const ios = (this.props.platform ?? 'ios') !== 'android';
+    const dark = this.props.dark === true || this.props.dark === 'true';
+    const active = this.props.active ?? 'home';
+    const t = dark
+      ? { bar: '#1A2221', border: '#2C3634', text: '#ECEAE5', muted: '#9AA5A3', primary: '#5CC8C2', tint: '#173332', accent: '#F2B85C' }
+      : { bar: '#FFFFFF', border: '#E4E0D8', text: '#1F1D1A', muted: '#6B655C', primary: '#0F5C63', tint: '#E6F0F0', accent: '#E8A33D' };
+    const keys = ['home', 'guides', 'tools', 'me'];
+    const col = {}, pill = {}, fw = {}, cur = {};
+    keys.forEach((k) => {
+      const on = k === active;
+      col[k] = on ? t.primary : t.muted;
+      pill[k] = on && !ios ? t.tint : 'transparent';
+      fw[k] = on ? 700 : 500;
+      cur[k] = on ? 'page' : 'false';
+    });
+    const p = ios ? 'ios-' : 'and-';
+    return {
+      t: t, col: col, pill: pill, fw: fw, cur: cur,
+      h: ios ? '84px' : '80px',
+      pad: ios ? '6px 4px 0' : '12px 4px 0',
+      gap: ios ? '2px' : '4px',
+      fs: ios ? '11px' : '12px',
+      href: { home: p + 'home.dc.html', guides: p + 'guides.dc.html', assist: p + 'assist.dc.html', tools: p + 'compare-blocked.dc.html', me: p + 'me.dc.html' }
+    };
+  }
+}
+</script>
+</body>
+</html>

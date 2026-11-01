@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>How we make money and Where to get help</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>body{margin:0}</style>
+</helmet>
+<div style="width: {{ rootW }}; height: {{ rootH }}; position: relative; overflow: hidden; background: {{ k.cF6F4F0 }}; color: {{ k.c1F1D1A }}; font-family: Inter, system-ui, sans-serif">
+  <sc-if value="{{ notWeb }}" hint-placeholder-val="{{ true }}"><dc-import name="AppBar" platform="{{ platform }}" title="{{ title }}" back="Me" href="{{ meHref }}" large="true" action="none" dark="{{ darkStr }}" hint-size="390px,96px"></dc-import></sc-if>
+
+  <!-- How we make money -->
+  <sc-if value="{{ money }}" hint-placeholder-val="{{ true }}">
+    <div style="display: flex; flex-direction: column; gap: 16px; padding: 4px 16px {{ padB }}">
+      <p style="margin: 0; font-size: 17px; line-height: 26px">All guides, checklists, reminders, calculators and comparisons are free. This is how we pay for them — in plain words.</p>
+
+      <sc-for list="{{ ways }}" as="w" hint-placeholder-count="3">
+        <section style="background: {{ k.cFFFFFF }}; border: 1px solid {{ k.cE4E0D8 }}; border-radius: {{ r }}; padding: 18px; display: flex; flex-direction: column; gap: 10px">
+          <div style="display: flex; align-items: center; gap: 12px">
+            <span style="width: 40px; height: 40px; border-radius: 12px; background: {{ w.iconBg }}; color: {{ w.iconFg }}; display: flex; align-items: center; justify-content: center; flex: none"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{ w.icon }}"></path></svg></span>
+            <h2 style="margin: 0; font-size: 18px; line-height: 24px; font-weight: 700">{{ w.n }}. {{ w.title }}</h2>
+          </div>
+          <p style="margin: 0; font-size: 15px; line-height: 23px; color: {{ k.c3B3833 }}">{{ w.body }}</p>
+          <ul role="list" style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 6px">
+            <sc-for list="{{ w.points }}" as="pt" hint-placeholder-count="3">
+              <li style="display: flex; gap: 8px; font-size: 14px; line-height: 21px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="{{ k.c2E7D4F }}" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none; margin-top: 3px"><path d="M20 6L9 17l-5-5"></path></svg><span>{{ pt }}</span></li>
+            </sc-for>
+          </ul>
+        </section>
+      </sc-for>
+
+      <section style="background: {{ k.c0F5C63 }}; color: {{ k.cFFFFFF }}; border-radius: {{ r }}; padding: 18px; display: flex; flex-direction: column; gap: 10px">
+        <h2 style="margin: 0; font-size: 18px; font-weight: 700">What we never do</h2>
+        <sc-for list="{{ nevers }}" as="nv" hint-placeholder-count="4">
+          <div style="display: flex; gap: 10px; font-size: 15px; line-height: 22px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="{{ k.cE8A33D }}" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none; margin-top: 2px"><path d="M18 6L6 18M6 6l12 12"></path></svg><span>{{ nv }}</span></div>
+        </sc-for>
+      </section>
+
+      <section style="background: {{ k.cFFFFFF }}; border: 1px solid {{ k.cE4E0D8 }}; border-radius: {{ r }}; padding: 0 16px">
+        <a href="#partners" style="min-height: 56px; display: flex; align-items: center; justify-content: space-between; gap: 12px; color: {{ k.c1F1D1A }}; text-decoration: none; font-size: 15px"><span style="display: flex; flex-direction: column"><strong>Our referral partners</strong><span style="font-size: 13px; color: {{ k.c6B655C }}">[X] partners · list updated [date]</span></span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="{{ k.c6B655C }}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"></path></svg></a>
+        <a href="#ad-partners" style="min-height: 56px; display: flex; align-items: center; justify-content: space-between; gap: 12px; border-top: 1px solid {{ k.cEFECE6 }}; color: {{ k.c1F1D1A }}; text-decoration: none; font-size: 15px"><span style="display: flex; flex-direction: column"><strong>Ad partners and your choices</strong><span style="font-size: 13px; color: {{ k.c6B655C }}">Change consent any time</span></span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="{{ k.c6B655C }}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"></path></svg></a>
+      </section>
+      <p style="margin: 0; font-size: 14px; line-height: 21px; color: {{ k.c6B655C }}">Something looks wrong or too salesy? <a href="#contact" style="color: {{ k.c0F5C63 }}; font-weight: 600">Tell us</a> — we read every message.</p>
+    </div>
+  </sc-if>
+
+  <!-- Where to get help -->
+  <sc-if value="{{ help }}" hint-placeholder-val="{{ false }}">
+    <div style="display: flex; flex-direction: column; gap: 16px; padding: 4px 16px {{ padB }}">
+      <p style="margin: 0; font-size: 17px; line-height: 26px">Our guides and AI give general information. For your own case, talk to a person. Many of these services are free.</p>
+      <a href="{{ safetyHref }}" style="text-decoration: none; background: {{ k.cFDECEA }}; border: 1.5px solid {{ k.cB42318 }}; border-radius: {{ r }}; padding: 14px 16px; display: flex; align-items: center; gap: 12px; color: {{ k.c1F1D1A }}">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="{{ k.cB42318 }}" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none"><path d="M10.3 3.9L1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"></path><path d="M12 9v4M12 17h.01"></path></svg>
+        <span style="flex: 1; font-size: 15px; line-height: 22px"><strong style="color: {{ k.cB42318 }}">In danger right now?</strong> Call 112. More emergency numbers in Safety.</span>
+      </a>
+      <div role="group" aria-label="Filter by topic" style="display: flex; gap: 8px; flex-wrap: wrap">
+        <sc-for list="{{ topics }}" as="tp" hint-placeholder-count="6">
+          <button aria-pressed="{{ tp.pressed }}" style="min-height: 40px; padding: 0 14px; border-radius: {{ chipR }}; border: 1px solid {{ tp.border }}; background: {{ tp.bg }}; color: {{ tp.color }}; font: 500 14px Inter, sans-serif">{{ tp.label }}</button>
+        </sc-for>
+      </div>
+      <sc-for list="{{ services }}" as="sv" hint-placeholder-count="6">
+        <article style="background: {{ k.cFFFFFF }}; border: 1px solid {{ k.cE4E0D8 }}; border-radius: {{ r }}; padding: 16px; display: flex; flex-direction: column; gap: 8px">
+          <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 10px">
+            <h2 style="margin: 0; font-size: 17px; line-height: 23px; font-weight: 700">{{ sv.title }}</h2>
+            <span style="background: {{ sv.costBg }}; color: {{ sv.costFg }}; border-radius: 999px; padding: 2px 10px; font-size: 12px; font-weight: 700; white-space: nowrap">{{ sv.cost }}</span>
+          </div>
+          <span style="display: flex; align-items: center; gap: 6px; font-size: 13px"><span style="font-size: 10px; font-weight: 700; border: 1px solid {{ k.c0F5C63 }}; color: {{ k.c0F5C63 }}; border-radius: 4px; padding: 0 4px; line-height: 15px">DE</span><span style="font-weight: 500">{{ sv.de }}</span></span>
+          <p style="margin: 0; font-size: 15px; line-height: 22px; color: {{ k.c3B3833 }}">{{ sv.body }}</p>
+          <a href="#find" style="min-height: 44px; border-radius: {{ btnR }}; border: 1.5px solid {{ k.c0F5C63 }}; color: {{ k.c0F5C63 }}; text-decoration: none; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 700">{{ sv.cta }}</a>
+        </article>
+      </sc-for>
+      <p style="margin: 0; font-size: 13px; line-height: 19px; color: {{ k.c6B655C }}">We don’t earn money from any service on this page. Last verified [date] · <a href="#report" style="color: {{ k.c0F5C63 }}">Report outdated information</a></p>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ notWeb }}" hint-placeholder-val="{{ true }}"><div style="position: absolute; left: 0; right: 0; bottom: 0"><dc-import name="TabBar" platform="{{ platform }}" active="me" dark="{{ darkStr }}" hint-size="390px,84px"></dc-import></div></sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"dark":{"editor":"boolean","default":false},"platform":{"editor":"enum","options":["ios","android","web"],"default":"ios"},"page":{"editor":"enum","options":["money","help"],"default":"money"},"$preview":{"width":390,"height":1700}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const __dark = this.props.dark === true || this.props.dark === 'true';
+    const k = __dark ? {"cF6F4F0": "#121614", "cFFFFFF": "#1A2221", "c1F1D1A": "#ECEAE5", "c3B3833": "#C9CFCD", "c4A453E": "#C2C8C6", "c6B655C": "#9AA5A3", "cE4E0D8": "#2C3634", "cEFECE6": "#252D2C", "cCFC9BE": "#4A5755", "cA8A196": "#6F7B79", "cE9E5DD": "#252D2C", "cEDE9E1": "#252D2C", "c0F5C63": "#5CC8C2", "c0A4449": "#8EDDD8", "cE6F0F0": "#173332", "cCFE3E3": "#1F4442", "cD3E6E6": "#1F3D3B", "cE8A33D": "#F2B85C", "c2A1A00": "#2A1A00", "cFBF1DF": "#33291A", "c8A5A12": "#E0C27A", "cB7791F": "#C9A15A", "cFDF6EA": "#2A2418", "cFBEFD9": "#33291A", "c5C3D08": "#E0C27A", "c5C4A2A": "#D8C8A8", "cFDECEA": "#3A1F1C", "cB42318": "#F0A49B", "cEAF4EE": "#1D3327", "c24653F": "#7FD3A0", "c2E7D4F": "#7FD3A0", "cF3F8F8": "#16201F", "cFBFAF7": "#161C1B", "c000000": "#F2F2F2", "cFDF3E2": "#33291A", "c55524C": "#000000", "c5E8C8F": "#7FB3B5"} : {"cF6F4F0": "#F6F4F0", "cFFFFFF": "#FFFFFF", "c1F1D1A": "#1F1D1A", "c3B3833": "#3B3833", "c4A453E": "#4A453E", "c6B655C": "#6B655C", "cE4E0D8": "#E4E0D8", "cEFECE6": "#EFECE6", "cCFC9BE": "#CFC9BE", "cA8A196": "#A8A196", "cE9E5DD": "#E9E5DD", "cEDE9E1": "#EDE9E1", "c0F5C63": "#0F5C63", "c0A4449": "#0A4449", "cE6F0F0": "#E6F0F0", "cCFE3E3": "#CFE3E3", "cD3E6E6": "#D3E6E6", "cE8A33D": "#E8A33D", "c2A1A00": "#2A1A00", "cFBF1DF": "#FBF1DF", "c8A5A12": "#8A5A12", "cB7791F": "#B7791F", "cFDF6EA": "#FDF6EA", "cFBEFD9": "#FBEFD9", "c5C3D08": "#5C3D08", "c5C4A2A": "#5C4A2A", "cFDECEA": "#FDECEA", "cB42318": "#B42318", "cEAF4EE": "#EAF4EE", "c24653F": "#24653F", "c2E7D4F": "#2E7D4F", "cF3F8F8": "#F3F8F8", "cFBFAF7": "#FBFAF7", "c000000": "#000000", "cFDF3E2": "#FDF3E2", "c55524C": "#55524C", "c5E8C8F": "#5E8C8F"};
+    const web = this.props.platform === 'web';
+    const platform = this.props.platform === 'android' ? 'android' : 'ios';
+    const ios = platform === 'ios';
+    const page = this.props.page === 'help' ? 'help' : 'money';
+    const p = ios ? 'ios-' : 'and-';
+    const chip = (label, on) => ({ label: label, pressed: on ? 'true' : 'false', bg: on ? k.c0F5C63 : k.cFFFFFF, color: on ? k.cFFFFFF : k.c1F1D1A, border: on ? k.c0F5C63 : k.cCFC9BE });
+    const free = ['Free', k.cEAF4EE, k.c24653F], fee = ['Small fee', k.cFBF1DF, k.c8A5A12], paid = ['Paid', k.cEFECE6, k.c4A453E];
+    const sv = (title, de, cost, body, cta) => ({ title: title, de: de, cost: cost[0], costBg: cost[1], costFg: cost[2], body: body, cta: cta });
+    return { k: k, darkStr: __dark ? 'true' : 'false',
+      notWeb: !web, rootW: web ? '100%' : '390px', rootH: web ? 'auto' : (page === 'help' ? '2000px' : '1700px'), padB: web ? '24px' : '120px',
+      platform: platform, page: page, money: page === 'money', help: page === 'help',
+      title: page === 'help' ? 'Where to get help' : 'How we make money',
+      meHref: p + 'me.dc.html', safetyHref: p + 'safety.dc.html',
+      r: ios ? '16px' : '20px', btnR: ios ? '12px' : '999px', chipR: ios ? '999px' : '8px',
+      ways: [
+        { n: '1', title: 'Ads in the free version', iconBg: k.cEFECE6, iconFg: k.c4A453E, icon: 'M3 5h18v14H3zM7 9h6M7 13h10',
+          body: 'Free users see a few clearly labelled ads. Personalised ads only appear if you agree.',
+          points: ['Never inside guide steps, checklists or AI answers', 'No ads on emergency, paywall or document-date screens', 'We block payday loans, gambling, unlicensed immigration agents and “guaranteed visa” offers'] },
+        { n: '2', title: 'Premium', iconBg: k.cFBF1DF, iconFg: k.c8A5A12, icon: 'M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z',
+          body: 'For €3.99 a month or €29.99 a year you get the AI tools and no ads. You can cancel any time.',
+          points: ['Free information never moves behind the paywall', 'Free users get 3 letter scans a month', 'One subscription for web, Android and iPhone'] },
+        { n: '3', title: 'Referral links on comparisons', iconBg: k.cE6F0F0, iconFg: k.c0F5C63, icon: 'M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7',
+          body: 'Some providers pay us a commission when you sign up through our link. It costs you nothing extra.',
+          points: ['Every referral link is labelled', 'Rankings are by fees or speed — never by commission', 'We also list providers that don’t pay us'] }
+      ],
+      nevers: ['Sell your personal data', 'Let anyone pay to change a guide', 'Let partners write or edit our content', 'Hide information to push you to Premium'],
+      topics: ['All', 'Visa and residence', 'Housing', 'Work', 'Money', 'Health and wellbeing'].map((t, i) => chip(t, i === 0)),
+      services: [
+        sv('Migration counselling', 'Migrationsberatung (MBE / JMD)', free, 'Help with residence permits, letters from the immigration office and refusals. Run by welfare organisations across Germany. Under 27? Youth migration services help you.', 'Find a service near you'),
+        sv('Your university', 'International Office · Studierendenwerk', free, 'Help with enrolment, student jobs, money problems and housing. Many universities also offer free legal and social counselling.', 'Find your university contact'),
+        sv('Tenants’ association', 'Mieterverein', fee, 'Checks rental contracts, deposits and bills from your landlord. You pay a yearly membership of about [€].', 'Find one in Leipzig'),
+        sv('A migration lawyer', 'Fachanwalt für Migrationsrecht', paid, 'For refusals, appeals and deadlines with legal effect. On a low income you can ask your local court for legal advice aid (Beratungshilfe).', 'How to find a lawyer'),
+        sv('Someone to talk to', 'Telefonseelsorge · 0800 111 0 111', free, 'Feeling overwhelmed or alone? Talk to someone any time, day or night, without giving your name. Your university also has psychological counselling.', 'Call now'),
+        sv('Your community and embassy', '[Nepali / Indian student groups]', free, 'Student groups help with everyday questions. Your embassy helps with passports and documents from home.', 'See groups and embassies')
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Me, privacy and subscription</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Noto+Sans+Devanagari:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<style>body{margin:0}</style>
+</helmet>
+<div style="width: {{ rootW }}; height: {{ rootH }}; position: relative; overflow: hidden; background: {{ k.cF6F4F0 }}; color: {{ k.c1F1D1A }}; font-family: Inter, 'Noto Sans Devanagari', system-ui, sans-serif">
+  <sc-if value="{{ notWeb }}" hint-placeholder-val="{{ true }}"><dc-import name="AppBar" platform="{{ platform }}" title="{{ title }}" back="{{ back }}" href="{{ backHref }}" large="true" action="none" dark="{{ darkStr }}" hint-size="390px,96px"></dc-import></sc-if>
+
+  <!-- Me -->
+  <sc-if value="{{ me }}" hint-placeholder-val="{{ true }}">
+    <div style="display: flex; flex-direction: column; gap: 18px; padding: 4px 16px {{ padB }}">
+      <section style="background: {{ k.cFFFFFF }}; border: 1px solid {{ k.cE4E0D8 }}; border-radius: {{ r }}; padding: 16px; display: flex; align-items: center; gap: 14px">
+        <span style="width: 52px; height: 52px; border-radius: 999px; background: {{ k.c0F5C63 }}; color: {{ k.cFFFFFF }}; font-size: 22px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex: none">S</span>
+        <span style="display: flex; flex-direction: column; gap: 2px; flex: 1; min-width: 0"><strong style="font-size: 17px">Sujan</strong><span style="font-size: 14px; color: {{ k.c6B655C }}">Student · from Nepal · Leipzig</span><span style="font-size: 14px; color: {{ k.c6B655C }}">Stage: First 30 days</span></span>
+        <a href="#profile" style="min-height: 44px; padding: 0 12px; display: flex; align-items: center; color: {{ k.c0F5C63 }}; font-size: 15px; font-weight: 600; text-decoration: none">Edit</a>
+      </section>
+      <a href="{{ subHref }}" style="text-decoration: none; color: {{ k.c1F1D1A }}; background: {{ k.cFDF6EA }}; border: 1px solid {{ k.cE8A33D }}; border-radius: {{ r }}; padding: 14px 16px; display: flex; align-items: center; gap: 12px">
+        <span style="background: {{ k.cE8A33D }}; color: {{ k.c2A1A00 }}; border-radius: 999px; padding: 3px 10px; font-size: 12px; font-weight: 700">Premium</span>
+        <span style="flex: 1; font-size: 15px">Renews 1 Nov 2027</span>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="{{ k.c6B655C }}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"></path></svg>
+      </a>
+      <sc-for list="{{ groups }}" as="g" hint-placeholder-count="3">
+        <section style="display: flex; flex-direction: column; gap: 6px">
+          <h2 style="margin: 0 0 2px 4px; font-size: 13px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: {{ k.c6B655C }}">{{ g.title }}</h2>
+          <div style="background: {{ k.cFFFFFF }}; border: 1px solid {{ k.cE4E0D8 }}; border-radius: {{ r }}; padding: 0 16px">
+            <sc-for list="{{ g.rows }}" as="row" hint-placeholder-count="3">
+              <a href="{{ row.href }}" style="min-height: 52px; display: flex; align-items: center; gap: 12px; border-top: {{ row.line }}; text-decoration: none; color: {{ k.c1F1D1A }}">
+                <span style="flex: 1; font-size: 16px">{{ row.label }}</span>
+                <span style="font-size: 15px; color: {{ k.c6B655C }}">{{ row.value }}</span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="{{ k.cA8A196 }}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"></path></svg>
+              </a>
+            </sc-for>
+          </div>
+        </section>
+      </sc-for>
+      <button style="min-height: 48px; border-radius: {{ btnR }}; border: 1px solid {{ k.cE4E0D8 }}; background: {{ k.cFFFFFF }}; color: {{ k.c1F1D1A }}; font: 600 15px Inter, sans-serif">Sign out</button>
+      <p style="margin: 0; font-size: 12px; color: {{ k.c6B655C }}; text-align: center">Version 1.0 · General information, not legal advice.</p>
+    </div>
+  </sc-if>
+
+  <!-- Privacy and data -->
+  <sc-if value="{{ privacy }}" hint-placeholder-val="{{ false }}">
+    <div style="display: flex; flex-direction: column; gap: 18px; padding: 4px 16px {{ padB }}">
+      <section style="background: {{ k.cFFFFFF }}; border: 1px solid {{ k.cE4E0D8 }}; border-radius: {{ r }}; padding: 16px; display: flex; flex-direction: column; gap: 10px">
+        <h2 style="margin: 0; font-size: 17px; font-weight: 700">What we store</h2>
+        <div style="display: flex; flex-direction: column; font-size: 15px; line-height: 22px">
+          <div style="display: flex; gap: 10px; padding: 8px 0"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="{{ k.c2E7D4F }}" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none; margin-top: 2px"><path d="M20 6L9 17l-5-5"></path></svg><span>Your profile: nationality, status, city, stage</span></div>
+          <div style="display: flex; gap: 10px; padding: 8px 0; border-top: 1px solid {{ k.cEFECE6 }}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="{{ k.c2E7D4F }}" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none; margin-top: 2px"><path d="M20 6L9 17l-5-5"></path></svg><span>Your checklist progress, reminder dates and notes</span></div>
+          <div style="display: flex; gap: 10px; padding: 8px 0; border-top: 1px solid {{ k.cEFECE6 }}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="{{ k.c2E7D4F }}" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none; margin-top: 2px"><path d="M20 6L9 17l-5-5"></path></svg><span>Letters and replies — only the ones you chose to save (2)</span></div>
+          <div style="display: flex; gap: 10px; padding: 8px 0; border-top: 1px solid {{ k.cEFECE6 }}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="{{ k.c6B655C }}" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none; margin-top: 2px"><path d="M18 6L6 18M6 6l12 12"></path></svg><span>We never keep photos of your documents</span></div>
+        </div>
+      </section>
+      <section style="display: flex; flex-direction: column; gap: 6px">
+        <h2 style="margin: 0 0 2px 4px; font-size: 13px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: {{ k.c6B655C }}">Your choices</h2>
+        <div style="background: {{ k.cFFFFFF }}; border: 1px solid {{ k.cE4E0D8 }}; border-radius: {{ r }}; padding: 0 16px">
+          <label style="min-height: 64px; display: flex; align-items: center; gap: 12px"><span style="flex: 1; display: flex; flex-direction: column"><span style="font-size: 16px">Personalised ads</span><span style="font-size: 13px; color: {{ k.c6B655C }}">Free plan only</span></span><input type="checkbox" role="switch" style="width: 44px; height: 26px; accent-color: {{ k.c0F5C63 }}; margin: 0"></label>
+          <label style="min-height: 64px; display: flex; align-items: center; gap: 12px; border-top: 1px solid {{ k.cEFECE6 }}"><span style="flex: 1; display: flex; flex-direction: column"><span style="font-size: 16px">Usage statistics</span><span style="font-size: 13px; color: {{ k.c6B655C }}">Helps us fix what’s confusing</span></span><input type="checkbox" role="switch" checked style="width: 44px; height: 26px; accent-color: {{ k.c0F5C63 }}; margin: 0"></label>
+          <label style="min-height: 64px; display: flex; align-items: center; gap: 12px; border-top: 1px solid {{ k.cEFECE6 }}"><span style="flex: 1; display: flex; flex-direction: column"><span style="font-size: 16px">Keep recent AI activity</span><span style="font-size: 13px; color: {{ k.c6B655C }}">Shows your last letters and replies in Assist</span></span><input type="checkbox" role="switch" checked style="width: 44px; height: 26px; accent-color: {{ k.c0F5C63 }}; margin: 0"></label>
+        </div>
+      </section>
+      <section style="display: flex; flex-direction: column; gap: 10px">
+        <button style="min-height: 52px; border-radius: {{ btnR }}; border: 1.5px solid {{ k.c0F5C63 }}; background: transparent; color: {{ k.c0F5C63 }}; font: 600 16px Inter, sans-serif; display: flex; align-items: center; justify-content: center; gap: 8px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"></path></svg>Download my data</button>
+        <button style="min-height: 52px; border-radius: {{ btnR }}; border: 1.5px solid {{ k.cB42318 }}; background: transparent; color: {{ k.cB42318 }}; font: 600 16px Inter, sans-serif">Delete my account</button>
+        <p style="margin: 0; font-size: 13px; line-height: 19px; color: {{ k.c6B655C }}">Deleting removes everything we store about you within 30 days. If you have Premium, cancel it in your store first.</p>
+      </section>
+      <div style="display: flex; gap: 16px; flex-wrap: wrap; font-size: 14px"><a href="#privacy-policy" style="color: {{ k.c0F5C63 }}; font-weight: 600; min-height: 32px; display: flex; align-items: center">Privacy policy</a><a href="#impressum" style="color: {{ k.c0F5C63 }}; font-weight: 600; min-height: 32px; display: flex; align-items: center">Impressum</a></div>
+    </div>
+  </sc-if>
+
+  <!-- Subscription -->
+  <sc-if value="{{ sub }}" hint-placeholder-val="{{ false }}">
+    <div style="display: flex; flex-direction: column; gap: 18px; padding: 4px 16px {{ padB }}">
+      <section style="background: {{ k.cFFFFFF }}; border: 1px solid {{ k.cE4E0D8 }}; border-radius: {{ r }}; padding: 18px; display: flex; flex-direction: column; gap: 12px">
+        <div style="display: flex; align-items: center; justify-content: space-between"><span style="background: {{ k.cE8A33D }}; color: {{ k.c2A1A00 }}; border-radius: 999px; padding: 3px 10px; font-size: 12px; font-weight: 700">Premium</span><span style="font-size: 13px; color: {{ k.c24653F }}; font-weight: 700">✓ Active</span></div>
+        <dl style="margin: 0; display: flex; flex-direction: column; font-size: 15px">
+          <div style="display: flex; justify-content: space-between; padding: 10px 0; border-top: 1px solid {{ k.cEFECE6 }}"><dt style="color: {{ k.c6B655C }}">Plan</dt><dd style="margin: 0; font-weight: 600">Yearly · €29.99</dd></div>
+          <div style="display: flex; justify-content: space-between; padding: 10px 0; border-top: 1px solid {{ k.cEFECE6 }}"><dt style="color: {{ k.c6B655C }}">Renews on</dt><dd style="margin: 0; font-weight: 600">1 November 2027</dd></div>
+          <div style="display: flex; justify-content: space-between; padding: 10px 0; border-top: 1px solid {{ k.cEFECE6 }}"><dt style="color: {{ k.c6B655C }}">Paid through</dt><dd style="margin: 0; font-weight: 600">{{ store }}</dd></div>
+        </dl>
+      </section>
+      <section style="background: {{ k.cFFFFFF }}; border: 1px solid {{ k.cE4E0D8 }}; border-radius: {{ r }}; padding: 18px; display: flex; flex-direction: column; gap: 12px">
+        <h2 style="margin: 0; font-size: 17px; font-weight: 700">This month</h2>
+        <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; text-align: center">
+          <div style="background: {{ k.cF6F4F0 }}; border-radius: 12px; padding: 12px 6px"><div style="font-size: 24px; font-weight: 700">7</div><div style="font-size: 12px; color: {{ k.c6B655C }}">letters explained</div></div>
+          <div style="background: {{ k.cF6F4F0 }}; border-radius: 12px; padding: 12px 6px"><div style="font-size: 24px; font-weight: 700">3</div><div style="font-size: 12px; color: {{ k.c6B655C }}">replies written</div></div>
+          <div style="background: {{ k.cF6F4F0 }}; border-radius: 12px; padding: 12px 6px"><div style="font-size: 24px; font-weight: 700">12</div><div style="font-size: 12px; color: {{ k.c6B655C }}">questions asked</div></div>
+        </div>
+      </section>
+      <a href="#store" style="min-height: 52px; border-radius: {{ btnR }}; border: 1.5px solid {{ k.c0F5C63 }}; color: {{ k.c0F5C63 }}; text-decoration: none; display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 600">Manage or cancel in {{ storeShort }} ↗</a>
+      <p style="margin: 0; font-size: 13px; line-height: 19px; color: {{ k.c6B655C }}">If you cancel, Premium stays on until 1 November 2027. All guides and checklists stay free.</p>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ notWeb }}" hint-placeholder-val="{{ true }}"><div style="position: absolute; left: 0; right: 0; bottom: 0">
+    <dc-import name="TabBar" platform="{{ platform }}" active="me" dark="{{ darkStr }}" hint-size="390px,84px"></dc-import>
+  </div></sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"dark":{"editor":"boolean","default":false},"platform":{"editor":"enum","options":["ios","android","web"],"default":"ios"},"screen":{"editor":"enum","options":["me","privacy","subscription"],"default":"me"},"$preview":{"width":390,"height":1500}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const __dark = this.props.dark === true || this.props.dark === 'true';
+    const __web = this.props.platform === 'web';
+    const k = __dark ? {"cF6F4F0": "#121614", "cFFFFFF": "#1A2221", "c1F1D1A": "#ECEAE5", "c3B3833": "#C9CFCD", "c4A453E": "#C2C8C6", "c6B655C": "#9AA5A3", "cE4E0D8": "#2C3634", "cEFECE6": "#252D2C", "cCFC9BE": "#4A5755", "cA8A196": "#6F7B79", "cE9E5DD": "#252D2C", "cEDE9E1": "#252D2C", "c0F5C63": "#5CC8C2", "c0A4449": "#8EDDD8", "cE6F0F0": "#173332", "cCFE3E3": "#1F4442", "cD3E6E6": "#1F3D3B", "cE8A33D": "#F2B85C", "c2A1A00": "#2A1A00", "cFBF1DF": "#33291A", "c8A5A12": "#E0C27A", "cB7791F": "#C9A15A", "cFDF6EA": "#2A2418", "cFBEFD9": "#33291A", "c5C3D08": "#E0C27A", "c5C4A2A": "#D8C8A8", "cFDECEA": "#3A1F1C", "cB42318": "#F0A49B", "cEAF4EE": "#1D3327", "c24653F": "#7FD3A0", "c2E7D4F": "#7FD3A0", "cF3F8F8": "#16201F", "cFBFAF7": "#161C1B", "c000000": "#F2F2F2", "cFDF3E2": "#33291A", "c55524C": "#000000", "c5E8C8F": "#7FB3B5"} : {"cF6F4F0": "#F6F4F0", "cFFFFFF": "#FFFFFF", "c1F1D1A": "#1F1D1A", "c3B3833": "#3B3833", "c4A453E": "#4A453E", "c6B655C": "#6B655C", "cE4E0D8": "#E4E0D8", "cEFECE6": "#EFECE6", "cCFC9BE": "#CFC9BE", "cA8A196": "#A8A196", "cE9E5DD": "#E9E5DD", "cEDE9E1": "#EDE9E1", "c0F5C63": "#0F5C63", "c0A4449": "#0A4449", "cE6F0F0": "#E6F0F0", "cCFE3E3": "#CFE3E3", "cD3E6E6": "#D3E6E6", "cE8A33D": "#E8A33D", "c2A1A00": "#2A1A00", "cFBF1DF": "#FBF1DF", "c8A5A12": "#8A5A12", "cB7791F": "#B7791F", "cFDF6EA": "#FDF6EA", "cFBEFD9": "#FBEFD9", "c5C3D08": "#5C3D08", "c5C4A2A": "#5C4A2A", "cFDECEA": "#FDECEA", "cB42318": "#B42318", "cEAF4EE": "#EAF4EE", "c24653F": "#24653F", "c2E7D4F": "#2E7D4F", "cF3F8F8": "#F3F8F8", "cFBFAF7": "#FBFAF7", "c000000": "#000000", "cFDF3E2": "#FDF3E2", "c55524C": "#55524C", "c5E8C8F": "#5E8C8F"};
+    const platform = (this.props.platform ?? 'ios') === 'android' ? 'android' : 'ios';
+    const ios = platform === 'ios';
+    const screen = this.props.screen ?? 'me';
+    const p = ios ? 'ios-' : 'and-';
+    const row = (label, value, href) => ({ label: label, value: value || '', href: href || '#' });
+    const lines = (rows) => rows.map((r, i) => Object.assign({ line: i === 0 ? 'none' : '1px solid ' + k.cEFECE6 }, r));
+    const groups = [
+      { title: 'My plans', rows: lines([row('Reminders and document dates', '5', p + 'reminders.dc.html'), row('Profile and stage', 'First 30 days'), row('Saved guides', '4')]) },
+      { title: 'Settings', rows: lines([row('Language', 'English'), row('Notifications', 'On'), row('Appearance', 'System'), row('Privacy and data', '', p + 'privacy.dc.html')]) },
+      { title: 'Help', rows: lines([row('Where to get help'), row('How we make money'), row('Contact us'), row('Impressum'), row('Privacy policy'), row('Terms')]) }
+    ];
+    const meta = { me: ['Me', '', '1500px'], privacy: ['Privacy and data', 'Me', '1150px'], subscription: ['Subscription', 'Me', '900px'] }[screen] || ['Me', '', '1500px'];
+    return { notWeb: !__web, rootW: __web ? '100%' : '390px', rootH: __web ? 'auto' : meta[2], padB: __web ? '24px' : '120px', k: k, darkStr: __dark ? 'true' : 'false',
+      platform: platform, title: meta[0], back: meta[1], backHref: p + 'me.dc.html', h: meta[2],
+      me: screen === 'me', privacy: screen === 'privacy', sub: screen === 'subscription',
+      groups: groups, subHref: p + 'subscription.dc.html',
+      store: ios ? 'App Store' : 'Google Play', storeShort: ios ? 'the App Store' : 'Google Play',
+      r: ios ? '16px' : '20px', btnR: ios ? '12px' : '999px'
+    };
+  }
+}
+</script>
+</body>
+</html>

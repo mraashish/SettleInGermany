@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Letter scan — capture and processing</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>body{margin:0}</style>
+</helmet>
+<div style="width: {{ rootW }}; height: {{ rootH }}; overflow: hidden; font-family: Inter, system-ui, sans-serif; color: #1F1D1A">
+
+  <sc-if value="{{ upload }}" hint-placeholder-val="{{ false }}">
+    <div style="background: {{ k.cF6F4F0 }}; color: {{ k.c1F1D1A }}; padding: 24px 16px; display: flex; flex-direction: column; gap: 16px">
+      <div style="display: flex; align-items: center; gap: 8px"><h1 style="margin: 0; font-size: 26px; line-height: 32px; font-weight: 700">Upload a letter</h1><span style="font-size: 11px; font-weight: 700; background: {{ k.cE8A33D }}; color: {{ k.c2A1A00 }}; border-radius: 4px; padding: 2px 6px">AI</span></div>
+      <label style="min-height: 260px; border: 2px dashed {{ k.cA8A196 }}; border-radius: 20px; background: {{ k.cFFFFFF }}; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; padding: 24px; text-align: center; cursor: pointer">
+        <span style="width: 64px; height: 64px; border-radius: 999px; background: {{ k.cE6F0F0 }}; color: {{ k.c0F5C63 }}; display: flex; align-items: center; justify-content: center"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"></path></svg></span>
+        <strong style="font-size: 18px">Drop a photo or PDF here</strong>
+        <span style="font-size: 15px; color: {{ k.c6B655C }}">or <span style="color: {{ k.c0F5C63 }}; font-weight: 700; text-decoration: underline">choose a file</span> · up to 10 pages</span>
+        <input type="file" accept="image/*,application/pdf" multiple style="position: absolute; width: 1px; height: 1px; opacity: 0">
+      </label>
+      <button style="min-height: 52px; border-radius: 12px; border: 1.5px solid {{ k.c0F5C63 }}; background: transparent; color: {{ k.c0F5C63 }}; font: 600 16px Inter, sans-serif; display: flex; align-items: center; justify-content: center; gap: 8px"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8a2 2 0 0 1 2-2h2l2-3h6l2 3h2a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><circle cx="12" cy="13" r="4"></circle></svg>Take a photo with your phone</button>
+      <div style="display: flex; gap: 10px; align-items: flex-start; background: {{ k.cEFECE6 }}; border-radius: 12px; padding: 12px 14px; font-size: 14px; line-height: 20px; color: {{ k.c3B3833 }}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none; margin-top: 1px"><rect x="4" y="11" width="16" height="10" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg><span>Your document is processed and then deleted. We don’t keep it unless you choose to save it.</span></div>
+      <p style="margin: 0; font-size: 14px; color: {{ k.c3B3833 }}; text-align: center">This uses 1 of your 3 free scans this month.</p>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ capture }}" hint-placeholder-val="{{ true }}">
+    <div style="height: 844px; background: #0E1110; color: #FFFFFF; display: flex; flex-direction: column">
+      <div style="height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 8px">
+        <a href="{{ hubHref }}" aria-label="Close scanner" style="width: 48px; height: 48px; border-radius: 999px; display: flex; align-items: center; justify-content: center; color: #FFFFFF"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"></path></svg></a>
+        <span style="font-size: 17px; font-weight: 600">Scan a letter</span>
+        <button aria-label="Flash off" style="width: 48px; height: 48px; border-radius: 999px; border: none; background: transparent; color: #FFFFFF; display: flex; align-items: center; justify-content: center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2L3 14h9l-1 8 10-12h-9z"></path><path d="M2 2l20 20"></path></svg></button>
+      </div>
+
+      <div style="margin: 0 16px; display: flex; gap: 10px; align-items: flex-start; background: rgba(255,255,255,0.1); border-radius: 12px; padding: 10px 12px; font-size: 13px; line-height: 19px; color: #E6EBEA">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none; margin-top: 1px"><rect x="4" y="11" width="16" height="10" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg>
+        <span>Your document is processed and then deleted. We don’t keep it unless you choose to save it.</span>
+      </div>
+
+      <div style="flex: 1; position: relative; display: flex; align-items: center; justify-content: center">
+        <div style="width: 236px; height: 320px; background: #F4F1EA; border-radius: 4px; transform: rotate(-3deg); padding: 22px 20px; box-sizing: border-box; display: flex; flex-direction: column; gap: 9px; box-shadow: 0 10px 30px rgba(0,0,0,0.5)">
+          <span style="width: 90px; height: 8px; background: #B9B3A8; border-radius: 2px"></span>
+          <span style="width: 120px; height: 6px; background: #CFC9BE; border-radius: 2px"></span>
+          <span style="height: 18px"></span>
+          <span style="width: 150px; height: 8px; background: #8E877B; border-radius: 2px"></span>
+          <span style="height: 6px; background: #CFC9BE; border-radius: 2px"></span>
+          <span style="height: 6px; background: #CFC9BE; border-radius: 2px"></span>
+          <span style="width: 170px; height: 6px; background: #CFC9BE; border-radius: 2px"></span>
+          <span style="height: 6px; background: #CFC9BE; border-radius: 2px"></span>
+          <span style="width: 140px; height: 6px; background: #CFC9BE; border-radius: 2px"></span>
+        </div>
+        <svg width="270" height="356" viewBox="0 0 270 356" aria-hidden="true" style="position: absolute"><path d="M10 50V14h36M224 6h36v36M262 306v36h-36M44 350H8v-36" fill="none" stroke="#5CC8C2" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" transform="rotate(-3 135 178)"></path></svg>
+        <span style="position: absolute; bottom: 18px; background: #5CC8C2; color: #0B1F1E; border-radius: 999px; padding: 6px 14px; font-size: 14px; font-weight: 700">{{ detectLabel }}</span>
+      </div>
+
+      <div style="padding: 12px 20px 28px; display: flex; flex-direction: column; gap: 16px">
+        <div style="text-align: center; font-size: 14px; color: #C9D2D0">This uses 1 of your 3 free scans this month</div>
+        <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: center">
+          <button style="justify-self: start; min-height: 56px; border: none; background: transparent; color: #FFFFFF; font: 500 12px Inter, sans-serif; display: flex; flex-direction: column; align-items: center; gap: 4px"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"></path></svg>Upload PDF<br>or photo</button>
+          <button aria-label="Take photo of page 1" style="justify-self: center; width: 76px; height: 76px; border-radius: 999px; border: 4px solid #FFFFFF; background: transparent; padding: 4px; box-sizing: border-box"><span style="display: block; width: 100%; height: 100%; border-radius: 999px; background: #FFFFFF"></span></button>
+          <button style="justify-self: end; min-height: 56px; border: none; background: transparent; color: #FFFFFF; font: 500 12px Inter, sans-serif; display: flex; flex-direction: column; align-items: center; gap: 4px"><span style="width: 32px; height: 40px; border-radius: 4px; border: 2px dashed #8E9A98; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700">0</span>Pages</button>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ processing }}" hint-placeholder-val="{{ false }}">
+    <div style="height: 844px; background: {{ k.cF6F4F0 }}; display: flex; flex-direction: column">
+      <div style="height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 8px">
+        <a href="{{ hubHref }}" aria-label="Close" style="width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; color: {{ k.c1F1D1A }}"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"></path></svg></a>
+        <span style="font-size: 11px; font-weight: 700; background: {{ k.cE8A33D }}; color: {{ k.c2A1A00 }}; border-radius: 4px; padding: 2px 6px; margin-right: 16px">AI</span>
+      </div>
+      <div style="flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 28px; padding: 0 28px 80px">
+        <div style="display: flex; justify-content: center">
+          <div style="width: 96px; height: 124px; border-radius: 8px; background: {{ k.cFFFFFF }}; border: 1px solid {{ k.cE4E0D8 }}; padding: 16px 14px; box-sizing: border-box; display: flex; flex-direction: column; gap: 8px; box-shadow: 0 6px 20px rgba(31,29,26,0.08)">
+            <span style="width: 40px; height: 6px; background: {{ k.cCFC9BE }}; border-radius: 2px"></span><span style="height: 5px; background: {{ k.cE4E0D8 }}; border-radius: 2px"></span><span style="height: 5px; background: {{ k.cE4E0D8 }}; border-radius: 2px"></span><span style="width: 50px; height: 5px; background: {{ k.cE8A33D }}; border-radius: 2px"></span><span style="height: 5px; background: {{ k.cE4E0D8 }}; border-radius: 2px"></span>
+          </div>
+        </div>
+        <div style="text-align: center; display: flex; flex-direction: column; gap: 6px">
+          <h1 style="margin: 0; font-size: 24px; line-height: 30px; font-weight: 700">Understanding your letter</h1>
+          <p style="margin: 0; font-size: 15px; color: {{ k.c6B655C }}">Usually about 20 seconds.</p>
+        </div>
+        <ol role="list" style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 4px; background: {{ k.cFFFFFF }}; border: 1px solid {{ k.cE4E0D8 }}; border-radius: 16px; padding: 8px 16px">
+          <li style="min-height: 48px; display: flex; align-items: center; gap: 12px; font-size: 16px"><span style="width: 26px; height: 26px; border-radius: 999px; background: {{ k.c2E7D4F }}; color: {{ k.cFFFFFF }}; display: flex; align-items: center; justify-content: center; flex: none"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"></path></svg></span>Reading the letter<span style="margin-left: auto; font-size: 13px; color: {{ k.c24653F }}; font-weight: 600">Done</span></li>
+          <li aria-current="step" style="min-height: 48px; display: flex; align-items: center; gap: 12px; font-size: 16px; font-weight: 600; border-top: 1px solid {{ k.cEFECE6 }}"><svg width="26" height="26" viewBox="0 0 26 26" aria-hidden="true" style="flex: none"><circle cx="13" cy="13" r="10" fill="none" stroke="{{ k.cE4E0D8 }}" stroke-width="3"></circle><path d="M13 3a10 10 0 0 1 10 10" fill="none" stroke="{{ k.c0F5C63 }}" stroke-width="3" stroke-linecap="round"></path></svg>Finding deadlines<span style="margin-left: auto; font-size: 13px; color: {{ k.c0F5C63 }}; font-weight: 600">Now</span></li>
+          <li style="min-height: 48px; display: flex; align-items: center; gap: 12px; font-size: 16px; color: {{ k.c6B655C }}; border-top: 1px solid {{ k.cEFECE6 }}"><span style="width: 22px; height: 22px; margin: 0 2px; border-radius: 999px; border: 2px solid {{ k.cCFC9BE }}; flex: none; box-sizing: border-box"></span>Preparing your summary</li>
+        </ol>
+        <div role="progressbar" aria-label="Step 2 of 3" style="height: 6px; border-radius: 999px; background: {{ k.cE4E0D8 }}; overflow: hidden"><div style="width: 55%; height: 6px; border-radius: 999px; background: {{ k.c0F5C63 }}"></div></div>
+        <p style="margin: 0; text-align: center; font-size: 13px; line-height: 19px; color: {{ k.c6B655C }}">You can leave this screen. We’ll notify you when it’s ready.<br>Your scan is deleted after processing.</p>
+      </div>
+    </div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"dark":{"editor":"boolean","default":false},"platform":{"editor":"enum","options":["ios","android","web"],"default":"ios"},"step":{"editor":"enum","options":["capture","processing","upload"],"default":"capture"},"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const __dark = this.props.dark === true || this.props.dark === 'true';
+    const __web = this.props.platform === 'web';
+    const k = __dark ? {"cF6F4F0": "#121614", "cFFFFFF": "#1A2221", "c1F1D1A": "#ECEAE5", "c3B3833": "#C9CFCD", "c4A453E": "#C2C8C6", "c6B655C": "#9AA5A3", "cE4E0D8": "#2C3634", "cEFECE6": "#252D2C", "cCFC9BE": "#4A5755", "cA8A196": "#6F7B79", "cE9E5DD": "#252D2C", "cEDE9E1": "#252D2C", "c0F5C63": "#5CC8C2", "c0A4449": "#8EDDD8", "cE6F0F0": "#173332", "cCFE3E3": "#1F4442", "cD3E6E6": "#1F3D3B", "cE8A33D": "#F2B85C", "c2A1A00": "#2A1A00", "cFBF1DF": "#33291A", "c8A5A12": "#E0C27A", "cB7791F": "#C9A15A", "cFDF6EA": "#2A2418", "cFBEFD9": "#33291A", "c5C3D08": "#E0C27A", "c5C4A2A": "#D8C8A8", "cFDECEA": "#3A1F1C", "cB42318": "#F0A49B", "cEAF4EE": "#1D3327", "c24653F": "#7FD3A0", "c2E7D4F": "#7FD3A0", "cF3F8F8": "#16201F", "cFBFAF7": "#161C1B", "c000000": "#F2F2F2", "cFDF3E2": "#33291A", "c55524C": "#000000"} : {"cF6F4F0": "#F6F4F0", "cFFFFFF": "#FFFFFF", "c1F1D1A": "#1F1D1A", "c3B3833": "#3B3833", "c4A453E": "#4A453E", "c6B655C": "#6B655C", "cE4E0D8": "#E4E0D8", "cEFECE6": "#EFECE6", "cCFC9BE": "#CFC9BE", "cA8A196": "#A8A196", "cE9E5DD": "#E9E5DD", "cEDE9E1": "#EDE9E1", "c0F5C63": "#0F5C63", "c0A4449": "#0A4449", "cE6F0F0": "#E6F0F0", "cCFE3E3": "#CFE3E3", "cD3E6E6": "#D3E6E6", "cE8A33D": "#E8A33D", "c2A1A00": "#2A1A00", "cFBF1DF": "#FBF1DF", "c8A5A12": "#8A5A12", "cB7791F": "#B7791F", "cFDF6EA": "#FDF6EA", "cFBEFD9": "#FBEFD9", "c5C3D08": "#5C3D08", "c5C4A2A": "#5C4A2A", "cFDECEA": "#FDECEA", "cB42318": "#B42318", "cEAF4EE": "#EAF4EE", "c24653F": "#24653F", "c2E7D4F": "#2E7D4F", "cF3F8F8": "#F3F8F8", "cFBFAF7": "#FBFAF7", "c000000": "#000000", "cFDF3E2": "#FDF3E2", "c55524C": "#55524C"};
+    const ios = (this.props.platform ?? 'ios') !== 'android';
+    const step = this.props.step ?? 'capture';
+    return { notWeb: !__web, rootW: __web ? '100%' : '390px', rootH: __web ? 'auto' : '844px', padB: __web ? '24px' : '120px', k: k, darkStr: __dark ? 'true' : 'false',
+      capture: step === 'capture', processing: step === 'processing', upload: step === 'upload',
+      detectLabel: ios ? 'Letter found · hold still' : 'Edges found · hold still',
+      hubHref: ios ? 'ios-assist.dc.html' : 'and-assist.dc.html'
+    };
+  }
+}
+</script>
+</body>
+</html>

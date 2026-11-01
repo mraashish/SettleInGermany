@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Roadmap detail screen</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>body{margin:0}</style>
+</helmet>
+<div style="width: {{ rootW }}; height: {{ rootH }}; position: relative; overflow: hidden; background: {{ k.cF6F4F0 }}; color: {{ k.c1F1D1A }}; font-family: Inter, system-ui, sans-serif">
+
+  <sc-if value="{{ ios }}" hint-placeholder-val="{{ true }}">
+    <div style="display: flex; flex-direction: column; gap: 10px; padding: 8px 16px 12px; background: {{ k.cF6F4F0 }}; border-bottom: 1px solid {{ k.cE4E0D8 }}">
+      <div style="height: 44px; display: flex; align-items: center; justify-content: space-between">
+        <a href="{{ homeHref }}" style="display: flex; align-items: center; height: 44px; margin-left: -8px; color: {{ k.c0F5C63 }}; text-decoration: none; font-size: 17px"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"></path></svg>Home</a>
+        <span style="font-size: 17px; font-weight: 600">Roadmap</span>
+        <button aria-label="More options" style="width: 44px; height: 44px; margin-right: -8px; border: none; background: transparent; color: {{ k.c0F5C63 }}; display: flex; align-items: center; justify-content: center"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="5" cy="12" r="2"></circle><circle cx="12" cy="12" r="2"></circle><circle cx="19" cy="12" r="2"></circle></svg></button>
+      </div>
+      <div role="tablist" aria-label="Stages" style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); background: {{ k.cE9E5DD }}; border-radius: 10px; padding: 2px">
+        <button role="tab" aria-selected="false" style="min-height: 36px; border: none; border-radius: 8px; background: transparent; font: 500 13px Inter, sans-serif; color: {{ k.c3B3833 }}">Before</button>
+        <button role="tab" aria-selected="true" style="min-height: 36px; border: none; border-radius: 8px; background: {{ k.cFFFFFF }}; box-shadow: 0 1px 3px rgba(31,29,26,0.15); font: 700 13px Inter, sans-serif; color: {{ k.c1F1D1A }}">First 30</button>
+        <button role="tab" aria-selected="false" style="min-height: 36px; border: none; border-radius: 8px; background: transparent; font: 500 13px Inter, sans-serif; color: {{ k.c3B3833 }}">Living</button>
+        <button role="tab" aria-selected="false" style="min-height: 36px; border: none; border-radius: 8px; background: transparent; font: 500 13px Inter, sans-serif; color: {{ k.c3B3833 }}">Career</button>
+      </div>
+    </div>
+  </sc-if>
+  <sc-if value="{{ android }}" hint-placeholder-val="{{ false }}">
+    <div style="background: {{ k.cF6F4F0 }}">
+      <div style="height: 64px; display: flex; align-items: center; gap: 4px; padding: 0 4px">
+        <a href="{{ homeHref }}" aria-label="Back" style="width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; color: {{ k.c1F1D1A }}"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"></path></svg></a>
+        <span style="flex: 1; font-size: 22px; font-weight: 500">Roadmap</span>
+        <button aria-label="More options" style="width: 48px; height: 48px; border: none; border-radius: 999px; background: transparent; color: {{ k.c1F1D1A }}; display: flex; align-items: center; justify-content: center"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="5" r="2"></circle><circle cx="12" cy="12" r="2"></circle><circle cx="12" cy="19" r="2"></circle></svg></button>
+      </div>
+      <div role="tablist" aria-label="Stages" style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-bottom: 1px solid {{ k.cE4E0D8 }}">
+        <button role="tab" aria-selected="false" style="height: 48px; border: none; background: transparent; font: 500 14px Inter, sans-serif; color: {{ k.c6B655C }}">Before</button>
+        <button role="tab" aria-selected="true" style="height: 48px; border: none; border-bottom: 3px solid {{ k.c0F5C63 }}; background: transparent; font: 700 14px Inter, sans-serif; color: {{ k.c0F5C63 }}">First 30</button>
+        <button role="tab" aria-selected="false" style="height: 48px; border: none; background: transparent; font: 500 14px Inter, sans-serif; color: {{ k.c6B655C }}">Living</button>
+        <button role="tab" aria-selected="false" style="height: 48px; border: none; background: transparent; font: 500 14px Inter, sans-serif; color: {{ k.c6B655C }}">Career</button>
+      </div>
+    </div>
+  </sc-if>
+
+  <div style="display: flex; flex-direction: column; gap: 16px; padding: 16px 16px {{ padB }}">
+    <div style="display: flex; align-items: center; gap: 14px">
+      <svg width="60" height="60" viewBox="0 0 60 60" role="img" aria-label="4 of 9 steps done"><circle cx="30" cy="30" r="24" fill="none" stroke="{{ k.cE4E0D8 }}" stroke-width="7"></circle><circle cx="30" cy="30" r="24" fill="none" stroke="{{ k.c0F5C63 }}" stroke-width="7" stroke-linecap="round" stroke-dasharray="67 150.8" transform="rotate(-90 30 30)"></circle><text x="30" y="35" text-anchor="middle" font-family="Inter, sans-serif" font-size="14" font-weight="700" fill="{{ k.c1F1D1A }}">4/9</text></svg>
+      <div style="display: flex; flex-direction: column; gap: 2px; flex: 1">
+        <h1 style="margin: 0; font-size: 24px; line-height: 30px; font-weight: 700">First 30 days</h1>
+        <span style="font-size: 14px; color: {{ k.c6B655C }}">5 to go · about 6 hours of work</span>
+      </div>
+    </div>
+
+    <div role="status" style="display: flex; align-items: center; gap: 10px; background: {{ k.cFBEFD9 }}; border: 1px solid {{ k.cE8A33D }}; border-radius: {{ r }}; padding: 10px 14px; font-size: 14px; font-weight: 600; color: {{ k.c5C3D08 }}">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="{{ k.cB7791F }}" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"></path></svg>
+      Nice work — bank account done. 4 of 9 finished.
+    </div>
+
+    <section style="display: flex; flex-direction: column; gap: 8px">
+      <h2 style="margin: 0; font-size: 13px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: {{ k.c6B655C }}">Paperwork · 1 of 4</h2>
+      <div style="background: {{ k.cFFFFFF }}; border: 1px solid {{ k.cE4E0D8 }}; border-radius: {{ rLg }}; padding: 0 14px">
+        <div style="display: flex; gap: 12px; padding: 14px 0; border-bottom: 1px solid {{ k.cEFECE6 }}">
+          <input type="checkbox" aria-label="Register your address" style="width: 24px; height: 24px; margin: 0; accent-color: {{ k.c2E7D4F }}; flex: none">
+          <div style="display: flex; flex-direction: column; gap: 6px; flex: 1">
+            <span style="font-size: 16px; font-weight: 600">Register your address</span>
+            <span style="display: flex; align-items: center; gap: 6px; font-size: 13px"><span style="font-size: 10px; font-weight: 700; border: 1px solid {{ k.c0F5C63 }}; color: {{ k.c0F5C63 }}; border-radius: 4px; padding: 0 4px; line-height: 15px">DE</span><span style="font-weight: 500; color: {{ k.c3B3833 }}">Anmeldung</span><span style="color: {{ k.c6B655C }}">· about 1 h</span></span>
+            <span style="display: flex; align-items: center; gap: 10px"><span style="display: inline-flex; align-items: center; gap: 4px; background: {{ k.cFDECEA }}; color: {{ k.cB42318 }}; border-radius: 999px; padding: 3px 10px; font-size: 13px; font-weight: 700"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.3 3.9L1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"></path><path d="M12 9v4M12 17h.01"></path></svg>Urgent · 5 days</span><a href="A-Guide.dc.html" style="font-size: 14px; font-weight: 600; color: {{ k.c0F5C63 }}">How to</a></span>
+          </div>
+        </div>
+        <div style="display: flex; gap: 12px; padding: 14px 0; border-bottom: 1px solid {{ k.cEFECE6 }}">
+          <input type="checkbox" aria-label="Book residence-permit appointment" style="width: 24px; height: 24px; margin: 0; accent-color: {{ k.c2E7D4F }}; flex: none">
+          <div style="display: flex; flex-direction: column; gap: 6px; flex: 1">
+            <span style="font-size: 16px; font-weight: 600">Book residence-permit appointment</span>
+            <span style="display: flex; align-items: center; gap: 6px; font-size: 13px"><span style="font-size: 10px; font-weight: 700; border: 1px solid {{ k.c0F5C63 }}; color: {{ k.c0F5C63 }}; border-radius: 4px; padding: 0 4px; line-height: 15px">DE</span><span style="font-weight: 500; color: {{ k.c3B3833 }}">Aufenthaltstitel</span><span style="color: {{ k.c6B655C }}">· 30 min</span></span>
+            <span style="display: flex; align-items: center; gap: 10px"><span style="display: inline-flex; align-items: center; gap: 4px; background: {{ k.cFBF1DF }}; color: {{ k.c8A5A12 }}; border-radius: 999px; padding: 3px 10px; font-size: 13px; font-weight: 700"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg>Soon · 21 days</span><a href="A-Guide.dc.html" style="font-size: 14px; font-weight: 600; color: {{ k.c0F5C63 }}">How to</a></span>
+          </div>
+        </div>
+        <div style="display: flex; gap: 12px; padding: 14px 0; border-bottom: 1px solid {{ k.cEFECE6 }}">
+          <input type="checkbox" aria-label="Get your tax ID" style="width: 24px; height: 24px; margin: 0; accent-color: {{ k.c2E7D4F }}; flex: none">
+          <div style="display: flex; flex-direction: column; gap: 6px; flex: 1">
+            <span style="font-size: 16px; font-weight: 600">Get your tax ID</span>
+            <span style="display: flex; align-items: center; gap: 6px; font-size: 13px"><span style="font-size: 10px; font-weight: 700; border: 1px solid {{ k.c0F5C63 }}; color: {{ k.c0F5C63 }}; border-radius: 4px; padding: 0 4px; line-height: 15px">DE</span><span style="font-weight: 500; color: {{ k.c3B3833 }}">Steuer-ID</span><span style="color: {{ k.c6B655C }}">· arrives by post</span></span>
+            <a href="A-Guide.dc.html" style="font-size: 14px; font-weight: 600; color: {{ k.c0F5C63 }}">How to</a>
+          </div>
+        </div>
+        <div style="display: flex; gap: 12px; padding: 14px 0">
+          <input type="checkbox" checked aria-label="Enrol at university, done" style="width: 24px; height: 24px; margin: 0; accent-color: {{ k.c2E7D4F }}; flex: none">
+          <div style="display: flex; flex-direction: column; gap: 4px; flex: 1">
+            <span style="font-size: 16px; font-weight: 500; color: {{ k.c6B655C }}; text-decoration: line-through">Enrol at university</span>
+            <span style="display: inline-flex; align-items: center; gap: 4px; color: {{ k.c24653F }}; font-size: 13px; font-weight: 700"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"></path></svg>Done · 22 Oct</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section style="display: flex; flex-direction: column; gap: 8px">
+      <h2 style="margin: 0; font-size: 13px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: {{ k.c6B655C }}">Money · 2 of 3</h2>
+      <div style="background: {{ k.cFFFFFF }}; border: 1px solid {{ k.cE4E0D8 }}; border-radius: {{ rLg }}; padding: 0 14px">
+        <div style="display: flex; gap: 12px; padding: 14px 0; border-bottom: 1px solid {{ k.cEFECE6 }}">
+          <input type="checkbox" aria-label="Pay the broadcasting fee" style="width: 24px; height: 24px; margin: 0; accent-color: {{ k.c2E7D4F }}; flex: none">
+          <div style="display: flex; flex-direction: column; gap: 6px; flex: 1">
+            <span style="font-size: 16px; font-weight: 600">Pay the broadcasting fee</span>
+            <span style="display: flex; align-items: center; gap: 6px; font-size: 13px"><span style="font-size: 10px; font-weight: 700; border: 1px solid {{ k.c0F5C63 }}; color: {{ k.c0F5C63 }}; border-radius: 4px; padding: 0 4px; line-height: 15px">DE</span><span style="font-weight: 500; color: {{ k.c3B3833 }}">Rundfunkbeitrag</span><span style="color: {{ k.c6B655C }}">· 10 min</span></span>
+            <span style="display: flex; align-items: center; gap: 10px"><span style="display: inline-flex; align-items: center; gap: 4px; background: {{ k.cEFECE6 }}; color: {{ k.c4A453E }}; border-radius: 999px; padding: 3px 10px; font-size: 13px; font-weight: 700"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"></rect><path d="M16 2v4M8 2v4M3 10h18"></path></svg>In 6 weeks</span><a href="A-Guide.dc.html" style="font-size: 14px; font-weight: 600; color: {{ k.c0F5C63 }}">How to</a></span>
+          </div>
+        </div>
+        <div style="display: flex; gap: 12px; padding: 14px 0; border-bottom: 1px solid {{ k.cEFECE6 }}; background: {{ k.cFDF6EA }}; margin: 0 -14px; padding-left: 14px; padding-right: 14px">
+          <input type="checkbox" checked aria-label="Open a bank account, done" style="width: 24px; height: 24px; margin: 0; accent-color: {{ k.c2E7D4F }}; flex: none">
+          <div style="display: flex; flex-direction: column; gap: 4px; flex: 1">
+            <span style="font-size: 16px; font-weight: 500; color: {{ k.c6B655C }}; text-decoration: line-through">Open a bank account</span>
+            <span style="display: inline-flex; align-items: center; gap: 4px; color: {{ k.c24653F }}; font-size: 13px; font-weight: 700"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"></path></svg>Done · just now</span>
+          </div>
+        </div>
+        <div style="display: flex; gap: 12px; padding: 14px 0">
+          <input type="checkbox" checked aria-label="Choose a phone plan, done" style="width: 24px; height: 24px; margin: 0; accent-color: {{ k.c2E7D4F }}; flex: none">
+          <div style="display: flex; flex-direction: column; gap: 4px; flex: 1">
+            <span style="font-size: 16px; font-weight: 500; color: {{ k.c6B655C }}; text-decoration: line-through">Choose a phone plan</span>
+            <span style="display: inline-flex; align-items: center; gap: 4px; color: {{ k.c24653F }}; font-size: 13px; font-weight: 700"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"></path></svg>Done · 20 Oct</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section style="display: flex; flex-direction: column; gap: 8px">
+      <h2 style="margin: 0; font-size: 13px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: {{ k.c6B655C }}">Health · 1 of 2</h2>
+      <div style="background: {{ k.cFFFFFF }}; border: 1px solid {{ k.cE4E0D8 }}; border-radius: {{ rLg }}; padding: 0 14px">
+        <div style="display: flex; gap: 12px; padding: 14px 0; border-bottom: 1px solid {{ k.cEFECE6 }}">
+          <input type="checkbox" aria-label="Find a family doctor" style="width: 24px; height: 24px; margin: 0; accent-color: {{ k.c2E7D4F }}; flex: none">
+          <div style="display: flex; flex-direction: column; gap: 6px; flex: 1">
+            <span style="font-size: 16px; font-weight: 600">Find a family doctor</span>
+            <span style="display: flex; align-items: center; gap: 6px; font-size: 13px"><span style="font-size: 10px; font-weight: 700; border: 1px solid {{ k.c0F5C63 }}; color: {{ k.c0F5C63 }}; border-radius: 4px; padding: 0 4px; line-height: 15px">DE</span><span style="font-weight: 500; color: {{ k.c3B3833 }}">Hausarzt</span><span style="color: {{ k.c6B655C }}">· no deadline</span></span>
+          </div>
+        </div>
+        <div style="display: flex; gap: 12px; padding: 14px 0">
+          <input type="checkbox" checked aria-label="Health insurance, done" style="width: 24px; height: 24px; margin: 0; accent-color: {{ k.c2E7D4F }}; flex: none">
+          <div style="display: flex; flex-direction: column; gap: 4px; flex: 1">
+            <span style="font-size: 16px; font-weight: 500; color: {{ k.c6B655C }}; text-decoration: line-through">Activate health insurance</span>
+            <span style="display: inline-flex; align-items: center; gap: 4px; color: {{ k.c24653F }}; font-size: 13px; font-weight: 700"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"></path></svg>Done · 19 Oct</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px">
+      <button style="min-height: 44px; padding: 0 4px; border: none; background: transparent; color: {{ k.c0F5C63 }}; font: 600 14px Inter, sans-serif">2 hidden tasks · Show</button>
+      <button style="min-height: 48px; padding: 0 18px; border-radius: {{ btnR }}; border: 1.5px solid {{ k.c0F5C63 }}; background: {{ k.cFFFFFF }}; color: {{ k.c0F5C63 }}; font: 600 15px Inter, sans-serif; display: flex; align-items: center; gap: 6px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>Add your own task</button>
+    </div>
+  </div>
+
+  <sc-if value="{{ notWeb }}" hint-placeholder-val="{{ true }}"><div style="position: absolute; left: 0; right: 0; bottom: 0">
+    <dc-import name="TabBar" platform="{{ platform }}" active="home" dark="{{ darkStr }}" hint-size="390px,84px"></dc-import>
+  </div></sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"dark":{"editor":"boolean","default":false},"platform":{"editor":"enum","options":["ios","android","web"],"default":"ios"},"$preview":{"width":390,"height":1300}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const __dark = this.props.dark === true || this.props.dark === 'true';
+    const __web = this.props.platform === 'web';
+    const k = __dark ? {"cF6F4F0": "#121614", "cFFFFFF": "#1A2221", "c1F1D1A": "#ECEAE5", "c3B3833": "#C9CFCD", "c4A453E": "#C2C8C6", "c6B655C": "#9AA5A3", "cE4E0D8": "#2C3634", "cEFECE6": "#252D2C", "cCFC9BE": "#4A5755", "cA8A196": "#6F7B79", "cE9E5DD": "#252D2C", "cEDE9E1": "#252D2C", "c0F5C63": "#5CC8C2", "c0A4449": "#8EDDD8", "cE6F0F0": "#173332", "cCFE3E3": "#1F4442", "cD3E6E6": "#1F3D3B", "cE8A33D": "#F2B85C", "c2A1A00": "#2A1A00", "cFBF1DF": "#33291A", "c8A5A12": "#E0C27A", "cB7791F": "#C9A15A", "cFDF6EA": "#2A2418", "cFBEFD9": "#33291A", "c5C3D08": "#E0C27A", "c5C4A2A": "#D8C8A8", "cFDECEA": "#3A1F1C", "cB42318": "#F0A49B", "cEAF4EE": "#1D3327", "c24653F": "#7FD3A0", "c2E7D4F": "#7FD3A0", "cF3F8F8": "#16201F", "cFBFAF7": "#161C1B", "c000000": "#F2F2F2", "cFDF3E2": "#33291A", "c55524C": "#000000"} : {"cF6F4F0": "#F6F4F0", "cFFFFFF": "#FFFFFF", "c1F1D1A": "#1F1D1A", "c3B3833": "#3B3833", "c4A453E": "#4A453E", "c6B655C": "#6B655C", "cE4E0D8": "#E4E0D8", "cEFECE6": "#EFECE6", "cCFC9BE": "#CFC9BE", "cA8A196": "#A8A196", "cE9E5DD": "#E9E5DD", "cEDE9E1": "#EDE9E1", "c0F5C63": "#0F5C63", "c0A4449": "#0A4449", "cE6F0F0": "#E6F0F0", "cCFE3E3": "#CFE3E3", "cD3E6E6": "#D3E6E6", "cE8A33D": "#E8A33D", "c2A1A00": "#2A1A00", "cFBF1DF": "#FBF1DF", "c8A5A12": "#8A5A12", "cB7791F": "#B7791F", "cFDF6EA": "#FDF6EA", "cFBEFD9": "#FBEFD9", "c5C3D08": "#5C3D08", "c5C4A2A": "#5C4A2A", "cFDECEA": "#FDECEA", "cB42318": "#B42318", "cEAF4EE": "#EAF4EE", "c24653F": "#24653F", "c2E7D4F": "#2E7D4F", "cF3F8F8": "#F3F8F8", "cFBFAF7": "#FBFAF7", "c000000": "#000000", "cFDF3E2": "#FDF3E2", "c55524C": "#55524C"};
+    const platform = (this.props.platform ?? 'ios') === 'android' ? 'android' : 'ios';
+    const ios = platform === 'ios';
+    return { notWeb: !__web, rootW: __web ? '100%' : '390px', rootH: __web ? 'auto' : '1300px', padB: __web ? '24px' : '120px', k: k, darkStr: __dark ? 'true' : 'false',
+      ios: ios, android: !ios, platform: platform,
+      r: '12px', rLg: ios ? '16px' : '20px', btnR: ios ? '12px' : '999px',
+      homeHref: ios ? 'ios-home.dc.html' : 'and-home.dc.html'
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Web · Guide page</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>body{margin:0}</style>
+</helmet>
+<div style="width: 100%; position: relative; background: {{ k.cF6F4F0 }}; color: {{ k.c1F1D1A }}; font-family: Inter, system-ui, sans-serif">
+
+  <sc-if value="{{ desktop }}" hint-placeholder-val="{{ true }}">
+    <header style="background: {{ k.cFFFFFF }}; border-bottom: 1px solid {{ k.cE4E0D8 }}">
+      <div style="max-width: 1200px; margin: 0 auto; padding: 0 32px; min-height: 68px; display: flex; align-items: center; gap: 32px; flex-wrap: wrap">
+        <a href="web-home-desktop.dc.html" style="display: flex; align-items: center; gap: 10px; text-decoration: none; color: {{ k.c1F1D1A }}; font-size: 17px; font-weight: 700"><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="9" fill="{{ k.c0F5C63 }}"></rect><path d="M9 23c0-5 14-3 14-9 0-3-3-5-7-5" fill="none" stroke="{{ k.cFFFFFF }}" stroke-width="2.6" stroke-linecap="round"></path><circle cx="9" cy="23" r="2.6" fill="{{ k.cE8A33D }}"></circle></svg>Settle in Germany</a>
+        <nav aria-label="Main" style="display: flex; gap: 4px; flex: 1">
+          <a href="web-home-desktop.dc.html" style="min-height: 44px; padding: 0 14px; display: flex; align-items: center; border-radius: 10px; color: {{ k.c3B3833 }}; font-size: 15px; font-weight: 500; text-decoration: none">Home</a>
+          <a href="web-guide-desktop.dc.html" aria-current="page" style="min-height: 44px; padding: 0 14px; display: flex; align-items: center; border-radius: 10px; background: {{ k.cE6F0F0 }}; color: {{ k.c0F5C63 }}; font-size: 15px; font-weight: 700; text-decoration: none">Guides</a>
+          <a href="web-paywall-desktop.dc.html" style="min-height: 44px; padding: 0 14px; display: flex; align-items: center; gap: 6px; border-radius: 10px; color: {{ k.c3B3833 }}; font-size: 15px; font-weight: 500; text-decoration: none">Assist <span style="font-size: 10px; font-weight: 700; background: {{ k.cE8A33D }}; color: {{ k.c2A1A00 }}; border-radius: 4px; padding: 1px 5px">AI</span></a>
+          <a href="web-compare-desktop.dc.html" style="min-height: 44px; padding: 0 14px; display: flex; align-items: center; border-radius: 10px; color: {{ k.c3B3833 }}; font-size: 15px; font-weight: 500; text-decoration: none">Tools</a>
+        </nav>
+        <div style="display: flex; align-items: center; gap: 10px">
+          <button style="min-height: 44px; padding: 0 12px; border-radius: 10px; border: 1px solid {{ k.cE4E0D8 }}; background: {{ k.cFFFFFF }}; font: 500 14px Inter, sans-serif; color: {{ k.c1F1D1A }}">English ▾</button>
+          <a href="#signin" style="min-height: 44px; padding: 0 14px; display: flex; align-items: center; color: {{ k.c0F5C63 }}; font-size: 15px; font-weight: 600; text-decoration: none">Sign in</a>
+          <a href="#app" style="min-height: 44px; padding: 0 18px; border-radius: 12px; background: {{ k.c0F5C63 }}; color: {{ k.cFFFFFF }}; display: flex; align-items: center; font-size: 15px; font-weight: 700; text-decoration: none">Get the app</a>
+        </div>
+      </div>
+    </header>
+  </sc-if>
+  <sc-if value="{{ mobile }}" hint-placeholder-val="{{ false }}">
+    <header style="background: {{ k.cFFFFFF }}; border-bottom: 1px solid {{ k.cE4E0D8 }}; min-height: 56px; display: flex; align-items: center; justify-content: space-between; padding: 0 12px 0 16px">
+      <a href="web-home-mobile.dc.html" style="display: flex; align-items: center; gap: 8px; text-decoration: none; color: {{ k.c1F1D1A }}; font-size: 16px; font-weight: 700"><svg width="28" height="28" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="9" fill="{{ k.c0F5C63 }}"></rect><path d="M9 23c0-5 14-3 14-9 0-3-3-5-7-5" fill="none" stroke="{{ k.cFFFFFF }}" stroke-width="2.6" stroke-linecap="round"></path><circle cx="9" cy="23" r="2.6" fill="{{ k.cE8A33D }}"></circle></svg>Settle in Germany</a>
+      <a href="#app" style="min-height: 40px; padding: 0 14px; border-radius: 999px; background: {{ k.c0F5C63 }}; color: {{ k.cFFFFFF }}; display: flex; align-items: center; font-size: 14px; font-weight: 700; text-decoration: none">Get the app</a>
+    </header>
+  </sc-if>
+
+  <div style="max-width: 1200px; margin: 0 auto; padding: {{ pad }}; box-sizing: border-box; display: flex; flex-direction: column; gap: 20px">
+    <nav aria-label="Breadcrumb" style="font-size: 14px; color: {{ k.c6B655C }}; display: flex; gap: 6px; flex-wrap: wrap"><a href="web-guide-desktop.dc.html" style="color: {{ k.c0F5C63 }}">Guides</a><span aria-hidden="true">›</span><a href="web-guide-desktop.dc.html" style="color: {{ k.c0F5C63 }}">First 30 days</a><span aria-hidden="true">›</span><span aria-current="page">Register your address</span></nav>
+
+    <div style="display: flex; gap: 40px; flex-wrap: wrap; align-items: flex-start">
+
+      <sc-if value="{{ desktop }}" hint-placeholder-val="{{ true }}">
+        <nav aria-label="On this page" style="flex: 0 0 200px; display: flex; flex-direction: column; gap: 2px; padding-top: 8px">
+          <span style="font-size: 12px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: {{ k.c6B655C }}; padding: 0 12px 8px">On this page</span>
+          <a href="#short" aria-current="location" style="min-height: 40px; padding: 0 12px; display: flex; align-items: center; border-radius: 8px; background: {{ k.cE6F0F0 }}; color: {{ k.c0F5C63 }}; font-size: 14px; font-weight: 700; text-decoration: none">In short</a>
+          <a href="#steps" style="min-height: 40px; padding: 0 12px; display: flex; align-items: center; color: {{ k.c3B3833 }}; font-size: 14px; text-decoration: none">Steps</a>
+          <a href="#docs" style="min-height: 40px; padding: 0 12px; display: flex; align-items: center; color: {{ k.c3B3833 }}; font-size: 14px; text-decoration: none">Documents to bring</a>
+          <a href="#tips" style="min-height: 40px; padding: 0 12px; display: flex; align-items: center; color: {{ k.c3B3833 }}; font-size: 14px; text-decoration: none">Tips and mistakes</a>
+          <a href="#sources" style="min-height: 40px; padding: 0 12px; display: flex; align-items: center; color: {{ k.c3B3833 }}; font-size: 14px; text-decoration: none">Official sources</a>
+        </nav>
+      </sc-if>
+
+      <article style="flex: 999 1 520px; min-width: 0; max-width: 720px; display: flex; flex-direction: column; gap: 24px">
+        <div style="display: flex; flex-direction: column; gap: 12px">
+          <span style="align-self: flex-start; background: {{ k.cE6F0F0 }}; color: {{ k.c0F5C63 }}; border-radius: 999px; padding: 4px 10px; font-size: 13px; font-weight: 600">Stage 2 · First 30 days</span>
+          <h1 style="margin: 0; font-size: {{ h1 }}; line-height: 1.15; font-weight: 700; letter-spacing: -0.02em">Register your address in Germany</h1>
+          <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap">
+            <span style="font-size: 11px; font-weight: 700; border: 1px solid {{ k.c0F5C63 }}; color: {{ k.c0F5C63 }}; border-radius: 4px; padding: 0 5px; line-height: 17px">DE</span>
+            <span style="font-size: 18px; font-weight: 500">Anmeldung</span>
+            <button aria-label="Play pronunciation of Anmeldung" style="width: 44px; height: 44px; border-radius: 999px; border: 1px solid {{ k.cE4E0D8 }}; background: {{ k.cFFFFFF }}; color: {{ k.c0F5C63 }}; display: flex; align-items: center; justify-content: center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5L6 9H2v6h4l5 4z"></path><path d="M15.5 8.5a5 5 0 0 1 0 7"></path></svg></button>
+            <span style="font-size: 14px; color: {{ k.c6B655C }}">6 min read · Last verified on [date]</span>
+          </div>
+          <div style="display: flex; gap: 8px">
+            <button style="min-height: 40px; padding: 0 14px; border-radius: 10px; border: 1px solid {{ k.cE4E0D8 }}; background: {{ k.cFFFFFF }}; font: 500 14px Inter, sans-serif; color: {{ k.c1F1D1A }}; display: flex; align-items: center; gap: 6px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>Save</button>
+            <button style="min-height: 40px; padding: 0 14px; border-radius: 10px; border: 1px solid {{ k.cE4E0D8 }}; background: {{ k.cFFFFFF }}; font: 500 14px Inter, sans-serif; color: {{ k.c1F1D1A }}; display: flex; align-items: center; gap: 6px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8M16 6l-4-4-4 4M12 2v13"></path></svg>Share</button>
+          </div>
+        </div>
+
+        <section id="short" aria-label="In short" style="background: {{ k.cFFFFFF }}; border: 1px solid {{ k.cE4E0D8 }}; border-radius: 16px; padding: 20px; display: flex; flex-direction: column; gap: 12px">
+          <h2 style="margin: 0; font-size: 13px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: {{ k.c0F5C63 }}">In short</h2>
+          <div style="display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 10px 14px; font-size: 16px; line-height: 24px">
+            <span style="color: {{ k.c6B655C }}">What</span><span>Telling the city where you live. You get a paper you need for almost everything else.</span>
+            <span style="color: {{ k.c6B655C }}">When</span><span>Every time you move into a new flat.</span>
+            <span style="color: {{ k.c6B655C }}">Deadline</span><span style="font-weight: 700">Within 2 weeks of moving in</span>
+          </div>
+        </section>
+
+        <sc-if value="{{ mobile }}" hint-placeholder-val="{{ false }}">
+          <a href="#app" style="text-decoration: none; color: {{ k.cFFFFFF }}; background: {{ k.c0F5C63 }}; border-radius: 16px; padding: 18px; display: flex; flex-direction: column; gap: 8px">
+            <span style="font-size: 18px; font-weight: 700">Get your personal checklist</span>
+            <span style="font-size: 14px; line-height: 20px; color: {{ k.cD3E6E6 }}">Every step for your city and visa, with reminders before deadlines. Free.</span>
+            <span style="font-size: 15px; font-weight: 700; color: {{ k.cFFFFFF }}">Start free →</span>
+          </a>
+        </sc-if>
+
+        <aside aria-label="Advertisement" style="height: 110px; box-sizing: border-box; border: 1px dashed {{ k.cCFC9BE }}; border-radius: 12px; background: {{ k.cFBFAF7 }}; display: flex; align-items: center; justify-content: center; position: relative; font-size: 13px; color: {{ k.c6B655C }}">
+          <span style="position: absolute; top: 8px; left: 10px; font-size: 11px; font-weight: 700; border: 1px solid {{ k.cCFC9BE }}; border-radius: 4px; padding: 0 5px">Ad</span>[Responsive ad slot · fixed height]
+        </aside>
+
+        <section id="steps" style="display: flex; flex-direction: column; gap: 14px">
+          <h2 style="margin: 0; font-size: 24px; font-weight: 700">Steps</h2>
+          <div style="background: {{ k.cFFFFFF }}; border: 1px solid {{ k.cE4E0D8 }}; border-radius: 16px; padding: 20px; display: flex; gap: 16px">
+            <span style="width: 34px; height: 34px; border-radius: 999px; background: {{ k.c0F5C63 }}; color: {{ k.cFFFFFF }}; font-weight: 700; display: flex; align-items: center; justify-content: center; flex: none">1</span>
+            <div style="display: flex; flex-direction: column; gap: 8px; min-width: 0">
+              <h3 style="margin: 0; font-size: 18px; font-weight: 600">Get the landlord’s confirmation</h3>
+              <p style="margin: 0; font-size: 16px; line-height: 25px; color: {{ k.c3B3833 }}">Your landlord signs a form saying you moved in. Ask for it when you get the keys.</p>
+              <span style="display: flex; align-items: center; gap: 6px; font-size: 14px; flex-wrap: wrap"><span style="font-size: 10px; font-weight: 700; border: 1px solid {{ k.c0F5C63 }}; color: {{ k.c0F5C63 }}; border-radius: 4px; padding: 0 4px; line-height: 15px">DE</span><span style="font-weight: 500">Wohnungsgeberbestätigung</span></span>
+            </div>
+          </div>
+          <div style="background: {{ k.cFFFFFF }}; border: 1px solid {{ k.cE4E0D8 }}; border-radius: 16px; padding: 20px; display: flex; gap: 16px">
+            <span style="width: 34px; height: 34px; border-radius: 999px; background: {{ k.c0F5C63 }}; color: {{ k.cFFFFFF }}; font-weight: 700; display: flex; align-items: center; justify-content: center; flex: none">2</span>
+            <div style="display: flex; flex-direction: column; gap: 10px; min-width: 0; flex: 1">
+              <h3 style="margin: 0; font-size: 18px; font-weight: 600">Book an appointment at the citizen’s office</h3>
+              <p style="margin: 0; font-size: 16px; line-height: 25px; color: {{ k.c3B3833 }}">Leipzig releases new slots online every morning. Any office in the city works.</p>
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 8px; font-size: 14px">
+                <div style="background: {{ k.cF6F4F0 }}; border-radius: 10px; padding: 10px 12px"><div style="color: {{ k.c6B655C }}">Typical cost</div><div style="font-weight: 600">Free</div></div>
+                <div style="background: {{ k.cF6F4F0 }}; border-radius: 10px; padding: 10px 12px"><div style="color: {{ k.c6B655C }}">Typical wait</div><div style="font-weight: 600">[X–Y days]</div></div>
+              </div>
+            </div>
+          </div>
+          <div style="background: {{ k.cFFFFFF }}; border: 1px solid {{ k.cE4E0D8 }}; border-radius: 16px; padding: 20px; display: flex; gap: 16px">
+            <span style="width: 34px; height: 34px; border-radius: 999px; background: {{ k.c0F5C63 }}; color: {{ k.cFFFFFF }}; font-weight: 700; display: flex; align-items: center; justify-content: center; flex: none">3</span>
+            <div style="display: flex; flex-direction: column; gap: 8px; min-width: 0">
+              <h3 style="margin: 0; font-size: 18px; font-weight: 600">Go to the appointment</h3>
+              <p style="margin: 0; font-size: 16px; line-height: 25px; color: {{ k.c3B3833 }}">You leave with your registration certificate. Keep it safe — the bank and the immigration office will ask for it.</p>
+              <span style="display: flex; align-items: center; gap: 6px; font-size: 14px"><span style="font-size: 10px; font-weight: 700; border: 1px solid {{ k.c0F5C63 }}; color: {{ k.c0F5C63 }}; border-radius: 4px; padding: 0 4px; line-height: 15px">DE</span><span style="font-weight: 500">Meldebescheinigung</span></span>
+            </div>
+          </div>
+        </section>
+
+        <section id="docs" style="background: {{ k.cFFFFFF }}; border: 1px solid {{ k.cE4E0D8 }}; border-radius: 16px; padding: 20px; display: flex; flex-direction: column; gap: 4px">
+          <h2 style="margin: 0 0 8px; font-size: 19px; font-weight: 700">Documents to bring</h2>
+          <label style="display: flex; align-items: center; gap: 12px; min-height: 44px; font-size: 16px"><input type="checkbox" style="width: 22px; height: 22px; accent-color: {{ k.c2E7D4F }}; margin: 0"> Passport with visa</label>
+          <label style="display: flex; align-items: center; gap: 12px; min-height: 44px; font-size: 16px"><input type="checkbox" style="width: 22px; height: 22px; accent-color: {{ k.c2E7D4F }}; margin: 0"> Landlord’s confirmation</label>
+          <label style="display: flex; align-items: center; gap: 12px; min-height: 44px; font-size: 16px"><input type="checkbox" style="width: 22px; height: 22px; accent-color: {{ k.c2E7D4F }}; margin: 0"> Registration form, filled in</label>
+          <a href="#app" style="margin-top: 8px; align-self: flex-start; min-height: 48px; padding: 0 18px; border-radius: 12px; border: 1.5px solid {{ k.c0F5C63 }}; color: {{ k.c0F5C63 }}; text-decoration: none; display: flex; align-items: center; font-size: 15px; font-weight: 700">Add to my free checklist</a>
+        </section>
+
+        <div id="tips" style="display: flex; flex-direction: column; gap: 12px">
+          <div style="display: flex; gap: 12px; background: {{ k.cE6F0F0 }}; border-radius: 12px; padding: 16px">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="{{ k.c0F5C63 }}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"></path></svg>
+            <span style="font-size: 16px; line-height: 24px"><strong style="color: {{ k.c0F5C63 }}">Tip.</strong> No slots? Check the booking page early in the morning — cancelled slots often come back then.</span>
+          </div>
+          <div style="display: flex; gap: 12px; background: {{ k.cFDECEA }}; border-radius: 12px; padding: 16px">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="{{ k.cB42318 }}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none"><circle cx="12" cy="12" r="9"></circle><path d="M15 9l-6 6M9 9l6 6"></path></svg>
+            <span style="font-size: 16px; line-height: 24px"><strong style="color: {{ k.cB42318 }}">Common mistake.</strong> Waiting for a slot doesn’t pause the 2 weeks. Book on day one, even if the slot is later.</span>
+          </div>
+        </div>
+
+        <a href="web-paywall-desktop.dc.html" style="text-decoration: none; color: {{ k.c1F1D1A }}; border: 1px solid {{ k.cE4E0D8 }}; background: {{ k.cFFFFFF }}; border-radius: 16px; padding: 16px 18px; display: flex; align-items: center; gap: 14px">
+          <span style="width: 40px; height: 40px; border-radius: 10px; background: {{ k.cFDF3E2 }}; color: {{ k.c8A5A12 }}; display: flex; align-items: center; justify-content: center; flex: none"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"></path></svg></span>
+          <span style="display: flex; flex-direction: column; gap: 2px; flex: 1"><span style="font-size: 16px; font-weight: 600">Need help writing to the office?</span><span style="font-size: 14px; color: {{ k.c6B655C }}">Use the reply writer <span style="font-size: 10px; font-weight: 700; background: {{ k.cE8A33D }}; color: {{ k.c2A1A00 }}; border-radius: 4px; padding: 1px 5px">AI</span></span></span>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="{{ k.c6B655C }}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"></path></svg>
+        </a>
+
+        <aside aria-label="Advertisement" style="height: 110px; box-sizing: border-box; border: 1px dashed {{ k.cCFC9BE }}; border-radius: 12px; background: {{ k.cFBFAF7 }}; display: flex; align-items: center; justify-content: center; position: relative; font-size: 13px; color: {{ k.c6B655C }}">
+          <span style="position: absolute; top: 8px; left: 10px; font-size: 11px; font-weight: 700; border: 1px solid {{ k.cCFC9BE }}; border-radius: 4px; padding: 0 5px">Ad</span>[Responsive ad slot · fixed height]
+        </aside>
+
+        <section id="sources" style="display: flex; flex-direction: column; gap: 6px">
+          <h2 style="margin: 0; font-size: 19px; font-weight: 700">Official sources</h2>
+          <a href="https://www.leipzig.de" style="font-size: 16px; color: {{ k.c0F5C63 }}; min-height: 36px; display: flex; align-items: center">Stadt Leipzig — Anmeldung ↗</a>
+          <a href="https://www.gesetze-im-internet.de/bmg/" style="font-size: 16px; color: {{ k.c0F5C63 }}; min-height: 36px; display: flex; align-items: center">Federal Registration Act (Bundesmeldegesetz) ↗</a>
+        </section>
+
+        <div style="border-top: 1px solid {{ k.cE4E0D8 }}; padding-top: 16px; display: flex; flex-direction: column; gap: 12px">
+          <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap">
+            <span style="font-size: 16px; font-weight: 500; flex: 1">Was this helpful?</span>
+            <button style="height: 44px; padding: 0 20px; border-radius: 999px; border: 1px solid {{ k.cE4E0D8 }}; background: {{ k.cFFFFFF }}; font: 500 14px Inter, sans-serif; color: {{ k.c1F1D1A }}">Yes</button>
+            <button style="height: 44px; padding: 0 20px; border-radius: 999px; border: 1px solid {{ k.cE4E0D8 }}; background: {{ k.cFFFFFF }}; font: 500 14px Inter, sans-serif; color: {{ k.c1F1D1A }}">No</button>
+          </div>
+          <a href="#report" style="font-size: 15px; color: {{ k.c0F5C63 }}">Report outdated information</a>
+        </div>
+      </article>
+
+      <aside style="flex: 1 1 260px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+        <sc-if value="{{ desktop }}" hint-placeholder-val="{{ true }}">
+          <section style="background: {{ k.c0F5C63 }}; color: {{ k.cFFFFFF }}; border-radius: 16px; padding: 20px; display: flex; flex-direction: column; gap: 12px">
+            <h2 style="margin: 0; font-size: 19px; line-height: 25px; font-weight: 700">Get your personal checklist</h2>
+            <p style="margin: 0; font-size: 14px; line-height: 21px; color: {{ k.cD3E6E6 }}">Every step for your city and visa, in English, Nepali or Hindi — with reminders before each deadline. Free.</p>
+            <a href="#signup" style="min-height: 48px; border-radius: 12px; background: {{ k.cFFFFFF }}; color: {{ k.c0F5C63 }}; text-decoration: none; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 700">Start free on the web</a>
+            <div style="display: flex; gap: 8px">
+              <a href="#appstore" style="flex: 1; min-height: 44px; border-radius: 10px; background: {{ k.c000000 }}; color: {{ k.cFFFFFF }}; text-decoration: none; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600">[App Store badge]</a>
+              <a href="#play" style="flex: 1; min-height: 44px; border-radius: 10px; background: {{ k.c000000 }}; color: {{ k.cFFFFFF }}; text-decoration: none; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600">[Google Play badge]</a>
+            </div>
+          </section>
+        </sc-if>
+        <sc-if value="{{ mobile }}" hint-placeholder-val="{{ false }}">
+          <div style="display: flex; gap: 8px">
+            <a href="#appstore" style="flex: 1; min-height: 48px; border-radius: 10px; background: {{ k.c000000 }}; color: {{ k.cFFFFFF }}; text-decoration: none; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600">[App Store badge]</a>
+            <a href="#play" style="flex: 1; min-height: 48px; border-radius: 10px; background: {{ k.c000000 }}; color: {{ k.cFFFFFF }}; text-decoration: none; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600">[Google Play badge]</a>
+          </div>
+        </sc-if>
+        <section style="background: {{ k.cFFFFFF }}; border: 1px solid {{ k.cE4E0D8 }}; border-radius: 16px; padding: 16px 18px; display: flex; flex-direction: column; gap: 4px">
+          <h2 style="margin: 0 0 6px; font-size: 16px; font-weight: 700">Related</h2>
+          <a href="web-compare-desktop.dc.html" style="min-height: 44px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid {{ k.cEFECE6 }}; color: {{ k.c1F1D1A }}; text-decoration: none; font-size: 15px">Compare bank accounts<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="{{ k.c6B655C }}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"></path></svg></a>
+          <a href="web-guide-desktop.dc.html" style="min-height: 44px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid {{ k.cEFECE6 }}; color: {{ k.c1F1D1A }}; text-decoration: none; font-size: 15px">Get your tax ID<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="{{ k.c6B655C }}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"></path></svg></a>
+          <a href="web-guide-desktop.dc.html" style="min-height: 44px; display: flex; align-items: center; justify-content: space-between; color: {{ k.c1F1D1A }}; text-decoration: none; font-size: 15px">Leipzig city page<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="{{ k.c6B655C }}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"></path></svg></a>
+        </section>
+        <p style="margin: 0; font-size: 13px; line-height: 19px; color: {{ k.c6B655C }}">General information, not legal advice. <a href="#help" style="color: {{ k.c0F5C63 }}">Where to get help</a></p>
+      </aside>
+    </div>
+  </div>
+
+  <footer style="border-top: 1px solid {{ k.cE4E0D8 }}; background: {{ k.cFFFFFF }}; margin-top: 24px">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 24px 32px {{ footBottom }}; display: flex; gap: 12px 24px; flex-wrap: wrap; align-items: center; font-size: 14px; color: {{ k.c6B655C }}; box-sizing: border-box">
+      <span style="flex: 1 1 280px">General information, not legal advice. © 2026 Settle in Germany</span>
+      <a href="#impressum" style="color: {{ k.c3B3833 }}; min-height: 32px; display: flex; align-items: center">Impressum</a>
+      <a href="#privacy" style="color: {{ k.c3B3833 }}; min-height: 32px; display: flex; align-items: center">Privacy</a>
+      <a href="#terms" style="color: {{ k.c3B3833 }}; min-height: 32px; display: flex; align-items: center">Terms</a>
+      <a href="#money" style="color: {{ k.c3B3833 }}; min-height: 32px; display: flex; align-items: center">How we make money</a>
+      <a href="#cookies" style="color: {{ k.c3B3833 }}; min-height: 32px; display: flex; align-items: center">Cookie settings</a>
+    </div>
+  </footer>
+
+  <sc-if value="{{ mobile }}" hint-placeholder-val="{{ false }}">
+    <div style="position: absolute; left: 0; right: 0; bottom: 0">
+      <dc-import name="TabBar" platform="ios" active="guides" dark="{{ darkStr }}" hint-size="390px,84px"></dc-import>
+    </div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"dark":{"editor":"boolean","default":false},"size":{"editor":"enum","options":["desktop","mobile"],"default":"desktop"},"$preview":{"width":1440,"height":2500}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const __dark = this.props.dark === true || this.props.dark === 'true';
+    const k = __dark ? {"cF6F4F0": "#121614", "cFFFFFF": "#1A2221", "c1F1D1A": "#ECEAE5", "c3B3833": "#C9CFCD", "c4A453E": "#C2C8C6", "c6B655C": "#9AA5A3", "cE4E0D8": "#2C3634", "cEFECE6": "#252D2C", "cCFC9BE": "#4A5755", "cA8A196": "#6F7B79", "cE9E5DD": "#252D2C", "cEDE9E1": "#252D2C", "c0F5C63": "#5CC8C2", "c0A4449": "#8EDDD8", "cE6F0F0": "#173332", "cCFE3E3": "#1F4442", "cD3E6E6": "#1F3D3B", "cE8A33D": "#F2B85C", "c2A1A00": "#2A1A00", "cFBF1DF": "#33291A", "c8A5A12": "#E0C27A", "cB7791F": "#C9A15A", "cFDF6EA": "#2A2418", "cFBEFD9": "#33291A", "c5C3D08": "#E0C27A", "c5C4A2A": "#D8C8A8", "cFDECEA": "#3A1F1C", "cB42318": "#F0A49B", "cEAF4EE": "#1D3327", "c24653F": "#7FD3A0", "c2E7D4F": "#7FD3A0", "cF3F8F8": "#16201F", "cFBFAF7": "#161C1B", "c000000": "#F2F2F2", "cFDF3E2": "#33291A", "c55524C": "#000000"} : {"cF6F4F0": "#F6F4F0", "cFFFFFF": "#FFFFFF", "c1F1D1A": "#1F1D1A", "c3B3833": "#3B3833", "c4A453E": "#4A453E", "c6B655C": "#6B655C", "cE4E0D8": "#E4E0D8", "cEFECE6": "#EFECE6", "cCFC9BE": "#CFC9BE", "cA8A196": "#A8A196", "cE9E5DD": "#E9E5DD", "cEDE9E1": "#EDE9E1", "c0F5C63": "#0F5C63", "c0A4449": "#0A4449", "cE6F0F0": "#E6F0F0", "cCFE3E3": "#CFE3E3", "cD3E6E6": "#D3E6E6", "cE8A33D": "#E8A33D", "c2A1A00": "#2A1A00", "cFBF1DF": "#FBF1DF", "c8A5A12": "#8A5A12", "cB7791F": "#B7791F", "cFDF6EA": "#FDF6EA", "cFBEFD9": "#FBEFD9", "c5C3D08": "#5C3D08", "c5C4A2A": "#5C4A2A", "cFDECEA": "#FDECEA", "cB42318": "#B42318", "cEAF4EE": "#EAF4EE", "c24653F": "#24653F", "c2E7D4F": "#2E7D4F", "cF3F8F8": "#F3F8F8", "cFBFAF7": "#FBFAF7", "c000000": "#000000", "cFDF3E2": "#FDF3E2", "c55524C": "#55524C"};
+    const mobile = this.props.size === 'mobile';
+    return { k: k, darkStr: __dark ? 'true' : 'false',
+      desktop: !mobile, mobile: mobile,
+      pad: mobile ? '16px 16px 32px' : '24px 32px 48px',
+      h1: mobile ? '30px' : '42px',
+      footBottom: mobile ? '108px' : '24px'
+    };
+  }
+}
+</script>
+</body>
+</html>

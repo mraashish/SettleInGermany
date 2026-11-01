@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Web consent banner</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>body{margin:0}</style>
+</helmet>
+<div style="width: 100%; height: {{ h }}; position: relative; overflow: hidden; background: {{ k.cF6F4F0 }}; color: {{ k.c1F1D1A }}; font-family: Inter, system-ui, sans-serif">
+  <div aria-hidden="true" style="position: absolute; inset: 0; overflow: hidden"><dc-import name="WebGuide" size="{{ size }}" dark="{{ darkStr }}" hint-size="100%,2500px"></dc-import></div>
+
+  <sc-if value="{{ banner }}" hint-placeholder-val="{{ true }}">
+    <section role="dialog" aria-labelledby="ck-title" aria-describedby="ck-text" style="position: absolute; left: {{ side }}; right: {{ side }}; bottom: {{ bottom }}; margin: 0 auto; max-width: 980px; background: {{ k.cFFFFFF }}; border: 1px solid {{ k.cE4E0D8 }}; border-radius: {{ bannerR }}; box-shadow: 0 12px 40px rgba(31,29,26,0.22); padding: {{ bannerPad }}; display: flex; gap: 20px 32px; flex-wrap: wrap; align-items: center; box-sizing: border-box">
+      <div style="flex: 999 1 420px; min-width: 0; display: flex; flex-direction: column; gap: 8px">
+        <h2 id="ck-title" style="margin: 0; font-size: 19px; font-weight: 700; display: flex; align-items: center; gap: 10px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="{{ k.c0F5C63 }}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>Your privacy choices</h2>
+        <p id="ck-text" style="margin: 0; font-size: 15px; line-height: 23px; color: {{ k.c3B3833 }}">The free version is paid for by ads. If you agree, we and [X] ad partners use cookies to show ads that fit you and to measure how the site is used. If you say no, every guide and tool still works. You can change this any time under <strong>Cookie settings</strong> at the bottom of each page.</p>
+        <span style="display: flex; gap: 14px; flex-wrap: wrap; font-size: 14px"><a href="#privacy" style="color: {{ k.c0F5C63 }}; font-weight: 600; min-height: 32px; display: flex; align-items: center">Privacy policy</a><a href="#partners" style="color: {{ k.c0F5C63 }}; font-weight: 600; min-height: 32px; display: flex; align-items: center">See our ad partners</a><a href="#money" style="color: {{ k.c0F5C63 }}; font-weight: 600; min-height: 32px; display: flex; align-items: center">How we make money</a></span>
+      </div>
+      <div style="flex: 1 1 220px; display: flex; flex-direction: column; gap: 10px">
+        <button style="min-height: 48px; border-radius: 12px; border: 1.5px solid {{ k.c0F5C63 }}; background: {{ k.cFFFFFF }}; color: {{ k.c0F5C63 }}; font: 700 15px Inter, sans-serif">Accept all</button>
+        <button style="min-height: 48px; border-radius: 12px; border: 1.5px solid {{ k.c0F5C63 }}; background: {{ k.cFFFFFF }}; color: {{ k.c0F5C63 }}; font: 700 15px Inter, sans-serif">Reject all</button>
+        <a href="{{ settingsHref }}" style="min-height: 48px; border-radius: 12px; border: 1.5px solid {{ k.c0F5C63 }}; background: {{ k.cFFFFFF }}; color: {{ k.c0F5C63 }}; text-decoration: none; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 700">Settings</a>
+      </div>
+    </section>
+  </sc-if>
+
+  <sc-if value="{{ settings }}" hint-placeholder-val="{{ false }}">
+    <div aria-hidden="true" style="position: absolute; inset: 0; background: rgba(20,22,21,0.5)"></div>
+    <section role="dialog" aria-modal="true" aria-labelledby="cs-title" style="position: absolute; left: {{ side }}; right: {{ side }}; top: {{ modalTop }}; bottom: {{ modalBottom }}; margin: 0 auto; max-width: 640px; background: {{ k.cFFFFFF }}; border-radius: {{ bannerR }}; padding: {{ bannerPad }}; display: flex; flex-direction: column; gap: 16px; box-sizing: border-box">
+      <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px">
+        <h2 id="cs-title" style="margin: 0; font-size: 22px; font-weight: 700">Cookie settings</h2>
+        <a href="{{ bannerHref }}" aria-label="Close" style="width: 44px; height: 44px; border-radius: 999px; background: {{ k.cF6F4F0 }}; color: {{ k.c3B3833 }}; display: flex; align-items: center; justify-content: center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"></path></svg></a>
+      </div>
+      <p style="margin: 0; font-size: 15px; line-height: 22px; color: {{ k.c3B3833 }}">Choose what we may use. Necessary cookies keep the site working and can’t be turned off.</p>
+      <div style="display: flex; flex-direction: column; border: 1px solid {{ k.cE4E0D8 }}; border-radius: 14px; padding: 0 16px">
+        <sc-for list="{{ cats }}" as="c" hint-placeholder-count="4">
+          <label style="min-height: 76px; display: flex; align-items: center; gap: 14px; border-top: {{ c.line }}; padding: 10px 0; box-sizing: border-box">
+            <span style="flex: 1; display: flex; flex-direction: column; gap: 3px"><strong style="font-size: 16px">{{ c.name }}</strong><span style="font-size: 14px; line-height: 20px; color: {{ k.c6B655C }}">{{ c.desc }}</span></span>
+            <sc-if value="{{ c.locked }}" hint-placeholder-val="{{ false }}"><span style="font-size: 13px; font-weight: 600; color: {{ k.c24653F }}; white-space: nowrap">Always on</span></sc-if>
+            <sc-if value="{{ c.toggle }}" hint-placeholder-val="{{ true }}"><input type="checkbox" role="switch" aria-label="{{ c.name }}" style="width: 44px; height: 26px; accent-color: {{ k.c0F5C63 }}; margin: 0; flex: none"></sc-if>
+          </label>
+        </sc-for>
+      </div>
+      <div style="margin-top: auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px">
+        <button style="min-height: 48px; border-radius: 12px; border: 1.5px solid {{ k.c0F5C63 }}; background: {{ k.cFFFFFF }}; color: {{ k.c0F5C63 }}; font: 700 15px Inter, sans-serif">Reject all</button>
+        <button style="min-height: 48px; border-radius: 12px; border: 1.5px solid {{ k.c0F5C63 }}; background: {{ k.cFFFFFF }}; color: {{ k.c0F5C63 }}; font: 700 15px Inter, sans-serif">Accept all</button>
+        <button style="min-height: 48px; border-radius: 12px; border: none; background: {{ k.c0F5C63 }}; color: {{ k.cFFFFFF }}; font: 700 15px Inter, sans-serif">Save my choices</button>
+      </div>
+    </section>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"dark":{"editor":"boolean","default":false},"size":{"editor":"enum","options":["desktop","mobile"],"default":"desktop"},"view":{"editor":"enum","options":["banner","settings"],"default":"banner"},"$preview":{"width":1440,"height":900}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const __dark = this.props.dark === true || this.props.dark === 'true';
+    const k = __dark ? {"cF6F4F0": "#121614", "cFFFFFF": "#1A2221", "c1F1D1A": "#ECEAE5", "c3B3833": "#C9CFCD", "c4A453E": "#C2C8C6", "c6B655C": "#9AA5A3", "cE4E0D8": "#2C3634", "cEFECE6": "#252D2C", "cCFC9BE": "#4A5755", "cA8A196": "#6F7B79", "cE9E5DD": "#252D2C", "cEDE9E1": "#252D2C", "c0F5C63": "#5CC8C2", "c0A4449": "#8EDDD8", "cE6F0F0": "#173332", "cCFE3E3": "#1F4442", "cD3E6E6": "#1F3D3B", "cE8A33D": "#F2B85C", "c2A1A00": "#2A1A00", "cFBF1DF": "#33291A", "c8A5A12": "#E0C27A", "cB7791F": "#C9A15A", "cFDF6EA": "#2A2418", "cFBEFD9": "#33291A", "c5C3D08": "#E0C27A", "c5C4A2A": "#D8C8A8", "cFDECEA": "#3A1F1C", "cB42318": "#F0A49B", "cEAF4EE": "#1D3327", "c24653F": "#7FD3A0", "c2E7D4F": "#7FD3A0", "cF3F8F8": "#16201F", "cFBFAF7": "#161C1B", "c000000": "#F2F2F2", "cFDF3E2": "#33291A", "c55524C": "#000000", "c5E8C8F": "#7FB3B5"} : {"cF6F4F0": "#F6F4F0", "cFFFFFF": "#FFFFFF", "c1F1D1A": "#1F1D1A", "c3B3833": "#3B3833", "c4A453E": "#4A453E", "c6B655C": "#6B655C", "cE4E0D8": "#E4E0D8", "cEFECE6": "#EFECE6", "cCFC9BE": "#CFC9BE", "cA8A196": "#A8A196", "cE9E5DD": "#E9E5DD", "cEDE9E1": "#EDE9E1", "c0F5C63": "#0F5C63", "c0A4449": "#0A4449", "cE6F0F0": "#E6F0F0", "cCFE3E3": "#CFE3E3", "cD3E6E6": "#D3E6E6", "cE8A33D": "#E8A33D", "c2A1A00": "#2A1A00", "cFBF1DF": "#FBF1DF", "c8A5A12": "#8A5A12", "cB7791F": "#B7791F", "cFDF6EA": "#FDF6EA", "cFBEFD9": "#FBEFD9", "c5C3D08": "#5C3D08", "c5C4A2A": "#5C4A2A", "cFDECEA": "#FDECEA", "cB42318": "#B42318", "cEAF4EE": "#EAF4EE", "c24653F": "#24653F", "c2E7D4F": "#2E7D4F", "cF3F8F8": "#F3F8F8", "cFBFAF7": "#FBFAF7", "c000000": "#000000", "cFDF3E2": "#FDF3E2", "c55524C": "#55524C", "c5E8C8F": "#5E8C8F"};
+    const mobile = this.props.size === 'mobile';
+    const view = this.props.view === 'settings' ? 'settings' : 'banner';
+    const sfx = mobile ? 'mobile' : 'desktop';
+    const cats = [
+      ['Necessary', 'Sign-in, language and your cookie choice. Needed for the site to work.', true],
+      ['Statistics', 'Counts visits without ads, so we can see which guides confuse people.', false],
+      ['Personalised ads', 'Lets our ad partners show ads based on your interests. Free version only.', false],
+      ['Ad measurement', 'Lets advertisers check how often their ads are seen.', false]
+    ];
+    return { k: k, darkStr: __dark ? 'true' : 'false',
+      size: sfx, banner: view === 'banner', settings: view === 'settings',
+      h: mobile ? '844px' : '900px',
+      side: mobile ? '0' : '32px', bottom: mobile ? '0' : '24px',
+      bannerR: mobile ? '20px 20px 0 0' : '20px', bannerPad: mobile ? '20px 16px 24px' : '24px 28px',
+      modalTop: mobile ? '48px' : '64px', modalBottom: mobile ? '0' : '64px',
+      settingsHref: 'web-consent-settings-' + sfx + '.dc.html', bannerHref: 'web-consent-' + sfx + '.dc.html',
+      cats: cats.map((c, i) => ({ name: c[0], desc: c[1], locked: c[2], toggle: !c[2], line: i === 0 ? 'none' : '1px solid ' + k.cEFECE6 }))
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Component library</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>body{margin:0}</style>
+</helmet>
+<div style="width: 1440px; height: 2600px; overflow: hidden; background: {{ k.cF6F4F0 }}; color: {{ k.c1F1D1A }}; font-family: Inter, system-ui, sans-serif; padding: 48px 56px; box-sizing: border-box; display: flex; flex-direction: column; gap: 32px">
+  <div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; border-bottom: 1px solid {{ k.cE4E0D8 }}; padding-bottom: 20px">
+    <div style="display: flex; flex-direction: column; gap: 6px"><span style="font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: {{ k.c0F5C63 }}">Calm Ledger · design system</span><h1 style="margin: 0; font-size: 40px; line-height: 48px; font-weight: 700; letter-spacing: -0.02em">Components and states — {{ modeName }}</h1></div>
+    <span style="font-size: 14px; color: {{ k.c6B655C }}; max-width: 460px; line-height: 21px">Tokens: 4-pt spacing · radius 8 / 12 / 16 (iOS) / 20 (Android cards) / 999 chips · 2 elevation levels. Status always = colour + icon + word.</span>
+  </div>
+
+  <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; align-items: start">
+
+    <section style="background: {{ k.cFFFFFF }}; border: 1px solid {{ k.cE4E0D8 }}; border-radius: 16px; padding: 20px; display: flex; flex-direction: column; gap: 14px">
+      <h2 style="margin: 0; font-size: 17px; font-weight: 700">Button</h2>
+      <div style="display: flex; flex-direction: column; gap: 10px">
+        <button style="height: 48px; border-radius: 12px; border: none; background: {{ k.c0F5C63 }}; color: {{ k.cFFFFFF }}; font: 600 15px Inter, sans-serif">Primary</button>
+        <button style="height: 48px; border-radius: 12px; border: 1.5px solid {{ k.c0F5C63 }}; background: transparent; color: {{ k.c0F5C63 }}; font: 600 15px Inter, sans-serif">Secondary</button>
+        <button style="height: 44px; border-radius: 12px; border: none; background: transparent; color: {{ k.c0F5C63 }}; font: 600 15px Inter, sans-serif">Text</button>
+        <button style="height: 48px; border-radius: 12px; border: 1.5px solid {{ k.cB42318 }}; background: transparent; color: {{ k.cB42318 }}; font: 600 15px Inter, sans-serif">Destructive</button>
+        <button style="height: 48px; border-radius: 12px; border: none; background: {{ k.cE8A33D }}; color: {{ k.c2A1A00 }}; font: 700 15px Inter, sans-serif">Premium</button>
+        <button aria-busy="true" style="height: 48px; border-radius: 12px; border: none; background: {{ k.c0F5C63 }}; color: {{ k.cFFFFFF }}; font: 600 15px Inter, sans-serif; display: flex; align-items: center; justify-content: center; gap: 8px"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="rgba(255,255,255,0.35)" stroke-width="3"></circle><path d="M12 3a9 9 0 0 1 9 9" fill="none" stroke="{{ k.cFFFFFF }}" stroke-width="3" stroke-linecap="round"></path></svg>Loading…</button>
+        <button style="height: 48px; border-radius: 999px; border: none; background: {{ k.c0F5C63 }}; color: {{ k.cFFFFFF }}; font: 600 15px Inter, sans-serif">Android shape (pill)</button>
+      </div>
+      <span style="font-size: 12px; color: {{ k.c6B655C }}">Full width on phones · min height 44 pt / 48 dp · labels may wrap to 2 lines</span>
+    </section>
+
+    <section style="background: {{ k.cFFFFFF }}; border: 1px solid {{ k.cE4E0D8 }}; border-radius: 16px; padding: 20px; display: flex; flex-direction: column; gap: 4px">
+      <h2 style="margin: 0 0 10px; font-size: 17px; font-weight: 700">Task item</h2>
+      <sc-for list="{{ tasks }}" as="t" hint-placeholder-count="4">
+        <div style="display: flex; gap: 12px; padding: 12px 0; border-top: 1px solid {{ k.cEFECE6 }}; opacity: {{ t.opacity }}">
+          <span style="width: 22px; height: 22px; border-radius: 6px; border: 2px solid {{ t.box }}; background: {{ t.fill }}; color: {{ k.cFFFFFF }}; display: flex; align-items: center; justify-content: center; flex: none; box-sizing: border-box; font-size: 13px; font-weight: 700">{{ t.mark }}</span>
+          <div style="display: flex; flex-direction: column; gap: 5px; flex: 1">
+            <span style="font-size: 15px; font-weight: 600; text-decoration: {{ t.strike }}; color: {{ t.color }}">{{ t.title }}</span>
+            <span style="display: flex; align-items: center; gap: 6px; font-size: 12px"><span style="font-size: 10px; font-weight: 700; border: 1px solid {{ k.c0F5C63 }}; color: {{ k.c0F5C63 }}; border-radius: 4px; padding: 0 4px; line-height: 15px">DE</span>{{ t.de }}</span>
+            <span style="align-self: flex-start; background: {{ t.chipBg }}; color: {{ t.chipFg }}; border-radius: 999px; padding: 2px 9px; font-size: 12px; font-weight: 700">{{ t.chip }}</span>
+          </div>
+          <span style="font-size: 11px; color: {{ k.c6B655C }}">{{ t.variant }}</span>
+        </div>
+      </sc-for>
+    </section>
+
+    <section style="background: {{ k.cFFFFFF }}; border: 1px solid {{ k.cE4E0D8 }}; border-radius: 16px; padding: 20px; display: flex; flex-direction: column; gap: 16px">
+      <h2 style="margin: 0; font-size: 17px; font-weight: 700">Deadline chip</h2>
+      <div style="display: flex; gap: 8px; flex-wrap: wrap">
+        <span style="display: inline-flex; align-items: center; gap: 4px; background: {{ k.cEFECE6 }}; color: {{ k.c4A453E }}; border-radius: 999px; padding: 4px 10px; font-size: 13px; font-weight: 700"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"></rect><path d="M16 2v4M8 2v4M3 10h18"></path></svg>In 47 days</span>
+        <span style="display: inline-flex; align-items: center; gap: 4px; background: {{ k.cFBF1DF }}; color: {{ k.c8A5A12 }}; border-radius: 999px; padding: 4px 10px; font-size: 13px; font-weight: 700"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg>Soon · 21 days</span>
+        <span style="display: inline-flex; align-items: center; gap: 4px; background: {{ k.cFDECEA }}; color: {{ k.cB42318 }}; border-radius: 999px; padding: 4px 10px; font-size: 13px; font-weight: 700"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.3 3.9L1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"></path><path d="M12 9v4M12 17h.01"></path></svg>Urgent · 5 days</span>
+        <span style="display: inline-flex; align-items: center; gap: 4px; background: {{ k.cEAF4EE }}; color: {{ k.c24653F }}; border-radius: 999px; padding: 4px 10px; font-size: 13px; font-weight: 700"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"></path></svg>Done</span>
+      </div>
+      <span style="font-size: 12px; color: {{ k.c6B655C }}">Neutral &gt; 30 days · warning ≤ 30 · danger ≤ 7 or expired · done</span>
+      <h2 style="margin: 8px 0 0; font-size: 17px; font-weight: 700">German term tag</h2>
+      <div style="display: flex; flex-direction: column; gap: 10px">
+        <span style="display: flex; align-items: center; gap: 6px; font-size: 15px">Register at the <span style="font-size: 10px; font-weight: 700; border: 1px solid {{ k.c0F5C63 }}; color: {{ k.c0F5C63 }}; border-radius: 4px; padding: 0 4px; line-height: 15px">DE</span><strong style="font-weight: 600">Bürgeramt</strong> first.</span>
+        <span style="display: flex; align-items: center; gap: 8px"><span style="font-size: 11px; font-weight: 700; border: 1px solid {{ k.c0F5C63 }}; color: {{ k.c0F5C63 }}; border-radius: 4px; padding: 0 5px; line-height: 17px">DE</span><span style="font-size: 17px; font-weight: 500">Aufenthaltstitel</span><button aria-label="Play pronunciation" style="width: 44px; height: 44px; border-radius: 999px; border: 1px solid {{ k.cE4E0D8 }}; background: {{ k.cFFFFFF }}; color: {{ k.c0F5C63 }}; display: flex; align-items: center; justify-content: center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5L6 9H2v6h4l5 4z"></path><path d="M15.5 8.5a5 5 0 0 1 0 7"></path></svg></button></span>
+      </div>
+      <span style="font-size: 12px; color: {{ k.c6B655C }}">Inline · with audio</span>
+    </section>
+
+    <section style="background: {{ k.cFFFFFF }}; border: 1px solid {{ k.cE4E0D8 }}; border-radius: 16px; padding: 20px; display: flex; flex-direction: column; gap: 10px">
+      <h2 style="margin: 0 0 4px; font-size: 17px; font-weight: 700">Guide card</h2>
+      <sc-for list="{{ guides }}" as="g" hint-placeholder-count="3">
+        <div style="border: 1px solid {{ k.cE4E0D8 }}; border-radius: 14px; padding: 12px 14px; display: flex; gap: 10px">
+          <span style="display: flex; flex-direction: column; gap: 5px; flex: 1"><span style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap"><strong style="font-size: 15px">{{ g.title }}</strong><sc-if value="{{ g.updated }}" hint-placeholder-val="{{ false }}"><span style="background: {{ k.cE6F0F0 }}; color: {{ k.c0F5C63 }}; border-radius: 999px; padding: 1px 8px; font-size: 11px; font-weight: 700">Updated</span></sc-if></span><span style="font-size: 12px; color: {{ k.c6B655C }}">5 min · Verified [date]</span></span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="{{ g.fill }}" stroke="{{ k.c0F5C63 }}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
+        </div>
+        <span style="font-size: 11px; color: {{ k.c6B655C }}; margin-top: -4px">{{ g.variant }}</span>
+      </sc-for>
+    </section>
+
+    <section style="background: {{ k.cFFFFFF }}; border: 1px solid {{ k.cE4E0D8 }}; border-radius: 16px; padding: 20px; display: flex; flex-direction: column; gap: 10px">
+      <h2 style="margin: 0 0 4px; font-size: 17px; font-weight: 700">Callout</h2>
+      <sc-for list="{{ callouts }}" as="c" hint-placeholder-count="4">
+        <div style="display: flex; gap: 10px; background: {{ c.bg }}; border-radius: 12px; padding: 12px 14px; font-size: 14px; line-height: 20px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="{{ c.fg }}" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none; margin-top: 1px"><path d="{{ c.icon }}"></path></svg><span><strong style="color: {{ c.fg }}">{{ c.label }}.</strong> {{ c.text }}</span></div>
+      </sc-for>
+    </section>
+
+    <section style="background: {{ k.cFFFFFF }}; border: 1px solid {{ k.cE4E0D8 }}; border-radius: 16px; padding: 20px; display: flex; flex-direction: column; gap: 10px">
+      <h2 style="margin: 0 0 4px; font-size: 17px; font-weight: 700">Provider card</h2>
+      <sc-for list="{{ providers }}" as="p" hint-placeholder-count="3">
+        <div style="border: {{ p.border }}; border-radius: 14px; padding: 12px 14px; display: flex; flex-direction: column; gap: 8px">
+          <div style="display: flex; justify-content: space-between; align-items: center"><strong style="font-size: 15px">{{ p.name }}</strong><span style="font-size: 11px; color: {{ k.c6B655C }}">{{ p.variant }}</span></div>
+          <div style="display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 4px 12px; font-size: 13px"><span style="color: {{ k.c4A453E }}">Monthly fee</span><span style="font-weight: 600; color: {{ k.c8A5A12 }}">€[—]</span><span style="color: {{ k.c4A453E }}">Opening time</span><span style="font-weight: 600; color: {{ k.c8A5A12 }}">[X] days</span></div>
+          <span style="min-height: 40px; border-radius: 10px; border: 1.5px solid {{ k.c0F5C63 }}; background: {{ p.btnBg }}; color: {{ p.btnFg }}; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700">Visit provider ↗</span>
+          <sc-if value="{{ p.ref }}" hint-placeholder-val="{{ false }}"><span style="font-size: 11px; color: {{ k.c6B655C }}">Referral link: we may earn a commission at no cost to you.</span></sc-if>
+        </div>
+      </sc-for>
+    </section>
+
+    <section style="background: {{ k.cFFFFFF }}; border: 1px solid {{ k.cE4E0D8 }}; border-radius: 16px; padding: 20px; display: flex; flex-direction: column; gap: 16px">
+      <h2 style="margin: 0; font-size: 17px; font-weight: 700">Progress</h2>
+      <div style="display: flex; align-items: center; gap: 14px"><svg width="64" height="64" viewBox="0 0 64 64" role="img" aria-label="4 of 9"><circle cx="32" cy="32" r="26" fill="none" stroke="{{ k.cE4E0D8 }}" stroke-width="7"></circle><circle cx="32" cy="32" r="26" fill="none" stroke="{{ k.c0F5C63 }}" stroke-width="7" stroke-linecap="round" stroke-dasharray="72.6 163.4" transform="rotate(-90 32 32)"></circle><text x="32" y="37" text-anchor="middle" font-family="Inter, sans-serif" font-size="15" font-weight="700" fill="{{ k.c1F1D1A }}">4/9</text></svg><span style="font-size: 13px; color: {{ k.c6B655C }}">Stage ring · saffron on teal hero, teal on surfaces</span></div>
+      <div style="display: flex; flex-direction: column; gap: 6px"><span style="font-size: 13px; color: {{ k.c4A453E }}">Work-day limit · normal</span><div style="height: 12px; border-radius: 999px; background: {{ k.cEFECE6 }}; overflow: hidden"><div style="width: 45%; height: 12px; border-radius: 999px; background: {{ k.c0F5C63 }}"></div></div></div>
+      <div style="display: flex; flex-direction: column; gap: 6px"><span style="font-size: 13px; color: {{ k.c8A5A12 }}; font-weight: 600">Work-day limit · near the limit (amber + warning text)</span><div style="height: 12px; border-radius: 999px; background: {{ k.cEFECE6 }}; overflow: hidden"><div style="width: 88%; height: 12px; border-radius: 999px; background: {{ k.cB7791F }}"></div></div></div>
+    </section>
+
+    <section style="background: {{ k.cFFFFFF }}; border: 1px solid {{ k.cE4E0D8 }}; border-radius: 16px; padding: 20px; display: flex; flex-direction: column; gap: 12px">
+      <h2 style="margin: 0; font-size: 17px; font-weight: 700">AI result block</h2>
+      <div style="border: 1px solid {{ k.cE4E0D8 }}; border-radius: 14px; overflow: hidden">
+        <div style="display: flex; align-items: center; gap: 8px; padding: 10px 14px; background: {{ k.cF6F4F0 }}; font-size: 13px; font-weight: 600"><span style="font-size: 10px; font-weight: 700; background: {{ k.cE8A33D }}; color: {{ k.c2A1A00 }}; border-radius: 4px; padding: 1px 5px">AI</span>Summary</div>
+        <p style="margin: 0; padding: 12px 14px; font-size: 14px; line-height: 20px">They need two more documents before deciding on your permit.</p>
+      </div>
+      <div style="display: flex; gap: 6px; flex-wrap: wrap; font-size: 12px"><span style="border: 1px solid {{ k.cE4E0D8 }}; border-radius: 999px; padding: 3px 9px">Summary</span><span style="border: 1px solid {{ k.cE4E0D8 }}; border-radius: 999px; padding: 3px 9px">Deadline</span><span style="border: 1px solid {{ k.cE4E0D8 }}; border-radius: 999px; padding: 3px 9px">Next steps</span><span style="border: 1px solid {{ k.cE4E0D8 }}; border-radius: 999px; padding: 3px 9px">Key terms</span><span style="border: 1px solid {{ k.cE4E0D8 }}; border-radius: 999px; padding: 3px 9px">Original text</span></div>
+      <h2 style="margin: 8px 0 0; font-size: 17px; font-weight: 700">Premium lock</h2>
+      <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px">
+        <div style="position: relative; border: 1px solid {{ k.cE4E0D8 }}; border-radius: 14px; padding: 12px; min-height: 92px; box-sizing: border-box"><strong style="font-size: 14px">Reply writer</strong><span style="position: absolute; top: 8px; right: 8px; background: {{ k.cE8A33D }}; color: {{ k.c2A1A00 }}; border-radius: 999px; padding: 1px 7px; font-size: 10px; font-weight: 700">Premium</span><span style="position: absolute; left: 12px; bottom: 10px; font-size: 11px; color: {{ k.c6B655C }}">Tile overlay</span></div>
+        <div style="border: 1px solid {{ k.cE8A33D }}; background: {{ k.cFDF6EA }}; border-radius: 14px; padding: 12px; display: flex; flex-direction: column; gap: 4px"><strong style="font-size: 13px">That was your last free scan</strong><span style="font-size: 12px; color: {{ k.c0F5C63 }}; font-weight: 700">See Premium</span><span style="font-size: 11px; color: {{ k.c6B655C }}">Inline card</span></div>
+      </div>
+    </section>
+
+    <section style="background: {{ k.cFFFFFF }}; border: 1px solid {{ k.cE4E0D8 }}; border-radius: 16px; padding: 20px; display: flex; flex-direction: column; gap: 12px">
+      <h2 style="margin: 0; font-size: 17px; font-weight: 700">Ad slot</h2>
+      <div style="height: 64px; border: 1px dashed {{ k.cCFC9BE }}; border-radius: 10px; background: {{ k.cFBFAF7 }}; display: flex; align-items: center; justify-content: center; position: relative; font-size: 12px; color: {{ k.c6B655C }}"><span style="position: absolute; top: 6px; left: 8px; font-size: 10px; font-weight: 700; border: 1px solid {{ k.cCFC9BE }}; border-radius: 4px; padding: 0 4px">Ad</span>Banner · fixed height</div>
+      <div style="height: 96px; border: 1px solid {{ k.cE4E0D8 }}; border-radius: 14px; display: flex; align-items: center; gap: 10px; padding: 10px; box-sizing: border-box"><span style="width: 64px; height: 64px; border-radius: 8px; background: {{ k.cEFECE6 }}"></span><span style="display: flex; flex-direction: column; gap: 3px; font-size: 12px; color: {{ k.c6B655C }}"><span style="align-self: flex-start; font-size: 10px; font-weight: 700; border: 1px solid {{ k.cCFC9BE }}; border-radius: 4px; padding: 0 4px">Ad</span><strong style="font-size: 14px; color: {{ k.c1F1D1A }}">[Native ad title]</strong>Native card · fixed size</span></div>
+      <span style="font-size: 12px; color: {{ k.c6B655C }}">Never in AI screens, paywall, onboarding, emergency or document dates</span>
+      <h2 style="margin: 8px 0 0; font-size: 17px; font-weight: 700">Alert banner</h2>
+      <div style="display: flex; gap: 10px; background: {{ k.cE6F0F0 }}; border-radius: 12px; padding: 10px 12px; font-size: 13px; align-items: center"><span style="flex: 1"><strong>Info</strong> · dismissible</span><span aria-hidden="true">✕</span></div>
+      <div style="display: flex; gap: 10px; background: {{ k.cFBF1DF }}; border-radius: 12px; padding: 10px 12px; font-size: 13px; color: {{ k.c5C3D08 }}; align-items: center"><span style="flex: 1"><strong>Rule change</strong> · dismissible</span><span aria-hidden="true">✕</span></div>
+      <div style="display: flex; gap: 10px; background: {{ k.cB42318 }}; color: {{ k.cFFFFFF }}; border-radius: 12px; padding: 10px 12px; font-size: 13px"><strong>Urgent</strong> · not dismissible</div>
+    </section>
+
+    <section style="background: {{ k.cFFFFFF }}; border: 1px solid {{ k.cE4E0D8 }}; border-radius: 16px; padding: 20px; display: flex; flex-direction: column; gap: 12px">
+      <h2 style="margin: 0; font-size: 17px; font-weight: 700">Bottom sheet and modal</h2>
+      <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px">
+        <sc-for list="{{ sheets }}" as="sh" hint-placeholder-count="3">
+          <div style="display: flex; flex-direction: column; gap: 6px; align-items: center">
+            <div style="width: 100%; height: 150px; border-radius: 12px; background: {{ k.c55524C }}; position: relative; overflow: hidden"><div style="position: absolute; left: 0; right: 0; bottom: 0; height: {{ sh.h }}; background: {{ k.cFFFFFF }}; border-radius: 12px 12px 0 0; padding: 8px; box-sizing: border-box; display: flex; flex-direction: column; gap: 6px; align-items: center"><span style="width: 24px; height: 3px; border-radius: 999px; background: {{ k.cCFC9BE }}"></span><span style="height: 6px; width: 70%; border-radius: 2px; background: {{ k.cE4E0D8 }}"></span><span style="height: 6px; width: 50%; border-radius: 2px; background: {{ k.cE4E0D8 }}"></span></div></div>
+            <span style="font-size: 12px; color: {{ k.c6B655C }}">{{ sh.label }}</span>
+          </div>
+        </sc-for>
+      </div>
+      <span style="font-size: 12px; color: {{ k.c6B655C }}">iOS: sheets with detents · Android: Material bottom sheets · web: side panel or modal</span>
+    </section>
+
+    <section style="background: {{ k.cFFFFFF }}; border: 1px solid {{ k.cE4E0D8 }}; border-radius: 16px; padding: 20px; display: flex; flex-direction: column; gap: 10px">
+      <h2 style="margin: 0 0 4px; font-size: 17px; font-weight: 700">Chat bubble</h2>
+      <div style="align-self: flex-end; max-width: 80%; background: {{ k.c0F5C63 }}; color: {{ k.cFFFFFF }}; border-radius: 16px 16px 4px 16px; padding: 9px 12px; font-size: 14px">User message</div>
+      <div style="align-self: flex-start; max-width: 85%; background: {{ k.cF6F4F0 }}; border: 1px solid {{ k.cE4E0D8 }}; border-radius: 16px 16px 16px 4px; padding: 9px 12px; font-size: 14px">AI answer</div>
+      <div style="align-self: flex-start; max-width: 85%; background: {{ k.cF6F4F0 }}; border: 1px solid {{ k.cE4E0D8 }}; border-radius: 16px 16px 16px 4px; padding: 9px 12px; font-size: 14px; display: flex; flex-direction: column; gap: 6px">AI answer with sources<span style="align-self: flex-start; background: {{ k.cE6F0F0 }}; color: {{ k.c0F5C63 }}; border-radius: 999px; padding: 2px 8px; font-size: 12px; font-weight: 600">Guide: Student jobs</span></div>
+      <div style="align-self: flex-start; max-width: 85%; background: {{ k.cFBF1DF }}; border: 1px solid {{ k.cB7791F }}; border-radius: 12px; padding: 9px 12px; font-size: 13px; color: {{ k.c5C3D08 }}"><strong>Legal-help card</strong> · links to counselling, student services, lawyers</div>
+    </section>
+
+    <section style="background: {{ k.cFFFFFF }}; border: 1px solid {{ k.cE4E0D8 }}; border-radius: 16px; padding: 20px; display: flex; flex-direction: column; gap: 10px">
+      <h2 style="margin: 0 0 4px; font-size: 17px; font-weight: 700">States every screen needs</h2>
+      <sc-for list="{{ states }}" as="s" hint-placeholder-count="6">
+        <div style="display: flex; gap: 10px; padding: 8px 0; border-top: 1px solid {{ k.cEFECE6 }}; font-size: 14px; line-height: 20px"><strong style="width: 110px; flex: none">{{ s.name }}</strong><span style="color: {{ k.c3B3833 }}">{{ s.rule }}</span></div>
+      </sc-for>
+    </section>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"dark":{"editor":"boolean","default":false},"$preview":{"width":1440,"height":2600}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const __dark = this.props.dark === true || this.props.dark === 'true';
+    const k = __dark ? {"cF6F4F0": "#121614", "cFFFFFF": "#1A2221", "c1F1D1A": "#ECEAE5", "c3B3833": "#C9CFCD", "c4A453E": "#C2C8C6", "c6B655C": "#9AA5A3", "cE4E0D8": "#2C3634", "cEFECE6": "#252D2C", "cCFC9BE": "#4A5755", "cA8A196": "#6F7B79", "cE9E5DD": "#252D2C", "cEDE9E1": "#252D2C", "c0F5C63": "#5CC8C2", "c0A4449": "#8EDDD8", "cE6F0F0": "#173332", "cCFE3E3": "#1F4442", "cD3E6E6": "#1F3D3B", "cE8A33D": "#F2B85C", "c2A1A00": "#2A1A00", "cFBF1DF": "#33291A", "c8A5A12": "#E0C27A", "cB7791F": "#C9A15A", "cFDF6EA": "#2A2418", "cFBEFD9": "#33291A", "c5C3D08": "#E0C27A", "c5C4A2A": "#D8C8A8", "cFDECEA": "#3A1F1C", "cB42318": "#F0A49B", "cEAF4EE": "#1D3327", "c24653F": "#7FD3A0", "c2E7D4F": "#7FD3A0", "cF3F8F8": "#16201F", "cFBFAF7": "#161C1B", "c000000": "#F2F2F2", "cFDF3E2": "#33291A", "c55524C": "#000000", "c5E8C8F": "#7FB3B5"} : {"cF6F4F0": "#F6F4F0", "cFFFFFF": "#FFFFFF", "c1F1D1A": "#1F1D1A", "c3B3833": "#3B3833", "c4A453E": "#4A453E", "c6B655C": "#6B655C", "cE4E0D8": "#E4E0D8", "cEFECE6": "#EFECE6", "cCFC9BE": "#CFC9BE", "cA8A196": "#A8A196", "cE9E5DD": "#E9E5DD", "cEDE9E1": "#EDE9E1", "c0F5C63": "#0F5C63", "c0A4449": "#0A4449", "cE6F0F0": "#E6F0F0", "cCFE3E3": "#CFE3E3", "cD3E6E6": "#D3E6E6", "cE8A33D": "#E8A33D", "c2A1A00": "#2A1A00", "cFBF1DF": "#FBF1DF", "c8A5A12": "#8A5A12", "cB7791F": "#B7791F", "cFDF6EA": "#FDF6EA", "cFBEFD9": "#FBEFD9", "c5C3D08": "#5C3D08", "c5C4A2A": "#5C4A2A", "cFDECEA": "#FDECEA", "cB42318": "#B42318", "cEAF4EE": "#EAF4EE", "c24653F": "#24653F", "c2E7D4F": "#2E7D4F", "cF3F8F8": "#F3F8F8", "cFBFAF7": "#FBFAF7", "c000000": "#000000", "cFDF3E2": "#FDF3E2", "c55524C": "#55524C", "c5E8C8F": "#5E8C8F"};
+    return { k: k, darkStr: __dark ? 'true' : 'false',
+      modeName: __dark ? 'dark' : 'light',
+      tasks: [
+        { variant: 'Open', title: 'Register your address', de: 'Anmeldung', chip: 'Soon · 21 days', chipBg: k.cFBF1DF, chipFg: k.c8A5A12, box: k.cA8A196, fill: 'transparent', mark: '', strike: 'none', color: k.c1F1D1A, opacity: '1' },
+        { variant: 'Done', title: 'Open a bank account', de: 'Girokonto', chip: 'Done', chipBg: k.cEAF4EE, chipFg: k.c24653F, box: k.c2E7D4F, fill: k.c2E7D4F, mark: '✓', strike: 'line-through', color: k.c6B655C, opacity: '1' },
+        { variant: 'Overdue', title: 'Pay the broadcasting fee', de: 'Rundfunkbeitrag', chip: 'Overdue · 3 days', chipBg: k.cFDECEA, chipFg: k.cB42318, box: k.cB42318, fill: 'transparent', mark: '', strike: 'none', color: k.c1F1D1A, opacity: '1' },
+        { variant: 'Hidden', title: 'Driving licence exchange', de: 'Führerschein', chip: 'Hidden · doesn’t apply', chipBg: k.cEFECE6, chipFg: k.c4A453E, box: k.cCFC9BE, fill: 'transparent', mark: '', strike: 'none', color: k.c6B655C, opacity: '0.7' }
+      ],
+      guides: [
+        { variant: 'Default', title: 'Get your tax ID', updated: false, fill: 'none' },
+        { variant: 'Saved', title: 'Register your address', updated: false, fill: k.c0F5C63 },
+        { variant: 'Updated recently', title: 'Pay the broadcasting fee', updated: true, fill: 'none' }
+      ],
+      callouts: [
+        { label: 'Tip', text: 'Check for slots early in the morning.', bg: k.cE6F0F0, fg: k.c0F5C63, icon: 'M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z' },
+        { label: 'Warning', text: 'Register again when you move.', bg: k.cFBF1DF, fg: k.c8A5A12, icon: 'M10.3 3.9L1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0zM12 9v4M12 17h.01' },
+        { label: 'Common mistake', text: 'Waiting doesn’t pause the deadline.', bg: k.cFDECEA, fg: k.cB42318, icon: 'M12 3a9 9 0 1 1 0 18 9 9 0 0 1 0-18zM15 9l-6 6M9 9l6 6' },
+        { label: 'Legal notice', text: 'General information, not legal advice.', bg: k.cEFECE6, fg: k.c4A453E, icon: 'M12 3a9 9 0 1 1 0 18 9 9 0 0 1 0-18zM12 16v-4M12 8h.01' }
+      ],
+      providers: [
+        { variant: 'Default', name: '[Provider]', border: '1px solid ' + k.cE4E0D8, btnBg: 'transparent', btnFg: k.c0F5C63, ref: false },
+        { variant: 'Highlighted', name: '[Provider]', border: '2px solid ' + k.c0F5C63, btnBg: k.c0F5C63, btnFg: k.cFFFFFF, ref: false },
+        { variant: 'Referral', name: '[Provider]', border: '1px solid ' + k.cE4E0D8, btnBg: 'transparent', btnFg: k.c0F5C63, ref: true }
+      ],
+      sheets: [{ label: 'Add reminder', h: '110px' }, { label: 'Share', h: '70px' }, { label: 'Filters', h: '90px' }],
+      states: [
+        { name: 'Empty', rule: 'Friendly illustration, one sentence, one action.' },
+        { name: 'Loading', rule: 'Skeletons for lists and guides; step-by-step progress for AI.' },
+        { name: 'Error', rule: 'Plain explanation and a retry button. Never an error code.' },
+        { name: 'Offline', rule: 'Subtle banner; cached content still works; AI shows “Needs internet”.' },
+        { name: 'Limit reached', rule: 'Show the full result, then a soft upgrade card.' },
+        { name: 'Outdated', rule: 'Banner when verification is older than 6 months.' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

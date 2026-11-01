@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Onboarding step</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Noto+Sans+Devanagari:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#0F5C63}a:hover{color:#0A4449}
+</style>
+</helmet>
+<div style="width: {{ rootW }}; height: {{ rootH }}; overflow: hidden; background: {{ k.cF6F4F0 }}; font-family: Inter, 'Noto Sans Devanagari', system-ui, sans-serif; color: {{ k.c1F1D1A }}; display: flex; flex-direction: column">
+
+  <sc-if value="{{ showHeader }}" hint-placeholder-val="{{ true }}">
+    <div style="height: 64px; flex: none; display: flex; flex-direction: column; justify-content: center; gap: 6px">
+      <sc-if value="{{ ios }}" hint-placeholder-val="{{ true }}">
+        <div style="height: 44px; display: flex; align-items: center; justify-content: space-between; padding: 0 8px">
+          <button style="height: 44px; display: flex; align-items: center; gap: 2px; padding: 0 8px; border: none; background: transparent; color: {{ k.c0F5C63 }}; font: 500 17px Inter, sans-serif"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"></path></svg>Back</button>
+          <span style="font-size: 13px; color: {{ k.c6B655C }}">{{ stepLabel }}</span>
+          <button style="height: 44px; padding: 0 12px; border: none; background: transparent; color: {{ k.c0F5C63 }}; font: 500 17px Inter, sans-serif">Skip</button>
+        </div>
+        <div role="progressbar" aria-label="{{ stepLabel }}" style="height: 4px; margin: 0 20px; border-radius: 999px; background: {{ k.cE4E0D8 }}; overflow: hidden"><div style="height: 4px; width: {{ progressW }}; border-radius: 999px; background: {{ k.c0F5C63 }}"></div></div>
+      </sc-if>
+      <sc-if value="{{ android }}" hint-placeholder-val="{{ false }}">
+        <div style="height: 48px; display: flex; align-items: center; justify-content: space-between; padding: 0 4px">
+          <button aria-label="Back" style="width: 48px; height: 48px; border-radius: 999px; border: none; background: transparent; color: {{ k.c1F1D1A }}; display: flex; align-items: center; justify-content: center"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"></path></svg></button>
+          <span style="font-size: 14px; color: {{ k.c6B655C }}; letter-spacing: 0.01em">{{ stepLabel }}</span>
+          <button style="height: 48px; padding: 0 16px; border-radius: 999px; border: none; background: transparent; color: {{ k.c0F5C63 }}; font: 600 14px Inter, sans-serif; letter-spacing: 0.01em">Skip</button>
+        </div>
+        <div role="progressbar" aria-label="{{ stepLabel }}" style="height: 4px; background: {{ k.cCFE3E3 }}"><div style="height: 4px; width: {{ progressW }}; background: {{ k.c0F5C63 }}"></div></div>
+      </sc-if>
+    </div>
+  </sc-if>
+
+  <!-- 1 · Welcome -->
+  <sc-if value="{{ s1 }}" hint-placeholder-val="{{ true }}">
+    <div style="height: 844px; display: flex; flex-direction: column; padding: 56px 20px 32px; box-sizing: border-box; gap: 24px">
+      <div style="display: flex; justify-content: center; padding-top: 12px">
+        <svg width="220" height="150" viewBox="0 0 220 150" aria-hidden="true"><ellipse cx="110" cy="132" rx="96" ry="10" fill="{{ k.cE9E5DD }}"></ellipse><rect x="20" y="58" width="112" height="56" rx="14" fill="{{ k.c0F5C63 }}"></rect><rect x="32" y="70" width="22" height="18" rx="4" fill="{{ k.cE6F0F0 }}"></rect><rect x="60" y="70" width="22" height="18" rx="4" fill="{{ k.cE6F0F0 }}"></rect><rect x="88" y="70" width="22" height="18" rx="4" fill="{{ k.cE6F0F0 }}"></rect><rect x="20" y="98" width="112" height="6" fill="{{ k.cE8A33D }}"></rect><path d="M60 58l14-22M92 58L78 36" stroke="{{ k.c0F5C63 }}" stroke-width="3"></path><circle cx="44" cy="120" r="7" fill="{{ k.c1F1D1A }}"></circle><circle cx="108" cy="120" r="7" fill="{{ k.c1F1D1A }}"></circle><rect x="146" y="46" width="52" height="38" rx="4" fill="{{ k.cFFFFFF }}" stroke="{{ k.c1F1D1A }}" stroke-width="2.5" transform="rotate(-8 172 65)"></rect><rect x="150" y="40" width="52" height="38" rx="4" fill="{{ k.cFFFFFF }}" stroke="{{ k.c1F1D1A }}" stroke-width="2.5"></rect><path d="M150 42l26 18 26-18" fill="none" stroke="{{ k.c1F1D1A }}" stroke-width="2.5"></path><path d="M154 98h30v20a10 10 0 0 1-10 10h-10a10 10 0 0 1-10-10z" fill="{{ k.cFFFFFF }}" stroke="{{ k.c1F1D1A }}" stroke-width="2.5"></path><path d="M184 104h4a5 5 0 0 1 0 10h-4" fill="none" stroke="{{ k.c1F1D1A }}" stroke-width="2.5"></path><rect x="156" y="104" width="26" height="7" fill="#C98A4B"></rect><path d="M163 92c-3-4 3-6 0-10M174 92c-3-4 3-6 0-10" stroke="{{ k.cB7791F }}" stroke-width="2.5" fill="none" stroke-linecap="round"></path></svg>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 10px; text-align: center">
+        <h1 style="margin: 0; font-size: 30px; line-height: 36px; font-weight: 700; letter-spacing: -0.02em">Settle in Germany</h1>
+        <p style="margin: 0; font-size: 17px; line-height: 25px; color: {{ k.c3B3833 }}">Know exactly what to do next in Germany, in your language.</p>
+      </div>
+      <fieldset style="border: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px">
+        <legend style="font-size: 15px; font-weight: 600; padding: 0 0 10px">Choose your language</legend>
+        <button aria-pressed="true" style="min-height: 56px; display: flex; align-items: center; justify-content: space-between; padding: 0 16px; border-radius: {{ cardR }}; border: 2px solid {{ k.c0F5C63 }}; background: {{ k.cE6F0F0 }}; font: 600 17px Inter, sans-serif; color: {{ k.c1F1D1A }}">English<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="{{ k.c0F5C63 }}" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"></path></svg></button>
+        <button lang="ne" aria-pressed="false" style="min-height: 56px; display: flex; align-items: center; padding: 0 17px; border-radius: {{ cardR }}; border: 1px solid {{ k.cE4E0D8 }}; background: {{ k.cFFFFFF }}; font: 500 18px 'Noto Sans Devanagari', sans-serif; color: {{ k.c1F1D1A }}">नेपाली <span style="font: 400 14px Inter, sans-serif; color: {{ k.c6B655C }}; margin-left: 8px">Nepali</span></button>
+        <button lang="hi" aria-pressed="false" style="min-height: 56px; display: flex; align-items: center; padding: 0 17px; border-radius: {{ cardR }}; border: 1px solid {{ k.cE4E0D8 }}; background: {{ k.cFFFFFF }}; font: 500 18px 'Noto Sans Devanagari', sans-serif; color: {{ k.c1F1D1A }}">हिन्दी <span style="font: 400 14px Inter, sans-serif; color: {{ k.c6B655C }}; margin-left: 8px">Hindi</span></button>
+      </fieldset>
+      <div style="margin-top: auto; display: flex; flex-direction: column; gap: 8px">
+        <button style="height: 52px; border-radius: {{ btnR }}; border: none; background: {{ k.c0F5C63 }}; color: {{ k.cFFFFFF }}; font: 600 17px Inter, sans-serif">Get started</button>
+        <button style="height: 48px; border-radius: {{ btnR }}; border: none; background: transparent; color: {{ k.c0F5C63 }}; font: 600 16px Inter, sans-serif">I already have an account</button>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- 2 · Nationality -->
+  <sc-if value="{{ s2 }}" hint-placeholder-val="{{ false }}">
+    <div style="height: 780px; display: flex; flex-direction: column; padding: 20px 20px 32px; box-sizing: border-box; gap: 20px">
+      <div style="display: flex; flex-direction: column; gap: 8px">
+        <h1 style="margin: 0; font-size: 28px; line-height: 34px; font-weight: {{ titleW }}">Where are you from?</h1>
+        <p style="margin: 0; font-size: 16px; line-height: 24px; color: {{ k.c6B655C }}">We’ll show the rules and embassy contacts that apply to you.</p>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 10px">
+        <button aria-pressed="true" style="min-height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 16px; border-radius: {{ cardR }}; border: 2px solid {{ k.c0F5C63 }}; background: {{ k.cE6F0F0 }}; font: 600 17px Inter, sans-serif; color: {{ k.c1F1D1A }}; text-align: left"><span>Nepal <span lang="ne" style="font: 400 16px 'Noto Sans Devanagari', sans-serif; color: {{ k.c4A453E }}; margin-left: 6px">नेपाल</span></span><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="{{ k.c0F5C63 }}" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"></path></svg></button>
+        <button aria-pressed="false" style="min-height: 64px; display: flex; align-items: center; padding: 0 17px; border-radius: {{ cardR }}; border: 1px solid {{ k.cE4E0D8 }}; background: {{ k.cFFFFFF }}; font: 500 17px Inter, sans-serif; color: {{ k.c1F1D1A }}; text-align: left">India <span lang="hi" style="font: 400 16px 'Noto Sans Devanagari', sans-serif; color: {{ k.c6B655C }}; margin-left: 6px">भारत</span></button>
+        <button aria-pressed="false" style="min-height: 64px; display: flex; align-items: center; padding: 0 17px; border-radius: {{ cardR }}; border: 1px solid {{ k.cE4E0D8 }}; background: {{ k.cFFFFFF }}; font: 500 17px Inter, sans-serif; color: {{ k.c1F1D1A }}; text-align: left">Another country</button>
+      </div>
+      <div style="margin-top: auto"><button style="width: 100%; height: 52px; border-radius: {{ btnR }}; border: none; background: {{ k.c0F5C63 }}; color: {{ k.cFFFFFF }}; font: 600 17px Inter, sans-serif">Continue</button></div>
+    </div>
+  </sc-if>
+
+  <!-- 3 · Status -->
+  <sc-if value="{{ s3 }}" hint-placeholder-val="{{ false }}">
+    <div style="height: 780px; display: flex; flex-direction: column; padding: 20px 20px 32px; box-sizing: border-box; gap: 20px">
+      <div style="display: flex; flex-direction: column; gap: 8px">
+        <h1 style="margin: 0; font-size: 28px; line-height: 34px; font-weight: {{ titleW }}">What brings you to Germany?</h1>
+        <p style="margin: 0; font-size: 16px; line-height: 24px; color: {{ k.c6B655C }}">This decides which permits and rules are on your roadmap.</p>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 10px">
+        <button aria-pressed="true" style="min-height: 72px; display: flex; align-items: center; gap: 14px; padding: 10px 16px; border-radius: {{ cardR }}; border: 2px solid {{ k.c0F5C63 }}; background: {{ k.cE6F0F0 }}; color: {{ k.c1F1D1A }}; text-align: left; font: 400 15px Inter, sans-serif"><span style="display: flex; flex-direction: column; gap: 2px; flex: 1"><span style="font-size: 17px; font-weight: 600">Student</span><span style="color: {{ k.c4A453E }}">University or language course</span></span><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="{{ k.c0F5C63 }}" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"></path></svg></button>
+        <button aria-pressed="false" style="min-height: 72px; display: flex; align-items: center; gap: 14px; padding: 10px 17px; border-radius: {{ cardR }}; border: 1px solid {{ k.cE4E0D8 }}; background: {{ k.cFFFFFF }}; color: {{ k.c1F1D1A }}; text-align: left; font: 400 15px Inter, sans-serif"><span style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 17px; font-weight: 500">Vocational trainee</span><span style="color: {{ k.c6B655C }}; display: flex; align-items: center; gap: 6px"><span style="font-size: 10px; font-weight: 700; border: 1px solid {{ k.c0F5C63 }}; color: {{ k.c0F5C63 }}; border-radius: 4px; padding: 0 4px; line-height: 15px">DE</span>Ausbildung</span></span></button>
+        <button aria-pressed="false" style="min-height: 72px; display: flex; align-items: center; gap: 14px; padding: 10px 17px; border-radius: {{ cardR }}; border: 1px solid {{ k.cE4E0D8 }}; background: {{ k.cFFFFFF }}; color: {{ k.c1F1D1A }}; text-align: left; font: 400 15px Inter, sans-serif"><span style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 17px; font-weight: 500">Skilled worker</span><span style="color: {{ k.c6B655C }}">You have a job or a job offer</span></span></button>
+        <button aria-pressed="false" style="min-height: 72px; display: flex; align-items: center; gap: 14px; padding: 10px 17px; border-radius: {{ cardR }}; border: 1px solid {{ k.cE4E0D8 }}; background: {{ k.cFFFFFF }}; color: {{ k.c1F1D1A }}; text-align: left; font: 400 15px Inter, sans-serif"><span style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 17px; font-weight: 500">Family member</span><span style="color: {{ k.c6B655C }}">Joining a partner or parent</span></span></button>
+      </div>
+      <div style="margin-top: auto"><button style="width: 100%; height: 52px; border-radius: {{ btnR }}; border: none; background: {{ k.c0F5C63 }}; color: {{ k.cFFFFFF }}; font: 600 17px Inter, sans-serif">Continue</button></div>
+    </div>
+  </sc-if>
+
+  <!-- 4 · City -->
+  <sc-if value="{{ s4 }}" hint-placeholder-val="{{ false }}">
+    <div style="height: 780px; display: flex; flex-direction: column; padding: 20px 20px 32px; box-sizing: border-box; gap: 18px">
+      <div style="display: flex; flex-direction: column; gap: 8px">
+        <h1 style="margin: 0; font-size: 28px; line-height: 34px; font-weight: {{ titleW }}">Which city?</h1>
+        <p style="margin: 0; font-size: 16px; line-height: 24px; color: {{ k.c6B655C }}">Offices and appointments differ by city.</p>
+      </div>
+      <label style="display: flex; align-items: center; gap: 10px; height: 52px; padding: 0 14px; border-radius: {{ fieldR }}; border: 1px solid {{ k.cA8A196 }}; background: {{ k.cFFFFFF }}; color: {{ k.c6B655C }}">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+        <span style="position: absolute; width: 1px; height: 1px; overflow: hidden">Search cities</span>
+        <input type="search" placeholder="Search cities" style="flex: 1; border: none; outline: none; background: transparent; font: 400 17px Inter, sans-serif; color: {{ k.c1F1D1A }}">
+      </label>
+      <div style="background: {{ k.cFFFFFF }}; border: 1px solid {{ k.cE4E0D8 }}; border-radius: {{ cardR }}; overflow: hidden; display: flex; flex-direction: column">
+        <button aria-pressed="true" style="min-height: 56px; display: flex; align-items: center; justify-content: space-between; padding: 0 16px; border: none; border-bottom: 1px solid {{ k.cEFECE6 }}; background: {{ k.cE6F0F0 }}; font: 600 17px Inter, sans-serif; color: {{ k.c1F1D1A }}">Leipzig<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="{{ k.c0F5C63 }}" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"></path></svg></button>
+        <button aria-pressed="false" style="min-height: 56px; display: flex; align-items: center; padding: 0 16px; border: none; border-bottom: 1px solid {{ k.cEFECE6 }}; background: {{ k.cFFFFFF }}; font: 400 17px Inter, sans-serif; color: {{ k.c1F1D1A }}">Berlin</button>
+        <button aria-pressed="false" style="min-height: 56px; display: flex; align-items: center; padding: 0 16px; border: none; border-bottom: 1px solid {{ k.cEFECE6 }}; background: {{ k.cFFFFFF }}; font: 400 17px Inter, sans-serif; color: {{ k.c1F1D1A }}">Munich</button>
+        <button aria-pressed="false" style="min-height: 56px; display: flex; align-items: center; padding: 0 16px; border: none; border-bottom: 1px solid {{ k.cEFECE6 }}; background: {{ k.cFFFFFF }}; font: 400 17px Inter, sans-serif; color: {{ k.c1F1D1A }}">Dresden</button>
+        <button aria-pressed="false" style="min-height: 56px; display: flex; align-items: center; padding: 0 16px; border: none; background: {{ k.cFFFFFF }}; font: 400 17px Inter, sans-serif; color: {{ k.c1F1D1A }}">Frankfurt am Main</button>
+      </div>
+      <button aria-pressed="false" style="min-height: 52px; border-radius: {{ cardR }}; border: 1px dashed {{ k.cA8A196 }}; background: transparent; font: 500 16px Inter, sans-serif; color: {{ k.c3B3833 }}">I haven’t decided yet</button>
+      <div style="margin-top: auto"><button style="width: 100%; height: 52px; border-radius: {{ btnR }}; border: none; background: {{ k.c0F5C63 }}; color: {{ k.cFFFFFF }}; font: 600 17px Inter, sans-serif">Continue</button></div>
+    </div>
+  </sc-if>
+
+  <!-- 5 · Stage -->
+  <sc-if value="{{ s5 }}" hint-placeholder-val="{{ false }}">
+    <div style="height: 780px; display: flex; flex-direction: column; padding: 20px 20px 32px; box-sizing: border-box; gap: 20px">
+      <div style="display: flex; flex-direction: column; gap: 8px">
+        <h1 style="margin: 0; font-size: 28px; line-height: 34px; font-weight: {{ titleW }}">Where are you right now?</h1>
+        <p style="margin: 0; font-size: 16px; line-height: 24px; color: {{ k.c6B655C }}">Home will focus on this stage. You can look at the others any time.</p>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 10px">
+        <button aria-pressed="false" style="min-height: 64px; display: flex; align-items: center; gap: 14px; padding: 0 17px; border-radius: {{ cardR }}; border: 1px solid {{ k.cE4E0D8 }}; background: {{ k.cFFFFFF }}; color: {{ k.c1F1D1A }}; text-align: left; font: 500 17px Inter, sans-serif"><span style="width: 10px; height: 10px; border-radius: 999px; background: #8FA9C9; flex: none"></span>Still at home, preparing</button>
+        <button aria-pressed="true" style="min-height: 72px; display: flex; align-items: center; gap: 14px; padding: 10px 16px; border-radius: {{ cardR }}; border: 2px solid {{ k.c0F5C63 }}; background: {{ k.cE6F0F0 }}; color: {{ k.c1F1D1A }}; text-align: left; font: 400 15px Inter, sans-serif"><span style="width: 10px; height: 10px; border-radius: 999px; background: {{ k.c0F5C63 }}; flex: none"></span><span style="display: flex; flex-direction: column; gap: 2px; flex: 1"><span style="font-size: 17px; font-weight: 600">Arrived recently</span><span style="color: {{ k.c4A453E }}">Less than 3 months ago</span></span><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="{{ k.c0F5C63 }}" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"></path></svg></button>
+        <button aria-pressed="false" style="min-height: 64px; display: flex; align-items: center; gap: 14px; padding: 0 17px; border-radius: {{ cardR }}; border: 1px solid {{ k.cE4E0D8 }}; background: {{ k.cFFFFFF }}; color: {{ k.c1F1D1A }}; text-align: left; font: 500 17px Inter, sans-serif"><span style="width: 10px; height: 10px; border-radius: 999px; background: #C9A15A; flex: none"></span>Living here over 3 months</button>
+        <button aria-pressed="false" style="min-height: 64px; display: flex; align-items: center; gap: 14px; padding: 0 17px; border-radius: {{ cardR }}; border: 1px solid {{ k.cE4E0D8 }}; background: {{ k.cFFFFFF }}; color: {{ k.c1F1D1A }}; text-align: left; font: 500 17px Inter, sans-serif"><span style="width: 10px; height: 10px; border-radius: 999px; background: #8C6FA8; flex: none"></span>Finishing my studies</button>
+      </div>
+      <div style="margin-top: auto"><button style="width: 100%; height: 52px; border-radius: {{ btnR }}; border: none; background: {{ k.c0F5C63 }}; color: {{ k.cFFFFFF }}; font: 600 17px Inter, sans-serif">Continue</button></div>
+    </div>
+  </sc-if>
+
+  <!-- 6 · Arrival date -->
+  <sc-if value="{{ s6 }}" hint-placeholder-val="{{ false }}">
+    <div style="height: 780px; display: flex; flex-direction: column; padding: 20px 20px 32px; box-sizing: border-box; gap: 18px">
+      <div style="display: flex; flex-direction: column; gap: 8px">
+        <h1 style="margin: 0; font-size: 28px; line-height: 34px; font-weight: {{ titleW }}">When did you arrive?</h1>
+        <p style="margin: 0; font-size: 16px; line-height: 24px; color: {{ k.c6B655C }}">Optional. We use it to count deadlines like the 2-week address registration.</p>
+      </div>
+      <div style="background: {{ k.cFFFFFF }}; border: 1px solid {{ k.cE4E0D8 }}; border-radius: {{ cardR }}; padding: 14px 12px; display: flex; flex-direction: column; gap: 8px">
+        <div style="display: flex; align-items: center; justify-content: space-between; padding: 0 4px">
+          <span style="font-size: 17px; font-weight: 600">October 2026</span>
+          <div style="display: flex">
+            <button aria-label="Previous month" style="width: 44px; height: 44px; border: none; background: transparent; color: {{ k.c0F5C63 }}; display: flex; align-items: center; justify-content: center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"></path></svg></button>
+            <button aria-label="Next month" style="width: 44px; height: 44px; border: none; background: transparent; color: {{ k.c0F5C63 }}; display: flex; align-items: center; justify-content: center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"></path></svg></button>
+          </div>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); text-align: center; font-size: 12px; font-weight: 600; color: {{ k.c6B655C }}"><span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span><span>Su</span></div>
+        <div style="display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); row-gap: 2px">
+          <sc-for list="{{ days }}" as="d" hint-placeholder-count="35">
+            <span style="height: 42px; display: flex; align-items: center; justify-content: center"><span style="width: 38px; height: 38px; border-radius: 999px; display: flex; align-items: center; justify-content: center; font-size: 15px; background: {{ d.bg }}; color: {{ d.color }}; font-weight: {{ d.weight }}">{{ d.label }}</span></span>
+          </sc-for>
+        </div>
+      </div>
+      <div style="display: flex; align-items: center; gap: 8px; font-size: 15px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="{{ k.c0F5C63 }}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"></rect><path d="M16 2v4M8 2v4M3 10h18"></path></svg>Arrived <strong>Sunday, 18 October 2026</strong></div>
+      <div style="margin-top: auto; display: flex; flex-direction: column; gap: 6px">
+        <button style="width: 100%; height: 52px; border-radius: {{ btnR }}; border: none; background: {{ k.c0F5C63 }}; color: {{ k.cFFFFFF }}; font: 600 17px Inter, sans-serif">Continue</button>
+        <button style="width: 100%; height: 48px; border-radius: {{ btnR }}; border: none; background: transparent; color: {{ k.c0F5C63 }}; font: 600 16px Inter, sans-serif">I’m not sure yet</button>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- 7 · Notifications -->
+  <sc-if value="{{ s7 }}" hint-placeholder-val="{{ false }}">
+    <div style="height: 780px; display: flex; flex-direction: column; padding: 20px 20px 32px; box-sizing: border-box; gap: 20px">
+      <div style="display: flex; justify-content: center; padding: 12px 0 4px">
+        <span style="width: 96px; height: 96px; border-radius: 999px; background: {{ k.cE6F0F0 }}; color: {{ k.c0F5C63 }}; display: flex; align-items: center; justify-content: center"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9M10.3 21a1.9 1.9 0 0 0 3.4 0"></path></svg></span>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 8px; text-align: center">
+        <h1 style="margin: 0; font-size: 28px; line-height: 34px; font-weight: {{ titleW }}">Never miss a deadline</h1>
+        <p style="margin: 0; font-size: 16px; line-height: 24px; color: {{ k.c6B655C }}">We only message you when something needs you.</p>
+      </div>
+      <div style="background: {{ k.cFFFFFF }}; border: 1px solid {{ k.cE4E0D8 }}; border-radius: {{ cardR }}; padding: 6px 16px; display: flex; flex-direction: column">
+        <div style="display: flex; gap: 12px; padding: 12px 0; border-bottom: 1px solid {{ k.cEFECE6 }}; font-size: 15px; line-height: 21px"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="{{ k.c0F5C63 }}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg><span>“Your visa expires in 30 days. Book your appointment now.”</span></div>
+        <div style="display: flex; gap: 12px; padding: 12px 0; border-bottom: 1px solid {{ k.cEFECE6 }}; font-size: 15px; line-height: 21px"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="{{ k.c0F5C63 }}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none"><rect x="3" y="4" width="18" height="18" rx="2"></rect><path d="M16 2v4M8 2v4M3 10h18"></path></svg><span>A nudge the day before each appointment.</span></div>
+        <div style="display: flex; gap: 12px; padding: 12px 0; font-size: 15px; line-height: 21px"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="{{ k.c0F5C63 }}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none"><path d="M10.3 3.9L1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"></path><path d="M12 9v4M12 17h.01"></path></svg><span>Rule changes — only ones that affect students from Nepal.</span></div>
+      </div>
+      <div style="margin-top: auto; display: flex; flex-direction: column; gap: 6px">
+        <p style="margin: 0 0 6px; font-size: 13px; color: {{ k.c6B655C }}; text-align: center">{{ promptNote }}</p>
+        <button style="width: 100%; height: 52px; border-radius: {{ btnR }}; border: none; background: {{ k.c0F5C63 }}; color: {{ k.cFFFFFF }}; font: 600 17px Inter, sans-serif">Turn on reminders</button>
+        <button style="width: 100%; height: 48px; border-radius: {{ btnR }}; border: none; background: transparent; color: {{ k.c0F5C63 }}; font: 600 16px Inter, sans-serif">Not now</button>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- 8 · Account -->
+  <sc-if value="{{ s8 }}" hint-placeholder-val="{{ false }}">
+    <div style="height: 780px; display: flex; flex-direction: column; padding: 20px 20px 28px; box-sizing: border-box; gap: 18px">
+      <div style="display: flex; flex-direction: column; gap: 8px">
+        <h1 style="margin: 0; font-size: 28px; line-height: 34px; font-weight: {{ titleW }}">Keep your roadmap safe</h1>
+        <p style="margin: 0; font-size: 16px; line-height: 24px; color: {{ k.c6B655C }}">Optional. With an account you can move your roadmap and reminders to a new phone.</p>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 10px">
+        <sc-if value="{{ ios }}" hint-placeholder-val="{{ true }}">
+          <button style="height: 52px; border-radius: {{ btnR }}; border: none; background: {{ k.c000000 }}; color: {{ k.cFFFFFF }}; font: 600 17px Inter, sans-serif; display: flex; align-items: center; justify-content: center; gap: 8px"><svg width="18" height="20" viewBox="0 0 18 22" fill="currentColor" aria-hidden="true"><path d="M14.9 11.7c0-2.6 2.1-3.8 2.2-3.9-1.2-1.8-3.1-2-3.7-2-1.6-.2-3.1.9-3.9.9-.8 0-2-.9-3.4-.9-1.7 0-3.3 1-4.2 2.6-1.8 3.1-.5 7.7 1.3 10.2.9 1.2 1.9 2.6 3.2 2.6 1.3-.1 1.8-.8 3.3-.8s2 .8 3.4.8c1.4 0 2.3-1.3 3.1-2.5 1-1.4 1.4-2.8 1.4-2.9 0 0-2.7-1-2.7-4.1zM12.3 4c.7-.9 1.2-2 1-3.2-1 0-2.3.7-3 1.6-.7.8-1.2 2-1.1 3.1 1.2.1 2.3-.6 3.1-1.5z"></path></svg>Continue with Apple</button>
+        </sc-if>
+        <button style="height: 52px; border-radius: {{ btnR }}; border: 1px solid {{ k.cA8A196 }}; background: {{ k.cFFFFFF }}; color: {{ k.c1F1D1A }}; font: 600 17px Inter, sans-serif; display: flex; align-items: center; justify-content: center; gap: 10px"><svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true"><path fill="#4285F4" d="M44.5 20H24v8.5h11.8C34.7 33.9 30.1 37 24 37c-7.2 0-13-5.8-13-13s5.8-13 13-13c3.1 0 5.9 1.1 8.1 2.9l6.4-6.4C34.6 4.1 29.6 2 24 2 11.8 2 2 11.8 2 24s9.8 22 22 22c11 0 21-8 21-22 0-1.3-.2-2.7-.5-4z"></path><path fill="#34A853" d="M6.3 14.7l7 5.1C15.1 15.1 19.2 12 24 12c3.1 0 5.9 1.1 8.1 2.9l6.4-6.4C34.6 4.1 29.6 2 24 2 15.6 2 8.4 6.8 4.9 13.8z" opacity="0"></path></svg>Continue with Google</button>
+        <button style="height: 52px; border-radius: {{ btnR }}; border: 1px solid {{ k.cA8A196 }}; background: {{ k.cFFFFFF }}; color: {{ k.c1F1D1A }}; font: 600 17px Inter, sans-serif; display: flex; align-items: center; justify-content: center; gap: 10px"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="M22 6l-10 7L2 6"></path></svg>Continue with email</button>
+      </div>
+      <label style="display: flex; align-items: flex-start; gap: 12px; font-size: 15px; line-height: 22px; min-height: 44px"><input type="checkbox" style="width: 22px; height: 22px; accent-color: {{ k.c0F5C63 }}; margin: 0; flex: none"><span>I am 16 or older and accept the <a href="#terms">Terms</a> and <a href="#privacy">Privacy policy</a>.</span></label>
+      <div style="margin-top: auto; display: flex; flex-direction: column; gap: 6px; align-items: center">
+        <button style="width: 100%; height: 52px; border-radius: {{ btnR }}; border: 1.5px solid {{ k.c0F5C63 }}; background: transparent; color: {{ k.c0F5C63 }}; font: 600 17px Inter, sans-serif">Continue without account</button>
+        <span style="font-size: 13px; color: {{ k.c6B655C }}; text-align: center">Your data stays on this phone. You can sign in later in Me.</span>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- 9 · Result -->
+  <sc-if value="{{ s9 }}" hint-placeholder-val="{{ false }}">
+    <div style="height: 844px; display: flex; flex-direction: column; padding: 72px 20px 32px; box-sizing: border-box; gap: 22px">
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 14px; text-align: center">
+        <svg width="88" height="88" viewBox="0 0 88 88" aria-hidden="true"><circle cx="44" cy="44" r="34" fill="{{ k.cE8A33D }}"></circle><path d="M30 45l10 10 19-21" fill="none" stroke="{{ k.c2A1A00 }}" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M44 2v6M44 80v6M2 44h6M80 44h6M14 14l4 4M70 70l4 4M74 14l-4 4M14 74l4-4" stroke="{{ k.cE8A33D }}" stroke-width="3" stroke-linecap="round"></path></svg>
+        <h1 style="margin: 0; font-size: 28px; line-height: 34px; font-weight: {{ titleW }}">Your roadmap is ready</h1>
+        <p style="margin: 0; font-size: 16px; line-height: 24px; color: {{ k.c6B655C }}">First 30 days in Leipzig · 9 steps. Start with these three.</p>
+      </div>
+      <div style="background: {{ k.cFFFFFF }}; border: 1px solid {{ k.cE4E0D8 }}; border-radius: {{ cardR }}; padding: 4px 16px">
+        <div style="display: flex; align-items: center; gap: 12px; padding: 12px 0; border-bottom: 1px solid {{ k.cEFECE6 }}"><span style="width: 28px; height: 28px; border-radius: 999px; background: {{ k.c0F5C63 }}; color: {{ k.cFFFFFF }}; font-weight: 700; font-size: 14px; display: flex; align-items: center; justify-content: center; flex: none">1</span><span style="flex: 1; font-size: 16px; font-weight: 600">Register your address</span><span style="background: {{ k.cFDECEA }}; color: {{ k.cB42318 }}; border-radius: 999px; padding: 3px 9px; font-size: 12px; font-weight: 700; white-space: nowrap">5 days</span></div>
+        <div style="display: flex; align-items: center; gap: 12px; padding: 12px 0; border-bottom: 1px solid {{ k.cEFECE6 }}"><span style="width: 28px; height: 28px; border-radius: 999px; background: {{ k.c0F5C63 }}; color: {{ k.cFFFFFF }}; font-weight: 700; font-size: 14px; display: flex; align-items: center; justify-content: center; flex: none">2</span><span style="flex: 1; font-size: 16px; font-weight: 600">Open a bank account</span><span style="background: {{ k.cEFECE6 }}; color: {{ k.c4A453E }}; border-radius: 999px; padding: 3px 9px; font-size: 12px; font-weight: 700; white-space: nowrap">After step 1</span></div>
+        <div style="display: flex; align-items: center; gap: 12px; padding: 12px 0"><span style="width: 28px; height: 28px; border-radius: 999px; background: {{ k.c0F5C63 }}; color: {{ k.cFFFFFF }}; font-weight: 700; font-size: 14px; display: flex; align-items: center; justify-content: center; flex: none">3</span><span style="flex: 1; font-size: 16px; font-weight: 600">Book residence-permit appointment</span><span style="background: {{ k.cFBF1DF }}; color: {{ k.c8A5A12 }}; border-radius: 999px; padding: 3px 9px; font-size: 12px; font-weight: 700; white-space: nowrap">21 days</span></div>
+      </div>
+      <p style="margin: 0; font-size: 14px; color: {{ k.c6B655C }}; text-align: center">You can change any answer later in Me → Profile.</p>
+      <div style="margin-top: auto"><button style="width: 100%; height: 52px; border-radius: {{ btnR }}; border: none; background: {{ k.c0F5C63 }}; color: {{ k.cFFFFFF }}; font: 600 17px Inter, sans-serif">Go to my roadmap</button></div>
+    </div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"dark":{"editor":"boolean","default":false},"platform":{"editor":"enum","options":["ios","android","web"],"default":"ios"},"step":{"editor":"enum","options":["1","2","3","4","5","6","7","8","9"],"default":"1"},"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const __dark = this.props.dark === true || this.props.dark === 'true';
+    const __web = this.props.platform === 'web';
+    const k = __dark ? {"cF6F4F0": "#121614", "cFFFFFF": "#1A2221", "c1F1D1A": "#ECEAE5", "c3B3833": "#C9CFCD", "c4A453E": "#C2C8C6", "c6B655C": "#9AA5A3", "cE4E0D8": "#2C3634", "cEFECE6": "#252D2C", "cCFC9BE": "#4A5755", "cA8A196": "#6F7B79", "cE9E5DD": "#252D2C", "cEDE9E1": "#252D2C", "c0F5C63": "#5CC8C2", "c0A4449": "#8EDDD8", "cE6F0F0": "#173332", "cCFE3E3": "#1F4442", "cD3E6E6": "#1F3D3B", "cE8A33D": "#F2B85C", "c2A1A00": "#2A1A00", "cFBF1DF": "#33291A", "c8A5A12": "#E0C27A", "cB7791F": "#C9A15A", "cFDF6EA": "#2A2418", "cFBEFD9": "#33291A", "c5C3D08": "#E0C27A", "c5C4A2A": "#D8C8A8", "cFDECEA": "#3A1F1C", "cB42318": "#F0A49B", "cEAF4EE": "#1D3327", "c24653F": "#7FD3A0", "c2E7D4F": "#7FD3A0", "cF3F8F8": "#16201F", "cFBFAF7": "#161C1B", "c000000": "#F2F2F2", "cFDF3E2": "#33291A", "c55524C": "#000000"} : {"cF6F4F0": "#F6F4F0", "cFFFFFF": "#FFFFFF", "c1F1D1A": "#1F1D1A", "c3B3833": "#3B3833", "c4A453E": "#4A453E", "c6B655C": "#6B655C", "cE4E0D8": "#E4E0D8", "cEFECE6": "#EFECE6", "cCFC9BE": "#CFC9BE", "cA8A196": "#A8A196", "cE9E5DD": "#E9E5DD", "cEDE9E1": "#EDE9E1", "c0F5C63": "#0F5C63", "c0A4449": "#0A4449", "cE6F0F0": "#E6F0F0", "cCFE3E3": "#CFE3E3", "cD3E6E6": "#D3E6E6", "cE8A33D": "#E8A33D", "c2A1A00": "#2A1A00", "cFBF1DF": "#FBF1DF", "c8A5A12": "#8A5A12", "cB7791F": "#B7791F", "cFDF6EA": "#FDF6EA", "cFBEFD9": "#FBEFD9", "c5C3D08": "#5C3D08", "c5C4A2A": "#5C4A2A", "cFDECEA": "#FDECEA", "cB42318": "#B42318", "cEAF4EE": "#EAF4EE", "c24653F": "#24653F", "c2E7D4F": "#2E7D4F", "cF3F8F8": "#F3F8F8", "cFBFAF7": "#FBFAF7", "c000000": "#000000", "cFDF3E2": "#FDF3E2", "c55524C": "#55524C"};
+    const ios = (this.props.platform ?? 'ios') !== 'android';
+    const n = parseInt(this.props.step ?? '1', 10) || 1;
+    const days = [];
+    for (let i = 0; i < 3; i++) days.push({ label: '', bg: 'transparent', color: k.c1F1D1A, weight: 400 });
+    for (let d = 1; d <= 31; d++) {
+      const sel = d === 18;
+      days.push({ label: String(d), bg: sel ? k.c0F5C63 : 'transparent', color: sel ? k.cFFFFFF : (d > 18 ? k.cA8A196 : k.c1F1D1A), weight: sel ? 700 : 400 });
+    }
+    return { notWeb: !__web, rootW: __web ? '100%' : '390px', rootH: __web ? 'auto' : '844px', padB: __web ? '24px' : '120px', k: k, darkStr: __dark ? 'true' : 'false',
+      ios: ios,
+      android: !ios,
+      s1: n === 1, s2: n === 2, s3: n === 3, s4: n === 4, s5: n === 5, s6: n === 6, s7: n === 7, s8: n === 8, s9: n === 9,
+      showHeader: n >= 2 && n <= 8,
+      stepLabel: 'Step ' + Math.max(1, n - 1) + ' of 7',
+      progressW: Math.round(((n - 1) / 7) * 100) + '%',
+      btnR: ios ? '14px' : '999px',
+      cardR: ios ? '14px' : '16px',
+      fieldR: ios ? '12px' : '4px',
+      titleW: ios ? 700 : 600,
+      promptNote: ios ? 'Next, iOS will ask you to allow notifications.' : 'Next, Android will ask you to allow notifications.',
+      days: days
+    };
+  }
+}
+</script>
+</body>
+</html>

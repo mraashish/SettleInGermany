@@ -1,0 +1,88 @@
+{
+  "expo": {
+    "name": "Settle in Germany",
+    "slug": "settle-in-germany",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/images/icon.png",
+    "scheme": "settleingermany",
+    "userInterfaceStyle": "automatic",
+    "ios": {
+      "icon": "./assets/expo.icon",
+      "bundleIdentifier": "app.settleingermany",
+      "supportsTablet": true,
+      "usesAppleSignIn": true,
+      "infoPlist": {
+        "NSCameraUsageDescription": "We use the camera to scan letters you want explained.",
+        "NSUserTrackingUsageDescription": "We only show personalised ads if you allow it. You can change this any time in Me › Privacy.",
+        "ITSAppUsesNonExemptEncryption": false
+      }
+    },
+    "android": {
+      "package": "app.settleingermany",
+      "adaptiveIcon": {
+        "backgroundColor": "#0F5C63",
+        "foregroundImage": "./assets/images/android-icon-foreground.png",
+        "backgroundImage": "./assets/images/android-icon-background.png",
+        "monochromeImage": "./assets/images/android-icon-monochrome.png"
+      },
+      "permissions": ["CAMERA", "POST_NOTIFICATIONS", "SCHEDULE_EXACT_ALARM"],
+      "predictiveBackGestureEnabled": false
+    },
+    "web": {
+      "output": "static",
+      "bundler": "metro",
+      "favicon": "./assets/images/favicon.png",
+      "name": "Settle in Germany",
+      "shortName": "Settle in DE",
+      "lang": "en",
+      "themeColor": "#0F5C63",
+      "backgroundColor": "#F6F4F0"
+    },
+    "plugins": [
+      "expo-router",
+      [
+        "expo-splash-screen",
+        {
+          "backgroundColor": "#F6F4F0",
+          "image": "./assets/images/splash-icon.png",
+          "imageWidth": 76,
+          "dark": { "backgroundColor": "#121614" }
+        }
+      ],
+      "expo-font",
+      "expo-localization",
+      "expo-sqlite",
+      "expo-apple-authentication",
+      [
+        "expo-notifications",
+        { "color": "#0F5C63" }
+      ],
+      [
+        "expo-audio",
+        { "microphonePermission": "We use the microphone for conversation practice." }
+      ],
+      [
+        "react-native-google-mobile-ads",
+        {
+          "androidAppId": "ca-app-pub-3940256099942544~3347511713",
+          "iosAppId": "ca-app-pub-3940256099942544~1458002511",
+          "delayAppMeasurementInit": true,
+          "userTrackingUsageDescription": "We only show personalised ads if you allow it."
+        }
+      ],
+      [
+        "react-native-document-scanner-plugin",
+        { "cameraPermission": "We use the camera to scan letters you want explained." }
+      ]
+    ],
+    "experiments": {
+      "typedRoutes": true,
+      "reactCompiler": true
+    },
+    "extra": {
+      "router": {},
+      "eas": { "projectId": "TODO-set-by-eas-init" }
+    }
+  }
+}

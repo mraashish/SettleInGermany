@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Home screen</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Noto+Sans+Devanagari:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<style>body{margin:0}</style>
+</helmet>
+<div style="width: 390px; height: 1300px; position: relative; overflow: hidden; background: {{ t.bg }}; color: {{ t.text }}; font-family: Inter, 'Noto Sans Devanagari', system-ui, sans-serif">
+  <div style="display: flex; flex-direction: column; gap: 16px; padding: 0 16px 120px">
+
+    <sc-if value="{{ ios }}" hint-placeholder-val="{{ true }}">
+      <div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 12px; padding-top: 20px">
+        <div style="display: flex; flex-direction: column; gap: 2px">
+          <span style="font-size: 13px; font-weight: 600; color: {{ t.muted }}; text-transform: uppercase; letter-spacing: 0.04em">Sunday, 1 November</span>
+          <h1 style="margin: 0; font-size: 32px; line-height: 38px; font-weight: 700; letter-spacing: -0.02em">Namaste, Sujan</h1>
+        </div>
+        <div style="display: flex; gap: 4px">
+          <button aria-label="Search guides, tools and German words" style="width: 44px; height: 44px; border-radius: 999px; border: none; background: {{ t.surface2 }}; color: {{ t.primary }}; display: flex; align-items: center; justify-content: center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg></button>
+          <button aria-label="Rule-change alerts, 1 new" style="width: 44px; height: 44px; border-radius: 999px; border: none; background: {{ t.surface2 }}; color: {{ t.primary }}; display: flex; align-items: center; justify-content: center; position: relative"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9M10.3 21a1.9 1.9 0 0 0 3.4 0"></path></svg><span style="position: absolute; top: 9px; right: 10px; width: 8px; height: 8px; border-radius: 999px; background: {{ t.danger }}"></span></button>
+        </div>
+      </div>
+    </sc-if>
+    <sc-if value="{{ android }}" hint-placeholder-val="{{ false }}">
+      <div style="height: 64px; display: flex; align-items: center; justify-content: space-between; margin: 0 -12px 0 0">
+        <h1 style="margin: 0; font-size: 22px; line-height: 28px; font-weight: 600">Namaste, Sujan</h1>
+        <div style="display: flex">
+          <button aria-label="Search guides, tools and German words" style="width: 48px; height: 48px; border-radius: 999px; border: none; background: transparent; color: {{ t.text }}; display: flex; align-items: center; justify-content: center"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg></button>
+          <button aria-label="Rule-change alerts, 1 new" style="width: 48px; height: 48px; border-radius: 999px; border: none; background: transparent; color: {{ t.text }}; display: flex; align-items: center; justify-content: center; position: relative"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9M10.3 21a1.9 1.9 0 0 0 3.4 0"></path></svg><span style="position: absolute; top: 11px; right: 12px; width: 8px; height: 8px; border-radius: 999px; background: {{ t.danger }}"></span></button>
+        </div>
+      </div>
+    </sc-if>
+
+    <div role="status" style="display: flex; gap: 12px; align-items: flex-start; background: {{ t.infoBg }}; border-radius: {{ r }}; padding: 12px 8px 12px 14px">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="{{ t.primary }}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none; margin-top: 2px"><circle cx="12" cy="12" r="9"></circle><path d="M12 16v-4M12 8h.01"></path></svg>
+      <div style="display: flex; flex-direction: column; gap: 4px; flex: 1; font-size: 14px; line-height: 20px">
+        <span><strong>Rule change · [date]</strong> — [One-line summary of a rule change that affects students from Nepal.]</span>
+        <a href="A-Guide.dc.html" style="color: {{ t.primary }}; font-weight: 600">See what changes</a>
+      </div>
+      <button aria-label="Dismiss alert" style="width: 44px; height: 44px; margin: -10px -2px 0 0; border: none; background: transparent; color: {{ t.muted }}; display: flex; align-items: center; justify-content: center; flex: none"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"></path></svg></button>
+    </div>
+
+    <a href="{{ roadmapHref }}" style="text-decoration: none; background: {{ t.hero }}; color: {{ t.heroText }}; border-radius: {{ rLg }}; padding: 16px; display: flex; align-items: center; gap: 16px">
+      <svg width="68" height="68" viewBox="0 0 68 68" role="img" aria-label="4 of 9 steps done"><circle cx="34" cy="34" r="28" fill="none" stroke="{{ t.heroTrack }}" stroke-width="7"></circle><circle cx="34" cy="34" r="28" fill="none" stroke="{{ t.accent }}" stroke-width="7" stroke-linecap="round" stroke-dasharray="78.2 175.9" transform="rotate(-90 34 34)"></circle><text x="34" y="39" text-anchor="middle" font-family="Inter, sans-serif" font-size="16" font-weight="700" fill="{{ t.heroText }}">4/9</text></svg>
+      <span style="display: flex; flex-direction: column; gap: 4px; flex: 1">
+        <span style="font-size: 12px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: {{ t.heroSub }}">Stage 2 of 4 · Leipzig</span>
+        <span style="font-size: 19px; font-weight: 700; line-height: 24px">First 30 days</span>
+        <span style="font-size: 14px; color: {{ t.heroSub }}">4 of 9 done · about 6 hours left</span>
+      </span>
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"></path></svg>
+    </a>
+
+    <section style="background: {{ t.surface }}; border: 1px solid {{ t.border }}; border-radius: {{ rLg }}; padding: 16px; display: flex; flex-direction: column">
+      <div style="display: flex; align-items: center; justify-content: space-between; padding-bottom: 8px">
+        <h2 style="margin: 0; font-size: 17px; font-weight: 700">Your next 3 steps</h2>
+        <a href="{{ roadmapHref }}" style="font-size: 14px; font-weight: 600; color: {{ t.primary }}; text-decoration: none; min-height: 44px; display: flex; align-items: center">See all 9</a>
+      </div>
+
+      <div style="display: flex; gap: 12px; padding: 12px 0; border-top: 1px solid {{ t.divider }}">
+        <span style="width: 24px; height: 24px; border-radius: 7px; border: 2px solid {{ t.checkbox }}; flex: none; margin-top: 1px; box-sizing: border-box"></span>
+        <div style="display: flex; flex-direction: column; gap: 6px; flex: 1">
+          <span style="font-size: 16px; font-weight: 600; line-height: 21px">Register your address</span>
+          <span style="display: flex; align-items: center; gap: 6px; font-size: 13px"><span style="font-size: 10px; font-weight: 700; border: 1px solid {{ t.primary }}; color: {{ t.primary }}; border-radius: 4px; padding: 0 4px; line-height: 15px">DE</span><span style="font-weight: 500; color: {{ t.text2 }}">Anmeldung</span></span>
+          <span style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap">
+            <span style="display: inline-flex; align-items: center; gap: 4px; background: {{ t.dangerBg }}; color: {{ t.danger }}; border-radius: 999px; padding: 3px 10px; font-size: 13px; font-weight: 700"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.3 3.9L1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"></path><path d="M12 9v4M12 17h.01"></path></svg>Urgent · 5 days</span>
+            <a href="A-Guide.dc.html" style="font-size: 14px; font-weight: 600; color: {{ t.primary }}">How to</a>
+          </span>
+        </div>
+      </div>
+      <div style="display: flex; gap: 12px; padding: 12px 0; border-top: 1px solid {{ t.divider }}">
+        <span style="width: 24px; height: 24px; border-radius: 7px; border: 2px solid {{ t.checkbox }}; flex: none; margin-top: 1px; box-sizing: border-box"></span>
+        <div style="display: flex; flex-direction: column; gap: 6px; flex: 1">
+          <span style="font-size: 16px; font-weight: 600; line-height: 21px">Book residence-permit appointment</span>
+          <span style="display: flex; align-items: center; gap: 6px; font-size: 13px"><span style="font-size: 10px; font-weight: 700; border: 1px solid {{ t.primary }}; color: {{ t.primary }}; border-radius: 4px; padding: 0 4px; line-height: 15px">DE</span><span style="font-weight: 500; color: {{ t.text2 }}">Aufenthaltstitel</span></span>
+          <span style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap">
+            <span style="display: inline-flex; align-items: center; gap: 4px; background: {{ t.warnBg }}; color: {{ t.warn }}; border-radius: 999px; padding: 3px 10px; font-size: 13px; font-weight: 700"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg>Soon · 21 days</span>
+            <a href="A-Guide.dc.html" style="font-size: 14px; font-weight: 600; color: {{ t.primary }}">How to</a>
+          </span>
+        </div>
+      </div>
+      <div style="display: flex; gap: 12px; padding: 12px 0 0; border-top: 1px solid {{ t.divider }}">
+        <span style="width: 24px; height: 24px; border-radius: 7px; border: 2px solid {{ t.checkbox }}; flex: none; margin-top: 1px; box-sizing: border-box"></span>
+        <div style="display: flex; flex-direction: column; gap: 6px; flex: 1">
+          <span style="font-size: 16px; font-weight: 600; line-height: 21px">Get your tax ID</span>
+          <span style="display: flex; align-items: center; gap: 6px; font-size: 13px"><span style="font-size: 10px; font-weight: 700; border: 1px solid {{ t.primary }}; color: {{ t.primary }}; border-radius: 4px; padding: 0 4px; line-height: 15px">DE</span><span style="font-weight: 500; color: {{ t.text2 }}">Steuer-ID</span></span>
+          <span style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap">
+            <span style="display: inline-flex; align-items: center; gap: 4px; background: {{ t.neutralBg }}; color: {{ t.neutral }}; border-radius: 999px; padding: 3px 10px; font-size: 13px; font-weight: 700"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="M22 6l-10 7L2 6"></path></svg>Arrives by post</span>
+            <a href="A-Guide.dc.html" style="font-size: 14px; font-weight: 600; color: {{ t.primary }}">How to</a>
+          </span>
+        </div>
+      </div>
+    </section>
+
+    <section style="display: flex; flex-direction: column; gap: 8px">
+      <h2 style="margin: 0; font-size: 17px; font-weight: 700">Upcoming deadlines</h2>
+      <div style="background: {{ t.surface }}; border: 1px solid {{ t.border }}; border-radius: {{ rLg }}; padding: 0 16px">
+        <div style="min-height: 56px; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid {{ t.divider }}"><span style="flex: 1; display: flex; flex-direction: column"><span style="font-size: 15px; font-weight: 600">Address registration</span><span style="font-size: 13px; color: {{ t.muted }}">6 Nov 2026</span></span><span style="display: inline-flex; align-items: center; gap: 4px; background: {{ t.dangerBg }}; color: {{ t.danger }}; border-radius: 999px; padding: 3px 10px; font-size: 13px; font-weight: 700; white-space: nowrap"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.3 3.9L1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"></path><path d="M12 9v4M12 17h.01"></path></svg>5 days</span></div>
+        <div style="min-height: 56px; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid {{ t.divider }}"><span style="flex: 1; display: flex; flex-direction: column"><span style="font-size: 15px; font-weight: 600">Residence-permit appointment</span><span style="font-size: 13px; color: {{ t.muted }}">22 Nov 2026</span></span><span style="display: inline-flex; align-items: center; gap: 4px; background: {{ t.warnBg }}; color: {{ t.warn }}; border-radius: 999px; padding: 3px 10px; font-size: 13px; font-weight: 700; white-space: nowrap"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg>21 days</span></div>
+        <div style="min-height: 56px; display: flex; align-items: center; gap: 12px"><span style="flex: 1; display: flex; flex-direction: column"><span style="font-size: 15px; font-weight: 600">Semester fee</span><span style="font-size: 13px; color: {{ t.muted }}">18 Dec 2026</span></span><span style="display: inline-flex; align-items: center; gap: 4px; background: {{ t.neutralBg }}; color: {{ t.neutral }}; border-radius: 999px; padding: 3px 10px; font-size: 13px; font-weight: 700; white-space: nowrap"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"></rect><path d="M16 2v4M8 2v4M3 10h18"></path></svg>47 days</span></div>
+      </div>
+    </section>
+
+    <a href="{{ captureHref }}" style="text-decoration: none; color: {{ t.text }}; background: {{ t.surface }}; border: 1px solid {{ t.border }}; border-radius: {{ rLg }}; padding: 14px 16px; display: flex; align-items: center; gap: 14px">
+      <span style="width: 44px; height: 44px; border-radius: 12px; background: {{ t.tint }}; color: {{ t.primary }}; display: flex; align-items: center; justify-content: center; flex: none"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8a2 2 0 0 1 2-2h2l2-3h6l2 3h2a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><circle cx="12" cy="13" r="4"></circle></svg></span>
+      <span style="display: flex; flex-direction: column; gap: 2px; flex: 1"><span style="font-size: 15px; font-weight: 600">Got a letter you don’t understand?</span><span style="font-size: 13px; color: {{ t.muted }}">Scan it · 3 free scans left this month</span></span>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"></path></svg>
+    </a>
+
+    <section style="display: flex; flex-direction: column; gap: 8px">
+      <h2 style="margin: 0; font-size: 17px; font-weight: 700">Look at other stages</h2>
+      <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px">
+        <a href="{{ roadmapHref }}" style="min-height: 56px; border-radius: {{ r }}; border: 1px solid {{ t.border }}; background: {{ t.surface }}; color: {{ t.text }}; text-decoration: none; display: flex; flex-direction: column; justify-content: center; padding: 8px 12px; font-size: 14px; font-weight: 600"><span>Before arrival</span><span style="font-size: 12px; font-weight: 600; color: {{ t.success }}">✓ Done</span></a>
+        <a href="{{ roadmapHref }}" aria-current="true" style="min-height: 56px; border-radius: {{ r }}; border: 2px solid {{ t.primary }}; background: {{ t.tint }}; color: {{ t.text }}; text-decoration: none; display: flex; flex-direction: column; justify-content: center; padding: 7px 11px; font-size: 14px; font-weight: 700"><span>First 30 days</span><span style="font-size: 12px; font-weight: 600; color: {{ t.primary }}">You are here</span></a>
+        <a href="{{ roadmapHref }}" style="min-height: 56px; border-radius: {{ r }}; border: 1px solid {{ t.border }}; background: {{ t.surface }}; color: {{ t.text }}; text-decoration: none; display: flex; flex-direction: column; justify-content: center; padding: 8px 12px; font-size: 14px; font-weight: 600"><span>Living in Germany</span><span style="font-size: 12px; font-weight: 500; color: {{ t.muted }}">14 steps</span></a>
+        <a href="{{ roadmapHref }}" style="min-height: 56px; border-radius: {{ r }}; border: 1px solid {{ t.border }}; background: {{ t.surface }}; color: {{ t.text }}; text-decoration: none; display: flex; flex-direction: column; justify-content: center; padding: 8px 12px; font-size: 14px; font-weight: 600"><span>Career and staying on</span><span style="font-size: 12px; font-weight: 500; color: {{ t.muted }}">11 steps</span></a>
+      </div>
+    </section>
+
+    <aside aria-label="Advertisement" style="height: 104px; box-sizing: border-box; border: 1px solid {{ t.border }}; border-radius: {{ rLg }}; background: {{ t.surface }}; display: flex; align-items: center; gap: 12px; padding: 12px">
+      <span style="width: 72px; height: 72px; border-radius: 10px; background: {{ t.adImg }}; flex: none"></span>
+      <span style="display: flex; flex-direction: column; gap: 4px; flex: 1; font-size: 13px; color: {{ t.muted }}"><span style="align-self: flex-start; font-size: 11px; font-weight: 700; border: 1px solid {{ t.border2 }}; border-radius: 4px; padding: 0 5px">Ad</span><span style="font-size: 15px; font-weight: 600; color: {{ t.text }}">[Native ad title]</span><span>[Advertiser · one line]</span></span>
+    </aside>
+  </div>
+
+  <div style="position: absolute; left: 0; right: 0; bottom: 0">
+    <dc-import name="TabBar" platform="{{ platform }}" active="home" dark="{{ darkStr }}" hint-size="390px,84px"></dc-import>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"platform":{"editor":"enum","options":["ios","android"],"default":"ios"},"dark":{"editor":"boolean","default":false},"$preview":{"width":390,"height":1300}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const platform = (this.props.platform ?? 'ios') === 'android' ? 'android' : 'ios';
+    const ios = platform === 'ios';
+    const dark = this.props.dark === true || this.props.dark === 'true';
+    const t = dark ? {
+      bg: '#121614', surface: '#1A2221', surface2: '#1A2221', border: '#2C3634', border2: '#4A5755', divider: '#26302E',
+      text: '#ECEAE5', text2: '#C9CFCD', muted: '#9AA5A3', checkbox: '#6F7B79',
+      primary: '#5CC8C2', tint: '#173332', accent: '#F2B85C', infoBg: '#173332',
+      hero: '#173332', heroText: '#ECEAE5', heroSub: '#B5D9D6', heroTrack: '#2C4746',
+      danger: '#F0A49B', dangerBg: '#3A1F1C', warn: '#E0C27A', warnBg: '#33291A',
+      neutral: '#C9CFCD', neutralBg: '#252D2C', success: '#7FD3A0', adImg: '#252D2C'
+    } : {
+      bg: '#F6F4F0', surface: '#FFFFFF', surface2: '#FFFFFF', border: '#E4E0D8', border2: '#CFC9BE', divider: '#EFECE6',
+      text: '#1F1D1A', text2: '#3B3833', muted: '#6B655C', checkbox: '#A8A196',
+      primary: '#0F5C63', tint: '#E6F0F0', accent: '#E8A33D', infoBg: '#E6F0F0',
+      hero: '#0F5C63', heroText: '#FFFFFF', heroSub: '#D3E6E6', heroTrack: 'rgba(255,255,255,0.22)',
+      danger: '#B42318', dangerBg: '#FDECEA', warn: '#8A5A12', warnBg: '#FBF1DF',
+      neutral: '#4A453E', neutralBg: '#EFECE6', success: '#24653F', adImg: '#EFECE6'
+    };
+    return {
+      t: t, ios: ios, android: !ios, platform: platform, darkStr: dark ? 'true' : 'false',
+      r: ios ? '12px' : '12px', rLg: ios ? '16px' : '20px',
+      roadmapHref: ios ? 'ios-roadmap.dc.html' : 'and-roadmap.dc.html',
+      captureHref: ios ? 'ios-capture.dc.html' : 'and-capture.dc.html'
+    };
+  }
+}
+</script>
+</body>
+</html>

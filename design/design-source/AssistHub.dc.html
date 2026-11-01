@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Assist hub screen</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>body{margin:0}</style>
+</helmet>
+<div style="width: {{ rootW }}; height: {{ rootH }}; position: relative; overflow: hidden; background: {{ k.cF6F4F0 }}; color: {{ k.c1F1D1A }}; font-family: Inter, system-ui, sans-serif">
+  <div style="display: flex; flex-direction: column; gap: 16px; padding: 0 16px {{ padB }}">
+
+    <sc-if value="{{ ios }}" hint-placeholder-val="{{ true }}">
+      <div style="display: flex; align-items: flex-end; justify-content: space-between; padding-top: 20px">
+        <h1 style="margin: 0; font-size: 32px; line-height: 38px; font-weight: 700; letter-spacing: -0.02em">Assist</h1>
+        <span style="font-size: 11px; font-weight: 700; background: {{ k.cE8A33D }}; color: {{ k.c2A1A00 }}; border-radius: 4px; padding: 2px 6px; margin-bottom: 8px">AI</span>
+      </div>
+    </sc-if>
+    <sc-if value="{{ android }}" hint-placeholder-val="{{ false }}">
+      <div style="height: 64px; display: flex; align-items: center; gap: 8px">
+        <h1 style="margin: 0; font-size: 22px; font-weight: 600">Assist</h1>
+        <span style="font-size: 11px; font-weight: 700; background: {{ k.cE8A33D }}; color: {{ k.c2A1A00 }}; border-radius: 4px; padding: 2px 6px">AI</span>
+      </div>
+    </sc-if>
+
+    <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; background: {{ k.cFFFFFF }}; border: 1px solid {{ k.cE4E0D8 }}; border-radius: 12px; padding: 10px 14px">
+      <span style="display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600">
+        <span role="img" aria-label="3 of 3 free scans left" style="display: flex; gap: 3px"><span style="width: 8px; height: 18px; border-radius: 3px; background: {{ k.c0F5C63 }}"></span><span style="width: 8px; height: 18px; border-radius: 3px; background: {{ k.c0F5C63 }}"></span><span style="width: 8px; height: 18px; border-radius: 3px; background: {{ k.c0F5C63 }}"></span></span>
+        3 free scans left this month
+      </span>
+      <a href="{{ paywallHref }}" style="font-size: 14px; font-weight: 600; color: {{ k.c0F5C63 }}; min-height: 44px; display: flex; align-items: center">See Premium</a>
+    </div>
+
+    <a href="{{ captureHref }}" style="text-decoration: none; background: {{ k.c0F5C63 }}; color: {{ k.cFFFFFF }}; border-radius: {{ rLg }}; padding: 20px; display: flex; flex-direction: column; gap: 14px">
+      <span style="width: 56px; height: 56px; border-radius: 16px; background: rgba(255,255,255,0.14); display: flex; align-items: center; justify-content: center"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8a2 2 0 0 1 2-2h2l2-3h6l2 3h2a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><circle cx="12" cy="13" r="4"></circle></svg></span>
+      <span style="display: flex; flex-direction: column; gap: 4px">
+        <span style="font-size: 22px; font-weight: 700; line-height: 28px">Scan a letter</span>
+        <span style="font-size: 15px; line-height: 22px; color: {{ k.cD3E6E6 }}">Who sent it, what they want, your deadline and what to do — in plain words.</span>
+      </span>
+      <span style="align-self: flex-start; height: 44px; padding: 0 18px; border-radius: {{ btnR }}; background: {{ k.cFFFFFF }}; color: {{ k.c0F5C63 }}; font-size: 15px; font-weight: 700; display: flex; align-items: center; gap: 6px">Start scan<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></span>
+    </a>
+
+    <section style="display: flex; flex-direction: column; gap: 10px">
+      <h2 style="margin: 0; font-size: 17px; font-weight: 700">More help</h2>
+      <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px">
+        <a href="{{ paywallHref }}" style="text-decoration: none; color: {{ k.c1F1D1A }}; background: {{ k.cFFFFFF }}; border: 1px solid {{ k.cE4E0D8 }}; border-radius: {{ rLg }}; padding: 14px; min-height: 120px; box-sizing: border-box; display: flex; flex-direction: column; gap: 8px; position: relative">
+          <span style="position: absolute; top: 10px; right: 10px; display: inline-flex; align-items: center; gap: 3px; background: {{ k.cE8A33D }}; color: {{ k.c2A1A00 }}; border-radius: 999px; padding: 2px 7px; font-size: 11px; font-weight: 700"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg>Premium</span>
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="{{ k.c0F5C63 }}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"></path></svg>
+          <span style="font-size: 15px; font-weight: 700">Write a reply</span><span style="font-size: 13px; color: {{ k.c6B655C }}; line-height: 18px">A formal German letter or email</span>
+        </a>
+        <a href="{{ paywallHref }}" style="text-decoration: none; color: {{ k.c1F1D1A }}; background: {{ k.cFFFFFF }}; border: 1px solid {{ k.cE4E0D8 }}; border-radius: {{ rLg }}; padding: 14px; min-height: 120px; box-sizing: border-box; display: flex; flex-direction: column; gap: 8px; position: relative">
+          <span style="position: absolute; top: 10px; right: 10px; display: inline-flex; align-items: center; gap: 3px; background: {{ k.cE8A33D }}; color: {{ k.c2A1A00 }}; border-radius: 999px; padding: 2px 7px; font-size: 11px; font-weight: 700"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg>Premium</span>
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="{{ k.c0F5C63 }}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+          <span style="font-size: 15px; font-weight: 700">Ask a question</span><span style="font-size: 13px; color: {{ k.c6B655C }}; line-height: 18px">Answers from our guides</span>
+        </a>
+        <a href="{{ paywallHref }}" style="text-decoration: none; color: {{ k.c1F1D1A }}; background: {{ k.cFFFFFF }}; border: 1px solid {{ k.cE4E0D8 }}; border-radius: {{ rLg }}; padding: 14px; min-height: 120px; box-sizing: border-box; display: flex; flex-direction: column; gap: 8px; position: relative">
+          <span style="position: absolute; top: 10px; right: 10px; display: inline-flex; align-items: center; gap: 3px; background: {{ k.cE8A33D }}; color: {{ k.c2A1A00 }}; border-radius: 999px; padding: 2px 7px; font-size: 11px; font-weight: 700"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg>Premium</span>
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="{{ k.c0F5C63 }}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><path d="M12 8v4M12 16h.01"></path></svg>
+          <span style="font-size: 15px; font-weight: 700">Housing scam checker</span><span style="font-size: 13px; color: {{ k.c6B655C }}; line-height: 18px">Paste a listing or message</span>
+        </a>
+        <a href="{{ paywallHref }}" style="text-decoration: none; color: {{ k.c1F1D1A }}; background: {{ k.cFFFFFF }}; border: 1px solid {{ k.cE4E0D8 }}; border-radius: {{ rLg }}; padding: 14px; min-height: 120px; box-sizing: border-box; display: flex; flex-direction: column; gap: 8px; position: relative">
+          <span style="position: absolute; top: 10px; right: 10px; display: inline-flex; align-items: center; gap: 3px; background: {{ k.cE8A33D }}; color: {{ k.c2A1A00 }}; border-radius: 999px; padding: 2px 7px; font-size: 11px; font-weight: 700"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg>Premium</span>
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="{{ k.c0F5C63 }}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><path d="M14 2v6h6M8 13h8M8 17h5"></path></svg>
+          <span style="font-size: 15px; font-weight: 700">Rental contract explainer</span><span style="font-size: 13px; color: {{ k.c6B655C }}; line-height: 18px">Clause by clause</span>
+        </a>
+        <a href="{{ paywallHref }}" style="text-decoration: none; color: {{ k.c1F1D1A }}; background: {{ k.cFFFFFF }}; border: 1px solid {{ k.cE4E0D8 }}; border-radius: {{ rLg }}; padding: 14px; min-height: 120px; box-sizing: border-box; display: flex; flex-direction: column; gap: 8px; position: relative">
+          <span style="position: absolute; top: 10px; right: 10px; display: inline-flex; align-items: center; gap: 3px; background: {{ k.cE8A33D }}; color: {{ k.c2A1A00 }}; border-radius: 999px; padding: 2px 7px; font-size: 11px; font-weight: 700"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg>Premium</span>
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="{{ k.c0F5C63 }}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2"></rect><path d="M8 8h8M8 12h8M8 16h4"></path></svg>
+          <span style="font-size: 15px; font-weight: 700">Form assistant</span><span style="font-size: 13px; color: {{ k.c6B655C }}; line-height: 18px">Fill official forms field by field</span>
+        </a>
+        <a href="{{ paywallHref }}" style="text-decoration: none; color: {{ k.c1F1D1A }}; background: {{ k.cFFFFFF }}; border: 1px solid {{ k.cE4E0D8 }}; border-radius: {{ rLg }}; padding: 14px; min-height: 120px; box-sizing: border-box; display: flex; flex-direction: column; gap: 8px; position: relative">
+          <span style="position: absolute; top: 10px; right: 10px; display: inline-flex; align-items: center; gap: 3px; background: {{ k.cE8A33D }}; color: {{ k.c2A1A00 }}; border-radius: 999px; padding: 2px 7px; font-size: 11px; font-weight: 700"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg>Premium</span>
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="{{ k.c0F5C63 }}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="7" width="20" height="14" rx="2"></rect><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"></path></svg>
+          <span style="font-size: 15px; font-weight: 700">Job application kit</span><span style="font-size: 13px; color: {{ k.c6B655C }}; line-height: 18px">CV, cover letter, interview</span>
+        </a>
+      </div>
+      <a href="{{ paywallHref }}" style="text-decoration: none; color: {{ k.c1F1D1A }}; background: {{ k.cFFFFFF }}; border: 1px solid {{ k.cE4E0D8 }}; border-radius: {{ rLg }}; padding: 14px; display: flex; align-items: center; gap: 12px">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="{{ k.c0F5C63 }}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2M12 19v3"></path></svg>
+        <span style="display: flex; flex-direction: column; gap: 2px; flex: 1"><span style="font-size: 15px; font-weight: 700">Conversation practice</span><span style="font-size: 13px; color: {{ k.c6B655C }}">Role-play the immigration office or a flat viewing</span></span>
+        <span style="display: inline-flex; align-items: center; gap: 3px; background: {{ k.cE8A33D }}; color: {{ k.c2A1A00 }}; border-radius: 999px; padding: 2px 7px; font-size: 11px; font-weight: 700"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg>Premium</span>
+      </a>
+    </section>
+
+    <section style="display: flex; flex-direction: column; gap: 8px">
+      <h2 style="margin: 0; font-size: 17px; font-weight: 700">Recent</h2>
+      <div style="border: 1px dashed {{ k.cCFC9BE }}; border-radius: {{ rLg }}; padding: 16px; font-size: 14px; line-height: 20px; color: {{ k.c6B655C }}">Letters and replies you choose to save show up here. We don’t keep anything unless you ask.</div>
+    </section>
+
+    <p style="margin: 0; font-size: 13px; line-height: 19px; color: {{ k.c6B655C }}">AI answers are general information, not legal advice. <a href="A-Guide.dc.html" style="color: {{ k.c0F5C63 }}">Where to get help</a></p>
+  </div>
+
+  <sc-if value="{{ notWeb }}" hint-placeholder-val="{{ true }}"><div style="position: absolute; left: 0; right: 0; bottom: 0">
+    <dc-import name="TabBar" platform="{{ platform }}" active="assist" dark="{{ darkStr }}" hint-size="390px,84px"></dc-import>
+  </div></sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"dark":{"editor":"boolean","default":false},"platform":{"editor":"enum","options":["ios","android","web"],"default":"ios"},"$preview":{"width":390,"height":1100}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const __dark = this.props.dark === true || this.props.dark === 'true';
+    const __web = this.props.platform === 'web';
+    const k = __dark ? {"cF6F4F0": "#121614", "cFFFFFF": "#1A2221", "c1F1D1A": "#ECEAE5", "c3B3833": "#C9CFCD", "c4A453E": "#C2C8C6", "c6B655C": "#9AA5A3", "cE4E0D8": "#2C3634", "cEFECE6": "#252D2C", "cCFC9BE": "#4A5755", "cA8A196": "#6F7B79", "cE9E5DD": "#252D2C", "cEDE9E1": "#252D2C", "c0F5C63": "#5CC8C2", "c0A4449": "#8EDDD8", "cE6F0F0": "#173332", "cCFE3E3": "#1F4442", "cD3E6E6": "#1F3D3B", "cE8A33D": "#F2B85C", "c2A1A00": "#2A1A00", "cFBF1DF": "#33291A", "c8A5A12": "#E0C27A", "cB7791F": "#C9A15A", "cFDF6EA": "#2A2418", "cFBEFD9": "#33291A", "c5C3D08": "#E0C27A", "c5C4A2A": "#D8C8A8", "cFDECEA": "#3A1F1C", "cB42318": "#F0A49B", "cEAF4EE": "#1D3327", "c24653F": "#7FD3A0", "c2E7D4F": "#7FD3A0", "cF3F8F8": "#16201F", "cFBFAF7": "#161C1B", "c000000": "#F2F2F2", "cFDF3E2": "#33291A", "c55524C": "#000000"} : {"cF6F4F0": "#F6F4F0", "cFFFFFF": "#FFFFFF", "c1F1D1A": "#1F1D1A", "c3B3833": "#3B3833", "c4A453E": "#4A453E", "c6B655C": "#6B655C", "cE4E0D8": "#E4E0D8", "cEFECE6": "#EFECE6", "cCFC9BE": "#CFC9BE", "cA8A196": "#A8A196", "cE9E5DD": "#E9E5DD", "cEDE9E1": "#EDE9E1", "c0F5C63": "#0F5C63", "c0A4449": "#0A4449", "cE6F0F0": "#E6F0F0", "cCFE3E3": "#CFE3E3", "cD3E6E6": "#D3E6E6", "cE8A33D": "#E8A33D", "c2A1A00": "#2A1A00", "cFBF1DF": "#FBF1DF", "c8A5A12": "#8A5A12", "cB7791F": "#B7791F", "cFDF6EA": "#FDF6EA", "cFBEFD9": "#FBEFD9", "c5C3D08": "#5C3D08", "c5C4A2A": "#5C4A2A", "cFDECEA": "#FDECEA", "cB42318": "#B42318", "cEAF4EE": "#EAF4EE", "c24653F": "#24653F", "c2E7D4F": "#2E7D4F", "cF3F8F8": "#F3F8F8", "cFBFAF7": "#FBFAF7", "c000000": "#000000", "cFDF3E2": "#FDF3E2", "c55524C": "#55524C"};
+    const platform = (this.props.platform ?? 'ios') === 'android' ? 'android' : 'ios';
+    const ios = platform === 'ios';
+    const p = ios ? 'ios-' : 'and-';
+    return { notWeb: !__web, rootW: __web ? '100%' : '390px', rootH: __web ? 'auto' : '1100px', padB: __web ? '24px' : '120px', k: k, darkStr: __dark ? 'true' : 'false',
+      ios: ios, android: !ios, platform: platform,
+      rLg: ios ? '16px' : '20px', btnR: ios ? '12px' : '999px',
+      captureHref: p + 'capture.dc.html', replyHref: p + 'reply.dc.html', paywallHref: p + 'paywall.dc.html'
+    };
+  }
+}
+</script>
+</body>
+</html>

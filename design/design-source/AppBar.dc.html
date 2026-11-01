@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>App bar</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>body{margin:0}</style>
+</helmet>
+<div style="width: 390px; background: {{ k.cF6F4F0 }}; color: {{ k.c1F1D1A }}; font-family: Inter, system-ui, sans-serif">
+  <sc-if value="{{ ios }}" hint-placeholder-val="{{ true }}">
+    <div style="padding: 0 8px; border-bottom: {{ iosLine }}">
+      <div style="height: 48px; display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); align-items: center">
+        <span style="display: flex">
+          <sc-if value="{{ hasBack }}" hint-placeholder-val="{{ true }}">
+            <a href="{{ href }}" style="display: flex; align-items: center; height: 44px; color: {{ k.c0F5C63 }}; text-decoration: none; font-size: 17px"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"></path></svg>{{ back }}</a>
+          </sc-if>
+        </span>
+        <span style="font-size: 17px; font-weight: 600; text-align: center">{{ smallTitle }}</span>
+        <span style="display: flex; justify-content: flex-end">
+          <sc-if value="{{ hasAction }}" hint-placeholder-val="{{ false }}">
+            <button aria-label="{{ actionLabel }}" style="width: 44px; height: 44px; border: none; background: transparent; color: {{ k.c0F5C63 }}; display: flex; align-items: center; justify-content: center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{ actionIcon }}"></path></svg></button>
+          </sc-if>
+        </span>
+      </div>
+      <sc-if value="{{ large }}" hint-placeholder-val="{{ true }}">
+        <h1 style="margin: 0; padding: 0 8px 10px; font-size: 32px; line-height: 38px; font-weight: 700; letter-spacing: -0.02em">{{ title }}</h1>
+      </sc-if>
+    </div>
+  </sc-if>
+  <sc-if value="{{ android }}" hint-placeholder-val="{{ false }}">
+    <div style="padding: 0 4px">
+      <div style="height: 64px; display: flex; align-items: center; gap: 4px">
+        <sc-if value="{{ hasBack }}" hint-placeholder-val="{{ true }}">
+          <a href="{{ href }}" aria-label="Back to {{ back }}" style="width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; color: {{ k.c1F1D1A }}"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"></path></svg></a>
+        </sc-if>
+        <span style="flex: 1; padding-left: {{ andPad }}; font-size: 22px; font-weight: 500">{{ smallTitle }}</span>
+        <sc-if value="{{ hasAction }}" hint-placeholder-val="{{ false }}">
+          <button aria-label="{{ actionLabel }}" style="width: 48px; height: 48px; border-radius: 999px; border: none; background: transparent; color: {{ k.c1F1D1A }}; display: flex; align-items: center; justify-content: center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{ actionIcon }}"></path></svg></button>
+        </sc-if>
+      </div>
+      <sc-if value="{{ large }}" hint-placeholder-val="{{ true }}">
+        <h1 style="margin: 0; padding: 0 12px 8px; font-size: 28px; line-height: 36px; font-weight: 500">{{ title }}</h1>
+      </sc-if>
+    </div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"dark":{"editor":"boolean","default":false},"platform":{"editor":"enum","options":["ios","android"],"default":"ios"},"title":{"editor":"text","default":"Title"},"back":{"editor":"text","default":"Back"},"href":{"editor":"text","default":"#"},"large":{"editor":"boolean","default":true},"action":{"editor":"enum","options":["none","share","more","add","search"],"default":"none"},"$preview":{"width":390,"height":96}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const __dark = this.props.dark === true || this.props.dark === 'true';
+    const k = __dark ? {"cF6F4F0": "#121614", "cFFFFFF": "#1A2221", "c1F1D1A": "#ECEAE5", "c3B3833": "#C9CFCD", "c4A453E": "#C2C8C6", "c6B655C": "#9AA5A3", "cE4E0D8": "#2C3634", "cEFECE6": "#252D2C", "cCFC9BE": "#4A5755", "cA8A196": "#6F7B79", "cE9E5DD": "#252D2C", "cEDE9E1": "#252D2C", "c0F5C63": "#5CC8C2", "c0A4449": "#8EDDD8", "cE6F0F0": "#173332", "cCFE3E3": "#1F4442", "cD3E6E6": "#1F3D3B", "cE8A33D": "#F2B85C", "c2A1A00": "#2A1A00", "cFBF1DF": "#33291A", "c8A5A12": "#E0C27A", "cB7791F": "#C9A15A", "cFDF6EA": "#2A2418", "cFBEFD9": "#33291A", "c5C3D08": "#E0C27A", "c5C4A2A": "#D8C8A8", "cFDECEA": "#3A1F1C", "cB42318": "#F0A49B", "cEAF4EE": "#1D3327", "c24653F": "#7FD3A0", "c2E7D4F": "#7FD3A0", "cF3F8F8": "#16201F", "cFBFAF7": "#161C1B", "c000000": "#F2F2F2", "cFDF3E2": "#33291A", "c55524C": "#000000", "c5E8C8F": "#7FB3B5"} : {"cF6F4F0": "#F6F4F0", "cFFFFFF": "#FFFFFF", "c1F1D1A": "#1F1D1A", "c3B3833": "#3B3833", "c4A453E": "#4A453E", "c6B655C": "#6B655C", "cE4E0D8": "#E4E0D8", "cEFECE6": "#EFECE6", "cCFC9BE": "#CFC9BE", "cA8A196": "#A8A196", "cE9E5DD": "#E9E5DD", "cEDE9E1": "#EDE9E1", "c0F5C63": "#0F5C63", "c0A4449": "#0A4449", "cE6F0F0": "#E6F0F0", "cCFE3E3": "#CFE3E3", "cD3E6E6": "#D3E6E6", "cE8A33D": "#E8A33D", "c2A1A00": "#2A1A00", "cFBF1DF": "#FBF1DF", "c8A5A12": "#8A5A12", "cB7791F": "#B7791F", "cFDF6EA": "#FDF6EA", "cFBEFD9": "#FBEFD9", "c5C3D08": "#5C3D08", "c5C4A2A": "#5C4A2A", "cFDECEA": "#FDECEA", "cB42318": "#B42318", "cEAF4EE": "#EAF4EE", "c24653F": "#24653F", "c2E7D4F": "#2E7D4F", "cF3F8F8": "#F3F8F8", "cFBFAF7": "#FBFAF7", "c000000": "#000000", "cFDF3E2": "#FDF3E2", "c55524C": "#55524C", "c5E8C8F": "#5E8C8F"};
+    const ios = (this.props.platform ?? 'ios') !== 'android';
+    const large = !(this.props.large === false || this.props.large === 'false');
+    const back = this.props.back ?? '';
+    const action = this.props.action ?? 'none';
+    const icons = {
+      share: 'M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8M16 6l-4-4-4 4M12 2v13',
+      more: 'M5 12h.01M12 12h.01M19 12h.01',
+      add: 'M12 5v14M5 12h14',
+      search: 'M11 4a7 7 0 1 1 0 14 7 7 0 0 1 0-14zM21 21l-4.3-4.3'
+    };
+    const labels = { share: 'Share', more: 'More options', add: 'Add', search: 'Search' };
+    const title = this.props.title ?? '';
+    return { k: k, darkStr: __dark ? 'true' : 'false',
+      ios: ios, android: !ios, large: large, title: title,
+      smallTitle: large ? '' : title,
+      back: back, hasBack: back !== '', href: this.props.href ?? '#',
+      hasAction: action !== 'none', actionIcon: icons[action] || '', actionLabel: labels[action] || '',
+      iosLine: large ? 'none' : '1px solid ' + k.cE4E0D8,
+      andPad: back !== '' ? '0' : '12px'
+    };
+  }
+}
+</script>
+</body>
+</html>

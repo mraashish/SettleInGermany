@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Phrasebook, safety and alerts</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Noto+Sans+Devanagari:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<style>body{margin:0}</style>
+</helmet>
+<div style="width: {{ rootW }}; height: {{ rootH }}; position: relative; overflow: hidden; background: {{ k.cF6F4F0 }}; color: {{ k.c1F1D1A }}; font-family: Inter, 'Noto Sans Devanagari', system-ui, sans-serif">
+  <sc-if value="{{ notWeb }}" hint-placeholder-val="{{ true }}"><dc-import name="AppBar" platform="{{ platform }}" title="{{ title }}" back="{{ back }}" href="#back" large="true" action="{{ action }}" dark="{{ darkStr }}" hint-size="390px,96px"></dc-import></sc-if>
+
+  <!-- Phrasebook -->
+  <sc-if value="{{ phrasebook }}" hint-placeholder-val="{{ true }}">
+    <div style="display: flex; flex-direction: column; gap: 14px; padding: 4px 16px {{ padB }}">
+      <div role="group" aria-label="Situations" style="display: flex; gap: 8px; flex-wrap: wrap">
+        <sc-for list="{{ situations }}" as="st" hint-placeholder-count="7">
+          <button aria-pressed="{{ st.pressed }}" style="min-height: 40px; padding: 0 14px; border-radius: {{ chipR }}; border: 1px solid {{ st.border }}; background: {{ st.bg }}; color: {{ st.color }}; font: 500 14px Inter, sans-serif">{{ st.label }}</button>
+        </sc-for>
+      </div>
+      <div style="display: flex; align-items: center; justify-content: space-between; font-size: 13px; color: {{ k.c6B655C }}"><span>Meaning shown in नेपाली · change in Me</span><span>12 phrases</span></div>
+      <sc-for list="{{ phrases }}" as="ph" hint-placeholder-count="4">
+        <article lang="de" style="background: {{ k.cFFFFFF }}; border: 1px solid {{ k.cE4E0D8 }}; border-radius: {{ r }}; padding: 14px 8px 14px 16px; display: flex; gap: 8px">
+          <div style="display: flex; flex-direction: column; gap: 6px; flex: 1; min-width: 0">
+            <span style="font-size: 17px; line-height: 24px; font-weight: 600">{{ ph.de }}</span>
+            <span lang="ne" style="font-size: 14px; line-height: 23px; color: {{ k.c0F5C63 }}">{{ ph.translit }}</span>
+            <span lang="ne" style="font-size: 15px; line-height: 25px; color: {{ k.c3B3833 }}">{{ ph.ne }}</span>
+            <span lang="en" style="font-size: 13px; color: {{ k.c6B655C }}">{{ ph.en }}</span>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 4px">
+            <button aria-label="Play {{ ph.de }}" style="width: 44px; height: 44px; border-radius: 999px; border: 1px solid {{ k.cE4E0D8 }}; background: {{ k.cFFFFFF }}; color: {{ k.c0F5C63 }}; display: flex; align-items: center; justify-content: center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5L6 9H2v6h4l5 4z"></path><path d="M15.5 8.5a5 5 0 0 1 0 7"></path></svg></button>
+            <button aria-label="{{ ph.starLabel }}" aria-pressed="{{ ph.starred }}" style="width: 44px; height: 44px; border: none; background: transparent; color: {{ ph.starColor }}; display: flex; align-items: center; justify-content: center"><svg width="20" height="20" viewBox="0 0 24 24" fill="{{ ph.starFill }}" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"></path></svg></button>
+          </div>
+        </article>
+      </sc-for>
+      <p style="margin: 0; font-size: 13px; color: {{ k.c6B655C }}">Spellings in Devanagari are a guide to sound. Tap play to hear the real German.</p>
+    </div>
+  </sc-if>
+
+  <!-- Safety -->
+  <sc-if value="{{ safety }}" hint-placeholder-val="{{ false }}">
+    <div style="display: flex; flex-direction: column; gap: 16px; padding: 4px 16px {{ padB }}">
+      <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px">
+        <a href="tel:112" style="grid-column: 1 / -1; min-height: 96px; border-radius: {{ r }}; background: {{ k.cB42318 }}; color: {{ k.cFFFFFF }}; text-decoration: none; display: flex; align-items: center; gap: 14px; padding: 0 18px"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"></path></svg><span style="display: flex; flex-direction: column"><span style="font-size: 34px; line-height: 38px; font-weight: 700">112</span><span style="font-size: 15px">Ambulance and fire · tap to call</span></span></a>
+        <a href="tel:110" style="min-height: 96px; border-radius: {{ r }}; background: {{ k.cFFFFFF }}; border: 2px solid {{ k.cB42318 }}; color: {{ k.c1F1D1A }}; text-decoration: none; display: flex; flex-direction: column; justify-content: center; padding: 0 16px"><span style="font-size: 28px; font-weight: 700; color: {{ k.cB42318 }}">110</span><span style="font-size: 14px">Police</span></a>
+        <a href="tel:116117" style="min-height: 96px; border-radius: {{ r }}; background: {{ k.cFFFFFF }}; border: 1px solid {{ k.cE4E0D8 }}; color: {{ k.c1F1D1A }}; text-decoration: none; display: flex; flex-direction: column; justify-content: center; padding: 0 16px"><span style="font-size: 28px; font-weight: 700; color: {{ k.c0F5C63 }}">116117</span><span style="font-size: 14px">Doctor on call · not life-threatening</span></a>
+      </div>
+      <section style="display: flex; flex-direction: column; gap: 8px">
+        <h2 style="margin: 0; font-size: 17px; font-weight: 700">Embassies and consulates</h2>
+        <div style="background: {{ k.cFFFFFF }}; border: 1px solid {{ k.cE4E0D8 }}; border-radius: {{ r }}; padding: 0 16px">
+          <div style="min-height: 64px; display: flex; align-items: center; gap: 12px"><span style="flex: 1; display: flex; flex-direction: column"><strong style="font-size: 15px">Embassy of Nepal, Berlin</strong><span style="font-size: 13px; color: {{ k.c6B655C }}">[Phone] · [Opening hours]</span></span><a href="#call" aria-label="Call Embassy of Nepal" style="width: 44px; height: 44px; border-radius: 999px; background: {{ k.cE6F0F0 }}; color: {{ k.c0F5C63 }}; display: flex; align-items: center; justify-content: center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"></path></svg></a></div>
+          <div style="min-height: 64px; display: flex; align-items: center; gap: 12px; border-top: 1px solid {{ k.cEFECE6 }}"><span style="flex: 1; display: flex; flex-direction: column"><strong style="font-size: 15px">Embassy of India, Berlin</strong><span style="font-size: 13px; color: {{ k.c6B655C }}">[Phone] · [Opening hours]</span></span><a href="#call" aria-label="Call Embassy of India" style="width: 44px; height: 44px; border-radius: 999px; background: {{ k.cE6F0F0 }}; color: {{ k.c0F5C63 }}; display: flex; align-items: center; justify-content: center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"></path></svg></a></div>
+          <div style="min-height: 64px; display: flex; align-items: center; gap: 12px; border-top: 1px solid {{ k.cEFECE6 }}"><span style="flex: 1; display: flex; flex-direction: column"><strong style="font-size: 15px">Consulates General of India</strong><span style="font-size: 13px; color: {{ k.c6B655C }}">[Cities] · find the one for your state</span></span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="{{ k.c6B655C }}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"></path></svg></div>
+        </div>
+      </section>
+      <section style="display: flex; flex-direction: column; gap: 8px">
+        <h2 style="margin: 0; font-size: 17px; font-weight: 700">Scam warnings</h2>
+        <sc-for list="{{ scams }}" as="sc" hint-placeholder-count="3">
+          <details style="background: {{ k.cFFFFFF }}; border: 1px solid {{ k.cE4E0D8 }}; border-radius: {{ r }}; padding: 0 16px">
+            <summary style="min-height: 56px; display: flex; align-items: center; gap: 10px; font-size: 15px; font-weight: 600; cursor: pointer"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="{{ k.cB42318 }}" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none"><path d="M10.3 3.9L1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"></path><path d="M12 9v4M12 17h.01"></path></svg><span style="flex: 1">{{ sc.title }}</span><span style="font-size: 13px; font-weight: 500; color: {{ k.c0F5C63 }}">What to do</span></summary>
+          </details>
+        </sc-for>
+      </section>
+    </div>
+  </sc-if>
+
+  <!-- Rule-change alerts -->
+  <sc-if value="{{ alerts }}" hint-placeholder-val="{{ false }}">
+    <div style="display: flex; flex-direction: column; gap: 12px; padding: 4px 16px {{ padB }}">
+      <div role="group" aria-label="Filter alerts" style="display: flex; gap: 8px">
+        <button aria-pressed="true" style="min-height: 40px; padding: 0 14px; border-radius: {{ chipR }}; border: 1px solid {{ k.c0F5C63 }}; background: {{ k.c0F5C63 }}; color: {{ k.cFFFFFF }}; font: 600 14px Inter, sans-serif">For me</button>
+        <button aria-pressed="false" style="min-height: 40px; padding: 0 14px; border-radius: {{ chipR }}; border: 1px solid {{ k.cCFC9BE }}; background: {{ k.cFFFFFF }}; color: {{ k.c1F1D1A }}; font: 500 14px Inter, sans-serif">All alerts</button>
+      </div>
+      <sc-for list="{{ alertList }}" as="al" hint-placeholder-count="4">
+        <article style="background: {{ k.cFFFFFF }}; border: 1px solid {{ k.cE4E0D8 }}; border-radius: {{ r }}; padding: 16px; display: flex; flex-direction: column; gap: 8px">
+          <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-wrap: wrap">
+            <span style="font-size: 13px; color: {{ k.c6B655C }}">{{ al.date }}</span>
+            <span style="display: inline-flex; align-items: center; gap: 4px; background: {{ al.bg }}; color: {{ al.fg }}; border-radius: 999px; padding: 2px 10px; font-size: 12px; font-weight: 700">{{ al.group }}</span>
+          </div>
+          <h2 style="margin: 0; font-size: 16px; line-height: 22px; font-weight: 700">{{ al.title }}</h2>
+          <p style="margin: 0; font-size: 15px; line-height: 22px; color: {{ k.c3B3833 }}">{{ al.body }}</p>
+          <a href="#guide" style="font-size: 14px; font-weight: 600; color: {{ k.c0F5C63 }}; min-height: 32px; display: flex; align-items: center">Read the updated guide →</a>
+        </article>
+      </sc-for>
+      <p style="margin: 0; font-size: 13px; line-height: 19px; color: {{ k.c6B655C }}">We send a notification only when a change affects your profile: Student · Nepal · Leipzig.</p>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ notWeb }}" hint-placeholder-val="{{ true }}"><div style="position: absolute; left: 0; right: 0; bottom: 0">
+    <dc-import name="TabBar" platform="{{ platform }}" active="{{ tab }}" dark="{{ darkStr }}" hint-size="390px,84px"></dc-import>
+  </div></sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"dark":{"editor":"boolean","default":false},"platform":{"editor":"enum","options":["ios","android","web"],"default":"ios"},"screen":{"editor":"enum","options":["phrasebook","safety","alerts"],"default":"phrasebook"},"$preview":{"width":390,"height":1400}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const __dark = this.props.dark === true || this.props.dark === 'true';
+    const __web = this.props.platform === 'web';
+    const k = __dark ? {"cF6F4F0": "#121614", "cFFFFFF": "#1A2221", "c1F1D1A": "#ECEAE5", "c3B3833": "#C9CFCD", "c4A453E": "#C2C8C6", "c6B655C": "#9AA5A3", "cE4E0D8": "#2C3634", "cEFECE6": "#252D2C", "cCFC9BE": "#4A5755", "cA8A196": "#6F7B79", "cE9E5DD": "#252D2C", "cEDE9E1": "#252D2C", "c0F5C63": "#5CC8C2", "c0A4449": "#8EDDD8", "cE6F0F0": "#173332", "cCFE3E3": "#1F4442", "cD3E6E6": "#1F3D3B", "cE8A33D": "#F2B85C", "c2A1A00": "#2A1A00", "cFBF1DF": "#33291A", "c8A5A12": "#E0C27A", "cB7791F": "#C9A15A", "cFDF6EA": "#2A2418", "cFBEFD9": "#33291A", "c5C3D08": "#E0C27A", "c5C4A2A": "#D8C8A8", "cFDECEA": "#3A1F1C", "cB42318": "#F0A49B", "cEAF4EE": "#1D3327", "c24653F": "#7FD3A0", "c2E7D4F": "#7FD3A0", "cF3F8F8": "#16201F", "cFBFAF7": "#161C1B", "c000000": "#F2F2F2", "cFDF3E2": "#33291A", "c55524C": "#000000", "c5E8C8F": "#7FB3B5"} : {"cF6F4F0": "#F6F4F0", "cFFFFFF": "#FFFFFF", "c1F1D1A": "#1F1D1A", "c3B3833": "#3B3833", "c4A453E": "#4A453E", "c6B655C": "#6B655C", "cE4E0D8": "#E4E0D8", "cEFECE6": "#EFECE6", "cCFC9BE": "#CFC9BE", "cA8A196": "#A8A196", "cE9E5DD": "#E9E5DD", "cEDE9E1": "#EDE9E1", "c0F5C63": "#0F5C63", "c0A4449": "#0A4449", "cE6F0F0": "#E6F0F0", "cCFE3E3": "#CFE3E3", "cD3E6E6": "#D3E6E6", "cE8A33D": "#E8A33D", "c2A1A00": "#2A1A00", "cFBF1DF": "#FBF1DF", "c8A5A12": "#8A5A12", "cB7791F": "#B7791F", "cFDF6EA": "#FDF6EA", "cFBEFD9": "#FBEFD9", "c5C3D08": "#5C3D08", "c5C4A2A": "#5C4A2A", "cFDECEA": "#FDECEA", "cB42318": "#B42318", "cEAF4EE": "#EAF4EE", "c24653F": "#24653F", "c2E7D4F": "#2E7D4F", "cF3F8F8": "#F3F8F8", "cFBFAF7": "#FBFAF7", "c000000": "#000000", "cFDF3E2": "#FDF3E2", "c55524C": "#55524C", "c5E8C8F": "#5E8C8F"};
+    const platform = (this.props.platform ?? 'ios') === 'android' ? 'android' : 'ios';
+    const ios = platform === 'ios';
+    const screen = this.props.screen ?? 'phrasebook';
+    const chip = (label, on) => ({ label: label, pressed: on ? 'true' : 'false', bg: on ? k.c0F5C63 : k.cFFFFFF, color: on ? k.cFFFFFF : k.c1F1D1A, border: on ? k.c0F5C63 : k.cCFC9BE });
+    const phr = [
+      ['Ich habe einen Termin um 10 Uhr.', 'इश हाबे आइनेन टेर्मीन उम त्सेन ऊर', 'मेरो १० बजे अपोइन्टमेन्ट छ।', 'I have an appointment at 10.', true],
+      ['Können Sie bitte langsamer sprechen?', 'क्योनेन ज़ी बिटे लाङज़ामर श्प्रेशेन?', 'कृपया अलि बिस्तारै बोल्न सक्नुहुन्छ?', 'Could you speak more slowly, please?', true],
+      ['Ich verstehe das nicht.', 'इश फ़ेरश्टेए दास निश्ट', 'मैले यो बुझिनँ।', 'I don’t understand this.', false],
+      ['Welche Unterlagen brauche ich?', 'वेल्शे उन्टरलागेन ब्राउखे इश?', 'मलाई कुन कागजातहरू चाहिन्छ?', 'Which documents do I need?', false]
+    ];
+    const meta = {
+      phrasebook: ['Phrasebook', 'Tools', 'search', 'tools'],
+      safety: ['Safety and emergency', 'Tools', 'none', 'tools'],
+      alerts: ['Rule changes', 'Home', 'none', 'home']
+    }[screen] || ['Phrasebook', 'Tools', 'search', 'tools'];
+    return { notWeb: !__web, rootW: __web ? '100%' : '390px', rootH: __web ? 'auto' : '1400px', padB: __web ? '24px' : '120px', k: k, darkStr: __dark ? 'true' : 'false',
+      platform: platform, title: meta[0], back: meta[1], action: meta[2], tab: meta[3],
+      phrasebook: screen === 'phrasebook', safety: screen === 'safety', alerts: screen === 'alerts',
+      r: ios ? '16px' : '20px', chipR: ios ? '999px' : '8px',
+      situations: ['Immigration office', 'Citizen’s office', 'Doctor', 'Pharmacy', 'Landlord', 'Bank', 'Workplace'].map((s, i) => chip(s, i === 0)),
+      phrases: phr.map((p) => ({ de: p[0], translit: p[1], ne: p[2], en: p[3], starred: p[4] ? 'true' : 'false', starLabel: p[4] ? 'Remove from favourites' : 'Add to favourites', starColor: p[4] ? k.cB7791F : k.c6B655C, starFill: p[4] ? 'currentColor' : 'none' })),
+      scams: [{ title: 'A landlord wants a deposit before you see the flat' }, { title: 'A caller says they are from the immigration office' }, { title: 'An agent promises a “guaranteed visa”' }],
+      alertList: [
+        { date: '[Date] · new', group: 'Students from Nepal', bg: k.cE6F0F0, fg: k.c0F5C63, title: '[Rule change headline]', body: '[Two-line summary of what changes and from when, written in plain words.]' },
+        { date: '[Date]', group: 'All students', bg: k.cEFECE6, fg: k.c4A453E, title: '[Rule change headline]', body: '[Two-line summary of what changes and from when, written in plain words.]' },
+        { date: '[Date]', group: 'Leipzig', bg: k.cEFECE6, fg: k.c4A453E, title: '[Local office change headline]', body: '[Two-line summary, e.g. new booking system or opening hours.]' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Consent banner</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>body{margin:0}</style>
+</helmet>
+<div style="width: 390px; height: 844px; position: relative; overflow: hidden; background: {{ k.cF6F4F0 }}; color: {{ k.c1F1D1A }}; font-family: Inter, system-ui, sans-serif">
+  <div aria-hidden="true" style="padding: 120px 20px 0; display: flex; flex-direction: column; align-items: center; gap: 12px; text-align: center">
+    <span style="width: 72px; height: 72px; border-radius: 20px; background: {{ k.c0F5C63 }}"></span>
+    <span style="font-size: 28px; font-weight: 700">Settle in Germany</span>
+    <span style="font-size: 16px; color: {{ k.c6B655C }}">Know exactly what to do next in Germany, in your language.</span>
+  </div>
+  <div aria-hidden="true" style="position: absolute; inset: 0; background: rgba(20,22,21,0.45)"></div>
+
+  <div role="dialog" aria-modal="true" aria-labelledby="consent-title" style="position: absolute; left: 0; right: 0; bottom: 0; background: {{ k.cFFFFFF }}; border-radius: {{ sheetR }}; padding: 12px 20px 28px; display: flex; flex-direction: column; gap: 14px">
+    <div style="display: flex; justify-content: center"><span style="width: 36px; height: 5px; border-radius: 999px; background: {{ k.cCFC9BE }}"></span></div>
+    <div style="display: flex; align-items: center; gap: 10px">
+      <span style="width: 40px; height: 40px; border-radius: 12px; background: {{ k.cE6F0F0 }}; color: {{ k.c0F5C63 }}; display: flex; align-items: center; justify-content: center; flex: none"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg></span>
+      <h1 id="consent-title" style="margin: 0; font-size: 22px; line-height: 28px; font-weight: 700">Your privacy choices</h1>
+    </div>
+    <p style="margin: 0; font-size: 15px; line-height: 23px; color: {{ k.c3B3833 }}">The free version is paid for by ads. If you agree, we and our ad partners use data from this device to show ads that fit you and to measure how the app is used.</p>
+    <p style="margin: 0; font-size: 15px; line-height: 23px; color: {{ k.c3B3833 }}">If you say no, you still get every guide and tool — the ads are just less personal. You can change this any time in <strong>Me › Privacy</strong>.</p>
+    <div style="display: flex; gap: 6px; flex-wrap: wrap; font-size: 14px">
+      <a href="#privacy" style="color: {{ k.c0F5C63 }}; font-weight: 600; min-height: 32px; display: flex; align-items: center">Privacy policy</a><span style="color: {{ k.cA8A196 }}; display: flex; align-items: center">·</span><a href="#partners" style="color: {{ k.c0F5C63 }}; font-weight: 600; min-height: 32px; display: flex; align-items: center">Our 12 ad partners</a>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 10px; padding-top: 4px">
+      <button style="height: 52px; border-radius: {{ btnR }}; border: 1.5px solid {{ k.c0F5C63 }}; background: {{ k.cFFFFFF }}; color: {{ k.c0F5C63 }}; font: 700 16px Inter, sans-serif">Accept all</button>
+      <button style="height: 52px; border-radius: {{ btnR }}; border: 1.5px solid {{ k.c0F5C63 }}; background: {{ k.cFFFFFF }}; color: {{ k.c0F5C63 }}; font: 700 16px Inter, sans-serif">Reject all</button>
+      <button style="height: 52px; border-radius: {{ btnR }}; border: 1.5px solid {{ k.c0F5C63 }}; background: {{ k.cFFFFFF }}; color: {{ k.c0F5C63 }}; font: 700 16px Inter, sans-serif">Settings</button>
+    </div>
+    <p style="margin: 0; font-size: 12px; line-height: 17px; color: {{ k.c6B655C }}; text-align: center">{{ footNote }}</p>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"dark":{"editor":"boolean","default":false},"platform":{"editor":"enum","options":["ios","android"],"default":"ios"},"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const __dark = this.props.dark === true || this.props.dark === 'true';
+    const k = __dark ? {"cF6F4F0": "#121614", "cFFFFFF": "#1A2221", "c1F1D1A": "#ECEAE5", "c3B3833": "#C9CFCD", "c4A453E": "#C2C8C6", "c6B655C": "#9AA5A3", "cE4E0D8": "#2C3634", "cEFECE6": "#252D2C", "cCFC9BE": "#4A5755", "cA8A196": "#6F7B79", "cE9E5DD": "#252D2C", "cEDE9E1": "#252D2C", "c0F5C63": "#5CC8C2", "c0A4449": "#8EDDD8", "cE6F0F0": "#173332", "cCFE3E3": "#1F4442", "cD3E6E6": "#1F3D3B", "cE8A33D": "#F2B85C", "c2A1A00": "#2A1A00", "cFBF1DF": "#33291A", "c8A5A12": "#E0C27A", "cB7791F": "#C9A15A", "cFDF6EA": "#2A2418", "cFBEFD9": "#33291A", "c5C3D08": "#E0C27A", "c5C4A2A": "#D8C8A8", "cFDECEA": "#3A1F1C", "cB42318": "#F0A49B", "cEAF4EE": "#1D3327", "c24653F": "#7FD3A0", "c2E7D4F": "#7FD3A0", "cF3F8F8": "#16201F", "cFBFAF7": "#161C1B", "c000000": "#F2F2F2", "cFDF3E2": "#33291A", "c55524C": "#000000"} : {"cF6F4F0": "#F6F4F0", "cFFFFFF": "#FFFFFF", "c1F1D1A": "#1F1D1A", "c3B3833": "#3B3833", "c4A453E": "#4A453E", "c6B655C": "#6B655C", "cE4E0D8": "#E4E0D8", "cEFECE6": "#EFECE6", "cCFC9BE": "#CFC9BE", "cA8A196": "#A8A196", "cE9E5DD": "#E9E5DD", "cEDE9E1": "#EDE9E1", "c0F5C63": "#0F5C63", "c0A4449": "#0A4449", "cE6F0F0": "#E6F0F0", "cCFE3E3": "#CFE3E3", "cD3E6E6": "#D3E6E6", "cE8A33D": "#E8A33D", "c2A1A00": "#2A1A00", "cFBF1DF": "#FBF1DF", "c8A5A12": "#8A5A12", "cB7791F": "#B7791F", "cFDF6EA": "#FDF6EA", "cFBEFD9": "#FBEFD9", "c5C3D08": "#5C3D08", "c5C4A2A": "#5C4A2A", "cFDECEA": "#FDECEA", "cB42318": "#B42318", "cEAF4EE": "#EAF4EE", "c24653F": "#24653F", "c2E7D4F": "#2E7D4F", "cF3F8F8": "#F3F8F8", "cFBFAF7": "#FBFAF7", "c000000": "#000000", "cFDF3E2": "#FDF3E2", "c55524C": "#55524C"};
+    const ios = (this.props.platform ?? 'ios') !== 'android';
+    return { k: k, darkStr: __dark ? 'true' : 'false',
+      sheetR: ios ? '14px 14px 0 0' : '28px 28px 0 0',
+      btnR: ios ? '14px' : '999px',
+      footNote: ios ? 'If you accept, iOS will then ask whether to allow tracking. Premium has no ads.' : 'Premium has no ads.'
+    };
+  }
+}
+</script>
+</body>
+</html>

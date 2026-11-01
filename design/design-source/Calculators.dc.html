@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Calculators</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>body{margin:0}</style>
+</helmet>
+<div style="width: {{ rootW }}; height: {{ rootH }}; position: relative; overflow: hidden; background: {{ k.cF6F4F0 }}; color: {{ k.c1F1D1A }}; font-family: Inter, system-ui, sans-serif">
+  <sc-if value="{{ notWeb }}" hint-placeholder-val="{{ true }}"><dc-import name="AppBar" platform="{{ platform }}" title="{{ title }}" back="Tools" href="#tools" large="true" action="none" dark="{{ darkStr }}" hint-size="390px,96px"></dc-import></sc-if>
+
+  <!-- Monthly budget -->
+  <sc-if value="{{ budget }}" hint-placeholder-val="{{ true }}">
+    <div style="display: flex; flex-direction: column; gap: 16px; padding: 4px 16px {{ padB }}">
+      <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px">
+        <label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 600; color: {{ k.c3B3833 }}">City<span style="min-height: 48px; border-radius: {{ fieldR }}; border: 1px solid {{ k.cA8A196 }}; background: {{ k.cFFFFFF }}; display: flex; align-items: center; justify-content: space-between; padding: 0 12px; font-size: 15px; font-weight: 500; color: {{ k.c1F1D1A }}">Leipzig ▾</span></label>
+        <label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 600; color: {{ k.c3B3833 }}">Living<span style="min-height: 48px; border-radius: {{ fieldR }}; border: 1px solid {{ k.cA8A196 }}; background: {{ k.cFFFFFF }}; display: flex; align-items: center; justify-content: space-between; padding: 0 12px; font-size: 15px; font-weight: 500; color: {{ k.c1F1D1A }}">Shared flat ▾</span></label>
+      </div>
+      <div style="background: {{ k.cFFFFFF }}; border: 1px solid {{ k.cE4E0D8 }}; border-radius: {{ r }}; padding: 4px 16px">
+        <sc-for list="{{ items }}" as="it" hint-placeholder-count="5">
+          <label style="display: flex; flex-direction: column; gap: 8px; padding: 12px 0; border-top: {{ it.line }}">
+            <span style="display: flex; justify-content: space-between; font-size: 15px"><span style="display: flex; align-items: center; gap: 8px; font-weight: 500"><span style="width: 10px; height: 10px; border-radius: 3px; background: {{ it.color }}"></span>{{ it.label }}</span><strong>€{{ it.value }}</strong></span>
+            <input type="range" min="0" max="800" value="{{ it.value }}" aria-label="{{ it.label }}, euros per month" style="width: 100%; accent-color: {{ k.c0F5C63 }}; margin: 0; height: 24px">
+          </label>
+        </sc-for>
+      </div>
+      <section aria-label="Result" style="background: {{ k.c0F5C63 }}; color: {{ k.cFFFFFF }}; border-radius: {{ r }}; padding: 18px; display: flex; flex-direction: column; gap: 12px">
+        <span style="font-size: 14px; color: {{ k.cD3E6E6 }}">Your month in Leipzig</span>
+        <span style="font-size: 36px; line-height: 40px; font-weight: 700; letter-spacing: -0.02em">€{{ total }}</span>
+        <div role="img" aria-label="Breakdown: rent is the largest part" style="display: flex; height: 12px; border-radius: 999px; overflow: hidden; background: rgba(255,255,255,0.2)">
+          <sc-for list="{{ items }}" as="it" hint-placeholder-count="5"><span style="width: {{ it.pct }}; background: {{ it.color }}"></span></sc-for>
+        </div>
+        <span style="font-size: 13px; line-height: 19px; color: {{ k.cD3E6E6 }}">Compare: your blocked account pays out [€ monthly amount].</span>
+      </section>
+      <p style="margin: 0; font-size: 13px; line-height: 19px; color: {{ k.c6B655C }}">Starting values are typical for [city] · checked [date]. Change them to match your life.</p>
+      <aside aria-label="Advertisement" style="height: 90px; border: 1px dashed {{ k.cCFC9BE }}; border-radius: 12px; background: {{ k.cFBFAF7 }}; display: flex; align-items: center; justify-content: center; position: relative; font-size: 13px; color: {{ k.c6B655C }}"><span style="position: absolute; top: 8px; left: 10px; font-size: 11px; font-weight: 700; border: 1px solid {{ k.cCFC9BE }}; border-radius: 4px; padding: 0 5px">Ad</span>[Banner below results]</aside>
+    </div>
+  </sc-if>
+
+  <!-- Net pay -->
+  <sc-if value="{{ netpay }}" hint-placeholder-val="{{ false }}">
+    <div style="display: flex; flex-direction: column; gap: 16px; padding: 4px 16px {{ padB }}">
+      <p style="margin: 0; font-size: 15px; line-height: 22px; color: {{ k.c3B3833 }}">See what reaches your bank account from a student job.</p>
+      <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px">
+        <label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 600; color: {{ k.c3B3833 }}">Hourly wage<span style="min-height: 52px; border-radius: {{ fieldR }}; border: 1px solid {{ k.cA8A196 }}; background: {{ k.cFFFFFF }}; display: flex; align-items: center; padding: 0 12px; font-size: 18px; font-weight: 600; color: {{ k.c1F1D1A }}">€ 14.00</span></label>
+        <label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 600; color: {{ k.c3B3833 }}">Hours a week<span style="min-height: 52px; border-radius: {{ fieldR }}; border: 1px solid {{ k.cA8A196 }}; background: {{ k.cFFFFFF }}; display: flex; align-items: center; padding: 0 12px; font-size: 18px; font-weight: 600; color: {{ k.c1F1D1A }}">10</span></label>
+      </div>
+      <fieldset style="border: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px">
+        <legend style="font-size: 13px; font-weight: 600; color: {{ k.c3B3833 }}; padding-bottom: 8px">Type of job</legend>
+        <div style="display: flex; gap: 8px; flex-wrap: wrap">
+          <button aria-pressed="true" style="min-height: 40px; padding: 0 14px; border-radius: {{ chipR }}; border: 1px solid {{ k.c0F5C63 }}; background: {{ k.c0F5C63 }}; color: {{ k.cFFFFFF }}; font: 600 14px Inter, sans-serif">Mini job</button>
+          <button aria-pressed="false" style="min-height: 40px; padding: 0 14px; border-radius: {{ chipR }}; border: 1px solid {{ k.cCFC9BE }}; background: {{ k.cFFFFFF }}; color: {{ k.c1F1D1A }}; font: 500 14px Inter, sans-serif">Working student</button>
+          <button aria-pressed="false" style="min-height: 40px; padding: 0 14px; border-radius: {{ chipR }}; border: 1px solid {{ k.cCFC9BE }}; background: {{ k.cFFFFFF }}; color: {{ k.c1F1D1A }}; font: 500 14px Inter, sans-serif">Not sure</button>
+        </div>
+      </fieldset>
+      <section aria-label="Result" style="background: {{ k.cFFFFFF }}; border: 2px solid {{ k.c0F5C63 }}; border-radius: {{ r }}; padding: 18px; display: flex; flex-direction: column; gap: 12px">
+        <span style="font-size: 14px; color: {{ k.c6B655C }}">You keep about</span>
+        <span style="font-size: 36px; line-height: 40px; font-weight: 700; color: {{ k.c8A5A12 }}; background: {{ k.cFBF1DF }}; align-self: flex-start; border-radius: 6px; padding: 0 6px">€[net] / month</span>
+        <dl style="margin: 0; display: flex; flex-direction: column; font-size: 15px">
+          <div style="display: flex; justify-content: space-between; padding: 8px 0; border-top: 1px solid {{ k.cEFECE6 }}"><dt>Gross pay</dt><dd style="margin: 0; font-weight: 600">€[gross]</dd></div>
+          <div style="display: flex; justify-content: space-between; padding: 8px 0; border-top: 1px solid {{ k.cEFECE6 }}"><dt>Tax</dt><dd style="margin: 0; font-weight: 600">€[—]</dd></div>
+          <div style="display: flex; justify-content: space-between; padding: 8px 0; border-top: 1px solid {{ k.cEFECE6 }}"><dt>Pension contribution</dt><dd style="margin: 0; font-weight: 600">€[—]</dd></div>
+        </dl>
+        <p style="margin: 0; font-size: 14px; line-height: 21px; color: {{ k.c3B3833 }}"><strong>In plain words:</strong> [One or two sentences on why these deductions apply to a mini job, and how to opt out of the pension contribution.]</p>
+      </section>
+      <p style="margin: 0; font-size: 13px; line-height: 19px; color: {{ k.c6B655C }}">Estimate only, not tax advice. Limits and rates checked [date].</p>
+      <aside aria-label="Advertisement" style="height: 90px; border: 1px dashed {{ k.cCFC9BE }}; border-radius: 12px; background: {{ k.cFBFAF7 }}; display: flex; align-items: center; justify-content: center; position: relative; font-size: 13px; color: {{ k.c6B655C }}"><span style="position: absolute; top: 8px; left: 10px; font-size: 11px; font-weight: 700; border: 1px solid {{ k.cCFC9BE }}; border-radius: 4px; padding: 0 5px">Ad</span>[Banner below results]</aside>
+    </div>
+  </sc-if>
+
+  <!-- Work limit -->
+  <sc-if value="{{ worklimit }}" hint-placeholder-val="{{ false }}">
+    <div style="display: flex; flex-direction: column; gap: 16px; padding: 4px 16px {{ padB }}">
+      <section style="background: {{ k.cFFFFFF }}; border: 1px solid {{ k.cE4E0D8 }}; border-radius: {{ r }}; padding: 18px; display: flex; flex-direction: column; gap: 12px">
+        <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 8px; flex-wrap: wrap"><span style="font-size: 15px; color: {{ k.c3B3833 }}">This year you’ve used</span><span style="font-size: 13px; color: {{ k.c6B655C }}">1 Jan – 31 Dec 2026</span></div>
+        <span style="font-size: 36px; line-height: 40px; font-weight: 700">[used] <span style="font-size: 18px; color: {{ k.c6B655C }}; font-weight: 600">of [limit] full days</span></span>
+        <div role="progressbar" aria-label="Work days used: close to the limit" aria-valuenow="88" aria-valuemin="0" aria-valuemax="100" style="height: 14px; border-radius: 999px; background: {{ k.cEFECE6 }}; overflow: hidden"><div style="width: 88%; height: 14px; border-radius: 999px; background: {{ k.cB7791F }}"></div></div>
+        <div style="display: flex; gap: 10px; align-items: flex-start; background: {{ k.cFBF1DF }}; border-radius: 12px; padding: 12px; font-size: 14px; line-height: 20px; color: {{ k.c5C3D08 }}">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="{{ k.c8A5A12 }}" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none; margin-top: 1px"><path d="M10.3 3.9L1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"></path><path d="M12 9v4M12 17h.01"></path></svg>
+          <span><strong>Close to your limit.</strong> [X] full days left this year. Two half days count as one full day.</span>
+        </div>
+        <span style="font-size: 13px; color: {{ k.c6B655C }}">Limit for your permit, from our rules · checked [date]</span>
+      </section>
+      <button style="min-height: 52px; border-radius: {{ btnR }}; border: none; background: {{ k.c0F5C63 }}; color: {{ k.cFFFFFF }}; font: 600 16px Inter, sans-serif; display: flex; align-items: center; justify-content: center; gap: 6px"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>Log a work day</button>
+      <section style="display: flex; flex-direction: column; gap: 8px">
+        <h2 style="margin: 0; font-size: 17px; font-weight: 700">Recent days</h2>
+        <div style="background: {{ k.cFFFFFF }}; border: 1px solid {{ k.cE4E0D8 }}; border-radius: {{ r }}; padding: 0 16px">
+          <div style="min-height: 56px; display: flex; align-items: center; justify-content: space-between; gap: 8px"><span style="display: flex; flex-direction: column"><span style="font-size: 15px; font-weight: 600">Fri, 30 Oct</span><span style="font-size: 13px; color: {{ k.c6B655C }}">Café · 6 hours</span></span><span style="font-size: 13px; font-weight: 700; background: {{ k.cEFECE6 }}; color: {{ k.c4A453E }}; border-radius: 999px; padding: 3px 10px">Full day</span></div>
+          <div style="min-height: 56px; display: flex; align-items: center; justify-content: space-between; gap: 8px; border-top: 1px solid {{ k.cEFECE6 }}"><span style="display: flex; flex-direction: column"><span style="font-size: 15px; font-weight: 600">Wed, 28 Oct</span><span style="font-size: 13px; color: {{ k.c6B655C }}">Café · 3 hours</span></span><span style="font-size: 13px; font-weight: 700; background: {{ k.cEFECE6 }}; color: {{ k.c4A453E }}; border-radius: 999px; padding: 3px 10px">Half day</span></div>
+          <div style="min-height: 56px; display: flex; align-items: center; justify-content: space-between; gap: 8px; border-top: 1px solid {{ k.cEFECE6 }}"><span style="display: flex; flex-direction: column"><span style="font-size: 15px; font-weight: 600">Mon, 26 Oct</span><span style="font-size: 13px; color: {{ k.c6B655C }}">University lab · 4 hours</span></span><span style="font-size: 13px; font-weight: 700; background: {{ k.cE6F0F0 }}; color: {{ k.c0F5C63 }}; border-radius: 999px; padding: 3px 10px">Not counted</span></div>
+        </div>
+        <span style="font-size: 13px; line-height: 19px; color: {{ k.c6B655C }}">[Short rule on which university jobs don’t count, from the content system.]</span>
+      </section>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ notWeb }}" hint-placeholder-val="{{ true }}"><div style="position: absolute; left: 0; right: 0; bottom: 0">
+    <dc-import name="TabBar" platform="{{ platform }}" active="tools" dark="{{ darkStr }}" hint-size="390px,84px"></dc-import>
+  </div></sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"dark":{"editor":"boolean","default":false},"platform":{"editor":"enum","options":["ios","android","web"],"default":"ios"},"tool":{"editor":"enum","options":["budget","netpay","worklimit"],"default":"budget"},"$preview":{"width":390,"height":1300}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const __dark = this.props.dark === true || this.props.dark === 'true';
+    const __web = this.props.platform === 'web';
+    const k = __dark ? {"cF6F4F0": "#121614", "cFFFFFF": "#1A2221", "c1F1D1A": "#ECEAE5", "c3B3833": "#C9CFCD", "c4A453E": "#C2C8C6", "c6B655C": "#9AA5A3", "cE4E0D8": "#2C3634", "cEFECE6": "#252D2C", "cCFC9BE": "#4A5755", "cA8A196": "#6F7B79", "cE9E5DD": "#252D2C", "cEDE9E1": "#252D2C", "c0F5C63": "#5CC8C2", "c0A4449": "#8EDDD8", "cE6F0F0": "#173332", "cCFE3E3": "#1F4442", "cD3E6E6": "#1F3D3B", "cE8A33D": "#F2B85C", "c2A1A00": "#2A1A00", "cFBF1DF": "#33291A", "c8A5A12": "#E0C27A", "cB7791F": "#C9A15A", "cFDF6EA": "#2A2418", "cFBEFD9": "#33291A", "c5C3D08": "#E0C27A", "c5C4A2A": "#D8C8A8", "cFDECEA": "#3A1F1C", "cB42318": "#F0A49B", "cEAF4EE": "#1D3327", "c24653F": "#7FD3A0", "c2E7D4F": "#7FD3A0", "cF3F8F8": "#16201F", "cFBFAF7": "#161C1B", "c000000": "#F2F2F2", "cFDF3E2": "#33291A", "c55524C": "#000000", "c5E8C8F": "#7FB3B5"} : {"cF6F4F0": "#F6F4F0", "cFFFFFF": "#FFFFFF", "c1F1D1A": "#1F1D1A", "c3B3833": "#3B3833", "c4A453E": "#4A453E", "c6B655C": "#6B655C", "cE4E0D8": "#E4E0D8", "cEFECE6": "#EFECE6", "cCFC9BE": "#CFC9BE", "cA8A196": "#A8A196", "cE9E5DD": "#E9E5DD", "cEDE9E1": "#EDE9E1", "c0F5C63": "#0F5C63", "c0A4449": "#0A4449", "cE6F0F0": "#E6F0F0", "cCFE3E3": "#CFE3E3", "cD3E6E6": "#D3E6E6", "cE8A33D": "#E8A33D", "c2A1A00": "#2A1A00", "cFBF1DF": "#FBF1DF", "c8A5A12": "#8A5A12", "cB7791F": "#B7791F", "cFDF6EA": "#FDF6EA", "cFBEFD9": "#FBEFD9", "c5C3D08": "#5C3D08", "c5C4A2A": "#5C4A2A", "cFDECEA": "#FDECEA", "cB42318": "#B42318", "cEAF4EE": "#EAF4EE", "c24653F": "#24653F", "c2E7D4F": "#2E7D4F", "cF3F8F8": "#F3F8F8", "cFBFAF7": "#FBFAF7", "c000000": "#000000", "cFDF3E2": "#FDF3E2", "c55524C": "#55524C", "c5E8C8F": "#5E8C8F"};
+    const platform = (this.props.platform ?? 'ios') === 'android' ? 'android' : 'ios';
+    const ios = platform === 'ios';
+    const tool = this.props.tool ?? 'budget';
+    const raw = [['Rent', 420, k.c0F5C63], ['Food', 220, k.cE8A33D], ['Health insurance', 140, k.c5E8C8F], ['Transit', 0, k.c8A5A12], ['Phone and internet', 25, k.cA8A196]];
+    const total = raw.reduce((s, x) => s + x[1], 0);
+    const titles = { budget: 'Monthly budget', netpay: 'Net pay', worklimit: 'Work-day limit' };
+    return { notWeb: !__web, rootW: __web ? '100%' : '390px', rootH: __web ? 'auto' : '1300px', padB: __web ? '24px' : '120px', k: k, darkStr: __dark ? 'true' : 'false',
+      platform: platform, title: titles[tool] || 'Monthly budget',
+      budget: tool === 'budget', netpay: tool === 'netpay', worklimit: tool === 'worklimit',
+      items: raw.map((x, i) => ({ label: x[0], value: x[1], color: x[2], pct: (x[1] / total * 100).toFixed(1) + '%', line: i === 0 ? 'none' : '1px solid ' + k.cEFECE6 })),
+      total: total,
+      r: ios ? '16px' : '20px', btnR: ios ? '12px' : '999px', chipR: ios ? '999px' : '8px', fieldR: ios ? '12px' : '4px'
+    };
+  }
+}
+</script>
+</body>
+</html>

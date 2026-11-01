@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Web · Paywall</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>body{margin:0}</style>
+</helmet>
+<div style="width: 100%; min-height: {{ minH }}; background: {{ outerBg }}; color: {{ k.c1F1D1A }}; font-family: Inter, system-ui, sans-serif; display: flex; justify-content: center; align-items: flex-start; padding: {{ outerPad }}; box-sizing: border-box">
+  <div role="dialog" aria-modal="true" aria-labelledby="wp-title" style="width: 100%; max-width: 920px; background: {{ k.cFFFFFF }}; border-radius: {{ dlgR }}; box-shadow: {{ shadow }}; position: relative; display: flex; flex-wrap: wrap; overflow: hidden">
+    <a href="web-home-desktop.dc.html" aria-label="Close" style="position: absolute; top: 12px; right: 12px; width: 44px; height: 44px; border-radius: 999px; display: flex; align-items: center; justify-content: center; color: {{ k.c3B3833 }}; background: {{ k.cF6F4F0 }}; z-index: 1"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"></path></svg></a>
+
+    <section style="flex: 1 1 340px; background: {{ k.cF3F8F8 }}; padding: {{ colPad }}; display: flex; flex-direction: column; gap: 20px; box-sizing: border-box">
+      <span style="align-self: flex-start; background: {{ k.cE8A33D }}; color: {{ k.c2A1A00 }}; border-radius: 999px; padding: 3px 10px; font-size: 12px; font-weight: 700">Premium</span>
+      <h1 id="wp-title" style="margin: 0; font-size: {{ h1 }}; line-height: 1.2; font-weight: 700; letter-spacing: -0.015em; padding-right: 40px">Understand every German letter in seconds</h1>
+      <ul role="list" style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 14px; font-size: 16px; line-height: 22px">
+        <li style="display: flex; gap: 12px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="{{ k.c0F5C63 }}" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none"><path d="M20 6L9 17l-5-5"></path></svg>Upload every letter — no monthly limit</li>
+        <li style="display: flex; gap: 12px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="{{ k.c0F5C63 }}" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none"><path d="M20 6L9 17l-5-5"></path></svg>Formal German replies, with a translation</li>
+        <li style="display: flex; gap: 12px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="{{ k.c0F5C63 }}" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none"><path d="M20 6L9 17l-5-5"></path></svg>Ask questions in Nepali, Hindi or English</li>
+        <li style="display: flex; gap: 12px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="{{ k.c0F5C63 }}" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none"><path d="M20 6L9 17l-5-5"></path></svg>Check flat listings and rental contracts</li>
+        <li style="display: flex; gap: 12px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="{{ k.c0F5C63 }}" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none"><path d="M20 6L9 17l-5-5"></path></svg>No ads — on the web and in the apps</li>
+      </ul>
+      <p style="margin: 0; font-size: 14px; line-height: 21px; color: {{ k.c3B3833 }}">One subscription works on the website, Android and iPhone. All guides and checklists stay free.</p>
+    </section>
+
+    <section style="flex: 1 1 360px; padding: {{ colPad }}; display: flex; flex-direction: column; gap: 16px; box-sizing: border-box">
+      <h2 style="margin: 0; font-size: 18px; font-weight: 700">Choose a plan</h2>
+      <div role="radiogroup" aria-label="Choose a plan" style="display: flex; flex-direction: column; gap: 10px">
+        <button role="radio" aria-checked="true" style="min-height: 72px; border-radius: 14px; border: 2px solid {{ k.c0F5C63 }}; background: {{ k.cE6F0F0 }}; padding: 10px 16px; display: flex; align-items: center; gap: 12px; text-align: left; font: 400 14px Inter, sans-serif; color: {{ k.c1F1D1A }}">
+          <span style="width: 22px; height: 22px; border-radius: 999px; border: 2px solid {{ k.c0F5C63 }}; display: flex; align-items: center; justify-content: center; flex: none; box-sizing: border-box"><span style="width: 10px; height: 10px; border-radius: 999px; background: {{ k.c0F5C63 }}"></span></span>
+          <span style="display: flex; flex-direction: column; gap: 2px; flex: 1"><span style="font-size: 17px; font-weight: 700">Yearly · €29.99</span><span style="color: {{ k.c3B3833 }}">€2.50 a month, billed once a year</span></span>
+          <span style="background: {{ k.cE8A33D }}; color: {{ k.c2A1A00 }}; border-radius: 999px; padding: 3px 9px; font-size: 12px; font-weight: 700">Save 37%</span>
+        </button>
+        <button role="radio" aria-checked="false" style="min-height: 64px; border-radius: 14px; border: 1px solid {{ k.cCFC9BE }}; background: {{ k.cFFFFFF }}; padding: 10px 17px; display: flex; align-items: center; gap: 12px; text-align: left; font: 400 14px Inter, sans-serif; color: {{ k.c1F1D1A }}">
+          <span style="width: 22px; height: 22px; border-radius: 999px; border: 2px solid {{ k.cA8A196 }}; flex: none; box-sizing: border-box"></span>
+          <span style="display: flex; flex-direction: column; gap: 2px; flex: 1"><span style="font-size: 17px; font-weight: 600">Monthly · €3.99</span><span style="color: {{ k.c6B655C }}">Billed every month</span></span>
+        </button>
+      </div>
+      <button style="min-height: 54px; border-radius: 14px; border: none; background: {{ k.cE8A33D }}; color: {{ k.c2A1A00 }}; font: 700 17px Inter, sans-serif">Start 7-day free trial</button>
+      <p style="margin: 0; font-size: 14px; line-height: 21px; color: {{ k.c3B3833 }}; text-align: center">Free until 8 November, then <strong>€29.99 a year</strong>. Cancel before then and you pay nothing.</p>
+      <div style="display: flex; gap: 10px; align-items: flex-start; background: {{ k.cF6F4F0 }}; border-radius: 12px; padding: 12px 14px; font-size: 13px; line-height: 19px; color: {{ k.c3B3833 }}">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none; margin-top: 1px"><rect x="4" y="11" width="16" height="10" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg>
+        <span>Secure checkout by Stripe — we never see your card details. Cancel any time in <strong>Me › Subscription</strong>.</span>
+      </div>
+      <p style="margin: 0; font-size: 14px; color: {{ k.c3B3833 }}; text-align: center">Already Premium in the app? <a href="#signin" style="color: {{ k.c0F5C63 }}; font-weight: 600">Sign in</a></p>
+      <div style="display: flex; justify-content: center; gap: 4px; flex-wrap: wrap">
+        <a href="#terms" style="min-height: 44px; padding: 0 10px; display: flex; align-items: center; color: {{ k.c0F5C63 }}; font-size: 13px; font-weight: 600">Terms</a>
+        <a href="#privacy" style="min-height: 44px; padding: 0 10px; display: flex; align-items: center; color: {{ k.c0F5C63 }}; font-size: 13px; font-weight: 600">Privacy</a>
+        <a href="#impressum" style="min-height: 44px; padding: 0 10px; display: flex; align-items: center; color: {{ k.c0F5C63 }}; font-size: 13px; font-weight: 600">Impressum</a>
+      </div>
+    </section>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"dark":{"editor":"boolean","default":false},"size":{"editor":"enum","options":["desktop","mobile"],"default":"desktop"},"$preview":{"width":1440,"height":900}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const __dark = this.props.dark === true || this.props.dark === 'true';
+    const k = __dark ? {"cF6F4F0": "#121614", "cFFFFFF": "#1A2221", "c1F1D1A": "#ECEAE5", "c3B3833": "#C9CFCD", "c4A453E": "#C2C8C6", "c6B655C": "#9AA5A3", "cE4E0D8": "#2C3634", "cEFECE6": "#252D2C", "cCFC9BE": "#4A5755", "cA8A196": "#6F7B79", "cE9E5DD": "#252D2C", "cEDE9E1": "#252D2C", "c0F5C63": "#5CC8C2", "c0A4449": "#8EDDD8", "cE6F0F0": "#173332", "cCFE3E3": "#1F4442", "cD3E6E6": "#1F3D3B", "cE8A33D": "#F2B85C", "c2A1A00": "#2A1A00", "cFBF1DF": "#33291A", "c8A5A12": "#E0C27A", "cB7791F": "#C9A15A", "cFDF6EA": "#2A2418", "cFBEFD9": "#33291A", "c5C3D08": "#E0C27A", "c5C4A2A": "#D8C8A8", "cFDECEA": "#3A1F1C", "cB42318": "#F0A49B", "cEAF4EE": "#1D3327", "c24653F": "#7FD3A0", "c2E7D4F": "#7FD3A0", "cF3F8F8": "#16201F", "cFBFAF7": "#161C1B", "c000000": "#F2F2F2", "cFDF3E2": "#33291A", "c55524C": "#000000"} : {"cF6F4F0": "#F6F4F0", "cFFFFFF": "#FFFFFF", "c1F1D1A": "#1F1D1A", "c3B3833": "#3B3833", "c4A453E": "#4A453E", "c6B655C": "#6B655C", "cE4E0D8": "#E4E0D8", "cEFECE6": "#EFECE6", "cCFC9BE": "#CFC9BE", "cA8A196": "#A8A196", "cE9E5DD": "#E9E5DD", "cEDE9E1": "#EDE9E1", "c0F5C63": "#0F5C63", "c0A4449": "#0A4449", "cE6F0F0": "#E6F0F0", "cCFE3E3": "#CFE3E3", "cD3E6E6": "#D3E6E6", "cE8A33D": "#E8A33D", "c2A1A00": "#2A1A00", "cFBF1DF": "#FBF1DF", "c8A5A12": "#8A5A12", "cB7791F": "#B7791F", "cFDF6EA": "#FDF6EA", "cFBEFD9": "#FBEFD9", "c5C3D08": "#5C3D08", "c5C4A2A": "#5C4A2A", "cFDECEA": "#FDECEA", "cB42318": "#B42318", "cEAF4EE": "#EAF4EE", "c24653F": "#24653F", "c2E7D4F": "#2E7D4F", "cF3F8F8": "#F3F8F8", "cFBFAF7": "#FBFAF7", "c000000": "#000000", "cFDF3E2": "#FDF3E2", "c55524C": "#55524C"};
+    const mobile = this.props.size === 'mobile';
+    return { k: k, darkStr: __dark ? 'true' : 'false',
+      minH: mobile ? '0' : '900px',
+      outerBg: mobile ? k.cFFFFFF : 'rgba(31,29,26,0.55)',
+      outerPad: mobile ? '0' : '72px 32px',
+      dlgR: mobile ? '0' : '20px',
+      shadow: mobile ? 'none' : '0 24px 60px rgba(0,0,0,0.25)',
+      colPad: mobile ? '24px 20px' : '40px',
+      h1: mobile ? '26px' : '32px'
+    };
+  }
+}
+</script>
+</body>
+</html>

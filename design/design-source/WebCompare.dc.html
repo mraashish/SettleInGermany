@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Web · Comparison page</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>body{margin:0}</style>
+</helmet>
+<div style="width: 100%; position: relative; background: {{ k.cF6F4F0 }}; color: {{ k.c1F1D1A }}; font-family: Inter, system-ui, sans-serif">
+
+  <sc-if value="{{ desktop }}" hint-placeholder-val="{{ true }}">
+    <header style="background: {{ k.cFFFFFF }}; border-bottom: 1px solid {{ k.cE4E0D8 }}">
+      <div style="max-width: 1200px; margin: 0 auto; padding: 0 32px; min-height: 68px; display: flex; align-items: center; gap: 32px; flex-wrap: wrap">
+        <a href="web-home-desktop.dc.html" style="display: flex; align-items: center; gap: 10px; text-decoration: none; color: {{ k.c1F1D1A }}; font-size: 17px; font-weight: 700"><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="9" fill="{{ k.c0F5C63 }}"></rect><path d="M9 23c0-5 14-3 14-9 0-3-3-5-7-5" fill="none" stroke="{{ k.cFFFFFF }}" stroke-width="2.6" stroke-linecap="round"></path><circle cx="9" cy="23" r="2.6" fill="{{ k.cE8A33D }}"></circle></svg>Settle in Germany</a>
+        <nav aria-label="Main" style="display: flex; gap: 4px; flex: 1">
+          <a href="web-home-desktop.dc.html" style="min-height: 44px; padding: 0 14px; display: flex; align-items: center; border-radius: 10px; color: {{ k.c3B3833 }}; font-size: 15px; font-weight: 500; text-decoration: none">Home</a>
+          <a href="web-guide-desktop.dc.html" style="min-height: 44px; padding: 0 14px; display: flex; align-items: center; border-radius: 10px; color: {{ k.c3B3833 }}; font-size: 15px; font-weight: 500; text-decoration: none">Guides</a>
+          <a href="web-paywall-desktop.dc.html" style="min-height: 44px; padding: 0 14px; display: flex; align-items: center; gap: 6px; border-radius: 10px; color: {{ k.c3B3833 }}; font-size: 15px; font-weight: 500; text-decoration: none">Assist <span style="font-size: 10px; font-weight: 700; background: {{ k.cE8A33D }}; color: {{ k.c2A1A00 }}; border-radius: 4px; padding: 1px 5px">AI</span></a>
+          <a href="web-compare-desktop.dc.html" aria-current="page" style="min-height: 44px; padding: 0 14px; display: flex; align-items: center; border-radius: 10px; background: {{ k.cE6F0F0 }}; color: {{ k.c0F5C63 }}; font-size: 15px; font-weight: 700; text-decoration: none">Tools</a>
+        </nav>
+        <div style="display: flex; align-items: center; gap: 10px">
+          <button style="min-height: 44px; padding: 0 12px; border-radius: 10px; border: 1px solid {{ k.cE4E0D8 }}; background: {{ k.cFFFFFF }}; font: 500 14px Inter, sans-serif; color: {{ k.c1F1D1A }}">English ▾</button>
+          <a href="#signin" style="min-height: 44px; padding: 0 14px; display: flex; align-items: center; color: {{ k.c0F5C63 }}; font-size: 15px; font-weight: 600; text-decoration: none">Sign in</a>
+          <a href="#app" style="min-height: 44px; padding: 0 18px; border-radius: 12px; background: {{ k.c0F5C63 }}; color: {{ k.cFFFFFF }}; display: flex; align-items: center; font-size: 15px; font-weight: 700; text-decoration: none">Get the app</a>
+        </div>
+      </div>
+    </header>
+  </sc-if>
+  <sc-if value="{{ mobile }}" hint-placeholder-val="{{ false }}">
+    <header style="background: {{ k.cFFFFFF }}; border-bottom: 1px solid {{ k.cE4E0D8 }}; min-height: 56px; display: flex; align-items: center; justify-content: space-between; padding: 0 12px 0 16px">
+      <a href="web-home-mobile.dc.html" style="display: flex; align-items: center; gap: 8px; text-decoration: none; color: {{ k.c1F1D1A }}; font-size: 16px; font-weight: 700"><svg width="28" height="28" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="9" fill="{{ k.c0F5C63 }}"></rect><path d="M9 23c0-5 14-3 14-9 0-3-3-5-7-5" fill="none" stroke="{{ k.cFFFFFF }}" stroke-width="2.6" stroke-linecap="round"></path><circle cx="9" cy="23" r="2.6" fill="{{ k.cE8A33D }}"></circle></svg>Settle in Germany</a>
+      <a href="#app" style="min-height: 40px; padding: 0 14px; border-radius: 999px; background: {{ k.c0F5C63 }}; color: {{ k.cFFFFFF }}; display: flex; align-items: center; font-size: 14px; font-weight: 700; text-decoration: none">Get the app</a>
+    </header>
+  </sc-if>
+
+  <main style="max-width: 1200px; margin: 0 auto; padding: {{ pad }}; box-sizing: border-box; display: flex; flex-direction: column; gap: 24px">
+    <nav aria-label="Breadcrumb" style="font-size: 14px; color: {{ k.c6B655C }}; display: flex; gap: 6px; flex-wrap: wrap"><a href="#tools" style="color: {{ k.c0F5C63 }}">Tools</a><span aria-hidden="true">›</span><a href="#comparisons" style="color: {{ k.c0F5C63 }}">Comparisons</a><span aria-hidden="true">›</span><span aria-current="page">{{ c.crumb }}</span></nav>
+
+    <div style="display: flex; flex-direction: column; gap: 10px; max-width: 760px">
+      <h1 style="margin: 0; font-size: {{ h1 }}; line-height: 1.15; font-weight: 700; letter-spacing: -0.02em">{{ c.title }}</h1>
+      <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap; font-size: 14px; color: {{ k.c6B655C }}"><span style="font-size: 11px; font-weight: 700; border: 1px solid {{ k.c0F5C63 }}; color: {{ k.c0F5C63 }}; border-radius: 4px; padding: 0 5px; line-height: 17px">DE</span><span style="font-size: 16px; font-weight: 500; color: {{ k.c1F1D1A }}">{{ c.de }}</span><span>· Fees last checked [date]</span></div>
+    </div>
+
+    <section aria-label="What matters" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px">
+      <sc-for list="{{ c.matters }}" as="m" hint-placeholder-count="3">
+        <div style="background: {{ k.cFFFFFF }}; border: 1px solid {{ k.cE4E0D8 }}; border-radius: 16px; padding: 18px; display: flex; flex-direction: column; gap: 6px"><span style="width: 28px; height: 28px; border-radius: 999px; background: {{ k.cE6F0F0 }}; color: {{ k.c0F5C63 }}; font-size: 14px; font-weight: 700; display: flex; align-items: center; justify-content: center">{{ m.n }}</span><strong style="font-size: 16px">{{ m.head }}</strong><span style="font-size: 15px; line-height: 22px; color: {{ k.c3B3833 }}">{{ m.body }}</span></div>
+      </sc-for>
+    </section>
+
+    <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap">
+      <div role="group" aria-label="Filters" style="display: flex; gap: 8px; flex-wrap: wrap">
+        <sc-for list="{{ c.filters }}" as="f" hint-placeholder-count="3">
+          <button aria-pressed="{{ f.pressed }}" style="min-height: 40px; padding: 0 14px; border-radius: 999px; border: 1px solid {{ f.border }}; background: {{ f.bg }}; font: 500 14px Inter, sans-serif; color: {{ f.color }}">{{ f.label }}</button>
+        </sc-for>
+      </div>
+      <label style="display: flex; align-items: center; gap: 8px; font-size: 14px; color: {{ k.c3B3833 }}">Sort by
+        <span style="min-height: 40px; padding: 0 12px; border-radius: 10px; border: 1px solid {{ k.cCFC9BE }}; background: {{ k.cFFFFFF }}; display: flex; align-items: center; font-weight: 600; color: {{ k.c1F1D1A }}">{{ c.sort }} ▾</span>
+      </label>
+    </div>
+
+    <sc-if value="{{ desktop }}" hint-placeholder-val="{{ true }}">
+      <div style="background: {{ k.cFFFFFF }}; border: 1px solid {{ k.cE4E0D8 }}; border-radius: 16px; overflow-x: auto">
+        <table style="width: 100%; border-collapse: collapse; font-size: 15px; min-width: 960px">
+          <caption style="position: absolute; width: 1px; height: 1px; overflow: hidden">{{ c.caption }}</caption>
+          <thead>
+            <tr style="background: {{ k.cF6F4F0 }}; text-align: left; font-size: 13px; color: {{ k.c4A453E }}">
+              <th scope="col" style="padding: 14px 20px; font-weight: 600">{{ c.firstCol }}</th>
+              <sc-for list="{{ c.cols }}" as="col" hint-placeholder-count="6">
+                <th scope="col" style="padding: 14px 12px; font-weight: 600">{{ col }}</th>
+              </sc-for>
+              <th scope="col" style="padding: 14px 20px"><span style="position: absolute; width: 1px; height: 1px; overflow: hidden">Link</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            <sc-for list="{{ c.providers }}" as="p" hint-placeholder-count="3">
+              <tr style="border-top: 1px solid {{ k.cE4E0D8 }}; background: {{ p.rowBg }}">
+                <th scope="row" style="padding: 18px 20px; text-align: left; font-weight: 400; vertical-align: top"><span style="display: flex; flex-direction: column; gap: 4px"><span style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap"><strong style="font-size: 16px">{{ p.name }}</strong><sc-if value="{{ p.hasBadge }}" hint-placeholder-val="{{ false }}"><span style="background: {{ p.badgeBg }}; color: {{ p.badgeFg }}; border-radius: 999px; padding: 2px 8px; font-size: 11px; font-weight: 700">{{ p.badge }}</span></sc-if></span><span style="font-size: 12px; color: {{ k.c6B655C }}; max-width: 240px">{{ p.note }}</span></span></th>
+                <sc-for list="{{ p.cells }}" as="cl" hint-placeholder-count="6">
+                  <td style="padding: 18px 12px; vertical-align: top"><span style="color: {{ cl.color }}; background: {{ cl.bg }}; border-radius: 4px; padding: 1px 5px; font-weight: {{ cl.weight }}; white-space: nowrap">{{ cl.value }}</span></td>
+                </sc-for>
+                <td style="padding: 14px 20px; vertical-align: top"><a href="https://example.com" style="min-height: 44px; padding: 0 16px; border-radius: 10px; border: 1.5px solid {{ k.c0F5C63 }}; background: {{ p.btnBg }}; color: {{ p.btnFg }}; text-decoration: none; display: inline-flex; align-items: center; font-size: 14px; font-weight: 700; white-space: nowrap">Visit provider ↗</a></td>
+              </tr>
+            </sc-for>
+          </tbody>
+        </table>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ mobile }}" hint-placeholder-val="{{ false }}">
+      <div style="display: flex; flex-direction: column; gap: 14px">
+        <sc-for list="{{ c.providers }}" as="p" hint-placeholder-count="3">
+          <article style="background: {{ k.cFFFFFF }}; border: {{ p.border }}; border-radius: 16px; padding: 16px; display: flex; flex-direction: column; gap: 10px">
+            <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px"><strong style="font-size: 17px">{{ p.name }}</strong><sc-if value="{{ p.hasBadge }}" hint-placeholder-val="{{ false }}"><span style="background: {{ p.badgeBg }}; color: {{ p.badgeFg }}; border-radius: 999px; padding: 2px 8px; font-size: 11px; font-weight: 700">{{ p.badge }}</span></sc-if></div>
+            <dl style="margin: 0; display: flex; flex-direction: column">
+              <sc-for list="{{ p.cells }}" as="cl" hint-placeholder-count="6">
+                <div style="min-height: 38px; display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 10px; border-top: 1px solid {{ k.cEFECE6 }}; font-size: 14px"><dt style="color: {{ k.c4A453E }}">{{ cl.label }}</dt><dd style="margin: 0; color: {{ cl.color }}; background: {{ cl.bg }}; border-radius: 4px; padding: 1px 5px; font-weight: {{ cl.weight }}">{{ cl.value }}</dd></div>
+              </sc-for>
+            </dl>
+            <a href="https://example.com" style="min-height: 48px; border-radius: 12px; border: 1.5px solid {{ k.c0F5C63 }}; background: {{ p.btnBg }}; color: {{ p.btnFg }}; text-decoration: none; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 700">Visit provider ↗</a>
+            <span style="font-size: 12px; line-height: 17px; color: {{ k.c6B655C }}">{{ p.note }}</span>
+          </article>
+        </sc-for>
+      </div>
+    </sc-if>
+
+    <div style="display: flex; flex-direction: column; gap: 8px; font-size: 14px; line-height: 21px; color: {{ k.c6B655C }}; max-width: 760px">
+      <span>Ranking is by {{ c.sortLower }}, never by commission. Fees change — confirm on the provider’s site before you sign up.</span>
+      <span style="display: flex; gap: 16px; flex-wrap: wrap"><a href="#money" style="color: {{ k.c0F5C63 }}; font-weight: 600; min-height: 32px; display: flex; align-items: center">How we make money</a><a href="web-guide-desktop.dc.html" style="color: {{ k.c0F5C63 }}; font-weight: 600; min-height: 32px; display: flex; align-items: center">{{ c.guideLink }}</a><a href="#report" style="color: {{ k.c0F5C63 }}; font-weight: 600; min-height: 32px; display: flex; align-items: center">Report wrong information</a></span>
+    </div>
+
+    <aside aria-label="Advertisement" style="height: 100px; box-sizing: border-box; border: 1px dashed {{ k.cCFC9BE }}; border-radius: 12px; background: {{ k.cFBFAF7 }}; display: flex; align-items: center; justify-content: center; position: relative; font-size: 13px; color: {{ k.c6B655C }}">
+      <span style="position: absolute; top: 8px; left: 10px; font-size: 11px; font-weight: 700; border: 1px solid {{ k.cCFC9BE }}; border-radius: 4px; padding: 0 5px">Ad</span>[Banner below results · fixed height]
+    </aside>
+  </main>
+
+  <footer style="border-top: 1px solid {{ k.cE4E0D8 }}; background: {{ k.cFFFFFF }}">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 24px 32px {{ footBottom }}; display: flex; gap: 12px 24px; flex-wrap: wrap; align-items: center; font-size: 14px; color: {{ k.c6B655C }}; box-sizing: border-box">
+      <span style="flex: 1 1 280px">General information, not legal advice. © 2026 Settle in Germany</span>
+      <a href="#impressum" style="color: {{ k.c3B3833 }}; min-height: 32px; display: flex; align-items: center">Impressum</a>
+      <a href="#privacy" style="color: {{ k.c3B3833 }}; min-height: 32px; display: flex; align-items: center">Privacy</a>
+      <a href="#terms" style="color: {{ k.c3B3833 }}; min-height: 32px; display: flex; align-items: center">Terms</a>
+      <a href="#money" style="color: {{ k.c3B3833 }}; min-height: 32px; display: flex; align-items: center">How we make money</a>
+    </div>
+  </footer>
+
+  <sc-if value="{{ mobile }}" hint-placeholder-val="{{ false }}">
+    <div style="position: absolute; left: 0; right: 0; bottom: 0">
+      <dc-import name="TabBar" platform="ios" active="tools" dark="{{ darkStr }}" hint-size="390px,84px"></dc-import>
+    </div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"dark":{"editor":"boolean","default":false},"size":{"editor":"enum","options":["desktop","mobile"],"default":"desktop"},"topic":{"editor":"enum","options":["blocked","bank"],"default":"blocked"},"$preview":{"width":1440,"height":1300}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const __dark = this.props.dark === true || this.props.dark === 'true';
+    const k = __dark ? {"cF6F4F0": "#121614", "cFFFFFF": "#1A2221", "c1F1D1A": "#ECEAE5", "c3B3833": "#C9CFCD", "c4A453E": "#C2C8C6", "c6B655C": "#9AA5A3", "cE4E0D8": "#2C3634", "cEFECE6": "#252D2C", "cCFC9BE": "#4A5755", "cA8A196": "#6F7B79", "cE9E5DD": "#252D2C", "cEDE9E1": "#252D2C", "c0F5C63": "#5CC8C2", "c0A4449": "#8EDDD8", "cE6F0F0": "#173332", "cCFE3E3": "#1F4442", "cD3E6E6": "#1F3D3B", "cE8A33D": "#F2B85C", "c2A1A00": "#2A1A00", "cFBF1DF": "#33291A", "c8A5A12": "#E0C27A", "cB7791F": "#C9A15A", "cFDF6EA": "#2A2418", "cFBEFD9": "#33291A", "c5C3D08": "#E0C27A", "c5C4A2A": "#D8C8A8", "cFDECEA": "#3A1F1C", "cB42318": "#F0A49B", "cEAF4EE": "#1D3327", "c24653F": "#7FD3A0", "c2E7D4F": "#7FD3A0", "cF3F8F8": "#16201F", "cFBFAF7": "#161C1B", "c000000": "#F2F2F2", "cFDF3E2": "#33291A", "c55524C": "#000000"} : {"cF6F4F0": "#F6F4F0", "cFFFFFF": "#FFFFFF", "c1F1D1A": "#1F1D1A", "c3B3833": "#3B3833", "c4A453E": "#4A453E", "c6B655C": "#6B655C", "cE4E0D8": "#E4E0D8", "cEFECE6": "#EFECE6", "cCFC9BE": "#CFC9BE", "cA8A196": "#A8A196", "cE9E5DD": "#E9E5DD", "cEDE9E1": "#EDE9E1", "c0F5C63": "#0F5C63", "c0A4449": "#0A4449", "cE6F0F0": "#E6F0F0", "cCFE3E3": "#CFE3E3", "cD3E6E6": "#D3E6E6", "cE8A33D": "#E8A33D", "c2A1A00": "#2A1A00", "cFBF1DF": "#FBF1DF", "c8A5A12": "#8A5A12", "cB7791F": "#B7791F", "cFDF6EA": "#FDF6EA", "cFBEFD9": "#FBEFD9", "c5C3D08": "#5C3D08", "c5C4A2A": "#5C4A2A", "cFDECEA": "#FDECEA", "cB42318": "#B42318", "cEAF4EE": "#EAF4EE", "c24653F": "#24653F", "c2E7D4F": "#2E7D4F", "cF3F8F8": "#F3F8F8", "cFBFAF7": "#FBFAF7", "c000000": "#000000", "cFDF3E2": "#FDF3E2", "c55524C": "#55524C"};
+    const mobile = this.props.size === 'mobile';
+    const topic = this.props.topic === 'bank' ? 'bank' : 'blocked';
+    const ph = (v) => ({ value: v, color: k.c8A5A12, bg: k.cFBF1DF, weight: 600 });
+    const yes = (v) => ({ value: '✓ ' + (v || 'Yes'), color: k.c24653F, bg: 'transparent', weight: 600 });
+    const no = (v) => ({ value: '✕ ' + (v || 'No'), color: k.c6B655C, bg: 'transparent', weight: 500 });
+    const txt = (v) => ({ value: v, color: k.c1F1D1A, bg: 'transparent', weight: 600 });
+    const chip = (label, on) => ({ label: label, pressed: on ? 'true' : 'false', bg: on ? k.c0F5C63 : k.cFFFFFF, color: on ? k.cFFFFFF : k.c1F1D1A, border: on ? k.c0F5C63 : k.cCFC9BE });
+    const REF = 'Referral link: we may earn a commission at no cost to you.';
+    const mk = (cols, o) => ({
+      name: o.name, hasBadge: !!o.badge, badge: o.badge || '',
+      badgeBg: o.top ? k.c0F5C63 : k.cE6F0F0, badgeFg: o.top ? k.cFFFFFF : k.c0F5C63,
+      note: o.note, rowBg: o.top ? k.cF3F8F8 : k.cFFFFFF, border: o.top ? '2px solid ' + k.c0F5C63 : '1px solid ' + k.cE4E0D8,
+      btnBg: o.top ? k.c0F5C63 : k.cFFFFFF, btnFg: o.top ? k.cFFFFFF : k.c0F5C63,
+      cells: o.cells.map((cl, i) => Object.assign({ label: cols[i] }, cl))
+    });
+    let c;
+    if (topic === 'blocked') {
+      const cols = ['Setup fee', 'Monthly fee', 'Year one total', 'Opening time', 'First payout', 'Nepal visa'];
+      const cells = () => [ph('€[—]'), ph('€[—]'), ph('€[—]'), ph('[X] days'), ph('[X] days'), yes()];
+      c = {
+        crumb: 'Blocked accounts', title: 'Compare blocked accounts for your German student visa', de: 'Sperrkonto',
+        caption: 'Blocked account providers, sorted by lowest total fees', firstCol: 'Provider', cols: cols,
+        matters: [
+          { n: '1', head: 'The amount is fixed by law', body: 'You deposit [€ yearly amount] and get [€ monthly amount] each month — the same at every provider.' },
+          { n: '2', head: 'Fees are the real difference', body: 'Add the setup fee and 12 monthly fees to see the true cost of year one.' },
+          { n: '3', head: 'Speed matters for your visa', body: 'You need the confirmation before your embassy appointment.' }
+        ],
+        filters: [chip('Accepted for Nepal', true), chip('Accepted for India', false), chip('Without insurance bundle', false)],
+        sort: 'Lowest total fees', sortLower: 'lowest total fees', guideLink: 'Guide: open a blocked account',
+        providers: [
+          mk(cols, { name: '[Provider A]', badge: 'Lowest fees', top: true, note: REF, cells: cells() }),
+          mk(cols, { name: '[Provider B]', badge: 'Fastest opening', note: 'Not a partner — listed because it fits your needs.', cells: cells() }),
+          mk(cols, { name: '[Provider C]', note: 'Bundled with insurance · ' + REF, cells: cells() })
+        ]
+      };
+    } else {
+      const cols = ['Monthly fee', 'Fee-free if', 'Without registration', 'App in English', 'Cards', 'Branches'];
+      c = {
+        crumb: 'Bank accounts', title: 'Compare bank accounts for newcomers to Germany', de: 'Girokonto',
+        caption: 'Bank accounts, sorted by lowest monthly fee', firstCol: 'Bank', cols: cols,
+        matters: [
+          { n: '1', head: 'Can you open it yet?', body: 'Some banks need your address registration first. Others open with just your passport.' },
+          { n: '2', head: 'Read the fine print on “free”', body: 'Free often means free only if a set amount comes in each month.' },
+          { n: '3', head: 'You may need a girocard', body: 'Some shops, offices and landlords still don’t take Visa or Mastercard debit cards.' }
+        ],
+        filters: [chip('Open without address registration', true), chip('App in English', true), chip('Has branches', false)],
+        sort: 'Lowest monthly fee', sortLower: 'lowest monthly fee', guideLink: 'Guide: open a bank account',
+        providers: [
+          mk(cols, { name: '[Bank A]', badge: 'No monthly fee', top: true, note: 'Online bank · ' + REF, cells: [ph('€[—]'), ph('[condition]'), yes(), yes(), ph('[Debit Visa]'), no('Online only')] }),
+          mk(cols, { name: '[Bank B]', note: 'Online bank · ' + REF, cells: [ph('€[—]'), ph('[condition]'), yes(), yes(), ph('[Debit Mastercard]'), no('Online only')] }),
+          mk(cols, { name: '[Bank C]', badge: 'Has branches', note: 'Not a partner — listed because it fits your needs.', cells: [ph('€[—]'), ph('[condition]'), no(), no('German only'), ph('[girocard]'), yes('In Leipzig')] })
+        ]
+      };
+    }
+    return { k: k, darkStr: __dark ? 'true' : 'false',
+      desktop: !mobile, mobile: mobile, c: c,
+      pad: mobile ? '16px 16px 32px' : '24px 32px 48px',
+      h1: mobile ? '28px' : '40px',
+      footBottom: mobile ? '108px' : '24px'
+    };
+  }
+}
+</script>
+</body>
+</html>

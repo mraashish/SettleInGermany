@@ -1,0 +1,3521 @@
+{
+  "v": 3,
+  "createdOnFiles": {
+    "v": 1,
+    "at": "2026-11-01T10:00:00Z"
+  },
+  "title": "Settle in Germany — Calm Ledger",
+  "launch": {
+    "view": "canvas",
+    "page": "calm"
+  },
+  "pages": [
+    {
+      "id": "calm",
+      "name": "Calm Ledger"
+    },
+    {
+      "id": "ios",
+      "name": "iOS"
+    },
+    {
+      "id": "android",
+      "name": "Android"
+    },
+    {
+      "id": "web",
+      "name": "Web"
+    },
+    {
+      "id": "explore",
+      "name": "Explorations"
+    },
+    {
+      "id": "parts",
+      "name": "Components"
+    }
+  ],
+  "boards": {
+    "Main.dc.html": {
+      "x": 0,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "title": "R1 · Home",
+      "page": "calm"
+    },
+    "A-Guide.dc.html": {
+      "x": 470,
+      "y": 0,
+      "w": 390,
+      "h": 2000,
+      "title": "R1 · Guide page",
+      "page": "calm"
+    },
+    "A-Letter.dc.html": {
+      "x": 940,
+      "y": 0,
+      "w": 390,
+      "h": 1600,
+      "title": "R1 · Letter explainer result",
+      "page": "calm"
+    },
+    "Foundations.dc.html": {
+      "x": 1490,
+      "y": 0,
+      "w": 1280,
+      "h": 1560,
+      "title": "Colour, type & icons (light + dark)",
+      "radius": 0,
+      "page": "calm"
+    },
+    "ios-onboard-1.dc.html": {
+      "x": 0,
+      "y": 300,
+      "w": 390,
+      "h": 844,
+      "title": "iOS · 1 Welcome",
+      "page": "ios"
+    },
+    "ios-onboard-2.dc.html": {
+      "x": 470,
+      "y": 300,
+      "w": 390,
+      "h": 844,
+      "title": "iOS · 2 Nationality",
+      "page": "ios"
+    },
+    "ios-onboard-3.dc.html": {
+      "x": 940,
+      "y": 300,
+      "w": 390,
+      "h": 844,
+      "title": "iOS · 3 Status",
+      "page": "ios"
+    },
+    "ios-onboard-4.dc.html": {
+      "x": 1410,
+      "y": 300,
+      "w": 390,
+      "h": 844,
+      "title": "iOS · 4 City",
+      "page": "ios"
+    },
+    "ios-onboard-5.dc.html": {
+      "x": 1880,
+      "y": 300,
+      "w": 390,
+      "h": 844,
+      "title": "iOS · 5 Stage",
+      "page": "ios"
+    },
+    "ios-onboard-6.dc.html": {
+      "x": 2350,
+      "y": 300,
+      "w": 390,
+      "h": 844,
+      "title": "iOS · 6 Arrival date",
+      "page": "ios"
+    },
+    "ios-onboard-7.dc.html": {
+      "x": 2820,
+      "y": 300,
+      "w": 390,
+      "h": 844,
+      "title": "iOS · 7 Notifications",
+      "page": "ios"
+    },
+    "ios-onboard-8.dc.html": {
+      "x": 3290,
+      "y": 300,
+      "w": 390,
+      "h": 844,
+      "title": "iOS · 8 Account",
+      "page": "ios"
+    },
+    "ios-onboard-9.dc.html": {
+      "x": 3760,
+      "y": 300,
+      "w": 390,
+      "h": 844,
+      "title": "iOS · 9 Roadmap ready",
+      "page": "ios"
+    },
+    "and-onboard-1.dc.html": {
+      "x": 0,
+      "y": 300,
+      "w": 390,
+      "h": 844,
+      "title": "Android · 1 Welcome",
+      "page": "android"
+    },
+    "and-onboard-2.dc.html": {
+      "x": 470,
+      "y": 300,
+      "w": 390,
+      "h": 844,
+      "title": "Android · 2 Nationality",
+      "page": "android"
+    },
+    "and-onboard-3.dc.html": {
+      "x": 940,
+      "y": 300,
+      "w": 390,
+      "h": 844,
+      "title": "Android · 3 Status",
+      "page": "android"
+    },
+    "and-onboard-4.dc.html": {
+      "x": 1410,
+      "y": 300,
+      "w": 390,
+      "h": 844,
+      "title": "Android · 4 City",
+      "page": "android"
+    },
+    "and-onboard-5.dc.html": {
+      "x": 1880,
+      "y": 300,
+      "w": 390,
+      "h": 844,
+      "title": "Android · 5 Stage",
+      "page": "android"
+    },
+    "and-onboard-6.dc.html": {
+      "x": 2350,
+      "y": 300,
+      "w": 390,
+      "h": 844,
+      "title": "Android · 6 Arrival date",
+      "page": "android"
+    },
+    "and-onboard-7.dc.html": {
+      "x": 2820,
+      "y": 300,
+      "w": 390,
+      "h": 844,
+      "title": "Android · 7 Notifications",
+      "page": "android"
+    },
+    "and-onboard-8.dc.html": {
+      "x": 3290,
+      "y": 300,
+      "w": 390,
+      "h": 844,
+      "title": "Android · 8 Account",
+      "page": "android"
+    },
+    "and-onboard-9.dc.html": {
+      "x": 3760,
+      "y": 300,
+      "w": 390,
+      "h": 844,
+      "title": "Android · 9 Roadmap ready",
+      "page": "android"
+    },
+    "ios-home.dc.html": {
+      "x": 0,
+      "y": 1564,
+      "w": 390,
+      "h": 1300,
+      "title": "iOS · Home",
+      "page": "ios"
+    },
+    "ios-roadmap.dc.html": {
+      "x": 470,
+      "y": 1564,
+      "w": 390,
+      "h": 1300,
+      "title": "iOS · Roadmap detail",
+      "page": "ios"
+    },
+    "ios-guides.dc.html": {
+      "x": 940,
+      "y": 1564,
+      "w": 390,
+      "h": 1300,
+      "title": "iOS · Guides list",
+      "page": "ios"
+    },
+    "ios-reminders.dc.html": {
+      "x": 1410,
+      "y": 1564,
+      "w": 390,
+      "h": 1300,
+      "title": "iOS · Reminders",
+      "page": "ios"
+    },
+    "ios-home-dark.dc.html": {
+      "x": 1880,
+      "y": 1564,
+      "w": 390,
+      "h": 1300,
+      "title": "iOS · Home (dark)",
+      "page": "ios"
+    },
+    "and-home.dc.html": {
+      "x": 0,
+      "y": 1564,
+      "w": 390,
+      "h": 1300,
+      "title": "Android · Home",
+      "page": "android"
+    },
+    "and-roadmap.dc.html": {
+      "x": 470,
+      "y": 1564,
+      "w": 390,
+      "h": 1300,
+      "title": "Android · Roadmap detail",
+      "page": "android"
+    },
+    "and-guides.dc.html": {
+      "x": 940,
+      "y": 1564,
+      "w": 390,
+      "h": 1300,
+      "title": "Android · Guides list",
+      "page": "android"
+    },
+    "and-reminders.dc.html": {
+      "x": 1410,
+      "y": 1564,
+      "w": 390,
+      "h": 1300,
+      "title": "Android · Reminders",
+      "page": "android"
+    },
+    "and-home-dark.dc.html": {
+      "x": 1880,
+      "y": 1564,
+      "w": 390,
+      "h": 1300,
+      "title": "Android · Home (dark)",
+      "page": "android"
+    },
+    "ios-assist.dc.html": {
+      "x": 0,
+      "y": 3284,
+      "w": 390,
+      "h": 1100,
+      "title": "iOS · Assist hub",
+      "page": "ios"
+    },
+    "ios-capture.dc.html": {
+      "x": 470,
+      "y": 3284,
+      "w": 390,
+      "h": 844,
+      "title": "iOS · Letter capture",
+      "page": "ios"
+    },
+    "ios-processing.dc.html": {
+      "x": 940,
+      "y": 3284,
+      "w": 390,
+      "h": 844,
+      "title": "iOS · Letter processing",
+      "page": "ios"
+    },
+    "ios-result.dc.html": {
+      "x": 1410,
+      "y": 3284,
+      "w": 390,
+      "h": 1600,
+      "title": "iOS · Letter result",
+      "page": "ios"
+    },
+    "ios-reply.dc.html": {
+      "x": 1880,
+      "y": 3284,
+      "w": 390,
+      "h": 1400,
+      "title": "iOS · Reply writer",
+      "page": "ios"
+    },
+    "ios-paywall.dc.html": {
+      "x": 2350,
+      "y": 3284,
+      "w": 390,
+      "h": 1000,
+      "title": "iOS · Paywall (sheet)",
+      "page": "ios"
+    },
+    "ios-consent.dc.html": {
+      "x": 2820,
+      "y": 3284,
+      "w": 390,
+      "h": 844,
+      "title": "iOS · Consent banner",
+      "page": "ios"
+    },
+    "and-assist.dc.html": {
+      "x": 0,
+      "y": 3284,
+      "w": 390,
+      "h": 1100,
+      "title": "Android · Assist hub",
+      "page": "android"
+    },
+    "and-capture.dc.html": {
+      "x": 470,
+      "y": 3284,
+      "w": 390,
+      "h": 844,
+      "title": "Android · Letter capture",
+      "page": "android"
+    },
+    "and-processing.dc.html": {
+      "x": 940,
+      "y": 3284,
+      "w": 390,
+      "h": 844,
+      "title": "Android · Letter processing",
+      "page": "android"
+    },
+    "and-result.dc.html": {
+      "x": 1410,
+      "y": 3284,
+      "w": 390,
+      "h": 1600,
+      "title": "Android · Letter result",
+      "page": "android"
+    },
+    "and-reply.dc.html": {
+      "x": 1880,
+      "y": 3284,
+      "w": 390,
+      "h": 1400,
+      "title": "Android · Reply writer",
+      "page": "android"
+    },
+    "and-paywall.dc.html": {
+      "x": 2350,
+      "y": 3284,
+      "w": 390,
+      "h": 1000,
+      "title": "Android · Paywall (full-screen)",
+      "page": "android"
+    },
+    "and-consent.dc.html": {
+      "x": 2820,
+      "y": 3284,
+      "w": 390,
+      "h": 844,
+      "title": "Android · Consent banner",
+      "page": "android"
+    },
+    "ios-compare-blocked.dc.html": {
+      "x": 0,
+      "y": 5304,
+      "w": 390,
+      "h": 2200,
+      "title": "iOS · Compare blocked accounts",
+      "page": "ios"
+    },
+    "ios-compare-bank.dc.html": {
+      "x": 470,
+      "y": 5304,
+      "w": 390,
+      "h": 2200,
+      "title": "iOS · Compare bank accounts",
+      "page": "ios"
+    },
+    "and-compare-blocked.dc.html": {
+      "x": 0,
+      "y": 5304,
+      "w": 390,
+      "h": 2200,
+      "title": "Android · Compare blocked accounts",
+      "page": "android"
+    },
+    "and-compare-bank.dc.html": {
+      "x": 470,
+      "y": 5304,
+      "w": 390,
+      "h": 2200,
+      "title": "Android · Compare bank accounts",
+      "page": "android"
+    },
+    "web-home-desktop.dc.html": {
+      "x": 0,
+      "y": 300,
+      "w": 1440,
+      "h": 1240,
+      "title": "Web · Home (desktop, signed in)",
+      "expand": "fill",
+      "page": "web"
+    },
+    "web-guide-desktop.dc.html": {
+      "x": 1520,
+      "y": 300,
+      "w": 1440,
+      "h": 2500,
+      "title": "Web · Guide page (desktop, from Google)",
+      "expand": "fill",
+      "page": "web"
+    },
+    "web-compare-desktop.dc.html": {
+      "x": 3040,
+      "y": 300,
+      "w": 1440,
+      "h": 1300,
+      "title": "Web · Compare blocked accounts (desktop)",
+      "expand": "fill",
+      "page": "web"
+    },
+    "web-paywall-desktop.dc.html": {
+      "x": 4560,
+      "y": 300,
+      "w": 1440,
+      "h": 900,
+      "title": "Web · Paywall (desktop, Stripe)",
+      "expand": "fill",
+      "page": "web"
+    },
+    "web-home-mobile.dc.html": {
+      "x": 0,
+      "y": 3220,
+      "w": 390,
+      "h": 2250,
+      "title": "Web · Home (mobile)",
+      "page": "web"
+    },
+    "web-guide-mobile.dc.html": {
+      "x": 470,
+      "y": 3220,
+      "w": 390,
+      "h": 3900,
+      "title": "Web · Guide page (mobile)",
+      "page": "web"
+    },
+    "web-compare-mobile.dc.html": {
+      "x": 940,
+      "y": 3220,
+      "w": 390,
+      "h": 2500,
+      "title": "Web · Compare blocked accounts (mobile)",
+      "page": "web"
+    },
+    "web-paywall-mobile.dc.html": {
+      "x": 1410,
+      "y": 3220,
+      "w": 390,
+      "h": 1200,
+      "title": "Web · Paywall (mobile)",
+      "page": "web"
+    },
+    "WebHome.dc.html": {
+      "x": 6110,
+      "y": 0,
+      "w": 1440,
+      "h": 1240,
+      "title": "Web home (size)",
+      "expand": "fill",
+      "page": "parts"
+    },
+    "WebGuide.dc.html": {
+      "x": 7630,
+      "y": 0,
+      "w": 1440,
+      "h": 2500,
+      "title": "Web guide (size)",
+      "expand": "fill",
+      "page": "parts"
+    },
+    "WebCompare.dc.html": {
+      "x": 9150,
+      "y": 0,
+      "w": 1440,
+      "h": 1300,
+      "title": "Web compare (size, topic, dark)",
+      "expand": "fill",
+      "page": "parts"
+    },
+    "WebPaywall.dc.html": {
+      "x": 10670,
+      "y": 0,
+      "w": 1440,
+      "h": 900,
+      "title": "Web paywall (size)",
+      "expand": "fill",
+      "page": "parts"
+    },
+    "ComparePage.dc.html": {
+      "x": 5640,
+      "y": 0,
+      "w": 390,
+      "h": 2200,
+      "title": "Comparison page (platform, topic)",
+      "page": "parts"
+    },
+    "AssistHub.dc.html": {
+      "x": 2820,
+      "y": 0,
+      "w": 390,
+      "h": 1100,
+      "title": "Assist hub (platform)",
+      "page": "parts"
+    },
+    "LetterFlow.dc.html": {
+      "x": 3290,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "title": "Letter capture / processing (platform, step)",
+      "page": "parts"
+    },
+    "LetterResult.dc.html": {
+      "x": 3760,
+      "y": 0,
+      "w": 390,
+      "h": 1600,
+      "title": "Letter result (platform, lastFree)",
+      "page": "parts"
+    },
+    "ReplyWriter.dc.html": {
+      "x": 4230,
+      "y": 0,
+      "w": 390,
+      "h": 1400,
+      "title": "Reply writer (platform)",
+      "page": "parts"
+    },
+    "Paywall.dc.html": {
+      "x": 4700,
+      "y": 0,
+      "w": 390,
+      "h": 1000,
+      "title": "Paywall (platform)",
+      "page": "parts"
+    },
+    "Consent.dc.html": {
+      "x": 5170,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "title": "Consent banner (platform)",
+      "page": "parts"
+    },
+    "Onboarding.dc.html": {
+      "x": 0,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "title": "Onboarding step (component: platform + step props)",
+      "page": "parts"
+    },
+    "TabBar.dc.html": {
+      "x": 470,
+      "y": 0,
+      "w": 390,
+      "h": 84,
+      "title": "Tab bar (platform, active, dark)",
+      "page": "parts"
+    },
+    "HomeScreen.dc.html": {
+      "x": 940,
+      "y": 0,
+      "w": 390,
+      "h": 1300,
+      "title": "Home screen (platform, dark)",
+      "page": "parts"
+    },
+    "RoadmapScreen.dc.html": {
+      "x": 1410,
+      "y": 0,
+      "w": 390,
+      "h": 1300,
+      "title": "Roadmap screen (platform)",
+      "page": "parts"
+    },
+    "GuidesScreen.dc.html": {
+      "x": 1880,
+      "y": 0,
+      "w": 390,
+      "h": 1300,
+      "title": "Guides list screen (platform)",
+      "page": "parts"
+    },
+    "RemindersScreen.dc.html": {
+      "x": 2350,
+      "y": 0,
+      "w": 390,
+      "h": 1300,
+      "title": "Reminders screen (platform)",
+      "page": "parts"
+    },
+    "B-Home.dc.html": {
+      "x": 0,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "title": "B · Home",
+      "page": "explore"
+    },
+    "B-Guide.dc.html": {
+      "x": 470,
+      "y": 0,
+      "w": 390,
+      "h": 2000,
+      "title": "B · Guide page",
+      "page": "explore"
+    },
+    "B-Letter.dc.html": {
+      "x": 940,
+      "y": 0,
+      "w": 390,
+      "h": 1600,
+      "title": "B · Letter explainer result",
+      "page": "explore"
+    },
+    "C-Home.dc.html": {
+      "x": 0,
+      "y": 2420,
+      "w": 390,
+      "h": 844,
+      "title": "C · Home (dark)",
+      "page": "explore"
+    },
+    "C-Guide.dc.html": {
+      "x": 470,
+      "y": 2420,
+      "w": 390,
+      "h": 2000,
+      "title": "C · Guide page (dark)",
+      "page": "explore"
+    },
+    "C-Letter.dc.html": {
+      "x": 940,
+      "y": 2420,
+      "w": 390,
+      "h": 1600,
+      "title": "C · Letter explainer result (dark)",
+      "page": "explore"
+    },
+    "ios-guide.dc.html": {
+      "x": 0,
+      "y": 7924,
+      "w": 390,
+      "h": 2300,
+      "title": "iOS · Guide page",
+      "page": "ios"
+    },
+    "and-guide.dc.html": {
+      "x": 0,
+      "y": 7924,
+      "w": 390,
+      "h": 2300,
+      "title": "Android · Guide page",
+      "page": "android"
+    },
+    "ios-result-urgent.dc.html": {
+      "x": 470,
+      "y": 7924,
+      "w": 390,
+      "h": 1600,
+      "title": "iOS · Letter result — urgent / legal",
+      "page": "ios"
+    },
+    "and-result-urgent.dc.html": {
+      "x": 470,
+      "y": 7924,
+      "w": 390,
+      "h": 1600,
+      "title": "Android · Letter result — urgent / legal",
+      "page": "android"
+    },
+    "ios-add-reminder.dc.html": {
+      "x": 940,
+      "y": 7924,
+      "w": 390,
+      "h": 844,
+      "title": "iOS · Add reminder sheet",
+      "page": "ios"
+    },
+    "and-add-reminder.dc.html": {
+      "x": 940,
+      "y": 7924,
+      "w": 390,
+      "h": 844,
+      "title": "Android · Add reminder sheet",
+      "page": "android"
+    },
+    "web-compare-bank-desktop.dc.html": {
+      "x": 0,
+      "y": 7540,
+      "w": 1440,
+      "h": 1300,
+      "title": "Web · Compare bank accounts (desktop)",
+      "page": "web",
+      "expand": "fill"
+    },
+    "web-compare-bank-mobile.dc.html": {
+      "x": 1520,
+      "y": 7540,
+      "w": 390,
+      "h": 2500,
+      "title": "Web · Compare bank accounts (mobile)",
+      "page": "web"
+    },
+    "ios-home-ne.dc.html": {
+      "x": 0,
+      "y": 10644,
+      "w": 390,
+      "h": 1400,
+      "title": "iOS · Home in Nepali",
+      "page": "ios"
+    },
+    "and-home-hi.dc.html": {
+      "x": 940,
+      "y": 10644,
+      "w": 390,
+      "h": 1400,
+      "title": "Android · Home in Hindi",
+      "page": "android"
+    },
+    "ios-home-en-ref.dc.html": {
+      "x": 470,
+      "y": 10644,
+      "w": 390,
+      "h": 1300,
+      "title": "iOS · Home in English (for comparison)",
+      "page": "ios"
+    },
+    "ios-onboard-1-dark.dc.html": {
+      "x": 0,
+      "y": 12464,
+      "w": 390,
+      "h": 844,
+      "title": "iOS dark · 1 Welcome",
+      "page": "ios"
+    },
+    "ios-onboard-2-dark.dc.html": {
+      "x": 470,
+      "y": 12464,
+      "w": 390,
+      "h": 844,
+      "title": "iOS dark · 2 Nationality",
+      "page": "ios"
+    },
+    "ios-onboard-3-dark.dc.html": {
+      "x": 940,
+      "y": 12464,
+      "w": 390,
+      "h": 844,
+      "title": "iOS dark · 3 Status",
+      "page": "ios"
+    },
+    "ios-onboard-4-dark.dc.html": {
+      "x": 1410,
+      "y": 12464,
+      "w": 390,
+      "h": 844,
+      "title": "iOS dark · 4 City",
+      "page": "ios"
+    },
+    "ios-onboard-5-dark.dc.html": {
+      "x": 1880,
+      "y": 12464,
+      "w": 390,
+      "h": 844,
+      "title": "iOS dark · 5 Stage",
+      "page": "ios"
+    },
+    "ios-onboard-6-dark.dc.html": {
+      "x": 2350,
+      "y": 12464,
+      "w": 390,
+      "h": 844,
+      "title": "iOS dark · 6 Arrival date",
+      "page": "ios"
+    },
+    "ios-onboard-7-dark.dc.html": {
+      "x": 2820,
+      "y": 12464,
+      "w": 390,
+      "h": 844,
+      "title": "iOS dark · 7 Notifications",
+      "page": "ios"
+    },
+    "ios-onboard-8-dark.dc.html": {
+      "x": 3290,
+      "y": 12464,
+      "w": 390,
+      "h": 844,
+      "title": "iOS dark · 8 Account",
+      "page": "ios"
+    },
+    "ios-onboard-9-dark.dc.html": {
+      "x": 3760,
+      "y": 12464,
+      "w": 390,
+      "h": 844,
+      "title": "iOS dark · 9 Roadmap ready",
+      "page": "ios"
+    },
+    "ios-roadmap-dark.dc.html": {
+      "x": 0,
+      "y": 13728,
+      "w": 390,
+      "h": 1300,
+      "title": "iOS dark · Roadmap",
+      "page": "ios"
+    },
+    "ios-guides-dark.dc.html": {
+      "x": 470,
+      "y": 13728,
+      "w": 390,
+      "h": 1300,
+      "title": "iOS dark · Guides list",
+      "page": "ios"
+    },
+    "ios-reminders-dark.dc.html": {
+      "x": 940,
+      "y": 13728,
+      "w": 390,
+      "h": 1300,
+      "title": "iOS dark · Reminders",
+      "page": "ios"
+    },
+    "ios-add-reminder-dark.dc.html": {
+      "x": 1410,
+      "y": 13728,
+      "w": 390,
+      "h": 844,
+      "title": "iOS dark · Add reminder",
+      "page": "ios"
+    },
+    "ios-guide-dark.dc.html": {
+      "x": 1880,
+      "y": 13728,
+      "w": 390,
+      "h": 2300,
+      "title": "iOS dark · Guide page",
+      "page": "ios"
+    },
+    "ios-assist-dark.dc.html": {
+      "x": 2350,
+      "y": 13728,
+      "w": 390,
+      "h": 1100,
+      "title": "iOS dark · Assist hub",
+      "page": "ios"
+    },
+    "ios-processing-dark.dc.html": {
+      "x": 2820,
+      "y": 13728,
+      "w": 390,
+      "h": 844,
+      "title": "iOS dark · Letter processing",
+      "page": "ios"
+    },
+    "ios-result-dark.dc.html": {
+      "x": 3290,
+      "y": 13728,
+      "w": 390,
+      "h": 1600,
+      "title": "iOS dark · Letter result",
+      "page": "ios"
+    },
+    "ios-reply-dark.dc.html": {
+      "x": 3760,
+      "y": 13728,
+      "w": 390,
+      "h": 1400,
+      "title": "iOS dark · Reply writer",
+      "page": "ios"
+    },
+    "ios-paywall-dark.dc.html": {
+      "x": 4230,
+      "y": 13728,
+      "w": 390,
+      "h": 1000,
+      "title": "iOS dark · Paywall",
+      "page": "ios"
+    },
+    "ios-consent-dark.dc.html": {
+      "x": 4700,
+      "y": 13728,
+      "w": 390,
+      "h": 844,
+      "title": "iOS dark · Consent banner",
+      "page": "ios"
+    },
+    "ios-compare-blocked-dark.dc.html": {
+      "x": 5170,
+      "y": 13728,
+      "w": 390,
+      "h": 2200,
+      "title": "iOS dark · Compare blocked accounts",
+      "page": "ios"
+    },
+    "ios-compare-bank-dark.dc.html": {
+      "x": 5640,
+      "y": 13728,
+      "w": 390,
+      "h": 2200,
+      "title": "iOS dark · Compare bank accounts",
+      "page": "ios"
+    },
+    "and-onboard-1-dark.dc.html": {
+      "x": 0,
+      "y": 12464,
+      "w": 390,
+      "h": 844,
+      "title": "Android dark · Welcome",
+      "page": "android"
+    },
+    "and-roadmap-dark.dc.html": {
+      "x": 0,
+      "y": 13728,
+      "w": 390,
+      "h": 1300,
+      "title": "Android dark · Roadmap",
+      "page": "android"
+    },
+    "and-guide-dark.dc.html": {
+      "x": 1880,
+      "y": 13728,
+      "w": 390,
+      "h": 2300,
+      "title": "Android dark · Guide page",
+      "page": "android"
+    },
+    "and-assist-dark.dc.html": {
+      "x": 2350,
+      "y": 13728,
+      "w": 390,
+      "h": 1100,
+      "title": "Android dark · Assist hub",
+      "page": "android"
+    },
+    "and-result-dark.dc.html": {
+      "x": 3290,
+      "y": 13728,
+      "w": 390,
+      "h": 1600,
+      "title": "Android dark · Letter result",
+      "page": "android"
+    },
+    "and-paywall-dark.dc.html": {
+      "x": 4230,
+      "y": 13728,
+      "w": 390,
+      "h": 1000,
+      "title": "Android dark · Paywall",
+      "page": "android"
+    },
+    "and-compare-bank-dark.dc.html": {
+      "x": 5640,
+      "y": 13728,
+      "w": 390,
+      "h": 2200,
+      "title": "Android dark · Compare bank accounts",
+      "page": "android"
+    },
+    "web-guide-desktop-dark.dc.html": {
+      "x": 0,
+      "y": 10460,
+      "w": 1440,
+      "h": 2500,
+      "title": "Web dark · Guide page (desktop)",
+      "page": "web",
+      "expand": "fill"
+    },
+    "web-paywall-desktop-dark.dc.html": {
+      "x": 1520,
+      "y": 10460,
+      "w": 1440,
+      "h": 900,
+      "title": "Web dark · Paywall (desktop)",
+      "page": "web",
+      "expand": "fill"
+    },
+    "web-home-mobile-dark.dc.html": {
+      "x": 3040,
+      "y": 10460,
+      "w": 390,
+      "h": 2250,
+      "title": "Web dark · Home (mobile)",
+      "page": "web"
+    },
+    "GuideScreen.dc.html": {
+      "x": 12190,
+      "y": 0,
+      "w": 390,
+      "h": 2300,
+      "title": "Guide page screen (platform, dark)",
+      "page": "parts"
+    },
+    "AddReminderSheet.dc.html": {
+      "x": 12660,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "title": "Add reminder sheet (platform, dark)",
+      "page": "parts"
+    },
+    "LocalHome.dc.html": {
+      "x": 13130,
+      "y": 0,
+      "w": 390,
+      "h": 1400,
+      "title": "Home in Nepali/Hindi (platform, lang)",
+      "page": "parts"
+    },
+    "ios-city.dc.html": {
+      "x": 0,
+      "y": 16448,
+      "w": 390,
+      "h": 1900,
+      "title": "iOS · City page — Leipzig",
+      "page": "ios"
+    },
+    "ios-budget.dc.html": {
+      "x": 470,
+      "y": 16448,
+      "w": 390,
+      "h": 1300,
+      "title": "iOS · Monthly budget",
+      "page": "ios"
+    },
+    "ios-netpay.dc.html": {
+      "x": 940,
+      "y": 16448,
+      "w": 390,
+      "h": 1300,
+      "title": "iOS · Net pay for student jobs",
+      "page": "ios"
+    },
+    "ios-worklimit.dc.html": {
+      "x": 1410,
+      "y": 16448,
+      "w": 390,
+      "h": 1300,
+      "title": "iOS · Work-day limit tracker",
+      "page": "ios"
+    },
+    "ios-phrasebook.dc.html": {
+      "x": 1880,
+      "y": 16448,
+      "w": 390,
+      "h": 1400,
+      "title": "iOS · Phrasebook",
+      "page": "ios"
+    },
+    "ios-safety.dc.html": {
+      "x": 2350,
+      "y": 16448,
+      "w": 390,
+      "h": 1400,
+      "title": "iOS · Safety and emergency",
+      "page": "ios"
+    },
+    "ios-alerts.dc.html": {
+      "x": 2820,
+      "y": 16448,
+      "w": 390,
+      "h": 1400,
+      "title": "iOS · Rule-change alerts",
+      "page": "ios"
+    },
+    "ios-chat.dc.html": {
+      "x": 3290,
+      "y": 16448,
+      "w": 390,
+      "h": 1000,
+      "title": "iOS · Assistant chat",
+      "page": "ios"
+    },
+    "ios-scam.dc.html": {
+      "x": 3760,
+      "y": 16448,
+      "w": 390,
+      "h": 1250,
+      "title": "iOS · Housing scam checker",
+      "page": "ios"
+    },
+    "ios-contract.dc.html": {
+      "x": 4230,
+      "y": 16448,
+      "w": 390,
+      "h": 1300,
+      "title": "iOS · Rental contract explainer",
+      "page": "ios"
+    },
+    "ios-form.dc.html": {
+      "x": 4700,
+      "y": 16448,
+      "w": 390,
+      "h": 1000,
+      "title": "iOS · Form assistant",
+      "page": "ios"
+    },
+    "ios-jobkit.dc.html": {
+      "x": 5170,
+      "y": 16448,
+      "w": 390,
+      "h": 844,
+      "title": "iOS · Job application kit",
+      "page": "ios"
+    },
+    "ios-practice.dc.html": {
+      "x": 5640,
+      "y": 16448,
+      "w": 390,
+      "h": 1000,
+      "title": "iOS · Conversation practice",
+      "page": "ios"
+    },
+    "ios-practice-summary.dc.html": {
+      "x": 6110,
+      "y": 16448,
+      "w": 390,
+      "h": 1000,
+      "title": "iOS · Practice results",
+      "page": "ios"
+    },
+    "ios-me.dc.html": {
+      "x": 6580,
+      "y": 16448,
+      "w": 390,
+      "h": 1500,
+      "title": "iOS · Me",
+      "page": "ios"
+    },
+    "ios-privacy.dc.html": {
+      "x": 7050,
+      "y": 16448,
+      "w": 390,
+      "h": 1150,
+      "title": "iOS · Privacy and data",
+      "page": "ios"
+    },
+    "ios-subscription.dc.html": {
+      "x": 7520,
+      "y": 16448,
+      "w": 390,
+      "h": 900,
+      "title": "iOS · Subscription",
+      "page": "ios"
+    },
+    "and-city.dc.html": {
+      "x": 0,
+      "y": 16448,
+      "w": 390,
+      "h": 1900,
+      "title": "Android · City page — Leipzig",
+      "page": "android"
+    },
+    "and-budget.dc.html": {
+      "x": 470,
+      "y": 16448,
+      "w": 390,
+      "h": 1300,
+      "title": "Android · Monthly budget",
+      "page": "android"
+    },
+    "and-netpay.dc.html": {
+      "x": 940,
+      "y": 16448,
+      "w": 390,
+      "h": 1300,
+      "title": "Android · Net pay for student jobs",
+      "page": "android"
+    },
+    "and-worklimit.dc.html": {
+      "x": 1410,
+      "y": 16448,
+      "w": 390,
+      "h": 1300,
+      "title": "Android · Work-day limit tracker",
+      "page": "android"
+    },
+    "and-phrasebook.dc.html": {
+      "x": 1880,
+      "y": 16448,
+      "w": 390,
+      "h": 1400,
+      "title": "Android · Phrasebook",
+      "page": "android"
+    },
+    "and-safety.dc.html": {
+      "x": 2350,
+      "y": 16448,
+      "w": 390,
+      "h": 1400,
+      "title": "Android · Safety and emergency",
+      "page": "android"
+    },
+    "and-alerts.dc.html": {
+      "x": 2820,
+      "y": 16448,
+      "w": 390,
+      "h": 1400,
+      "title": "Android · Rule-change alerts",
+      "page": "android"
+    },
+    "and-chat.dc.html": {
+      "x": 3290,
+      "y": 16448,
+      "w": 390,
+      "h": 1000,
+      "title": "Android · Assistant chat",
+      "page": "android"
+    },
+    "and-scam.dc.html": {
+      "x": 3760,
+      "y": 16448,
+      "w": 390,
+      "h": 1250,
+      "title": "Android · Housing scam checker",
+      "page": "android"
+    },
+    "and-contract.dc.html": {
+      "x": 4230,
+      "y": 16448,
+      "w": 390,
+      "h": 1300,
+      "title": "Android · Rental contract explainer",
+      "page": "android"
+    },
+    "and-form.dc.html": {
+      "x": 4700,
+      "y": 16448,
+      "w": 390,
+      "h": 1000,
+      "title": "Android · Form assistant",
+      "page": "android"
+    },
+    "and-jobkit.dc.html": {
+      "x": 5170,
+      "y": 16448,
+      "w": 390,
+      "h": 844,
+      "title": "Android · Job application kit",
+      "page": "android"
+    },
+    "and-practice.dc.html": {
+      "x": 5640,
+      "y": 16448,
+      "w": 390,
+      "h": 1000,
+      "title": "Android · Conversation practice",
+      "page": "android"
+    },
+    "and-practice-summary.dc.html": {
+      "x": 6110,
+      "y": 16448,
+      "w": 390,
+      "h": 1000,
+      "title": "Android · Practice results",
+      "page": "android"
+    },
+    "and-me.dc.html": {
+      "x": 6580,
+      "y": 16448,
+      "w": 390,
+      "h": 1500,
+      "title": "Android · Me",
+      "page": "android"
+    },
+    "and-privacy.dc.html": {
+      "x": 7050,
+      "y": 16448,
+      "w": 390,
+      "h": 1150,
+      "title": "Android · Privacy and data",
+      "page": "android"
+    },
+    "and-subscription.dc.html": {
+      "x": 7520,
+      "y": 16448,
+      "w": 390,
+      "h": 900,
+      "title": "Android · Subscription",
+      "page": "android"
+    },
+    "ios-city-dark.dc.html": {
+      "x": 0,
+      "y": 18768,
+      "w": 390,
+      "h": 1900,
+      "title": "iOS dark · City page — Leipzig",
+      "page": "ios"
+    },
+    "ios-budget-dark.dc.html": {
+      "x": 470,
+      "y": 18768,
+      "w": 390,
+      "h": 1300,
+      "title": "iOS dark · Monthly budget",
+      "page": "ios"
+    },
+    "ios-netpay-dark.dc.html": {
+      "x": 940,
+      "y": 18768,
+      "w": 390,
+      "h": 1300,
+      "title": "iOS dark · Net pay for student jobs",
+      "page": "ios"
+    },
+    "ios-worklimit-dark.dc.html": {
+      "x": 1410,
+      "y": 18768,
+      "w": 390,
+      "h": 1300,
+      "title": "iOS dark · Work-day limit tracker",
+      "page": "ios"
+    },
+    "ios-phrasebook-dark.dc.html": {
+      "x": 1880,
+      "y": 18768,
+      "w": 390,
+      "h": 1400,
+      "title": "iOS dark · Phrasebook",
+      "page": "ios"
+    },
+    "ios-safety-dark.dc.html": {
+      "x": 2350,
+      "y": 18768,
+      "w": 390,
+      "h": 1400,
+      "title": "iOS dark · Safety and emergency",
+      "page": "ios"
+    },
+    "ios-alerts-dark.dc.html": {
+      "x": 2820,
+      "y": 18768,
+      "w": 390,
+      "h": 1400,
+      "title": "iOS dark · Rule-change alerts",
+      "page": "ios"
+    },
+    "ios-chat-dark.dc.html": {
+      "x": 3290,
+      "y": 18768,
+      "w": 390,
+      "h": 1000,
+      "title": "iOS dark · Assistant chat",
+      "page": "ios"
+    },
+    "ios-scam-dark.dc.html": {
+      "x": 3760,
+      "y": 18768,
+      "w": 390,
+      "h": 1250,
+      "title": "iOS dark · Housing scam checker",
+      "page": "ios"
+    },
+    "ios-contract-dark.dc.html": {
+      "x": 4230,
+      "y": 18768,
+      "w": 390,
+      "h": 1300,
+      "title": "iOS dark · Rental contract explainer",
+      "page": "ios"
+    },
+    "ios-form-dark.dc.html": {
+      "x": 4700,
+      "y": 18768,
+      "w": 390,
+      "h": 1000,
+      "title": "iOS dark · Form assistant",
+      "page": "ios"
+    },
+    "ios-jobkit-dark.dc.html": {
+      "x": 5170,
+      "y": 18768,
+      "w": 390,
+      "h": 844,
+      "title": "iOS dark · Job application kit",
+      "page": "ios"
+    },
+    "ios-practice-dark.dc.html": {
+      "x": 5640,
+      "y": 18768,
+      "w": 390,
+      "h": 1000,
+      "title": "iOS dark · Conversation practice",
+      "page": "ios"
+    },
+    "ios-practice-summary-dark.dc.html": {
+      "x": 6110,
+      "y": 18768,
+      "w": 390,
+      "h": 1000,
+      "title": "iOS dark · Practice results",
+      "page": "ios"
+    },
+    "ios-me-dark.dc.html": {
+      "x": 6580,
+      "y": 18768,
+      "w": 390,
+      "h": 1500,
+      "title": "iOS dark · Me",
+      "page": "ios"
+    },
+    "ios-privacy-dark.dc.html": {
+      "x": 7050,
+      "y": 18768,
+      "w": 390,
+      "h": 1150,
+      "title": "iOS dark · Privacy and data",
+      "page": "ios"
+    },
+    "ios-subscription-dark.dc.html": {
+      "x": 7520,
+      "y": 18768,
+      "w": 390,
+      "h": 900,
+      "title": "iOS dark · Subscription",
+      "page": "ios"
+    },
+    "ios-state-empty.dc.html": {
+      "x": 0,
+      "y": 21088,
+      "w": 390,
+      "h": 844,
+      "title": "iOS · State: empty",
+      "page": "ios"
+    },
+    "ios-state-loading.dc.html": {
+      "x": 470,
+      "y": 21088,
+      "w": 390,
+      "h": 844,
+      "title": "iOS · State: loading",
+      "page": "ios"
+    },
+    "ios-state-error.dc.html": {
+      "x": 940,
+      "y": 21088,
+      "w": 390,
+      "h": 844,
+      "title": "iOS · State: error",
+      "page": "ios"
+    },
+    "ios-state-offline.dc.html": {
+      "x": 1410,
+      "y": 21088,
+      "w": 390,
+      "h": 844,
+      "title": "iOS · State: offline",
+      "page": "ios"
+    },
+    "ios-state-outdated.dc.html": {
+      "x": 1880,
+      "y": 21088,
+      "w": 390,
+      "h": 844,
+      "title": "iOS · State: outdated",
+      "page": "ios"
+    },
+    "ios-state-limit.dc.html": {
+      "x": 2350,
+      "y": 21088,
+      "w": 390,
+      "h": 1600,
+      "title": "iOS · State: free limit reached",
+      "page": "ios"
+    },
+    "ios-state-empty-dark.dc.html": {
+      "x": 2820,
+      "y": 21088,
+      "w": 390,
+      "h": 844,
+      "title": "iOS dark · State: empty",
+      "page": "ios"
+    },
+    "ios-state-loading-dark.dc.html": {
+      "x": 3290,
+      "y": 21088,
+      "w": 390,
+      "h": 844,
+      "title": "iOS dark · State: loading",
+      "page": "ios"
+    },
+    "ios-state-error-dark.dc.html": {
+      "x": 3760,
+      "y": 21088,
+      "w": 390,
+      "h": 844,
+      "title": "iOS dark · State: error",
+      "page": "ios"
+    },
+    "ios-state-offline-dark.dc.html": {
+      "x": 4230,
+      "y": 21088,
+      "w": 390,
+      "h": 844,
+      "title": "iOS dark · State: offline",
+      "page": "ios"
+    },
+    "ios-state-outdated-dark.dc.html": {
+      "x": 4700,
+      "y": 21088,
+      "w": 390,
+      "h": 844,
+      "title": "iOS dark · State: outdated",
+      "page": "ios"
+    },
+    "ios-state-limit-dark.dc.html": {
+      "x": 5170,
+      "y": 21088,
+      "w": 390,
+      "h": 1600,
+      "title": "iOS dark · State: free limit reached",
+      "page": "ios"
+    },
+    "library-light.dc.html": {
+      "x": 0,
+      "y": 2720,
+      "w": 1440,
+      "h": 2600,
+      "title": "Component library · light",
+      "page": "calm"
+    },
+    "library-dark.dc.html": {
+      "x": 1520,
+      "y": 2720,
+      "w": 1440,
+      "h": 2600,
+      "title": "Component library · dark",
+      "page": "calm"
+    },
+    "AppBar.dc.html": {
+      "x": 13600,
+      "y": 0,
+      "w": 390,
+      "h": 96,
+      "title": "App bar (platform, title, back, large, action, dark)",
+      "page": "parts"
+    },
+    "CityPage.dc.html": {
+      "x": 14070,
+      "y": 0,
+      "w": 390,
+      "h": 1900,
+      "title": "City page (platform, dark)",
+      "page": "parts"
+    },
+    "Calculators.dc.html": {
+      "x": 14540,
+      "y": 0,
+      "w": 390,
+      "h": 1300,
+      "title": "Calculators (platform, tool, dark)",
+      "page": "parts"
+    },
+    "Reference.dc.html": {
+      "x": 15010,
+      "y": 0,
+      "w": 390,
+      "h": 1400,
+      "title": "Phrasebook / safety / alerts (platform, screen, dark)",
+      "page": "parts"
+    },
+    "AiTools.dc.html": {
+      "x": 15480,
+      "y": 0,
+      "w": 390,
+      "h": 1300,
+      "title": "AI tools (platform, tool, dark)",
+      "page": "parts"
+    },
+    "MeScreens.dc.html": {
+      "x": 15950,
+      "y": 0,
+      "w": 390,
+      "h": 1500,
+      "title": "Me / privacy / subscription (platform, screen, dark)",
+      "page": "parts"
+    },
+    "States.dc.html": {
+      "x": 16420,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "title": "States (platform, state, dark)",
+      "page": "parts"
+    },
+    "Library.dc.html": {
+      "x": 16900,
+      "y": 0,
+      "w": 1440,
+      "h": 2600,
+      "title": "Component library (dark)",
+      "page": "parts"
+    },
+    "web-city-desktop.dc.html": {
+      "x": 0,
+      "y": 13380,
+      "w": 1440,
+      "h": 2050,
+      "title": "Web · City page (desktop)",
+      "page": "web",
+      "expand": "fill"
+    },
+    "web-budget-desktop.dc.html": {
+      "x": 1520,
+      "y": 13380,
+      "w": 1440,
+      "h": 1450,
+      "title": "Web · Monthly budget (desktop)",
+      "page": "web",
+      "expand": "fill"
+    },
+    "web-netpay-desktop.dc.html": {
+      "x": 3040,
+      "y": 13380,
+      "w": 1440,
+      "h": 1450,
+      "title": "Web · Net pay (desktop)",
+      "page": "web",
+      "expand": "fill"
+    },
+    "web-worklimit-desktop.dc.html": {
+      "x": 4560,
+      "y": 13380,
+      "w": 1440,
+      "h": 1450,
+      "title": "Web · Work-day limit (desktop)",
+      "page": "web",
+      "expand": "fill"
+    },
+    "web-phrasebook-desktop.dc.html": {
+      "x": 6080,
+      "y": 13380,
+      "w": 1440,
+      "h": 1550,
+      "title": "Web · Phrasebook (desktop)",
+      "page": "web",
+      "expand": "fill"
+    },
+    "web-safety-desktop.dc.html": {
+      "x": 7600,
+      "y": 13380,
+      "w": 1440,
+      "h": 1550,
+      "title": "Web · Safety and emergency (desktop)",
+      "page": "web",
+      "expand": "fill"
+    },
+    "web-alerts-desktop.dc.html": {
+      "x": 0,
+      "y": 15550,
+      "w": 1440,
+      "h": 1550,
+      "title": "Web · Rule-change alerts (desktop)",
+      "page": "web",
+      "expand": "fill"
+    },
+    "web-chat-desktop.dc.html": {
+      "x": 1520,
+      "y": 15550,
+      "w": 1440,
+      "h": 1150,
+      "title": "Web · Assistant chat (desktop)",
+      "page": "web",
+      "expand": "fill"
+    },
+    "web-scam-desktop.dc.html": {
+      "x": 3040,
+      "y": 15550,
+      "w": 1440,
+      "h": 1400,
+      "title": "Web · Scam checker (desktop)",
+      "page": "web",
+      "expand": "fill"
+    },
+    "web-contract-desktop.dc.html": {
+      "x": 4560,
+      "y": 15550,
+      "w": 1440,
+      "h": 1450,
+      "title": "Web · Contract explainer (desktop)",
+      "page": "web",
+      "expand": "fill"
+    },
+    "web-form-desktop.dc.html": {
+      "x": 6080,
+      "y": 15550,
+      "w": 1440,
+      "h": 1150,
+      "title": "Web · Form assistant (desktop)",
+      "page": "web",
+      "expand": "fill"
+    },
+    "web-jobkit-desktop.dc.html": {
+      "x": 7600,
+      "y": 15550,
+      "w": 1440,
+      "h": 994,
+      "title": "Web · Job kit (desktop)",
+      "page": "web",
+      "expand": "fill"
+    },
+    "web-practice-desktop.dc.html": {
+      "x": 0,
+      "y": 17220,
+      "w": 1440,
+      "h": 1150,
+      "title": "Web · Conversation practice (desktop)",
+      "page": "web",
+      "expand": "fill"
+    },
+    "web-summary-desktop.dc.html": {
+      "x": 1520,
+      "y": 17220,
+      "w": 1440,
+      "h": 1150,
+      "title": "Web · Practice results (desktop)",
+      "page": "web",
+      "expand": "fill"
+    },
+    "web-me-desktop.dc.html": {
+      "x": 3040,
+      "y": 17220,
+      "w": 1440,
+      "h": 1650,
+      "title": "Web · Me (desktop)",
+      "page": "web",
+      "expand": "fill"
+    },
+    "web-privacy-desktop.dc.html": {
+      "x": 4560,
+      "y": 17220,
+      "w": 1440,
+      "h": 1300,
+      "title": "Web · Privacy and data (desktop)",
+      "page": "web",
+      "expand": "fill"
+    },
+    "web-subscription-desktop.dc.html": {
+      "x": 6080,
+      "y": 17220,
+      "w": 1440,
+      "h": 1050,
+      "title": "Web · Subscription (desktop)",
+      "page": "web",
+      "expand": "fill"
+    },
+    "web-state-empty-desktop.dc.html": {
+      "x": 7600,
+      "y": 17220,
+      "w": 1440,
+      "h": 994,
+      "title": "Web · State: empty (desktop)",
+      "page": "web",
+      "expand": "fill"
+    },
+    "web-state-loading-desktop.dc.html": {
+      "x": 0,
+      "y": 18990,
+      "w": 1440,
+      "h": 994,
+      "title": "Web · State: loading (desktop)",
+      "page": "web",
+      "expand": "fill"
+    },
+    "web-state-error-desktop.dc.html": {
+      "x": 1520,
+      "y": 18990,
+      "w": 1440,
+      "h": 994,
+      "title": "Web · State: error (desktop)",
+      "page": "web",
+      "expand": "fill"
+    },
+    "web-state-offline-desktop.dc.html": {
+      "x": 3040,
+      "y": 18990,
+      "w": 1440,
+      "h": 994,
+      "title": "Web · State: offline (desktop)",
+      "page": "web",
+      "expand": "fill"
+    },
+    "web-state-outdated-desktop.dc.html": {
+      "x": 4560,
+      "y": 18990,
+      "w": 1440,
+      "h": 994,
+      "title": "Web · State: outdated (desktop)",
+      "page": "web",
+      "expand": "fill"
+    },
+    "web-city-mobile.dc.html": {
+      "x": 0,
+      "y": 20404,
+      "w": 390,
+      "h": 2450,
+      "title": "Web · City page (mobile)",
+      "page": "web"
+    },
+    "web-budget-mobile.dc.html": {
+      "x": 470,
+      "y": 20404,
+      "w": 390,
+      "h": 1850,
+      "title": "Web · Monthly budget (mobile)",
+      "page": "web"
+    },
+    "web-netpay-mobile.dc.html": {
+      "x": 940,
+      "y": 20404,
+      "w": 390,
+      "h": 1850,
+      "title": "Web · Net pay (mobile)",
+      "page": "web"
+    },
+    "web-worklimit-mobile.dc.html": {
+      "x": 1410,
+      "y": 20404,
+      "w": 390,
+      "h": 1850,
+      "title": "Web · Work-day limit (mobile)",
+      "page": "web"
+    },
+    "web-phrasebook-mobile.dc.html": {
+      "x": 1880,
+      "y": 20404,
+      "w": 390,
+      "h": 1950,
+      "title": "Web · Phrasebook (mobile)",
+      "page": "web"
+    },
+    "web-safety-mobile.dc.html": {
+      "x": 2350,
+      "y": 20404,
+      "w": 390,
+      "h": 1950,
+      "title": "Web · Safety and emergency (mobile)",
+      "page": "web"
+    },
+    "web-alerts-mobile.dc.html": {
+      "x": 2820,
+      "y": 20404,
+      "w": 390,
+      "h": 1950,
+      "title": "Web · Rule-change alerts (mobile)",
+      "page": "web"
+    },
+    "web-chat-mobile.dc.html": {
+      "x": 3290,
+      "y": 20404,
+      "w": 390,
+      "h": 1550,
+      "title": "Web · Assistant chat (mobile)",
+      "page": "web"
+    },
+    "web-scam-mobile.dc.html": {
+      "x": 3760,
+      "y": 20404,
+      "w": 390,
+      "h": 1800,
+      "title": "Web · Scam checker (mobile)",
+      "page": "web"
+    },
+    "web-contract-mobile.dc.html": {
+      "x": 4230,
+      "y": 20404,
+      "w": 390,
+      "h": 1850,
+      "title": "Web · Contract explainer (mobile)",
+      "page": "web"
+    },
+    "web-form-mobile.dc.html": {
+      "x": 4700,
+      "y": 20404,
+      "w": 390,
+      "h": 1550,
+      "title": "Web · Form assistant (mobile)",
+      "page": "web"
+    },
+    "web-jobkit-mobile.dc.html": {
+      "x": 0,
+      "y": 22974,
+      "w": 390,
+      "h": 1394,
+      "title": "Web · Job kit (mobile)",
+      "page": "web"
+    },
+    "web-practice-mobile.dc.html": {
+      "x": 470,
+      "y": 22974,
+      "w": 390,
+      "h": 1550,
+      "title": "Web · Conversation practice (mobile)",
+      "page": "web"
+    },
+    "web-summary-mobile.dc.html": {
+      "x": 940,
+      "y": 22974,
+      "w": 390,
+      "h": 1550,
+      "title": "Web · Practice results (mobile)",
+      "page": "web"
+    },
+    "web-me-mobile.dc.html": {
+      "x": 1410,
+      "y": 22974,
+      "w": 390,
+      "h": 2050,
+      "title": "Web · Me (mobile)",
+      "page": "web"
+    },
+    "web-privacy-mobile.dc.html": {
+      "x": 1880,
+      "y": 22974,
+      "w": 390,
+      "h": 1700,
+      "title": "Web · Privacy and data (mobile)",
+      "page": "web"
+    },
+    "web-subscription-mobile.dc.html": {
+      "x": 2350,
+      "y": 22974,
+      "w": 390,
+      "h": 1450,
+      "title": "Web · Subscription (mobile)",
+      "page": "web"
+    },
+    "web-state-empty-mobile.dc.html": {
+      "x": 2820,
+      "y": 22974,
+      "w": 390,
+      "h": 1394,
+      "title": "Web · State: empty (mobile)",
+      "page": "web"
+    },
+    "web-state-loading-mobile.dc.html": {
+      "x": 3290,
+      "y": 22974,
+      "w": 390,
+      "h": 1394,
+      "title": "Web · State: loading (mobile)",
+      "page": "web"
+    },
+    "web-state-error-mobile.dc.html": {
+      "x": 3760,
+      "y": 22974,
+      "w": 390,
+      "h": 1394,
+      "title": "Web · State: error (mobile)",
+      "page": "web"
+    },
+    "web-state-offline-mobile.dc.html": {
+      "x": 4230,
+      "y": 22974,
+      "w": 390,
+      "h": 1394,
+      "title": "Web · State: offline (mobile)",
+      "page": "web"
+    },
+    "web-state-outdated-mobile.dc.html": {
+      "x": 4700,
+      "y": 22974,
+      "w": 390,
+      "h": 1394,
+      "title": "Web · State: outdated (mobile)",
+      "page": "web"
+    },
+    "WebShell.dc.html": {
+      "x": 18800,
+      "y": 0,
+      "w": 1440,
+      "h": 1300,
+      "title": "Web shell for Round 3 (size, screen)",
+      "expand": "fill",
+      "page": "parts"
+    },
+    "web-consent-desktop.dc.html": {
+      "x": 0,
+      "y": 25444,
+      "w": 1440,
+      "h": 900,
+      "title": "Web · Consent banner (desktop)",
+      "page": "web",
+      "expand": "fill"
+    },
+    "web-consent-settings-desktop.dc.html": {
+      "x": 1520,
+      "y": 25444,
+      "w": 1440,
+      "h": 900,
+      "title": "Web · Cookie settings (desktop)",
+      "page": "web",
+      "expand": "fill"
+    },
+    "web-consent-mobile.dc.html": {
+      "x": 3040,
+      "y": 25444,
+      "w": 390,
+      "h": 844,
+      "title": "Web · Consent banner (mobile)",
+      "page": "web"
+    },
+    "web-consent-settings-mobile.dc.html": {
+      "x": 3510,
+      "y": 25444,
+      "w": 390,
+      "h": 844,
+      "title": "Web · Cookie settings (mobile)",
+      "page": "web"
+    },
+    "ios-money.dc.html": {
+      "x": 0,
+      "y": 23108,
+      "w": 390,
+      "h": 1700,
+      "title": "iOS · How we make money",
+      "page": "ios"
+    },
+    "and-money.dc.html": {
+      "x": 0,
+      "y": 23108,
+      "w": 390,
+      "h": 1700,
+      "title": "Android · How we make money",
+      "page": "android"
+    },
+    "web-money-mobile.dc.html": {
+      "x": 0,
+      "y": 26764,
+      "w": 390,
+      "h": 2350,
+      "title": "Web · How we make money (mobile)",
+      "page": "web"
+    },
+    "ios-help.dc.html": {
+      "x": 470,
+      "y": 23108,
+      "w": 390,
+      "h": 2000,
+      "title": "iOS · Where to get help",
+      "page": "ios"
+    },
+    "and-help.dc.html": {
+      "x": 470,
+      "y": 23108,
+      "w": 390,
+      "h": 2000,
+      "title": "Android · Where to get help",
+      "page": "android"
+    },
+    "web-help-mobile.dc.html": {
+      "x": 470,
+      "y": 26764,
+      "w": 390,
+      "h": 2650,
+      "title": "Web · Where to get help (mobile)",
+      "page": "web"
+    },
+    "web-money-desktop.dc.html": {
+      "x": 0,
+      "y": 29834,
+      "w": 1440,
+      "h": 1700,
+      "title": "Web · How we make money (desktop)",
+      "page": "web",
+      "expand": "fill"
+    },
+    "web-help-desktop.dc.html": {
+      "x": 1520,
+      "y": 29834,
+      "w": 1440,
+      "h": 2000,
+      "title": "Web · Where to get help (desktop)",
+      "page": "web",
+      "expand": "fill"
+    },
+    "InfoPages.dc.html": {
+      "x": 20400,
+      "y": 0,
+      "w": 390,
+      "h": 1700,
+      "title": "Money / help pages (platform, page, dark)",
+      "page": "parts"
+    },
+    "WebConsent.dc.html": {
+      "x": 21920,
+      "y": 0,
+      "w": 1440,
+      "h": 900,
+      "title": "Web consent (size, view, dark)",
+      "page": "parts"
+    },
+    "and-home-ne.dc.html": {
+      "x": 0,
+      "y": 10644,
+      "w": 390,
+      "h": 1400,
+      "title": "Android · Home in Nepali",
+      "page": "android"
+    },
+    "and-home-en-ref.dc.html": {
+      "x": 470,
+      "y": 10644,
+      "w": 390,
+      "h": 1300,
+      "title": "Android · Home in English (for comparison)",
+      "page": "android"
+    },
+    "and-onboard-2-dark.dc.html": {
+      "x": 470,
+      "y": 12464,
+      "w": 390,
+      "h": 844,
+      "title": "Android dark · 2 Nationality",
+      "page": "android"
+    },
+    "and-onboard-3-dark.dc.html": {
+      "x": 940,
+      "y": 12464,
+      "w": 390,
+      "h": 844,
+      "title": "Android dark · 3 Status",
+      "page": "android"
+    },
+    "and-onboard-4-dark.dc.html": {
+      "x": 1410,
+      "y": 12464,
+      "w": 390,
+      "h": 844,
+      "title": "Android dark · 4 City",
+      "page": "android"
+    },
+    "and-onboard-5-dark.dc.html": {
+      "x": 1880,
+      "y": 12464,
+      "w": 390,
+      "h": 844,
+      "title": "Android dark · 5 Stage",
+      "page": "android"
+    },
+    "and-onboard-6-dark.dc.html": {
+      "x": 2350,
+      "y": 12464,
+      "w": 390,
+      "h": 844,
+      "title": "Android dark · 6 Arrival date",
+      "page": "android"
+    },
+    "and-onboard-7-dark.dc.html": {
+      "x": 2820,
+      "y": 12464,
+      "w": 390,
+      "h": 844,
+      "title": "Android dark · 7 Notifications",
+      "page": "android"
+    },
+    "and-onboard-8-dark.dc.html": {
+      "x": 3290,
+      "y": 12464,
+      "w": 390,
+      "h": 844,
+      "title": "Android dark · 8 Account",
+      "page": "android"
+    },
+    "and-onboard-9-dark.dc.html": {
+      "x": 3760,
+      "y": 12464,
+      "w": 390,
+      "h": 844,
+      "title": "Android dark · 9 Roadmap ready",
+      "page": "android"
+    },
+    "and-guides-dark.dc.html": {
+      "x": 470,
+      "y": 13728,
+      "w": 390,
+      "h": 1300,
+      "title": "Android dark · Guides list",
+      "page": "android"
+    },
+    "and-reminders-dark.dc.html": {
+      "x": 940,
+      "y": 13728,
+      "w": 390,
+      "h": 1300,
+      "title": "Android dark · Reminders",
+      "page": "android"
+    },
+    "and-add-reminder-dark.dc.html": {
+      "x": 1410,
+      "y": 13728,
+      "w": 390,
+      "h": 844,
+      "title": "Android dark · Add reminder",
+      "page": "android"
+    },
+    "and-processing-dark.dc.html": {
+      "x": 2820,
+      "y": 13728,
+      "w": 390,
+      "h": 844,
+      "title": "Android dark · Letter processing",
+      "page": "android"
+    },
+    "and-reply-dark.dc.html": {
+      "x": 3760,
+      "y": 13728,
+      "w": 390,
+      "h": 1400,
+      "title": "Android dark · Reply writer",
+      "page": "android"
+    },
+    "and-consent-dark.dc.html": {
+      "x": 4700,
+      "y": 13728,
+      "w": 390,
+      "h": 844,
+      "title": "Android dark · Consent banner",
+      "page": "android"
+    },
+    "and-compare-blocked-dark.dc.html": {
+      "x": 5170,
+      "y": 13728,
+      "w": 390,
+      "h": 2200,
+      "title": "Android dark · Compare blocked accounts",
+      "page": "android"
+    },
+    "and-city-dark.dc.html": {
+      "x": 0,
+      "y": 18768,
+      "w": 390,
+      "h": 1900,
+      "title": "Android dark · City page — Leipzig",
+      "page": "android"
+    },
+    "and-budget-dark.dc.html": {
+      "x": 470,
+      "y": 18768,
+      "w": 390,
+      "h": 1300,
+      "title": "Android dark · Monthly budget",
+      "page": "android"
+    },
+    "and-netpay-dark.dc.html": {
+      "x": 940,
+      "y": 18768,
+      "w": 390,
+      "h": 1300,
+      "title": "Android dark · Net pay for student jobs",
+      "page": "android"
+    },
+    "and-worklimit-dark.dc.html": {
+      "x": 1410,
+      "y": 18768,
+      "w": 390,
+      "h": 1300,
+      "title": "Android dark · Work-day limit tracker",
+      "page": "android"
+    },
+    "and-phrasebook-dark.dc.html": {
+      "x": 1880,
+      "y": 18768,
+      "w": 390,
+      "h": 1400,
+      "title": "Android dark · Phrasebook",
+      "page": "android"
+    },
+    "and-safety-dark.dc.html": {
+      "x": 2350,
+      "y": 18768,
+      "w": 390,
+      "h": 1400,
+      "title": "Android dark · Safety and emergency",
+      "page": "android"
+    },
+    "and-alerts-dark.dc.html": {
+      "x": 2820,
+      "y": 18768,
+      "w": 390,
+      "h": 1400,
+      "title": "Android dark · Rule-change alerts",
+      "page": "android"
+    },
+    "and-chat-dark.dc.html": {
+      "x": 3290,
+      "y": 18768,
+      "w": 390,
+      "h": 1000,
+      "title": "Android dark · Assistant chat",
+      "page": "android"
+    },
+    "and-scam-dark.dc.html": {
+      "x": 3760,
+      "y": 18768,
+      "w": 390,
+      "h": 1250,
+      "title": "Android dark · Housing scam checker",
+      "page": "android"
+    },
+    "and-contract-dark.dc.html": {
+      "x": 4230,
+      "y": 18768,
+      "w": 390,
+      "h": 1300,
+      "title": "Android dark · Rental contract explainer",
+      "page": "android"
+    },
+    "and-form-dark.dc.html": {
+      "x": 4700,
+      "y": 18768,
+      "w": 390,
+      "h": 1000,
+      "title": "Android dark · Form assistant",
+      "page": "android"
+    },
+    "and-jobkit-dark.dc.html": {
+      "x": 5170,
+      "y": 18768,
+      "w": 390,
+      "h": 844,
+      "title": "Android dark · Job application kit",
+      "page": "android"
+    },
+    "and-practice-dark.dc.html": {
+      "x": 5640,
+      "y": 18768,
+      "w": 390,
+      "h": 1000,
+      "title": "Android dark · Conversation practice",
+      "page": "android"
+    },
+    "and-practice-summary-dark.dc.html": {
+      "x": 6110,
+      "y": 18768,
+      "w": 390,
+      "h": 1000,
+      "title": "Android dark · Practice results",
+      "page": "android"
+    },
+    "and-me-dark.dc.html": {
+      "x": 6580,
+      "y": 18768,
+      "w": 390,
+      "h": 1500,
+      "title": "Android dark · Me",
+      "page": "android"
+    },
+    "and-privacy-dark.dc.html": {
+      "x": 7050,
+      "y": 18768,
+      "w": 390,
+      "h": 1150,
+      "title": "Android dark · Privacy and data",
+      "page": "android"
+    },
+    "and-subscription-dark.dc.html": {
+      "x": 7520,
+      "y": 18768,
+      "w": 390,
+      "h": 900,
+      "title": "Android dark · Subscription",
+      "page": "android"
+    },
+    "and-state-empty.dc.html": {
+      "x": 0,
+      "y": 21088,
+      "w": 390,
+      "h": 844,
+      "title": "Android · State: empty",
+      "page": "android"
+    },
+    "and-state-loading.dc.html": {
+      "x": 470,
+      "y": 21088,
+      "w": 390,
+      "h": 844,
+      "title": "Android · State: loading",
+      "page": "android"
+    },
+    "and-state-error.dc.html": {
+      "x": 940,
+      "y": 21088,
+      "w": 390,
+      "h": 844,
+      "title": "Android · State: error",
+      "page": "android"
+    },
+    "and-state-offline.dc.html": {
+      "x": 1410,
+      "y": 21088,
+      "w": 390,
+      "h": 844,
+      "title": "Android · State: offline",
+      "page": "android"
+    },
+    "and-state-outdated.dc.html": {
+      "x": 1880,
+      "y": 21088,
+      "w": 390,
+      "h": 844,
+      "title": "Android · State: outdated",
+      "page": "android"
+    },
+    "and-state-limit.dc.html": {
+      "x": 2350,
+      "y": 21088,
+      "w": 390,
+      "h": 1600,
+      "title": "Android · State: free limit reached",
+      "page": "android"
+    },
+    "and-state-empty-dark.dc.html": {
+      "x": 2820,
+      "y": 21088,
+      "w": 390,
+      "h": 844,
+      "title": "Android dark · State: empty",
+      "page": "android"
+    },
+    "and-state-loading-dark.dc.html": {
+      "x": 3290,
+      "y": 21088,
+      "w": 390,
+      "h": 844,
+      "title": "Android dark · State: loading",
+      "page": "android"
+    },
+    "and-state-error-dark.dc.html": {
+      "x": 3760,
+      "y": 21088,
+      "w": 390,
+      "h": 844,
+      "title": "Android dark · State: error",
+      "page": "android"
+    },
+    "and-state-offline-dark.dc.html": {
+      "x": 4230,
+      "y": 21088,
+      "w": 390,
+      "h": 844,
+      "title": "Android dark · State: offline",
+      "page": "android"
+    },
+    "and-state-outdated-dark.dc.html": {
+      "x": 4700,
+      "y": 21088,
+      "w": 390,
+      "h": 844,
+      "title": "Android dark · State: outdated",
+      "page": "android"
+    },
+    "and-state-limit-dark.dc.html": {
+      "x": 5170,
+      "y": 21088,
+      "w": 390,
+      "h": 1600,
+      "title": "Android dark · State: free limit reached",
+      "page": "android"
+    },
+    "web-onboard-1-desktop.dc.html": {
+      "x": 0,
+      "y": 32554,
+      "w": 1440,
+      "h": 1094,
+      "title": "Web · Onboarding 1 · Welcome (desktop)",
+      "expand": "fill",
+      "page": "web"
+    },
+    "web-onboard-2-desktop.dc.html": {
+      "x": 1520,
+      "y": 32554,
+      "w": 1440,
+      "h": 1094,
+      "title": "Web · Onboarding 2 · Nationality (desktop)",
+      "expand": "fill",
+      "page": "web"
+    },
+    "web-onboard-3-desktop.dc.html": {
+      "x": 3040,
+      "y": 32554,
+      "w": 1440,
+      "h": 1094,
+      "title": "Web · Onboarding 3 · Status (desktop)",
+      "expand": "fill",
+      "page": "web"
+    },
+    "web-onboard-4-desktop.dc.html": {
+      "x": 4560,
+      "y": 32554,
+      "w": 1440,
+      "h": 1094,
+      "title": "Web · Onboarding 4 · City (desktop)",
+      "expand": "fill",
+      "page": "web"
+    },
+    "web-onboard-5-desktop.dc.html": {
+      "x": 6080,
+      "y": 32554,
+      "w": 1440,
+      "h": 1094,
+      "title": "Web · Onboarding 5 · Stage (desktop)",
+      "expand": "fill",
+      "page": "web"
+    },
+    "web-onboard-6-desktop.dc.html": {
+      "x": 7600,
+      "y": 32554,
+      "w": 1440,
+      "h": 1094,
+      "title": "Web · Onboarding 6 · Arrival date (desktop)",
+      "expand": "fill",
+      "page": "web"
+    },
+    "web-onboard-7-desktop.dc.html": {
+      "x": 0,
+      "y": 33768,
+      "w": 1440,
+      "h": 1094,
+      "title": "Web · Onboarding 7 · Notifications (desktop)",
+      "expand": "fill",
+      "page": "web"
+    },
+    "web-onboard-8-desktop.dc.html": {
+      "x": 1520,
+      "y": 33768,
+      "w": 1440,
+      "h": 1094,
+      "title": "Web · Onboarding 8 · Account (desktop)",
+      "expand": "fill",
+      "page": "web"
+    },
+    "web-onboard-9-desktop.dc.html": {
+      "x": 3040,
+      "y": 33768,
+      "w": 1440,
+      "h": 1094,
+      "title": "Web · Onboarding 9 · Roadmap ready (desktop)",
+      "expand": "fill",
+      "page": "web"
+    },
+    "web-roadmap-desktop.dc.html": {
+      "x": 4560,
+      "y": 33768,
+      "w": 1440,
+      "h": 1550,
+      "title": "Web · Roadmap (desktop)",
+      "expand": "fill",
+      "page": "web"
+    },
+    "web-guides-desktop.dc.html": {
+      "x": 6080,
+      "y": 33768,
+      "w": 1440,
+      "h": 1550,
+      "title": "Web · Guides list (desktop)",
+      "expand": "fill",
+      "page": "web"
+    },
+    "web-reminders-desktop.dc.html": {
+      "x": 7600,
+      "y": 33768,
+      "w": 1440,
+      "h": 1550,
+      "title": "Web · Reminders (desktop)",
+      "expand": "fill",
+      "page": "web"
+    },
+    "web-add-reminder-desktop.dc.html": {
+      "x": 0,
+      "y": 35438,
+      "w": 1440,
+      "h": 1094,
+      "title": "Web · Add reminder (desktop)",
+      "expand": "fill",
+      "page": "web"
+    },
+    "web-assist-desktop.dc.html": {
+      "x": 1520,
+      "y": 35438,
+      "w": 1440,
+      "h": 1350,
+      "title": "Web · Assist hub (desktop)",
+      "expand": "fill",
+      "page": "web"
+    },
+    "web-upload-desktop.dc.html": {
+      "x": 3040,
+      "y": 35438,
+      "w": 1440,
+      "h": 1050,
+      "title": "Web · Upload a letter (desktop)",
+      "expand": "fill",
+      "page": "web"
+    },
+    "web-processing-desktop.dc.html": {
+      "x": 4560,
+      "y": 35438,
+      "w": 1440,
+      "h": 1094,
+      "title": "Web · Letter processing (desktop)",
+      "expand": "fill",
+      "page": "web"
+    },
+    "web-result-desktop.dc.html": {
+      "x": 6080,
+      "y": 35438,
+      "w": 1440,
+      "h": 1850,
+      "title": "Web · Letter result (desktop)",
+      "expand": "fill",
+      "page": "web"
+    },
+    "web-result-urgent-desktop.dc.html": {
+      "x": 7600,
+      "y": 35438,
+      "w": 1440,
+      "h": 1850,
+      "title": "Web · Letter result — urgent (desktop)",
+      "expand": "fill",
+      "page": "web"
+    },
+    "web-reply-desktop.dc.html": {
+      "x": 0,
+      "y": 37408,
+      "w": 1440,
+      "h": 1650,
+      "title": "Web · Reply writer (desktop)",
+      "expand": "fill",
+      "page": "web"
+    },
+    "web-state-limit-desktop.dc.html": {
+      "x": 1520,
+      "y": 37408,
+      "w": 1440,
+      "h": 1850,
+      "title": "Web · State: free limit reached (desktop)",
+      "expand": "fill",
+      "page": "web"
+    },
+    "web-onboard-1-mobile.dc.html": {
+      "x": 0,
+      "y": 39678,
+      "w": 390,
+      "h": 1344,
+      "title": "Web · Onboarding 1 · Welcome (mobile)",
+      "page": "web"
+    },
+    "web-onboard-2-mobile.dc.html": {
+      "x": 470,
+      "y": 39678,
+      "w": 390,
+      "h": 1344,
+      "title": "Web · Onboarding 2 · Nationality (mobile)",
+      "page": "web"
+    },
+    "web-onboard-3-mobile.dc.html": {
+      "x": 940,
+      "y": 39678,
+      "w": 390,
+      "h": 1344,
+      "title": "Web · Onboarding 3 · Status (mobile)",
+      "page": "web"
+    },
+    "web-onboard-4-mobile.dc.html": {
+      "x": 1410,
+      "y": 39678,
+      "w": 390,
+      "h": 1344,
+      "title": "Web · Onboarding 4 · City (mobile)",
+      "page": "web"
+    },
+    "web-onboard-5-mobile.dc.html": {
+      "x": 1880,
+      "y": 39678,
+      "w": 390,
+      "h": 1344,
+      "title": "Web · Onboarding 5 · Stage (mobile)",
+      "page": "web"
+    },
+    "web-onboard-6-mobile.dc.html": {
+      "x": 2350,
+      "y": 39678,
+      "w": 390,
+      "h": 1344,
+      "title": "Web · Onboarding 6 · Arrival date (mobile)",
+      "page": "web"
+    },
+    "web-onboard-7-mobile.dc.html": {
+      "x": 2820,
+      "y": 39678,
+      "w": 390,
+      "h": 1344,
+      "title": "Web · Onboarding 7 · Notifications (mobile)",
+      "page": "web"
+    },
+    "web-onboard-8-mobile.dc.html": {
+      "x": 3290,
+      "y": 39678,
+      "w": 390,
+      "h": 1344,
+      "title": "Web · Onboarding 8 · Account (mobile)",
+      "page": "web"
+    },
+    "web-onboard-9-mobile.dc.html": {
+      "x": 3760,
+      "y": 39678,
+      "w": 390,
+      "h": 1344,
+      "title": "Web · Onboarding 9 · Roadmap ready (mobile)",
+      "page": "web"
+    },
+    "web-roadmap-mobile.dc.html": {
+      "x": 4230,
+      "y": 39678,
+      "w": 390,
+      "h": 1800,
+      "title": "Web · Roadmap (mobile)",
+      "page": "web"
+    },
+    "web-guides-mobile.dc.html": {
+      "x": 0,
+      "y": 41598,
+      "w": 390,
+      "h": 1800,
+      "title": "Web · Guides list (mobile)",
+      "page": "web"
+    },
+    "web-reminders-mobile.dc.html": {
+      "x": 470,
+      "y": 41598,
+      "w": 390,
+      "h": 1800,
+      "title": "Web · Reminders (mobile)",
+      "page": "web"
+    },
+    "web-add-reminder-mobile.dc.html": {
+      "x": 940,
+      "y": 41598,
+      "w": 390,
+      "h": 1344,
+      "title": "Web · Add reminder (mobile)",
+      "page": "web"
+    },
+    "web-assist-mobile.dc.html": {
+      "x": 1410,
+      "y": 41598,
+      "w": 390,
+      "h": 1600,
+      "title": "Web · Assist hub (mobile)",
+      "page": "web"
+    },
+    "web-upload-mobile.dc.html": {
+      "x": 1880,
+      "y": 41598,
+      "w": 390,
+      "h": 1300,
+      "title": "Web · Upload a letter (mobile)",
+      "page": "web"
+    },
+    "web-processing-mobile.dc.html": {
+      "x": 2350,
+      "y": 41598,
+      "w": 390,
+      "h": 1344,
+      "title": "Web · Letter processing (mobile)",
+      "page": "web"
+    },
+    "web-result-mobile.dc.html": {
+      "x": 2820,
+      "y": 41598,
+      "w": 390,
+      "h": 2100,
+      "title": "Web · Letter result (mobile)",
+      "page": "web"
+    },
+    "web-result-urgent-mobile.dc.html": {
+      "x": 3290,
+      "y": 41598,
+      "w": 390,
+      "h": 2100,
+      "title": "Web · Letter result — urgent (mobile)",
+      "page": "web"
+    },
+    "web-reply-mobile.dc.html": {
+      "x": 3760,
+      "y": 41598,
+      "w": 390,
+      "h": 1900,
+      "title": "Web · Reply writer (mobile)",
+      "page": "web"
+    },
+    "web-state-limit-mobile.dc.html": {
+      "x": 4230,
+      "y": 41598,
+      "w": 390,
+      "h": 2100,
+      "title": "Web · State: free limit reached (mobile)",
+      "page": "web"
+    }
+  },
+  "order": [
+    "Main.dc.html",
+    "A-Guide.dc.html",
+    "A-Letter.dc.html",
+    "Foundations.dc.html",
+    "ios-onboard-1.dc.html",
+    "ios-onboard-2.dc.html",
+    "ios-onboard-3.dc.html",
+    "ios-onboard-4.dc.html",
+    "ios-onboard-5.dc.html",
+    "ios-onboard-6.dc.html",
+    "ios-onboard-7.dc.html",
+    "ios-onboard-8.dc.html",
+    "ios-onboard-9.dc.html",
+    "and-onboard-1.dc.html",
+    "and-onboard-2.dc.html",
+    "and-onboard-3.dc.html",
+    "and-onboard-4.dc.html",
+    "and-onboard-5.dc.html",
+    "and-onboard-6.dc.html",
+    "and-onboard-7.dc.html",
+    "and-onboard-8.dc.html",
+    "and-onboard-9.dc.html",
+    "ios-home.dc.html",
+    "ios-roadmap.dc.html",
+    "ios-guides.dc.html",
+    "ios-reminders.dc.html",
+    "ios-home-dark.dc.html",
+    "and-home.dc.html",
+    "and-roadmap.dc.html",
+    "and-guides.dc.html",
+    "and-reminders.dc.html",
+    "and-home-dark.dc.html",
+    "ios-assist.dc.html",
+    "ios-capture.dc.html",
+    "ios-processing.dc.html",
+    "ios-result.dc.html",
+    "ios-reply.dc.html",
+    "ios-paywall.dc.html",
+    "ios-consent.dc.html",
+    "and-assist.dc.html",
+    "and-capture.dc.html",
+    "and-processing.dc.html",
+    "and-result.dc.html",
+    "and-reply.dc.html",
+    "and-paywall.dc.html",
+    "and-consent.dc.html",
+    "ios-compare-blocked.dc.html",
+    "ios-compare-bank.dc.html",
+    "and-compare-blocked.dc.html",
+    "and-compare-bank.dc.html",
+    "ComparePage.dc.html",
+    "web-home-desktop.dc.html",
+    "web-guide-desktop.dc.html",
+    "web-compare-desktop.dc.html",
+    "web-paywall-desktop.dc.html",
+    "web-home-mobile.dc.html",
+    "web-guide-mobile.dc.html",
+    "web-compare-mobile.dc.html",
+    "web-paywall-mobile.dc.html",
+    "WebHome.dc.html",
+    "WebGuide.dc.html",
+    "WebCompare.dc.html",
+    "WebPaywall.dc.html",
+    "AssistHub.dc.html",
+    "LetterFlow.dc.html",
+    "LetterResult.dc.html",
+    "ReplyWriter.dc.html",
+    "Paywall.dc.html",
+    "Consent.dc.html",
+    "ios-guide.dc.html",
+    "and-guide.dc.html",
+    "ios-result-urgent.dc.html",
+    "and-result-urgent.dc.html",
+    "ios-add-reminder.dc.html",
+    "and-add-reminder.dc.html",
+    "web-compare-bank-desktop.dc.html",
+    "web-compare-bank-mobile.dc.html",
+    "ios-home-ne.dc.html",
+    "and-home-hi.dc.html",
+    "ios-home-en-ref.dc.html",
+    "ios-onboard-1-dark.dc.html",
+    "ios-onboard-2-dark.dc.html",
+    "ios-onboard-3-dark.dc.html",
+    "ios-onboard-4-dark.dc.html",
+    "ios-onboard-5-dark.dc.html",
+    "ios-onboard-6-dark.dc.html",
+    "ios-onboard-7-dark.dc.html",
+    "ios-onboard-8-dark.dc.html",
+    "ios-onboard-9-dark.dc.html",
+    "ios-roadmap-dark.dc.html",
+    "ios-guides-dark.dc.html",
+    "ios-reminders-dark.dc.html",
+    "ios-add-reminder-dark.dc.html",
+    "ios-guide-dark.dc.html",
+    "ios-assist-dark.dc.html",
+    "ios-processing-dark.dc.html",
+    "ios-result-dark.dc.html",
+    "ios-reply-dark.dc.html",
+    "ios-paywall-dark.dc.html",
+    "ios-consent-dark.dc.html",
+    "ios-compare-blocked-dark.dc.html",
+    "ios-compare-bank-dark.dc.html",
+    "and-onboard-1-dark.dc.html",
+    "and-roadmap-dark.dc.html",
+    "and-guide-dark.dc.html",
+    "and-assist-dark.dc.html",
+    "and-result-dark.dc.html",
+    "and-paywall-dark.dc.html",
+    "and-compare-bank-dark.dc.html",
+    "web-guide-desktop-dark.dc.html",
+    "web-paywall-desktop-dark.dc.html",
+    "web-home-mobile-dark.dc.html",
+    "ios-city.dc.html",
+    "ios-budget.dc.html",
+    "ios-netpay.dc.html",
+    "ios-worklimit.dc.html",
+    "ios-phrasebook.dc.html",
+    "ios-safety.dc.html",
+    "ios-alerts.dc.html",
+    "ios-chat.dc.html",
+    "ios-scam.dc.html",
+    "ios-contract.dc.html",
+    "ios-form.dc.html",
+    "ios-jobkit.dc.html",
+    "ios-practice.dc.html",
+    "ios-practice-summary.dc.html",
+    "ios-me.dc.html",
+    "ios-privacy.dc.html",
+    "ios-subscription.dc.html",
+    "and-city.dc.html",
+    "and-budget.dc.html",
+    "and-netpay.dc.html",
+    "and-worklimit.dc.html",
+    "and-phrasebook.dc.html",
+    "and-safety.dc.html",
+    "and-alerts.dc.html",
+    "and-chat.dc.html",
+    "and-scam.dc.html",
+    "and-contract.dc.html",
+    "and-form.dc.html",
+    "and-jobkit.dc.html",
+    "and-practice.dc.html",
+    "and-practice-summary.dc.html",
+    "and-me.dc.html",
+    "and-privacy.dc.html",
+    "and-subscription.dc.html",
+    "ios-city-dark.dc.html",
+    "ios-budget-dark.dc.html",
+    "ios-netpay-dark.dc.html",
+    "ios-worklimit-dark.dc.html",
+    "ios-phrasebook-dark.dc.html",
+    "ios-safety-dark.dc.html",
+    "ios-alerts-dark.dc.html",
+    "ios-chat-dark.dc.html",
+    "ios-scam-dark.dc.html",
+    "ios-contract-dark.dc.html",
+    "ios-form-dark.dc.html",
+    "ios-jobkit-dark.dc.html",
+    "ios-practice-dark.dc.html",
+    "ios-practice-summary-dark.dc.html",
+    "ios-me-dark.dc.html",
+    "ios-privacy-dark.dc.html",
+    "ios-subscription-dark.dc.html",
+    "ios-state-empty.dc.html",
+    "ios-state-loading.dc.html",
+    "ios-state-error.dc.html",
+    "ios-state-offline.dc.html",
+    "ios-state-outdated.dc.html",
+    "ios-state-limit.dc.html",
+    "ios-state-empty-dark.dc.html",
+    "ios-state-loading-dark.dc.html",
+    "ios-state-error-dark.dc.html",
+    "ios-state-offline-dark.dc.html",
+    "ios-state-outdated-dark.dc.html",
+    "ios-state-limit-dark.dc.html",
+    "library-light.dc.html",
+    "library-dark.dc.html",
+    "web-city-desktop.dc.html",
+    "web-budget-desktop.dc.html",
+    "web-netpay-desktop.dc.html",
+    "web-worklimit-desktop.dc.html",
+    "web-phrasebook-desktop.dc.html",
+    "web-safety-desktop.dc.html",
+    "web-alerts-desktop.dc.html",
+    "web-chat-desktop.dc.html",
+    "web-scam-desktop.dc.html",
+    "web-contract-desktop.dc.html",
+    "web-form-desktop.dc.html",
+    "web-jobkit-desktop.dc.html",
+    "web-practice-desktop.dc.html",
+    "web-summary-desktop.dc.html",
+    "web-me-desktop.dc.html",
+    "web-privacy-desktop.dc.html",
+    "web-subscription-desktop.dc.html",
+    "web-state-empty-desktop.dc.html",
+    "web-state-loading-desktop.dc.html",
+    "web-state-error-desktop.dc.html",
+    "web-state-offline-desktop.dc.html",
+    "web-state-outdated-desktop.dc.html",
+    "web-city-mobile.dc.html",
+    "web-budget-mobile.dc.html",
+    "web-netpay-mobile.dc.html",
+    "web-worklimit-mobile.dc.html",
+    "web-phrasebook-mobile.dc.html",
+    "web-safety-mobile.dc.html",
+    "web-alerts-mobile.dc.html",
+    "web-chat-mobile.dc.html",
+    "web-scam-mobile.dc.html",
+    "web-contract-mobile.dc.html",
+    "web-form-mobile.dc.html",
+    "web-jobkit-mobile.dc.html",
+    "web-practice-mobile.dc.html",
+    "web-summary-mobile.dc.html",
+    "web-me-mobile.dc.html",
+    "web-privacy-mobile.dc.html",
+    "web-subscription-mobile.dc.html",
+    "web-state-empty-mobile.dc.html",
+    "web-state-loading-mobile.dc.html",
+    "web-state-error-mobile.dc.html",
+    "web-state-offline-mobile.dc.html",
+    "web-state-outdated-mobile.dc.html",
+    "web-consent-desktop.dc.html",
+    "web-consent-settings-desktop.dc.html",
+    "web-consent-mobile.dc.html",
+    "web-consent-settings-mobile.dc.html",
+    "ios-money.dc.html",
+    "and-money.dc.html",
+    "web-money-mobile.dc.html",
+    "ios-help.dc.html",
+    "and-help.dc.html",
+    "web-help-mobile.dc.html",
+    "web-money-desktop.dc.html",
+    "web-help-desktop.dc.html",
+    "and-home-ne.dc.html",
+    "and-home-en-ref.dc.html",
+    "and-onboard-2-dark.dc.html",
+    "and-onboard-3-dark.dc.html",
+    "and-onboard-4-dark.dc.html",
+    "and-onboard-5-dark.dc.html",
+    "and-onboard-6-dark.dc.html",
+    "and-onboard-7-dark.dc.html",
+    "and-onboard-8-dark.dc.html",
+    "and-onboard-9-dark.dc.html",
+    "and-guides-dark.dc.html",
+    "and-reminders-dark.dc.html",
+    "and-add-reminder-dark.dc.html",
+    "and-processing-dark.dc.html",
+    "and-reply-dark.dc.html",
+    "and-consent-dark.dc.html",
+    "and-compare-blocked-dark.dc.html",
+    "and-city-dark.dc.html",
+    "and-budget-dark.dc.html",
+    "and-netpay-dark.dc.html",
+    "and-worklimit-dark.dc.html",
+    "and-phrasebook-dark.dc.html",
+    "and-safety-dark.dc.html",
+    "and-alerts-dark.dc.html",
+    "and-chat-dark.dc.html",
+    "and-scam-dark.dc.html",
+    "and-contract-dark.dc.html",
+    "and-form-dark.dc.html",
+    "and-jobkit-dark.dc.html",
+    "and-practice-dark.dc.html",
+    "and-practice-summary-dark.dc.html",
+    "and-me-dark.dc.html",
+    "and-privacy-dark.dc.html",
+    "and-subscription-dark.dc.html",
+    "and-state-empty.dc.html",
+    "and-state-loading.dc.html",
+    "and-state-error.dc.html",
+    "and-state-offline.dc.html",
+    "and-state-outdated.dc.html",
+    "and-state-limit.dc.html",
+    "and-state-empty-dark.dc.html",
+    "and-state-loading-dark.dc.html",
+    "and-state-error-dark.dc.html",
+    "and-state-offline-dark.dc.html",
+    "and-state-outdated-dark.dc.html",
+    "and-state-limit-dark.dc.html",
+    "web-onboard-1-desktop.dc.html",
+    "web-onboard-2-desktop.dc.html",
+    "web-onboard-3-desktop.dc.html",
+    "web-onboard-4-desktop.dc.html",
+    "web-onboard-5-desktop.dc.html",
+    "web-onboard-6-desktop.dc.html",
+    "web-onboard-7-desktop.dc.html",
+    "web-onboard-8-desktop.dc.html",
+    "web-onboard-9-desktop.dc.html",
+    "web-roadmap-desktop.dc.html",
+    "web-guides-desktop.dc.html",
+    "web-reminders-desktop.dc.html",
+    "web-add-reminder-desktop.dc.html",
+    "web-assist-desktop.dc.html",
+    "web-upload-desktop.dc.html",
+    "web-processing-desktop.dc.html",
+    "web-result-desktop.dc.html",
+    "web-result-urgent-desktop.dc.html",
+    "web-reply-desktop.dc.html",
+    "web-state-limit-desktop.dc.html",
+    "web-onboard-1-mobile.dc.html",
+    "web-onboard-2-mobile.dc.html",
+    "web-onboard-3-mobile.dc.html",
+    "web-onboard-4-mobile.dc.html",
+    "web-onboard-5-mobile.dc.html",
+    "web-onboard-6-mobile.dc.html",
+    "web-onboard-7-mobile.dc.html",
+    "web-onboard-8-mobile.dc.html",
+    "web-onboard-9-mobile.dc.html",
+    "web-roadmap-mobile.dc.html",
+    "web-guides-mobile.dc.html",
+    "web-reminders-mobile.dc.html",
+    "web-add-reminder-mobile.dc.html",
+    "web-assist-mobile.dc.html",
+    "web-upload-mobile.dc.html",
+    "web-processing-mobile.dc.html",
+    "web-result-mobile.dc.html",
+    "web-result-urgent-mobile.dc.html",
+    "web-reply-mobile.dc.html",
+    "web-state-limit-mobile.dc.html",
+    "Onboarding.dc.html",
+    "TabBar.dc.html",
+    "HomeScreen.dc.html",
+    "RoadmapScreen.dc.html",
+    "GuidesScreen.dc.html",
+    "RemindersScreen.dc.html",
+    "B-Home.dc.html",
+    "B-Guide.dc.html",
+    "B-Letter.dc.html",
+    "C-Home.dc.html",
+    "C-Guide.dc.html",
+    "C-Letter.dc.html",
+    "GuideScreen.dc.html",
+    "AddReminderSheet.dc.html",
+    "LocalHome.dc.html",
+    "AppBar.dc.html",
+    "CityPage.dc.html",
+    "Calculators.dc.html",
+    "Reference.dc.html",
+    "AiTools.dc.html",
+    "MeScreens.dc.html",
+    "States.dc.html",
+    "Library.dc.html",
+    "WebShell.dc.html",
+    "InfoPages.dc.html",
+    "WebConsent.dc.html"
+  ],
+  "notes": {
+    "titleA": {
+      "x": 0,
+      "y": -300,
+      "text": "Round 1 — Calm Ledger direction",
+      "kind": "title1",
+      "maxW": 2770,
+      "page": "calm"
+    },
+    "titleB": {
+      "x": 0,
+      "y": -300,
+      "text": "B — Chai & Tram",
+      "kind": "title1",
+      "maxW": 1330,
+      "page": "explore"
+    },
+    "titleC": {
+      "x": 0,
+      "y": 2120,
+      "text": "C — Clear Signal (dark-first)",
+      "kind": "title1",
+      "maxW": 1330,
+      "page": "explore"
+    },
+    "ios_row10": {
+      "x": 0,
+      "y": 0,
+      "text": "Round 2 · iOS — Onboarding",
+      "kind": "title1",
+      "maxW": 4150,
+      "page": "ios"
+    },
+    "ios_row11": {
+      "x": 0,
+      "y": 1264,
+      "text": "Round 2 · iOS — Home, roadmap, guides, reminders",
+      "kind": "title1",
+      "maxW": 2270,
+      "page": "ios"
+    },
+    "ios_row12": {
+      "x": 0,
+      "y": 2984,
+      "text": "Round 2 · iOS — Assist, letter explainer, reply writer, paywall, consent",
+      "kind": "title1",
+      "maxW": 3210,
+      "page": "ios"
+    },
+    "ios_row13": {
+      "x": 0,
+      "y": 5004,
+      "text": "Round 2 · Comparisons — blocked accounts and bank accounts (iOS, Android)",
+      "kind": "title1",
+      "maxW": 860,
+      "page": "ios"
+    },
+    "ios_row14": {
+      "x": 0,
+      "y": 7624,
+      "text": "Round 2 · App guide page, urgent letter, add reminder, web bank comparison",
+      "kind": "title1",
+      "maxW": 1330,
+      "page": "ios"
+    },
+    "ios_row15": {
+      "x": 0,
+      "y": 10344,
+      "text": "Round 2 · Text-length check — Nepali (iOS) and Hindi (Android)",
+      "kind": "title1",
+      "maxW": 860,
+      "page": "ios"
+    },
+    "ios_row16": {
+      "x": 0,
+      "y": 12164,
+      "text": "Round 2 · Dark mode — iOS onboarding",
+      "kind": "title1",
+      "maxW": 4150,
+      "page": "ios"
+    },
+    "ios_row17": {
+      "x": 0,
+      "y": 13428,
+      "text": "Round 2 · Dark mode — iOS screens",
+      "kind": "title1",
+      "maxW": 6030,
+      "page": "ios"
+    },
+    "ios_row18": {
+      "x": 0,
+      "y": 16148,
+      "text": "Round 3 · iOS — remaining screens",
+      "kind": "title1",
+      "maxW": 7910,
+      "page": "ios"
+    },
+    "ios_row19": {
+      "x": 0,
+      "y": 18468,
+      "text": "Round 3 · iOS dark — remaining screens",
+      "kind": "title1",
+      "maxW": 7910,
+      "page": "ios"
+    },
+    "ios_row20": {
+      "x": 0,
+      "y": 20788,
+      "text": "Round 3 · States — empty, loading, error, offline, outdated, limit reached (iOS light and dark)",
+      "kind": "title1",
+      "maxW": 5560,
+      "page": "ios"
+    },
+    "ios_row21": {
+      "x": 0,
+      "y": 22808,
+      "text": "How we make money · Where to get help — iOS, Android, web mobile",
+      "kind": "title1",
+      "maxW": 860,
+      "page": "ios"
+    },
+    "web_row22": {
+      "x": 0,
+      "y": 0,
+      "text": "Round 2 · Web — desktop (1440)",
+      "kind": "title1",
+      "maxW": 6000,
+      "page": "web"
+    },
+    "web_row23": {
+      "x": 0,
+      "y": 2920,
+      "text": "Round 2 · Web — mobile (390)",
+      "kind": "title1",
+      "maxW": 1800,
+      "page": "web"
+    },
+    "web_row24": {
+      "x": 0,
+      "y": 7240,
+      "text": "Round 2 · App guide page, urgent letter, add reminder, web bank comparison",
+      "kind": "title1",
+      "maxW": 1910,
+      "page": "web"
+    },
+    "web_row25": {
+      "x": 0,
+      "y": 10160,
+      "text": "Round 2 · Dark mode — web",
+      "kind": "title1",
+      "maxW": 3430,
+      "page": "web"
+    },
+    "web_row26": {
+      "x": 0,
+      "y": 13080,
+      "text": "Round 3 · Web — desktop (1440)",
+      "kind": "title1",
+      "maxW": 9040,
+      "page": "web"
+    },
+    "web_row27": {
+      "x": 0,
+      "y": 20104,
+      "text": "Round 3 · Web — mobile (390)",
+      "kind": "title1",
+      "maxW": 5090,
+      "page": "web"
+    },
+    "web_row28": {
+      "x": 0,
+      "y": 25144,
+      "text": "Web consent banner — first visit, and cookie settings",
+      "kind": "title1",
+      "maxW": 3900,
+      "page": "web"
+    },
+    "web_row29": {
+      "x": 0,
+      "y": 26464,
+      "text": "How we make money · Where to get help — iOS, Android, web mobile",
+      "kind": "title1",
+      "maxW": 860,
+      "page": "web"
+    },
+    "web_row30": {
+      "x": 0,
+      "y": 29534,
+      "text": "How we make money · Where to get help — web desktop",
+      "kind": "title1",
+      "maxW": 2960,
+      "page": "web"
+    },
+    "titleLibCalm": {
+      "x": 0,
+      "y": 2420,
+      "text": "Component library — light and dark",
+      "kind": "title1",
+      "maxW": 2960,
+      "page": "calm"
+    },
+    "and_ios_row10": {
+      "x": 0,
+      "y": 0,
+      "text": "Round 2 · Android — Onboarding",
+      "kind": "title1",
+      "maxW": 4150,
+      "page": "android"
+    },
+    "and_ios_row11": {
+      "x": 0,
+      "y": 1264,
+      "text": "Round 2 · Android — Home, roadmap, guides, reminders",
+      "kind": "title1",
+      "maxW": 2270,
+      "page": "android"
+    },
+    "and_ios_row12": {
+      "x": 0,
+      "y": 2984,
+      "text": "Round 2 · Android — Assist, letter explainer, reply writer, paywall, consent",
+      "kind": "title1",
+      "maxW": 3210,
+      "page": "android"
+    },
+    "and_ios_row13": {
+      "x": 0,
+      "y": 5004,
+      "text": "Round 2 · Comparisons — blocked accounts and bank accounts (Android, Android)",
+      "kind": "title1",
+      "maxW": 860,
+      "page": "android"
+    },
+    "and_ios_row14": {
+      "x": 0,
+      "y": 7624,
+      "text": "Round 2 · App guide page, urgent letter, add reminder, web bank comparison",
+      "kind": "title1",
+      "maxW": 1330,
+      "page": "android"
+    },
+    "and_ios_row15": {
+      "x": 0,
+      "y": 10344,
+      "text": "Round 2 · Text-length check — Nepali (Android) and Hindi (Android)",
+      "kind": "title1",
+      "maxW": 860,
+      "page": "android"
+    },
+    "and_ios_row16": {
+      "x": 0,
+      "y": 12164,
+      "text": "Round 2 · Dark mode — Android onboarding",
+      "kind": "title1",
+      "maxW": 4150,
+      "page": "android"
+    },
+    "and_ios_row17": {
+      "x": 0,
+      "y": 13428,
+      "text": "Round 2 · Dark mode — Android screens",
+      "kind": "title1",
+      "maxW": 6030,
+      "page": "android"
+    },
+    "and_ios_row18": {
+      "x": 0,
+      "y": 16148,
+      "text": "Round 3 · Android — remaining screens",
+      "kind": "title1",
+      "maxW": 7910,
+      "page": "android"
+    },
+    "and_ios_row19": {
+      "x": 0,
+      "y": 18468,
+      "text": "Round 3 · Android dark — remaining screens",
+      "kind": "title1",
+      "maxW": 7910,
+      "page": "android"
+    },
+    "and_ios_row20": {
+      "x": 0,
+      "y": 20788,
+      "text": "Round 3 · States — empty, loading, error, offline, outdated, limit reached (Android light and dark)",
+      "kind": "title1",
+      "maxW": 5560,
+      "page": "android"
+    },
+    "and_ios_row21": {
+      "x": 0,
+      "y": 22808,
+      "text": "How we make money · Where to get help — Android, Android, web mobile",
+      "kind": "title1",
+      "maxW": 860,
+      "page": "android"
+    },
+    "web_r2app_desk": {
+      "x": 0,
+      "y": 32254,
+      "text": "Web · onboarding, roadmap, guides, reminders, Assist and letters — desktop (1440)",
+      "kind": "title1",
+      "maxW": 9040,
+      "page": "web"
+    },
+    "web_r2app_mob": {
+      "x": 0,
+      "y": 39378,
+      "text": "Web · onboarding, roadmap, guides, reminders, Assist and letters — mobile (390)",
+      "kind": "title1",
+      "maxW": 4620,
+      "page": "web"
+    }
+  },
+  "designSystems": []
+}

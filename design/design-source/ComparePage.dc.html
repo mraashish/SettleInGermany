@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Comparison page</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>body{margin:0}</style>
+</helmet>
+<div style="width: 390px; height: 2200px; position: relative; overflow: hidden; background: {{ k.cF6F4F0 }}; color: {{ k.c1F1D1A }}; font-family: Inter, system-ui, sans-serif">
+
+  <sc-if value="{{ ios }}" hint-placeholder-val="{{ true }}">
+    <div style="padding: 8px 16px 0; display: flex; flex-direction: column; gap: 4px">
+      <div style="height: 44px; display: flex; align-items: center; justify-content: space-between">
+        <a href="ios-home.dc.html" style="display: flex; align-items: center; height: 44px; margin-left: -8px; color: {{ k.c0F5C63 }}; text-decoration: none; font-size: 17px"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"></path></svg>Tools</a>
+        <button aria-label="Share comparison" style="width: 44px; height: 44px; margin-right: -8px; border: none; background: transparent; color: {{ k.c0F5C63 }}; display: flex; align-items: center; justify-content: center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8M16 6l-4-4-4 4M12 2v13"></path></svg></button>
+      </div>
+      <h1 style="margin: 0; font-size: 30px; line-height: 36px; font-weight: 700; letter-spacing: -0.02em">{{ c.title }}</h1>
+    </div>
+  </sc-if>
+  <sc-if value="{{ android }}" hint-placeholder-val="{{ false }}">
+    <div style="padding: 0 4px">
+      <div style="height: 64px; display: flex; align-items: center; justify-content: space-between">
+        <a href="and-home.dc.html" aria-label="Back" style="width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; color: {{ k.c1F1D1A }}"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"></path></svg></a>
+        <button aria-label="Share comparison" style="width: 48px; height: 48px; border-radius: 999px; border: none; background: transparent; color: {{ k.c1F1D1A }}; display: flex; align-items: center; justify-content: center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"></path></svg></button>
+      </div>
+      <h1 style="margin: 0 12px; font-size: 28px; line-height: 36px; font-weight: 500">{{ c.title }}</h1>
+    </div>
+  </sc-if>
+
+  <div style="display: flex; flex-direction: column; gap: 16px; padding: 8px 16px 120px">
+    <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap">
+      <span style="font-size: 11px; font-weight: 700; border: 1px solid {{ k.c0F5C63 }}; color: {{ k.c0F5C63 }}; border-radius: 4px; padding: 0 5px; line-height: 17px">DE</span>
+      <span style="font-size: 16px; font-weight: 500">{{ c.de }}</span>
+      <span style="font-size: 13px; color: {{ k.c6B655C }}">· Checked {{ c.checked }}</span>
+    </div>
+
+    <section style="background: {{ k.cFFFFFF }}; border: 1px solid {{ k.cE4E0D8 }}; border-radius: {{ rLg }}; padding: 16px; display: flex; flex-direction: column; gap: 12px">
+      <h2 style="margin: 0; font-size: 13px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: {{ k.c0F5C63 }}">What matters</h2>
+      <sc-for list="{{ c.matters }}" as="m" hint-placeholder-count="3">
+        <div style="display: flex; gap: 12px; align-items: flex-start; font-size: 15px; line-height: 22px">
+          <span style="width: 24px; height: 24px; border-radius: 999px; background: {{ k.cE6F0F0 }}; color: {{ k.c0F5C63 }}; font-size: 13px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex: none">{{ m.n }}</span>
+          <span><strong>{{ m.head }}</strong> {{ m.body }}</span>
+        </div>
+      </sc-for>
+      <a href="A-Guide.dc.html" style="font-size: 14px; font-weight: 600; color: {{ k.c0F5C63 }}; min-height: 32px; display: flex; align-items: center">{{ c.guideLink }}</a>
+    </section>
+
+    <div style="display: flex; flex-direction: column; gap: 10px">
+      <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px">
+        <span style="font-size: 14px; color: {{ k.c6B655C }}">{{ c.count }}</span>
+        <button aria-haspopup="listbox" style="min-height: 40px; padding: 0 12px; border-radius: {{ chipR }}; border: 1px solid {{ k.cCFC9BE }}; background: {{ k.cFFFFFF }}; font: 600 14px Inter, sans-serif; color: {{ k.c1F1D1A }}; display: flex; align-items: center; gap: 6px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18M6 12h12M10 18h4"></path></svg>Sort: {{ c.sort }}</button>
+      </div>
+      <div role="group" aria-label="Filters" style="display: flex; gap: 8px; flex-wrap: wrap">
+        <sc-for list="{{ c.filters }}" as="f" hint-placeholder-count="3">
+          <button aria-pressed="{{ f.pressed }}" style="min-height: 36px; padding: 0 12px; border-radius: {{ chipR }}; border: 1px solid {{ f.border }}; background: {{ f.bg }}; font: 500 13px Inter, sans-serif; color: {{ f.color }}">{{ f.label }}</button>
+        </sc-for>
+      </div>
+    </div>
+
+    <sc-for list="{{ c.providers }}" as="p" hint-placeholder-count="3">
+      <article style="background: {{ k.cFFFFFF }}; border: {{ p.border }}; border-radius: {{ rLg }}; padding: 16px; display: flex; flex-direction: column; gap: 12px">
+        <div style="display: flex; align-items: center; gap: 12px">
+          <span style="width: 44px; height: 44px; border-radius: 12px; background: {{ k.cEFECE6 }}; color: {{ k.c6B655C }}; font-size: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex: none">Logo</span>
+          <span style="display: flex; flex-direction: column; gap: 2px; flex: 1">
+            <span style="font-size: 17px; font-weight: 700">{{ p.name }}</span>
+            <span style="font-size: 13px; color: {{ k.c6B655C }}">{{ p.sub }}</span>
+          </span>
+          <sc-if value="{{ p.hasBadge }}" hint-placeholder-val="{{ false }}">
+            <span style="background: {{ k.cE6F0F0 }}; color: {{ k.c0F5C63 }}; border-radius: 999px; padding: 3px 9px; font-size: 12px; font-weight: 700; white-space: nowrap">{{ p.badge }}</span>
+          </sc-if>
+        </div>
+        <dl style="margin: 0; display: flex; flex-direction: column">
+          <sc-for list="{{ p.rows }}" as="r" hint-placeholder-count="5">
+            <div style="min-height: 40px; display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 12px; border-top: 1px solid {{ k.cEFECE6 }}; font-size: 14px">
+              <dt style="color: {{ k.c4A453E }}">{{ r.label }}</dt>
+              <dd style="margin: 0; display: inline-flex; align-items: center; gap: 4px; font-weight: {{ r.weight }}; color: {{ r.color }}; background: {{ r.bg }}; border-radius: 4px; padding: 1px 5px">
+                <sc-if value="{{ r.yes }}" hint-placeholder-val="{{ false }}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"></path></svg></sc-if>
+                <sc-if value="{{ r.no }}" hint-placeholder-val="{{ false }}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"></path></svg></sc-if>
+                {{ r.value }}
+              </dd>
+            </div>
+          </sc-for>
+        </dl>
+        <a href="https://example.com" style="height: 48px; border-radius: {{ btnR }}; background: {{ p.btnBg }}; color: {{ p.btnColor }}; border: 1.5px solid {{ k.c0F5C63 }}; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 6px; font-size: 15px; font-weight: 700">Visit provider<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 3h6v6M10 14L21 3M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></a>
+        <sc-if value="{{ p.referral }}" hint-placeholder-val="{{ true }}">
+          <p style="margin: -4px 0 0; font-size: 12px; line-height: 17px; color: {{ k.c6B655C }}; display: flex; gap: 6px; align-items: flex-start"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none; margin-top: 1px"><circle cx="12" cy="12" r="9"></circle><path d="M12 16v-4M12 8h.01"></path></svg><span>Referral link: we may earn a commission at no cost to you.</span></p>
+        </sc-if>
+        <sc-if value="{{ p.noReferral }}" hint-placeholder-val="{{ false }}">
+          <p style="margin: -4px 0 0; font-size: 12px; line-height: 17px; color: {{ k.c6B655C }}">Not a partner — listed because it fits your needs.</p>
+        </sc-if>
+      </article>
+    </sc-for>
+
+    <div style="display: flex; flex-direction: column; gap: 8px; border-top: 1px solid {{ k.cE4E0D8 }}; padding-top: 14px; font-size: 13px; line-height: 19px; color: {{ k.c6B655C }}">
+      <span>Ranking is by {{ c.sortLower }}, never by commission. Fees change — confirm on the provider’s site before you sign up.</span>
+      <span style="display: flex; gap: 14px; flex-wrap: wrap"><a href="#how-we-make-money" style="color: {{ k.c0F5C63 }}; font-weight: 600; min-height: 32px; display: flex; align-items: center">How we make money</a><a href="#report" style="color: {{ k.c0F5C63 }}; font-weight: 600; min-height: 32px; display: flex; align-items: center">Report wrong information</a></span>
+    </div>
+  </div>
+
+  <div style="position: absolute; left: 0; right: 0; bottom: 0">
+    <dc-import name="TabBar" platform="{{ platform }}" active="tools" dark="{{ darkStr }}" hint-size="390px,84px"></dc-import>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"dark":{"editor":"boolean","default":false},"platform":{"editor":"enum","options":["ios","android"],"default":"ios"},"topic":{"editor":"enum","options":["blocked","bank"],"default":"blocked"},"$preview":{"width":390,"height":2200}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const __dark = this.props.dark === true || this.props.dark === 'true';
+    const k = __dark ? {"cF6F4F0": "#121614", "cFFFFFF": "#1A2221", "c1F1D1A": "#ECEAE5", "c3B3833": "#C9CFCD", "c4A453E": "#C2C8C6", "c6B655C": "#9AA5A3", "cE4E0D8": "#2C3634", "cEFECE6": "#252D2C", "cCFC9BE": "#4A5755", "cA8A196": "#6F7B79", "cE9E5DD": "#252D2C", "cEDE9E1": "#252D2C", "c0F5C63": "#5CC8C2", "c0A4449": "#8EDDD8", "cE6F0F0": "#173332", "cCFE3E3": "#1F4442", "cD3E6E6": "#1F3D3B", "cE8A33D": "#F2B85C", "c2A1A00": "#2A1A00", "cFBF1DF": "#33291A", "c8A5A12": "#E0C27A", "cB7791F": "#C9A15A", "cFDF6EA": "#2A2418", "cFBEFD9": "#33291A", "c5C3D08": "#E0C27A", "c5C4A2A": "#D8C8A8", "cFDECEA": "#3A1F1C", "cB42318": "#F0A49B", "cEAF4EE": "#1D3327", "c24653F": "#7FD3A0", "c2E7D4F": "#7FD3A0", "cF3F8F8": "#16201F", "cFBFAF7": "#161C1B", "c000000": "#F2F2F2", "cFDF3E2": "#33291A", "c55524C": "#000000"} : {"cF6F4F0": "#F6F4F0", "cFFFFFF": "#FFFFFF", "c1F1D1A": "#1F1D1A", "c3B3833": "#3B3833", "c4A453E": "#4A453E", "c6B655C": "#6B655C", "cE4E0D8": "#E4E0D8", "cEFECE6": "#EFECE6", "cCFC9BE": "#CFC9BE", "cA8A196": "#A8A196", "cE9E5DD": "#E9E5DD", "cEDE9E1": "#EDE9E1", "c0F5C63": "#0F5C63", "c0A4449": "#0A4449", "cE6F0F0": "#E6F0F0", "cCFE3E3": "#CFE3E3", "cD3E6E6": "#D3E6E6", "cE8A33D": "#E8A33D", "c2A1A00": "#2A1A00", "cFBF1DF": "#FBF1DF", "c8A5A12": "#8A5A12", "cB7791F": "#B7791F", "cFDF6EA": "#FDF6EA", "cFBEFD9": "#FBEFD9", "c5C3D08": "#5C3D08", "c5C4A2A": "#5C4A2A", "cFDECEA": "#FDECEA", "cB42318": "#B42318", "cEAF4EE": "#EAF4EE", "c24653F": "#24653F", "c2E7D4F": "#2E7D4F", "cF3F8F8": "#F3F8F8", "cFBFAF7": "#FBFAF7", "c000000": "#000000", "cFDF3E2": "#FDF3E2", "c55524C": "#55524C"};
+    const platform = (this.props.platform ?? 'ios') === 'android' ? 'android' : 'ios';
+    const ios = platform === 'ios';
+    const topic = this.props.topic === 'bank' ? 'bank' : 'blocked';
+
+    const ph = (v) => ({ value: v, color: k.c8A5A12, bg: k.cFBF1DF, weight: 600, yes: false, no: false });
+    const yes = (v) => ({ value: v || 'Yes', color: k.c24653F, bg: 'transparent', weight: 600, yes: true, no: false });
+    const no = (v) => ({ value: v || 'No', color: k.c6B655C, bg: 'transparent', weight: 500, yes: false, no: true });
+    const txt = (v) => ({ value: v, color: k.c1F1D1A, bg: 'transparent', weight: 600, yes: false, no: false });
+    const row = (label, v) => Object.assign({ label: label }, v);
+
+    const chip = (label, on) => ({ label: label, pressed: on ? 'true' : 'false', bg: on ? k.c0F5C63 : k.cFFFFFF, color: on ? k.cFFFFFF : k.c1F1D1A, border: on ? k.c0F5C63 : k.cCFC9BE });
+    const card = (o) => Object.assign({
+      hasBadge: !!o.badge, badge: o.badge || '',
+      border: o.highlight ? '2px solid ' + k.c0F5C63 : '1px solid ' + k.cE4E0D8,
+      btnBg: o.highlight ? k.c0F5C63 : k.cFFFFFF, btnColor: o.highlight ? k.cFFFFFF : k.c0F5C63,
+      referral: !!o.referral, noReferral: !o.referral
+    }, o);
+
+    const blocked = {
+      title: 'Blocked accounts', de: 'Sperrkonto', checked: '[date]',
+      guideLink: 'Read the guide: open a blocked account step by step',
+      matters: [
+        { n: '1', head: 'The amount is fixed by law.', body: 'You deposit [€ yearly amount] and get [€ monthly amount] paid out each month. It is the same at every provider.' },
+        { n: '2', head: 'Fees are the real difference.', body: 'Add the setup fee and 12 monthly fees to see the true cost of year one.' },
+        { n: '3', head: 'Speed matters for your visa.', body: 'You need the confirmation before your embassy appointment in Kathmandu or New Delhi.' }
+      ],
+      count: '[X] providers', sort: 'Lowest total fees', sortLower: 'lowest total fees',
+      filters: [chip('Accepted for Nepal', true), chip('Accepted for India', false), chip('Without insurance bundle', false)],
+      providers: [
+        card({ name: '[Provider A]', sub: 'Online · English support', badge: 'Lowest fees', highlight: true, referral: true, rows: [
+          row('Setup fee', ph('€[—]')), row('Monthly fee', ph('€[—]')), row('Year one, total', ph('€[—]')),
+          row('Opening time', ph('[X] working days')), row('First payout', ph('[X] days after arrival')), row('Accepted for Nepal visa', yes())
+        ] }),
+        card({ name: '[Provider B]', sub: 'Online · Hindi and English support', badge: 'Fastest opening', referral: false, rows: [
+          row('Setup fee', ph('€[—]')), row('Monthly fee', ph('€[—]')), row('Year one, total', ph('€[—]')),
+          row('Opening time', ph('[X] working days')), row('First payout', ph('[X] days after arrival')), row('Accepted for Nepal visa', yes())
+        ] }),
+        card({ name: '[Provider C]', sub: 'Bundled with health insurance', referral: true, rows: [
+          row('Setup fee', ph('€[—]')), row('Monthly fee', ph('€[—]')), row('Year one, total', ph('€[—]')),
+          row('Opening time', ph('[X] working days')), row('First payout', ph('[X] days after arrival')), row('Accepted for Nepal visa', yes())
+        ] })
+      ]
+    };
+
+    const bank = {
+      title: 'Bank accounts', de: 'Girokonto', checked: '[date]',
+      guideLink: 'Read the guide: open a bank account',
+      matters: [
+        { n: '1', head: 'Can you open it yet?', body: 'Some banks need your address registration first. Others open with just your passport.' },
+        { n: '2', head: 'Check the monthly fee and its conditions.', body: '“Free” often means free only if a set amount comes in each month.' },
+        { n: '3', head: 'You may need a girocard.', body: 'Some shops, offices and landlords still don’t take Visa or Mastercard debit cards.' }
+      ],
+      count: '[X] banks', sort: 'Lowest monthly fee', sortLower: 'lowest monthly fee',
+      filters: [chip('Open without address registration', true), chip('App in English', true), chip('Has branches', false)],
+      providers: [
+        card({ name: '[Bank A]', sub: 'Online bank · app only', badge: 'No monthly fee', highlight: true, referral: true, rows: [
+          row('Monthly fee', ph('€[—]')), row('Fee-free if', ph('[condition]')), row('Open without registration', yes()),
+          row('App in English', yes()), row('Cards', ph('[Debit Visa / girocard]')), row('Free cash withdrawals', ph('[X] a month')), row('Branches', no('Online only'))
+        ] }),
+        card({ name: '[Bank B]', sub: 'Online bank', referral: true, rows: [
+          row('Monthly fee', ph('€[—]')), row('Fee-free if', ph('[condition]')), row('Open without registration', yes()),
+          row('App in English', yes()), row('Cards', ph('[Debit Mastercard]')), row('Free cash withdrawals', ph('[X] a month')), row('Branches', no('Online only'))
+        ] }),
+        card({ name: '[Bank C]', sub: 'Branch bank · German app', badge: 'Has branches', referral: false, rows: [
+          row('Monthly fee', ph('€[—]')), row('Fee-free if', ph('[condition]')), row('Open without registration', no()),
+          row('App in English', no('German only')), row('Cards', ph('[girocard + credit card]')), row('Free cash withdrawals', txt('At own ATMs')), row('Branches', yes('In Leipzig'))
+        ] })
+      ]
+    };
+
+    return { k: k, darkStr: __dark ? 'true' : 'false',
+      ios: ios, android: !ios, platform: platform,
+      c: topic === 'bank' ? bank : blocked,
+      rLg: ios ? '16px' : '20px', btnR: ios ? '12px' : '999px', chipR: ios ? '999px' : '8px'
+    };
+  }
+}
+</script>
+</body>
+</html>

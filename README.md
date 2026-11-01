@@ -1,0 +1,99 @@
+# Settle in Germany
+
+One Expo (React Native) codebase that ships the **website**, the **Android app** and the **iOS app**, each matching its own designs from the "Calm Ledger" canvas.
+
+- Product brief: [`docs/brief.pdf`](docs/brief.pdf)
+- Build handoff (source of truth for this implementation): [`docs/HANDOFF.md`](docs/HANDOFF.md)
+- Every design frame: [`design/design-source/`](design/design-source) (`ios-*`, `and-*`, `web-*` frames + shared components; `canvas.json` is the index)
+
+## Run it
+
+```bash
+npm install
+npx expo start            # press i / a / w for iOS, Android, web
+```
+
+Ads, the document scanner, IAP and Sign in with Apple are native modules, so use a **development build** (not Expo Go):
+
+```bash
+npx eas-cli@latest build --profile development -p all
+```
+
+| Script | What it does |
+|---|---|
+| `npm run dev` | Dev server (`expo start`) |
+| `npm run build:native` | EAS Build, iOS + Android |
+| `npm run submit` | EAS Submit, both stores |
+| `npm run build:web` | Static website → `dist/` (deploy to any static host) |
+| `npm run release` | All three |
+| `npm run typecheck` / `npm run lint` / `npm test` | TypeScript, ESLint, Jest |
+
+Copy `.env.example` to `.env.local` to connect the CMS, backend, Supabase, RevenueCat and ad units. **With no env at all the app still runs**: it uses the bundled seed content, AI demo responses (bracketed placeholders) and fixed-size ad placeholders.
+
+## Architecture
+
+```
+app/                  Expo Router routes (thin: metadata + one screen component)
+  (tabs)/             Home · Guides · Assist · Tools · Me
+  onboarding/[step]   9 skippable steps
+  guides/[slug]       Static, crawlable guide pages (generateStaticParams + generateMetadata)
+  …                   every route in HANDOFF Appendix A
+  dev/gallery         Component gallery (dev only) — light and dark side by side
+src/
+  theme/              Tokens (HANDOFF §5, copied exactly), ThemeProvider (system + manual override)
+  ui/                 Component kit (HANDOFF §6). Platform shape differences via theme.shape / platform files
+  features/           Screens, grouped by area (onboarding, home, roadmap, guides, reminders, assist, tools, me, info, premium, consent)
+  content/            CMS types (§8), seed content, TanStack Query hooks
+  store/              Local-first state (profile, consent, roadmap, reminders) in expo-sqlite kv-store (localStorage on web)
+  services/           ads, consent, purchases (RevenueCat), notifications, auth (Supabase), api + ai (backend only), scanner
+  i18n/               i18next: en, ne, hi
+```
+
+### How each platform gets its own design
+
+- **Tokens are shared, shapes are not.** `useTheme().shape` gives per-platform radii (iOS buttons 12 / cards 16 / pill chips; Android pill buttons / cards 20 / radius-8 chips; web 12 / 16).
+- `AppBar` renders the iOS large title + "‹ Back" or the Android 64 px bar with ←; `StageSwitcher` is a segmented control on iOS/web and underlined tabs on Android; `TabBar` has the Material 3 pill on Android; sheets put Cancel/Save in the header on iOS and actions at the bottom on Android; the Android reminders screen uses an extended FAB.
+- **Web** wraps every screen in `WebShell` (site header, breadcrumbs, 760 px reading column, side column, footer). Under 600 px it uses the mobile header plus the iOS-style tab bar; at 1024 px and up it shows the desktop layout and a provider table on comparison pages.
+- `Screen` (`src/ui/Screen.tsx`) picks the right chrome, so feature screens are written once.
+- Dark mode follows the system on iOS/Android with a manual override in **Me › Appearance**. **Web is light-only** for now (`WEB_DARK_ENABLED` in `ThemeProvider`).
+
+### Rules the code enforces
+
+- **Nothing factual is hard-coded.** Guides, tasks, cities, rules, providers, phrases and help services come from `src/content` (CMS or seed). Bracketed placeholders from the designs are kept as-is.
+- **Status = colour + icon + word** (`DeadlineChip`, `Callout`, risk levels). Saffron is only used as a fill, never for text.
+- **Ads**: free tier only, nothing renders before a consent decision, fixed heights (no layout shift), labelled "Ad", placed only where §7.6 allows (never on AI, paywall, onboarding, emergency or document-date screens).
+- **Consent** before any personalised ads or analytics. "Accept all", "Reject all" and "Settings" have equal weight. You can change it in Me › Privacy and in the web footer's "Cookie settings".
+- **AI** goes through `services/api.ts` → our backend. The client never holds model keys. The 3 free scans are shown *before* a scan. After the last free scan the result still shows in full, followed by a soft upgrade card. Urgent letters get a red banner that can't be dismissed.
+- **Reminders** store dates and notes only, never document images. They default to 90/30/7 days before.
+- **Offline**: roadmap, reminders and opened guides (persisted query cache) work offline; a subtle banner shows instead of an error, and AI screens say "Needs internet".
+- **Monetisation** never blocks free information. The paywall shows the price after the trial and how to cancel, with restore, terms/privacy and a visible close. It has no timers.
+
+## Status
+
+| Build order (HANDOFF §10) | State |
+|---|---|
+| 1. Scaffold, tokens, fonts, i18n, theme, `/dev/gallery` | ✅ |
+| 2. Navigation shells (iOS/Android tab bars, web header + mobile-web tabs) | ✅ |
+| 3. Onboarding → Home → Roadmap → Guides → Guide (static SEO) → Reminders (+ local notifications) | ✅ |
+| 4. Tools: comparisons, calculators, phrasebook, safety, city page, rule-change alerts | ✅ (calculators show placeholders until the CMS provides rates) |
+| 5. Me, privacy, subscription, how we make money, where to get help, consent | ✅ |
+| 6. Assist: hub, scan/upload, processing, letter result (+ urgent, last-free), reply writer, chat, scam, contract, forms, job kit, practice | ✅ UI + backend client. The backend itself isn't built yet. Forms, job kit and practice still use sample content. |
+| 7. Payments (RevenueCat) and ads (AdMob/AdSense) with consent gating | ✅ wired, needs keys and unit IDs |
+| 8. States: empty, skeleton, error, offline, outdated, limit reached | ✅ |
+| 9. Release pipelines | `eas.json` + scripts. Run `eas init` to create the project ID |
+
+Verified locally: `tsc` clean, ESLint clean, Jest passing, `expo export -p web` (79 static routes with title/description/canonical), `expo export -p ios -p android` (Hermes bundles), and Playwright screenshots of the main web pages at 390 px and 1440 px with no hydration errors.
+
+## Open items for the product owner (HANDOFF §12)
+
+Search for `TODO(product owner)` in the code. In short:
+
+- Real content for every placeholder. The CMS and hosting choice is still open (`src/content/client.ts`).
+- The backend for the AI endpoints in `src/services/ai.ts` and for push registration.
+- Official App Store / Google Play badge artwork.
+- Native-speaker review of the Nepali and Hindi copy and transliterations (`src/i18n/locales/ne.ts`, `hi.ts`).
+- The final ad partner list and unit IDs (`app.json` still uses the AdMob **test** app IDs).
+- A certified IAB TCF CMP on web, styled like `WebConsent.dc.html`.
+- Stage and empty-state illustrations.
+- Web dark mode, which isn't designed yet.
+- Final Impressum, privacy policy and terms text.

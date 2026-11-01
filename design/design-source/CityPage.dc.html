@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>City page</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>body{margin:0}</style>
+</helmet>
+<div style="width: {{ rootW }}; height: {{ rootH }}; position: relative; overflow: hidden; background: {{ k.cF6F4F0 }}; color: {{ k.c1F1D1A }}; font-family: Inter, system-ui, sans-serif">
+  <sc-if value="{{ notWeb }}" hint-placeholder-val="{{ true }}"><dc-import name="AppBar" platform="{{ platform }}" title="Leipzig" back="Guides" href="{{ backHref }}" large="false" action="share" dark="{{ darkStr }}" hint-size="390px,64px"></dc-import></sc-if>
+
+  <div style="display: flex; flex-direction: column; gap: 18px; padding: 0 16px {{ padB }}">
+    <div style="margin: 0 -16px; height: 150px; background: {{ k.cE6F0F0 }}; position: relative; overflow: hidden">
+      <svg width="390" height="150" viewBox="0 0 390 150" aria-hidden="true" style="position: absolute; left: 0; bottom: 0"><path d="M0 150V96h30V70h22v26h18V58l14-14 14 14v38h20V80h26v16h16V40h8V24h4v16h8v56h22V74h30v22h18V62l20-12 20 12v34h16V84h24v12h20v54z" fill="{{ k.c0F5C63 }}" opacity="0.85"></path><path d="M0 150v-20h390v20z" fill="{{ k.c0A4449 }}"></path><rect x="250" y="112" width="70" height="20" rx="6" fill="{{ k.cE8A33D }}"></rect><rect x="258" y="116" width="12" height="8" rx="2" fill="{{ k.cFFFFFF }}"></rect><rect x="274" y="116" width="12" height="8" rx="2" fill="{{ k.cFFFFFF }}"></rect><rect x="290" y="116" width="12" height="8" rx="2" fill="{{ k.cFFFFFF }}"></rect></svg>
+      <span style="position: absolute; left: 16px; top: 14px; background: {{ k.cFFFFFF }}; color: {{ k.c0F5C63 }}; border-radius: 999px; padding: 4px 10px; font-size: 12px; font-weight: 700">Your city</span>
+    </div>
+
+    <section aria-label="Key facts" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px">
+      <div style="background: {{ k.cFFFFFF }}; border: 1px solid {{ k.cE4E0D8 }}; border-radius: {{ r }}; padding: 14px; display: flex; flex-direction: column; gap: 4px"><span style="font-size: 13px; color: {{ k.c6B655C }}">Shared room, warm rent</span><span style="font-size: 18px; font-weight: 700; color: {{ k.c8A5A12 }}; background: {{ k.cFBF1DF }}; align-self: flex-start; border-radius: 4px; padding: 0 4px">€[—]–[—]</span><span style="font-size: 12px; color: {{ k.c6B655C }}">a month</span></div>
+      <div style="background: {{ k.cFFFFFF }}; border: 1px solid {{ k.cE4E0D8 }}; border-radius: {{ r }}; padding: 14px; display: flex; flex-direction: column; gap: 4px"><span style="font-size: 13px; color: {{ k.c6B655C }}">Transit pass</span><span style="font-size: 18px; font-weight: 700">Semester ticket</span><span style="font-size: 12px; color: {{ k.c6B655C }}">Usually part of your semester fee — check your university</span></div>
+    </section>
+
+    <section style="display: flex; flex-direction: column; gap: 10px">
+      <h2 style="margin: 0; font-size: 19px; font-weight: 700">Appointments</h2>
+      <div style="background: {{ k.cFFFFFF }}; border: 1px solid {{ k.cE4E0D8 }}; border-radius: {{ r }}; padding: 16px; display: flex; flex-direction: column; gap: 10px">
+        <div style="display: flex; flex-direction: column; gap: 4px"><strong style="font-size: 16px">Citizen’s office</strong><span style="display: flex; align-items: center; gap: 6px; font-size: 13px"><span style="font-size: 10px; font-weight: 700; border: 1px solid {{ k.c0F5C63 }}; color: {{ k.c0F5C63 }}; border-radius: 4px; padding: 0 4px; line-height: 15px">DE</span><span style="font-weight: 500">Bürgeramt</span><span style="color: {{ k.c6B655C }}">· address registration</span></span></div>
+        <p style="margin: 0; font-size: 15px; line-height: 22px; color: {{ k.c3B3833 }}">Book online. Any office in the city can register you. [Tip about when new slots appear.]</p>
+        <a href="https://www.leipzig.de" style="min-height: 44px; border-radius: {{ btnR }}; border: 1.5px solid {{ k.c0F5C63 }}; color: {{ k.c0F5C63 }}; text-decoration: none; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 700">Book on the city website ↗</a>
+        <button style="align-self: flex-start; min-height: 32px; border: none; background: transparent; padding: 0; color: {{ k.c6B655C }}; font: 500 13px Inter, sans-serif; text-decoration: underline">Report a change</button>
+      </div>
+      <div style="background: {{ k.cFFFFFF }}; border: 1px solid {{ k.cE4E0D8 }}; border-radius: {{ r }}; padding: 16px; display: flex; flex-direction: column; gap: 10px">
+        <div style="display: flex; flex-direction: column; gap: 4px"><strong style="font-size: 16px">Immigration office</strong><span style="display: flex; align-items: center; gap: 6px; font-size: 13px"><span style="font-size: 10px; font-weight: 700; border: 1px solid {{ k.c0F5C63 }}; color: {{ k.c0F5C63 }}; border-radius: 4px; padding: 0 4px; line-height: 15px">DE</span><span style="font-weight: 500">Ausländerbehörde</span><span style="color: {{ k.c6B655C }}">· residence permit</span></span></div>
+        <p style="margin: 0; font-size: 15px; line-height: 22px; color: {{ k.c3B3833 }}">[How to request an appointment in Leipzig — online form or email.] Apply well before your visa ends.</p>
+        <a href="https://www.leipzig.de" style="min-height: 44px; border-radius: {{ btnR }}; border: 1.5px solid {{ k.c0F5C63 }}; color: {{ k.c0F5C63 }}; text-decoration: none; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 700">Request an appointment ↗</a>
+        <button style="align-self: flex-start; min-height: 32px; border: none; background: transparent; padding: 0; color: {{ k.c6B655C }}; font: 500 13px Inter, sans-serif; text-decoration: underline">Report a change</button>
+      </div>
+    </section>
+
+    <section style="display: flex; flex-direction: column; gap: 10px">
+      <h2 style="margin: 0; font-size: 19px; font-weight: 700">Community and culture</h2>
+      <div role="group" aria-label="Filter places" style="display: flex; gap: 8px; flex-wrap: wrap">
+        <button aria-pressed="true" style="min-height: 36px; padding: 0 12px; border-radius: {{ chipR }}; border: 1px solid {{ k.c0F5C63 }}; background: {{ k.c0F5C63 }}; color: {{ k.cFFFFFF }}; font: 600 13px Inter, sans-serif">All</button>
+        <button aria-pressed="false" style="min-height: 36px; padding: 0 12px; border-radius: {{ chipR }}; border: 1px solid {{ k.cCFC9BE }}; background: {{ k.cFFFFFF }}; color: {{ k.c1F1D1A }}; font: 500 13px Inter, sans-serif">Groceries</button>
+        <button aria-pressed="false" style="min-height: 36px; padding: 0 12px; border-radius: {{ chipR }}; border: 1px solid {{ k.cCFC9BE }}; background: {{ k.cFFFFFF }}; color: {{ k.c1F1D1A }}; font: 500 13px Inter, sans-serif">Restaurants</button>
+        <button aria-pressed="false" style="min-height: 36px; padding: 0 12px; border-radius: {{ chipR }}; border: 1px solid {{ k.cCFC9BE }}; background: {{ k.cFFFFFF }}; color: {{ k.c1F1D1A }}; font: 500 13px Inter, sans-serif">Temples</button>
+        <button aria-pressed="false" style="min-height: 36px; padding: 0 12px; border-radius: {{ chipR }}; border: 1px solid {{ k.cCFC9BE }}; background: {{ k.cFFFFFF }}; color: {{ k.c1F1D1A }}; font: 500 13px Inter, sans-serif">Groups</button>
+      </div>
+      <div role="img" aria-label="Map of Leipzig with 4 places marked" style="height: 170px; border-radius: {{ r }}; background: {{ k.cE9E5DD }}; position: relative; overflow: hidden; border: 1px solid {{ k.cE4E0D8 }}">
+        <svg width="358" height="170" viewBox="0 0 358 170" aria-hidden="true"><path d="M0 60C80 40 120 90 200 70S320 30 358 50M40 0l30 170M200 0l-20 170M0 130h358" stroke="{{ k.cFFFFFF }}" stroke-width="6" fill="none"></path><path d="M250 100c20-10 50 0 60 20s-20 40-50 30-30-40-10-50z" fill="{{ k.cCFE3E3 }}"></path></svg>
+        <sc-for list="{{ pins }}" as="pin" hint-placeholder-count="4">
+          <span style="position: absolute; left: {{ pin.x }}; top: {{ pin.y }}; width: 28px; height: 28px; border-radius: 999px 999px 999px 0; transform: rotate(-45deg); background: {{ k.c0F5C63 }}; display: flex; align-items: center; justify-content: center"><span style="transform: rotate(45deg); color: {{ k.cFFFFFF }}; font-size: 12px; font-weight: 700">{{ pin.n }}</span></span>
+        </sc-for>
+      </div>
+      <div style="background: {{ k.cFFFFFF }}; border: 1px solid {{ k.cE4E0D8 }}; border-radius: {{ r }}; padding: 0 14px">
+        <sc-for list="{{ places }}" as="pl" hint-placeholder-count="4">
+          <div style="display: flex; gap: 12px; padding: 12px 0; border-top: {{ pl.line }}; align-items: flex-start">
+            <span style="width: 26px; height: 26px; border-radius: 999px; background: {{ k.c0F5C63 }}; color: {{ k.cFFFFFF }}; font-size: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex: none">{{ pl.n }}</span>
+            <span style="display: flex; flex-direction: column; gap: 2px; flex: 1; min-width: 0"><strong style="font-size: 15px">{{ pl.name }}</strong><span style="font-size: 13px; color: {{ k.c6B655C }}">{{ pl.kind }}</span></span>
+            <button style="min-height: 32px; border: none; background: transparent; padding: 0; color: {{ k.c6B655C }}; font: 500 12px Inter, sans-serif; text-decoration: underline; white-space: nowrap">Report a change</button>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    <p style="margin: 0; font-size: 13px; color: {{ k.c6B655C }}">Last verified on [date] · <a href="#sources" style="color: {{ k.c0F5C63 }}">Sources</a></p>
+  </div>
+
+  <sc-if value="{{ notWeb }}" hint-placeholder-val="{{ true }}"><div style="position: absolute; left: 0; right: 0; bottom: 0">
+    <dc-import name="TabBar" platform="{{ platform }}" active="guides" dark="{{ darkStr }}" hint-size="390px,84px"></dc-import>
+  </div></sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"dark":{"editor":"boolean","default":false},"platform":{"editor":"enum","options":["ios","android","web"],"default":"ios"},"$preview":{"width":390,"height":1900}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const __dark = this.props.dark === true || this.props.dark === 'true';
+    const __web = this.props.platform === 'web';
+    const k = __dark ? {"cF6F4F0": "#121614", "cFFFFFF": "#1A2221", "c1F1D1A": "#ECEAE5", "c3B3833": "#C9CFCD", "c4A453E": "#C2C8C6", "c6B655C": "#9AA5A3", "cE4E0D8": "#2C3634", "cEFECE6": "#252D2C", "cCFC9BE": "#4A5755", "cA8A196": "#6F7B79", "cE9E5DD": "#252D2C", "cEDE9E1": "#252D2C", "c0F5C63": "#5CC8C2", "c0A4449": "#8EDDD8", "cE6F0F0": "#173332", "cCFE3E3": "#1F4442", "cD3E6E6": "#1F3D3B", "cE8A33D": "#F2B85C", "c2A1A00": "#2A1A00", "cFBF1DF": "#33291A", "c8A5A12": "#E0C27A", "cB7791F": "#C9A15A", "cFDF6EA": "#2A2418", "cFBEFD9": "#33291A", "c5C3D08": "#E0C27A", "c5C4A2A": "#D8C8A8", "cFDECEA": "#3A1F1C", "cB42318": "#F0A49B", "cEAF4EE": "#1D3327", "c24653F": "#7FD3A0", "c2E7D4F": "#7FD3A0", "cF3F8F8": "#16201F", "cFBFAF7": "#161C1B", "c000000": "#F2F2F2", "cFDF3E2": "#33291A", "c55524C": "#000000", "c5E8C8F": "#7FB3B5"} : {"cF6F4F0": "#F6F4F0", "cFFFFFF": "#FFFFFF", "c1F1D1A": "#1F1D1A", "c3B3833": "#3B3833", "c4A453E": "#4A453E", "c6B655C": "#6B655C", "cE4E0D8": "#E4E0D8", "cEFECE6": "#EFECE6", "cCFC9BE": "#CFC9BE", "cA8A196": "#A8A196", "cE9E5DD": "#E9E5DD", "cEDE9E1": "#EDE9E1", "c0F5C63": "#0F5C63", "c0A4449": "#0A4449", "cE6F0F0": "#E6F0F0", "cCFE3E3": "#CFE3E3", "cD3E6E6": "#D3E6E6", "cE8A33D": "#E8A33D", "c2A1A00": "#2A1A00", "cFBF1DF": "#FBF1DF", "c8A5A12": "#8A5A12", "cB7791F": "#B7791F", "cFDF6EA": "#FDF6EA", "cFBEFD9": "#FBEFD9", "c5C3D08": "#5C3D08", "c5C4A2A": "#5C4A2A", "cFDECEA": "#FDECEA", "cB42318": "#B42318", "cEAF4EE": "#EAF4EE", "c24653F": "#24653F", "c2E7D4F": "#2E7D4F", "cF3F8F8": "#F3F8F8", "cFBFAF7": "#FBFAF7", "c000000": "#000000", "cFDF3E2": "#FDF3E2", "c55524C": "#55524C", "c5E8C8F": "#5E8C8F"};
+    const platform = (this.props.platform ?? 'ios') === 'android' ? 'android' : 'ios';
+    const ios = platform === 'ios';
+    const places = [['[Nepali grocery store]', 'Groceries · [area]'], ['[Indian restaurant]', 'Restaurant · [area]'], ['[Hindu temple]', 'Temple · [area]'], ['[Nepali student group]', 'Community group · meets [day]']];
+    return { notWeb: !__web, rootW: __web ? '100%' : '390px', rootH: __web ? 'auto' : '1900px', padB: __web ? '24px' : '120px', k: k, darkStr: __dark ? 'true' : 'false',
+      platform: platform, backHref: ios ? 'ios-guides.dc.html' : 'and-guides.dc.html',
+      r: ios ? '16px' : '20px', btnR: ios ? '12px' : '999px', chipR: ios ? '999px' : '8px',
+      pins: [{ n: '1', x: '60px', y: '40px' }, { n: '2', x: '150px', y: '90px' }, { n: '3', x: '230px', y: '30px' }, { n: '4', x: '290px', y: '110px' }],
+      places: places.map((p, i) => ({ n: String(i + 1), name: p[0], kind: p[1], line: i === 0 ? 'none' : '1px solid ' + k.cEFECE6 }))
+    };
+  }
+}
+</script>
+</body>
+</html>
