@@ -1,44 +1,71 @@
 /**
- * Content client. With EXPO_PUBLIC_CMS_URL set it reads the headless CMS
- * (`GET {CMS}/{collection}?locale=xx`); otherwise it serves the bundled seed.
- * Screens use the TanStack Query hooks below; the persisted query cache makes
- * opened guides work offline (HANDOFF §7.3).
+ * Content client — reads the central content database (Supabase `published_content`).
  *
- * TODO(product owner): choose CMS + hosting (HANDOFF §12) and map its API here.
+ *  - Live: when EXPO_PUBLIC_SUPABASE_URL is set, every collection is read from the
+ *    database, and `useContentSync()` (src/content/sync.ts) refetches whatever an
+ *    editor publishes, on iOS, Android and web at the same moment.
+ *  - Baseline: `snapshot.generated.json` is written at build time (npm run content:snapshot)
+ *    so static web pages and a first app launch without network have the real content.
+ *  - Fallback: with no database configured, the bundled seed content is used.
+ *
+ * Screens use the TanStack Query hooks below; the persisted query cache keeps opened
+ * guides working offline (HANDOFF §7.3).
  */
 import { useQuery } from '@tanstack/react-query';
 import { useTranslation } from 'react-i18next';
 
+import { supabase } from '@/services/auth';
+import { type CollectionName, type Collections, isSingleton } from './collections';
 import * as seed from './seed';
-import type {
-  City, EmbassyContact, Guide, HelpService, Lang, Localized, Phrase, Provider, RoadmapTask, RuleChange, Rules, ScamWarning,
-} from './types';
+import snapshot from './snapshot.generated.json';
+import type { Lang, Localized } from './types';
 
-const CMS = process.env.EXPO_PUBLIC_CMS_URL;
-
-type Collections = {
-  guides: Guide[]; tasks: RoadmapTask[]; cities: City[]; rules: Rules; ruleChanges: RuleChange[];
-  providers: Provider[]; phrases: Phrase[]; helpServices: HelpService[]; scamWarnings: ScamWarning[]; embassies: EmbassyContact[];
-};
+export type { CollectionName, Collections } from './collections';
 
 const SEED: Collections = {
   guides: seed.guides, tasks: seed.tasks, cities: seed.cities, rules: seed.rules, ruleChanges: seed.ruleChanges,
   providers: seed.providers, phrases: seed.phrases, helpServices: seed.helpServices, scamWarnings: seed.scamWarnings, embassies: seed.embassies,
 };
 
-export async function fetchCollection<K extends keyof Collections>(name: K): Promise<Collections[K]> {
-  if (!CMS) return SEED[name];
-  const res = await fetch(`${CMS}/${name}`);
-  if (!res.ok) throw new Error(`CMS ${name}: ${res.status}`);
-  return (await res.json()) as Collections[K];
+const SNAPSHOT = snapshot as unknown as { generatedAt: string | null; collections: Partial<Collections> };
+const SNAPSHOT_AT = SNAPSHOT.generatedAt ? Date.parse(SNAPSHOT.generatedAt) : 0;
+
+/** True when the app reads the central database. */
+export const CMS_LIVE = !!supabase;
+
+/** What the app can show before (or without) a network response. */
+function baseline<K extends CollectionName>(name: K): Collections[K] | undefined {
+  return (SNAPSHOT.collections[name] as Collections[K] | undefined) ?? (CMS_LIVE ? undefined : SEED[name]);
 }
 
-const useCollection = <K extends keyof Collections>(name: K) =>
+export async function fetchCollection<K extends CollectionName>(name: K): Promise<Collections[K]> {
+  if (!supabase) return SEED[name];
+  const { data, error } = await supabase
+    .from('published_content')
+    .select('data')
+    .eq('collection', name)
+    .order('sort_order', { ascending: true })
+    .order('key', { ascending: true });
+  if (error) throw error;
+  const docs = (data ?? []).map((r) => r.data as unknown);
+  return (isSingleton(name) ? (docs[0] ?? SEED[name]) : docs) as Collections[K];
+}
+
+/**
+ * For static rendering (generateStaticParams / generateMetadata): uses the build
+ * snapshot when present so the generated pages match the content baked into them.
+ */
+export async function staticCollection<K extends CollectionName>(name: K): Promise<Collections[K]> {
+  return (SNAPSHOT.collections[name] as Collections[K] | undefined) ?? fetchCollection(name);
+}
+
+const useCollection = <K extends CollectionName>(name: K) =>
   useQuery({
     queryKey: ['cms', name],
     queryFn: () => fetchCollection(name),
-    // Seed data is available synchronously so static web pages render full content.
-    initialData: CMS ? undefined : SEED[name],
+    initialData: baseline(name),
+    // Snapshot/seed data counts as old, so the live version is fetched right away.
+    initialDataUpdatedAt: SNAPSHOT.collections[name] ? SNAPSHOT_AT : 0,
     staleTime: 1000 * 60 * 30,
   });
 
@@ -65,11 +92,4 @@ export function useL() {
   return (v: Localized | undefined) => (v ? (v[lang] ?? v.en) : '');
 }
 
-/** Guides verified more than 6 months ago show "We're re-checking this guide". */
-export function isOutdated(lastVerified: string, now = new Date()): boolean {
-  const d = new Date(lastVerified);
-  if (Number.isNaN(d.getTime())) return false;
-  const six = new Date(now);
-  six.setMonth(six.getMonth() - 6);
-  return d < six;
-}
+export { isOutdated } from './freshness';

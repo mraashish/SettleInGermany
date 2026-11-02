@@ -1,8 +1,9 @@
-import type { AppearancePref } from '@/theme/ThemeProvider';
+import type { StageId } from '@/content/types';
 import { createPersistedStore } from '@/lib/createStore';
+import type { AppearancePref } from '@/theme/ThemeProvider';
 
+export type { StageId };
 export type Language = 'en' | 'ne' | 'hi';
-export type StageId = 'before' | 'first30' | 'living' | 'career';
 export const STAGES: StageId[] = ['before', 'first30', 'living', 'career'];
 
 export interface Profile {

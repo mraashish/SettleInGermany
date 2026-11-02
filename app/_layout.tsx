@@ -12,7 +12,9 @@ import React, { useEffect } from 'react';
 import { Platform, View } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
+import { useContentSync } from '@/content/sync';
 import { ConsentHost } from '@/features/consent/ConsentHost';
+import { useNotificationLinks } from '@/services/notifications';
 import { tabForPath } from '@/lib/navigation';
 import { persister, queryClient } from '@/lib/queryClient';
 import { useLayout } from '@/lib/useLayout';
@@ -32,6 +34,8 @@ function Shell() {
   const onboarded = usePrefs((s) => s.onboarded);
   const { webWide } = useLayout();
   useAdsBootstrap();
+  useContentSync();
+  useNotificationLinks();
 
   useEffect(() => {
     configurePurchases();

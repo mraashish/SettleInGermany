@@ -3,7 +3,8 @@
  * these types — nothing factual is hard-coded in screens. `Localized<T>` fields hold
  * en / ne / hi variants; the client resolves them to the user's language.
  */
-import type { StageId } from '@/store/prefs';
+/** Journey stages (HANDOFF §7.3). */
+export type StageId = 'before' | 'first30' | 'living' | 'career';
 
 export type Lang = 'en' | 'ne' | 'hi';
 export type Localized<T = string> = { en: T } & Partial<Record<Exclude<Lang, 'en'>, T>>;

@@ -1,5 +1,9 @@
 import * as Notifications from 'expo-notifications';
+import { router } from 'expo-router';
+import { useEffect } from 'react';
 import { Platform } from 'react-native';
+
+import { supabase } from './auth';
 
 import { addDays } from '@/lib/deadline';
 import type { Reminder } from '@/store/reminders';
@@ -45,14 +49,38 @@ export async function cancelReminder(r: Pick<Reminder, 'notificationIds'>) {
   await Promise.all(r.notificationIds.map((id) => Notifications.cancelScheduledNotificationAsync(id).catch(() => undefined)));
 }
 
-/** Expo push token → backend, tagged with nationality / status / city for targeted rule-change pushes. */
-export async function registerForRuleChangePush(profile: { nationality: string | null; status: string | null; city: string | null }) {
-  if (Platform.OS === 'web') return;
+/**
+ * Expo push token → central database (public.register_push_token), tagged with
+ * nationality / status / city so rule-change pushes reach only affected profiles.
+ */
+export async function registerForRuleChangePush(
+  profile: { nationality: string | null; status: string | null; city: string | null },
+  language: string = 'en',
+) {
+  if (Platform.OS === 'web' || !supabase) return;
   try {
     const token = await Notifications.getExpoPushTokenAsync();
-    const { api } = await import('./api');
-    await api.post('/push/register', { token: token.data, ...profile });
+    await supabase.rpc('register_push_token', {
+      p_token: token.data,
+      p_platform: Platform.OS,
+      p_nationality: profile.nationality,
+      p_status: profile.status,
+      p_city: profile.city,
+      p_language: language,
+    });
   } catch {
     /* no projectId in dev or offline — retried on next launch */
   }
+}
+
+/** Opening a notification goes to the screen it is about (guide, alerts, reminders). */
+export function useNotificationLinks() {
+  useEffect(() => {
+    if (Platform.OS === 'web') return;
+    const sub = Notifications.addNotificationResponseReceivedListener((r) => {
+      const href = r.notification.request.content.data?.href;
+      if (typeof href === 'string' && href.startsWith('/')) router.push(href as never);
+    });
+    return () => sub.remove();
+  }, []);
 }

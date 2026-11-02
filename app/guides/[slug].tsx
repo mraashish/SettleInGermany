@@ -1,18 +1,18 @@
 import { useLocalSearchParams } from 'expo-router';
 import React from 'react';
 
-import { fetchCollection } from '@/content/client';
+import { staticCollection } from '@/content/client';
 import { pageMetadata } from '@/lib/metadata';
 import { GuideScreen } from '@/features/guides/GuideScreen';
 
 /** Static web rendering: one crawlable HTML page per guide (HANDOFF §2, §10.3). */
 export async function generateStaticParams() {
-  const guides = await fetchCollection('guides');
+  const guides = await staticCollection('guides');
   return guides.map((g) => ({ slug: g.slug }));
 }
 
 export async function generateMetadata(_req: unknown, params: { slug?: string }) {
-  const guides = await fetchCollection('guides');
+  const guides = await staticCollection('guides');
   const g = guides.find((x) => x.slug === params?.slug);
   if (!g) return pageMetadata({ title: 'Guide', path: '/guides', noindex: true });
   return pageMetadata({

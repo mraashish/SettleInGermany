@@ -1,0 +1,13 @@
+# Supabase CLI config (https://supabase.com/docs/guides/local-development).
+project_id = "settle-in-germany"
+
+[db.seed]
+enabled = true
+sql_paths = ["./seed.sql"]
+
+[functions.on-content-published]
+# Called by the database webhook with x-cms-webhook-secret instead of a user JWT.
+verify_jwt = false
+
+[functions.invite-editor]
+verify_jwt = true

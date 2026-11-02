@@ -270,7 +270,7 @@ export function OnboardingScreen({ step }: { step: number }) {
         label: t('onboarding.turnOn'),
         onPress: async () => {
           prefsStore.set({ notificationsAsked: true });
-          if (await requestPermission()) void registerForRuleChangePush(prefsStore.get().profile);
+          if (await requestPermission()) void registerForRuleChangePush(prefsStore.get().profile, prefsStore.get().language);
           goStep(8);
         },
       };

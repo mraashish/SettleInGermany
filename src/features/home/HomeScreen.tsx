@@ -111,7 +111,7 @@ export function HomeScreen() {
         }>{t('home.nextSteps')}</SectionTitle>
         {next3.map((v) => (
           <TaskItem key={v.id} title={v.title} term={v.task.term} due={v.due} timingNote={l(v.task.timingNote)} state={v.state}
-            guideHref={v.task.guideSlug ? `/guides/${v.task.guideSlug}` : undefined} onToggle={(d) => toggle(v, d)} />
+            guideHref={v.guideHref} onToggle={(d) => toggle(v, d)} />
         ))}
       </Card>
 

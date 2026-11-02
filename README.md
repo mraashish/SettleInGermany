@@ -5,6 +5,7 @@ One Expo (React Native) codebase that ships the **website**, the **Android app**
 - Product brief: [`docs/brief.pdf`](docs/brief.pdf)
 - Build handoff (source of truth for this implementation): [`docs/HANDOFF.md`](docs/HANDOFF.md)
 - Every design frame: [`design/design-source/`](design/design-source) (`ios-*`, `and-*`, `web-*` frames + shared components; `canvas.json` is the index)
+- **Content management: [`docs/CMS.md`](docs/CMS.md)** — one Supabase database + the CMS in `cms/`; publishing updates iOS, Android and the web at once
 
 ## Run it
 
@@ -27,8 +28,12 @@ npx eas-cli@latest build --profile development -p all
 | `npm run build:web` | Static website → `dist/` (deploy to any static host) |
 | `npm run release` | All three |
 | `npm run typecheck` / `npm run lint` / `npm test` | TypeScript, ESLint, Jest |
+| `npm run cms:dev` / `npm run cms:build` | Content management app (`cms/`, run `npm --prefix cms install` first) |
+| `npm run db:test` | Database schema + publish workflow tests on a throwaway local PostgreSQL |
+| `npm run content:snapshot` | Bake the latest published content into the build (runs automatically in `build:web` and EAS builds) |
+| `npm run db:seed-sql` | Regenerate `supabase/seed.sql` from `src/content/seed.ts` |
 
-Copy `.env.example` to `.env.local` to connect the CMS, backend, Supabase, RevenueCat and ad units. **With no env at all the app still runs**: it uses the bundled seed content, AI demo responses (bracketed placeholders) and fixed-size ad placeholders.
+Copy `.env.example` to `.env.local` to connect the content database (Supabase), the AI backend, RevenueCat and the ad units. **With no env at all the app still runs**: it uses the bundled seed content, AI demo responses (bracketed placeholders) and fixed-size ad placeholders, and the CMS runs in demo mode.
 
 ## Architecture
 
@@ -39,11 +44,13 @@ app/                  Expo Router routes (thin: metadata + one screen component)
   guides/[slug]       Static, crawlable guide pages (generateStaticParams + generateMetadata)
   …                   every route in HANDOFF Appendix A
   dev/gallery         Component gallery (dev only) — light and dark side by side
+cms/                  Content management web app (Vite + React) — see docs/CMS.md
+supabase/             Database migration, seed, Edge Functions (publish webhook, editor invites), tests
 src/
   theme/              Tokens (HANDOFF §5, copied exactly), ThemeProvider (system + manual override)
   ui/                 Component kit (HANDOFF §6). Platform shape differences via theme.shape / platform files
   features/           Screens, grouped by area (onboarding, home, roadmap, guides, reminders, assist, tools, me, info, premium, consent)
-  content/            CMS types (§8), seed content, TanStack Query hooks
+  content/            Content types (§8), collections, seed, database client, Realtime sync (sync.ts)
   store/              Local-first state (profile, consent, roadmap, reminders) in expo-sqlite kv-store (localStorage on web)
   services/           ads, consent, purchases (RevenueCat), notifications, auth (Supabase), api + ai (backend only), scanner
   i18n/               i18next: en, ne, hi
@@ -59,7 +66,7 @@ src/
 
 ### Rules the code enforces
 
-- **Nothing factual is hard-coded.** Guides, tasks, cities, rules, providers, phrases and help services come from `src/content` (CMS or seed). Bracketed placeholders from the designs are kept as-is.
+- **Nothing factual is hard-coded.** Guides, tasks, cities, rules, providers, phrases and help services come from the central content database (`published_content`), with a build-time snapshot and the seed as fallbacks. Bracketed placeholders from the designs are kept as-is.
 - **Status = colour + icon + word** (`DeadlineChip`, `Callout`, risk levels). Saffron is only used as a fill, never for text.
 - **Ads**: free tier only, nothing renders before a consent decision, fixed heights (no layout shift), labelled "Ad", placed only where §7.6 allows (never on AI, paywall, onboarding, emergency or document-date screens).
 - **Consent** before any personalised ads or analytics. "Accept all", "Reject all" and "Settings" have equal weight. You can change it in Me › Privacy and in the web footer's "Cookie settings".
@@ -88,7 +95,8 @@ Verified locally: `tsc` clean, ESLint clean, Jest passing, `expo export -p web` 
 
 Search for `TODO(product owner)` in the code. In short:
 
-- Real content for every placeholder. The CMS and hosting choice is still open (`src/content/client.ts`).
+- Real content for every placeholder, entered in the CMS. The 11 seed guides without official sources are drafts until sources are added.
+- Create the Supabase project and web host, then follow [`docs/CMS.md`](docs/CMS.md).
 - The backend for the AI endpoints in `src/services/ai.ts` and for push registration.
 - Official App Store / Google Play badge artwork.
 - Native-speaker review of the Nepali and Hindi copy and transliterations (`src/i18n/locales/ne.ts`, `hi.ts`).
