@@ -17,6 +17,8 @@ export interface TaskView {
   custom?: boolean;
   /** "How to" link — only when the guide is actually published. */
   guideHref?: string;
+  /** Every item has a page: its guide, or the task page. */
+  href: string;
 }
 
 /** Rough effort per task for "about N hours left" (until the CMS carries minutes). */
@@ -41,7 +43,7 @@ export function useRoadmapData(stage?: StageId) {
       const isHidden = hidden.includes(t.id);
       const state: TaskState = isDone ? 'done' : isHidden ? 'hidden' : due && daysUntil(due) < 0 ? 'overdue' : 'open';
       const guideHref = t.guideSlug && liveGuides.has(t.guideSlug) ? `/guides/${t.guideSlug}` : undefined;
-      return { task: t, id: t.id, title: l(t.title), group: l(t.group), due, state, custom: t.id.startsWith('custom-'), guideHref };
+      return { task: t, id: t.id, title: l(t.title), group: l(t.group), due, state, custom: t.id.startsWith('custom-'), guideHref, href: guideHref ?? `/roadmap/task/${t.id}` };
     };
     const byStage = Object.fromEntries(STAGES.map((s) => [s, all.filter((t) => t.stage === s).map(view)])) as Record<StageId, TaskView[]>;
     const stats = (s: StageId) => {

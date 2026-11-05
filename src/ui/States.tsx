@@ -33,8 +33,8 @@ export function ErrorState({ onRetry, secondary }: { onRetry?: () => void; secon
       <View style={{ width: 80, height: 80, borderRadius: 40, backgroundColor: c.divider, alignItems: 'center', justifyContent: 'center' }}>
         <Icon icon={AlertCircle} size={36} color="text3" />
       </View>
-      <Text variant="title" align="center" heading>We couldn’t load this</Text>
-      <Text color="muted" align="center">Check your connection and try again.</Text>
+      <Text variant="title" align="center" heading>{t('states.couldNotLoad')}</Text>
+      <Text color="muted" align="center">{t('states.checkConnection')}</Text>
       {onRetry ? <Button label={t('common.retry')} icon={RefreshCw} onPress={onRetry} fullWidth={false} /> : null}
       {secondary}
     </View>
@@ -43,6 +43,7 @@ export function ErrorState({ onRetry, secondary }: { onRetry?: () => void; secon
 
 /** Skeleton rows for lists and guides. Static when reduced motion is on. */
 export function Skeleton({ lines = 5 }: { lines?: number }) {
+  const { t } = useTranslation();
   const { c } = useTheme();
   const [pulse] = useState(() => new Animated.Value(0.5));
   useEffect(() => {
@@ -58,7 +59,7 @@ export function Skeleton({ lines = 5 }: { lines?: number }) {
     return () => loop?.stop();
   }, [pulse]);
   return (
-    <Animated.View accessibilityLabel="Loading" accessibilityRole="progressbar" style={{ opacity: pulse, gap: 18 }}>
+    <Animated.View accessibilityLabel={t('common.loading')} accessibilityRole="progressbar" style={{ opacity: pulse, gap: 18 }}>
       {Array.from({ length: lines }).map((_, i) => (
         <View key={i} style={{ gap: 8 }}>
           <View style={{ height: 14, width: `${70 - (i % 3) * 12}%`, borderRadius: 4, backgroundColor: c.divider }} />
@@ -83,16 +84,17 @@ export function OfflineBanner() {
 
 /** Outdated: guide verification older than 6 months. */
 export function OutdatedBanner({ lastVerified }: { lastVerified: string }) {
+  const { t } = useTranslation();
   const { c } = useTheme();
   return (
     <View accessibilityRole="summary" style={{ flexDirection: 'row', gap: 10, backgroundColor: c.warningBg, borderWidth: 1, borderColor: c.warningBorder, borderRadius: 12, padding: 12 }}>
       <Icon icon={RefreshCw} size={18} color="warningBorder" />
       <View style={{ flex: 1, gap: 2 }}>
         <Text size={14} color="warningStrongText">
-          <Text size={14} weight="700" color="warningStrongText">We’re re-checking this guide. </Text>
-          It was last verified over 6 months ago. Confirm details with the office.
+          <Text size={14} weight="700" color="warningStrongText">{t('guides.rechecking')}. </Text>
+          {t('guides.recheckingBody')}
         </Text>
-        <Text size={12} color="warningText">Last verified on {lastVerified}</Text>
+        <Text size={12} color="warningText">{t('common.lastVerified', { date: lastVerified })}</Text>
       </View>
     </View>
   );

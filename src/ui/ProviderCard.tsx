@@ -17,11 +17,11 @@ const isPlaceholder = (v: string) => v.includes('[');
 
 export function rowsFor(p: Provider, t: (k: string) => string): ProviderRow[] {
   return [
-    ...(p.setupFee ? [{ label: 'Setup fee', value: p.setupFee }] : []),
+    { label: t('tools.setupFee'), value: p.setupFee ?? '' },
     { label: t('tools.monthlyFee'), value: p.monthlyFee },
     { label: t('tools.openingTime'), value: p.openingTime },
-    ...(p.payout ? [{ label: t('tools.payout'), value: p.payout }] : []),
-  ];
+    { label: t('tools.payout'), value: p.payout ?? '' },
+  ].filter((r) => r.value);
 }
 
 function Value({ row }: { row: ProviderRow }) {
@@ -65,14 +65,18 @@ export function ProviderCard({ provider, highlighted, badge }: { provider: Provi
     >
       <View style={{ flexDirection: 'row', alignItems: 'center', gap: 12 }}>
         <View style={{ width: 40, height: 40, borderRadius: 10, backgroundColor: c.divider, alignItems: 'center', justifyContent: 'center' }}>
-          <Text size={10} color="muted">Logo</Text>
+          <Text size={16} weight="700" color="muted">{provider.name.replace(/[^A-Za-z]/g, '').slice(0, 1)}</Text>
         </View>
         <View style={{ flex: 1 }}>
           <Text size={16} weight="700">{provider.name}</Text>
-          {provider.facts[0] ? <Text variant="caption" color="muted">{l(provider.facts[0])}</Text> : null}
         </View>
         {badge ? <Pill label={badge} tone="tint" /> : null}
       </View>
+      {provider.facts.length ? (
+        <View style={{ gap: 4 }}>
+          {provider.facts.map((f, i) => <Text key={i} size={13} color="text2">• {l(f)}</Text>)}
+        </View>
+      ) : null}
       <View style={{ gap: 6 }}>
         {rows.map((r) => (
           <View key={r.label} style={{ flexDirection: 'row', justifyContent: 'space-between', gap: 12 }}>
@@ -93,7 +97,7 @@ export function ProviderCard({ provider, highlighted, badge }: { provider: Provi
         <Text size={14} weight="700" color={highlighted ? c.onPrimary : c.primary}>{t('tools.visit')}</Text>
       </Pressable>
       <Text size={11} lineHeight={15} color="muted">
-        {provider.referralUrl ? t('common.referral') : 'Not a partner — listed because it fits your needs.'}
+        {provider.referralUrl ? t('common.referral') : t('tools.notPartner')}
       </Text>
     </View>
   );
@@ -105,7 +109,7 @@ export function ProviderTable({ providers }: { providers: Provider[] }) {
   const th = useTheme();
   const { c } = th;
   const l = useL();
-  const rowLabels = providers[0] ? rowsFor(providers[0], t).map((r) => r.label) : [];
+  const rowLabels = [...new Set(providers.flatMap((p) => rowsFor(p, t).map((r) => r.label)))];
   const col = { flex: 1, minWidth: 140, paddingVertical: 12, paddingHorizontal: 12 } as const;
   return (
     <View accessibilityRole={'table' as never} style={{ borderWidth: 1, borderColor: c.border, borderRadius: 16, backgroundColor: c.surface, overflow: 'hidden' }}>
@@ -114,16 +118,16 @@ export function ProviderTable({ providers }: { providers: Provider[] }) {
         {providers.map((p, i) => (
           <View key={p.id} accessibilityRole={'columnheader' as never} style={[col, { gap: 4 }]}>
             <Text weight="700">{p.name}</Text>
-            {p.facts[0] ? <Text variant="caption" color="muted">{l(p.facts[0])}</Text> : null}
+            {p.facts.map((f, k) => <Text key={k} variant="caption" color="muted">• {l(f)}</Text>)}
             {i === 0 ? <Pill label={t('tools.sortFees')} /> : null}
           </View>
         ))}
       </View>
-      {rowLabels.map((label, ri) => (
+      {rowLabels.map((label) => (
         <View key={label} accessibilityRole={'row' as never} style={{ flexDirection: 'row', borderBottomWidth: 1, borderColor: c.divider }}>
           <View style={[col, { flex: 0.8 }]}><Text size={14} color="text3">{label}</Text></View>
           {providers.map((p) => (
-            <View key={p.id} accessibilityRole={'cell' as never} style={col}><Value row={rowsFor(p, t)[ri]} /></View>
+            <View key={p.id} accessibilityRole={'cell' as never} style={col}><Value row={rowsFor(p, t).find((r) => r.label === label) ?? { label, value: '—', kind: 'no' }} /></View>
           ))}
         </View>
       ))}
@@ -134,7 +138,7 @@ export function ProviderTable({ providers }: { providers: Provider[] }) {
             <Pressable accessibilityRole="link" onPress={() => openProvider(p)} style={{ minHeight: 44, borderRadius: 12, borderWidth: 1.5, borderColor: c.primary, backgroundColor: i === 0 ? c.primary : c.surface, alignItems: 'center', justifyContent: 'center' }}>
               <Text size={14} weight="700" color={i === 0 ? c.onPrimary : c.primary}>{t('tools.visit')}</Text>
             </Pressable>
-            <Text size={11} color="muted">{p.referralUrl ? t('common.referral') : 'Not a partner.'}</Text>
+            <Text size={11} color="muted">{p.referralUrl ? t('common.referral') : t('tools.notPartnerShort')}</Text>
           </View>
         ))}
       </View>

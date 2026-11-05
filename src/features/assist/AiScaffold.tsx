@@ -16,7 +16,7 @@ export function AiDisclaimer({ deleted }: { deleted?: boolean }) {
   return (
     <Text variant="caption" color="muted">
       {t('common.generalInfo')} {deleted ? `${t('assist.deletedNote')} ` : ''}
-      <Link href="/get-help"><Text variant="caption" weight="600" color="primary">Get human help</Text></Link>
+      <Link href="/get-help"><Text variant="caption" weight="600" color="primary">{t('assist.humanHelp')}</Text></Link>
     </Text>
   );
 }
@@ -27,7 +27,7 @@ export function NeedsInternet() {
   return (
     <View accessibilityRole="alert" style={{ flexDirection: 'row', gap: 10, alignItems: 'center', backgroundColor: c.divider, borderRadius: 12, padding: 12 }}>
       <Icon icon={WifiOff} size={20} color="text3" />
-      <Text size={14} color="text3" style={{ flex: 1 }}>{t('common.needsInternet')}. Your saved letters and guides still work offline.</Text>
+      <Text size={14} color="text3" style={{ flex: 1 }}>{t('common.needsInternet')}. {t('assist.offlineNote')}</Text>
     </View>
   );
 }
@@ -39,6 +39,7 @@ export function usePremiumUnlocked() {
 }
 
 export function AiScreen({ children, title, premiumOnly, ...rest }: ScreenProps & { premiumOnly?: boolean }) {
+  const { t } = useTranslation();
   const online = useOnline();
   const unlocked = usePremiumUnlocked();
   return (
@@ -48,16 +49,16 @@ export function AiScreen({ children, title, premiumOnly, ...rest }: ScreenProps 
       ai
       large={rest.large ?? false}
       customHeader={rest.customHeader}
-      back={rest.back ?? { label: 'Assist', href: '/assist' }}
-      crumbs={rest.crumbs ?? [{ label: 'Assist', href: '/assist' }, { label: title }]}
+      back={rest.back ?? { label: t('nav.assist'), href: '/assist' }}
+      crumbs={rest.crumbs ?? [{ label: t('nav.assist'), href: '/assist' }, { label: title }]}
     >
       <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}>
         <AILabel />
-        <Text size={13} color="muted">AI answers are general information, not legal advice.</Text>
+        <Text size={13} color="muted">{t('assist.disclaimer')}</Text>
       </View>
       {!online ? <NeedsInternet /> : null}
       {premiumOnly && !unlocked ? (
-        <UpgradeCard title={`${title} is part of Premium`} body="All guides, the roadmap, reminders and 3 letter scans a month stay free. Premium adds the AI tools and removes ads." />
+        <UpgradeCard title={t('assist.partOfPremium', { title })} body={t('assist.partOfPremiumBody')} />
       ) : children}
       <AiDisclaimer />
     </Screen>

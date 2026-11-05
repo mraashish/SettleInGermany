@@ -12,6 +12,7 @@ export type ChatSource = { title: string; href: string };
 
 /** ChatBubble: user, AI, AI with source chips, legal-help card. */
 export function ChatBubble({ role, text, sources }: { role: 'user' | 'ai'; text: string; sources?: ChatSource[] }) {
+  const { t } = useTranslation();
   const { c } = useTheme();
   const user = role === 'user';
   return (
@@ -27,7 +28,7 @@ export function ChatBubble({ role, text, sources }: { role: 'user' | 'ai'; text:
       {sources?.map((s) => (
         <Link key={s.href} href={s.href as never} asChild>
           <Pressable accessibilityRole="link" style={{ alignSelf: 'flex-start', backgroundColor: c.primaryTint, borderRadius: 999, paddingHorizontal: 8, paddingVertical: 2 }}>
-            <Text size={12} weight="600" color="primary">Guide: {s.title}</Text>
+            <Text size={12} weight="600" color="primary">{t('common.guide')}: {s.title}</Text>
           </Pressable>
         </Link>
       ))}

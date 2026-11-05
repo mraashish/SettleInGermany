@@ -13,11 +13,12 @@ import { Text } from './Text';
 
 /** Outlined "DE" tag (10–11 px, 700, primary border). */
 export function DETag({ large }: { large?: boolean }) {
+  const { t } = useTranslation();
   const { c } = useTheme();
   return (
     <View
       accessible
-      accessibilityLabel="German term"
+      accessibilityLabel={t('common.germanTerm')}
       style={[styles.tag, { borderColor: c.primary, paddingHorizontal: large ? 5 : 4 }]}
     >
       <Text size={large ? 11 : 10} lineHeight={large ? 17 : 15} weight="700" color="primary" devanagari={false}>

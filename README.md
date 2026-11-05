@@ -66,7 +66,7 @@ src/
 
 ### Rules the code enforces
 
-- **Nothing factual is hard-coded.** Guides, tasks, cities, rules, providers, phrases and help services come from the central content database (`published_content`), with a build-time snapshot and the seed as fallbacks. Bracketed placeholders from the designs are kept as-is.
+- **Nothing factual is hard-coded.** Guides, tasks, cities, rules, providers, phrases and help services come from the central content database (`published_content`), with a build-time snapshot and the seed as fallbacks. The seed (`src/content/data/`) holds the Leipzig content in English, Nepali and Hindi; every page lists its official sources.
 - **Status = colour + icon + word** (`DeadlineChip`, `Callout`, risk levels). Saffron is only used as a fill, never for text.
 - **Ads**: free tier only, nothing renders before a consent decision, fixed heights (no layout shift), labelled "Ad", placed only where §7.6 allows (never on AI, paywall, onboarding, emergency or document-date screens).
 - **Consent** before any personalised ads or analytics. "Accept all", "Reject all" and "Settings" have equal weight. You can change it in Me › Privacy and in the web footer's "Cookie settings".
@@ -82,7 +82,7 @@ src/
 | 1. Scaffold, tokens, fonts, i18n, theme, `/dev/gallery` | ✅ |
 | 2. Navigation shells (iOS/Android tab bars, web header + mobile-web tabs) | ✅ |
 | 3. Onboarding → Home → Roadmap → Guides → Guide (static SEO) → Reminders (+ local notifications) | ✅ |
-| 4. Tools: comparisons, calculators, phrasebook, safety, city page, rule-change alerts | ✅ (calculators show placeholders until the CMS provides rates) |
+| 4. Tools: comparisons, calculators, phrasebook, safety, city page, rule-change alerts | ✅ with 2026 rates from official sources |
 | 5. Me, privacy, subscription, how we make money, where to get help, consent | ✅ |
 | 6. Assist: hub, scan/upload, processing, letter result (+ urgent, last-free), reply writer, chat, scam, contract, forms, job kit, practice | ✅ UI + backend client. The backend itself isn't built yet. Forms, job kit and practice still use sample content. |
 | 7. Payments (RevenueCat) and ads (AdMob/AdSense) with consent gating | ✅ wired, needs keys and unit IDs |
@@ -95,13 +95,14 @@ Verified locally: `tsc` clean, ESLint clean, Jest passing, `expo export -p web` 
 
 Search for `TODO(product owner)` in the code. In short:
 
-- Real content for every placeholder, entered in the CMS. The 11 seed guides without official sources are drafts until sources are added.
+- Review the Leipzig content (checked against official sources on 5 Nov 2026) and add other cities in the CMS. Coracle's fees come from its 2023 terms; no community places (shops, temples, groups) are listed yet because none could be verified.
+- Turn on email, Google and Apple sign-in in Supabase (see “User accounts” in [`docs/CMS.md`](docs/CMS.md)).
 - Create the Supabase project and web host, then follow [`docs/CMS.md`](docs/CMS.md).
 - The backend for the AI endpoints in `src/services/ai.ts` and for push registration.
 - Official App Store / Google Play badge artwork.
-- Native-speaker review of the Nepali and Hindi copy and transliterations (`src/i18n/locales/ne.ts`, `hi.ts`).
+- Native-speaker review of the Nepali and Hindi copy and transliterations (`src/i18n/locales/ne.ts`, `hi.ts`, `src/content/data/`).
 - The final ad partner list and unit IDs (`app.json` still uses the AdMob **test** app IDs).
 - A certified IAB TCF CMP on web, styled like `WebConsent.dc.html`.
 - Stage and empty-state illustrations.
 - Web dark mode, which isn't designed yet.
-- Final Impressum, privacy policy and terms text.
+- The operator's details in the Impressum, and a legal review of the draft privacy policy and terms (`src/features/info/legal.ts`).

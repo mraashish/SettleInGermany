@@ -26,3 +26,4 @@ export * from './TabBar';
 export * from './TaskItem';
 export * from './Text';
 export * from './WebShell';
+export * from './Sources';

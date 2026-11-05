@@ -38,6 +38,16 @@ const STAGES = [
 const NATIONALITIES = ['nepal', 'india', 'other'];
 const STATUSES = ['student', 'trainee', 'worker', 'family'];
 
+const TOPICS = ['visa', 'housing', 'work', 'money', 'health', 'study'];
+
+/** Official sources — shown on the page they back (HANDOFF §7.8). */
+const sourcesField = (help = 'Official pages this is based on. Shown to users.'): Field => ({
+  type: 'list', name: 'sources', label: 'Official sources', itemLabel: 'source', summary: (s) => String(s.title ?? ''), help, fields: [
+    { type: 'text', name: 'title', label: 'Title' },
+    { type: 'url', name: 'url', label: 'URL' },
+  ],
+});
+
 const L = (d: Json, k: string) => ((d[k] as Json | undefined)?.en as string | undefined) ?? '';
 const today = () => new Date().toISOString().slice(0, 10);
 const shortId = (p: string) => `${p}-${Math.random().toString(36).slice(2, 8)}`;
@@ -78,6 +88,7 @@ export const COLLECTION_DEFS: CollectionDef[] = [
           { type: 'localized', name: 'where', label: 'Where' },
           { type: 'localized', name: 'cost', label: 'Typical cost' },
           { type: 'localized', name: 'wait', label: 'Typical wait' },
+          { type: 'localizedList', name: 'documents', label: 'Documents for this step', itemLabel: 'document' },
         ],
       },
       { type: 'localizedList', name: 'documents', label: 'Documents to bring', itemLabel: 'document' },
@@ -97,12 +108,7 @@ export const COLLECTION_DEFS: CollectionDef[] = [
           { type: 'text', name: 'href', label: 'Link inside the app', placeholder: '/guides/get-your-tax-id' },
         ],
       },
-      {
-        type: 'list', name: 'sources', label: 'Official sources', itemLabel: 'source', summary: (s) => String(s.title ?? ''), help: 'Required: every guide shows its sources.', fields: [
-          { type: 'text', name: 'title', label: 'Title' },
-          { type: 'url', name: 'url', label: 'URL' },
-        ],
-      },
+      sourcesField('Required: every guide shows its sources.'),
       {
         type: 'group', name: 'compareLink', label: 'Comparison link on the guide card', optional: true, fields: [
           { type: 'localized', name: 'label', label: 'Label' },
@@ -146,8 +152,15 @@ export const COLLECTION_DEFS: CollectionDef[] = [
         { type: 'localized', name: 'title', label: 'Office' }, { type: 'localized', name: 'body', label: 'How to book', multiline: true }, { type: 'url', name: 'url', label: 'Booking link' },
       ] },
       { type: 'list', name: 'community', label: 'Community places', itemLabel: 'place', summary: (p) => String(p.name ?? ''), fields: [
-        { type: 'text', name: 'name', label: 'Name' }, { type: 'localized', name: 'kind', label: 'Kind (Groceries, Temples…)' }, { type: 'url', name: 'mapUrl', label: 'Map link' },
+        { type: 'text', name: 'name', label: 'Name' }, { type: 'localized', name: 'kind', label: 'Kind (Advice, Groceries, Temples…)' },
+        { type: 'localized', name: 'description', label: 'Description' }, { type: 'text', name: 'address', label: 'Address' },
+        { type: 'text', name: 'phone', label: 'Phone' }, { type: 'url', name: 'url', label: 'Website' }, { type: 'url', name: 'mapUrl', label: 'Map link' },
       ] },
+      { type: 'list', name: 'budget', label: 'Budget planner starting values (€ a month)', itemLabel: 'item', summary: (b) => `${L(b, 'label')}: €${b.value ?? ''}`, fields: [
+        { type: 'localized', name: 'label', label: 'Item' }, { type: 'number', name: 'value', label: 'Typical € a month' },
+      ] },
+      { type: 'date', name: 'lastVerified', label: 'Last verified' },
+      sourcesField(),
     ],
   },
   {
@@ -160,7 +173,16 @@ export const COLLECTION_DEFS: CollectionDef[] = [
       { type: 'number', name: 'studentWorkHalfDays', label: 'Student work limit (half days a year)' },
       { type: 'number', name: 'blockedAccountMonthly', label: 'Blocked account monthly payout (€)' },
       { type: 'number', name: 'miniJobLimitMonthly', label: 'Mini-job limit (€ a month)' },
+      { type: 'number', name: 'minimumWage', label: 'Minimum wage (€ an hour)' },
+      { type: 'number', name: 'basicTaxAllowance', label: 'Tax-free basic allowance (€ a year)' },
+      { type: 'number', name: 'miniJobPensionPercent', label: 'Mini-job pension contribution (%)' },
+      { type: 'number', name: 'studentPensionPercent', label: 'Working-student pension contribution (%)' },
+      { type: 'number', name: 'studentWeeklyHours', label: 'Student alternative limit (hours a week)' },
+      { type: 'number', name: 'fullDayHours', label: 'A day counts as full above (hours)' },
+      { type: 'number', name: 'broadcastingFeeMonthly', label: 'Broadcasting fee (€ a month)' },
+      { type: 'number', name: 'deutschlandticketMonthly', label: 'Deutschlandticket (€ a month)' },
       { type: 'text', name: 'lastVerified', label: 'Last verified' },
+      sourcesField(),
     ],
   },
   {
@@ -170,6 +192,7 @@ export const COLLECTION_DEFS: CollectionDef[] = [
     subtitle: (d) => String(d.date ?? ''),
     blank: () => ({ id: shortId('rc'), date: today(), affects: { nationalities: [], statuses: [], cities: [] }, summary: emptyL() }),
     fields: [
+      { type: 'localized', name: 'title', label: 'Title' },
       { type: 'localized', name: 'summary', label: 'Summary', multiline: true, required: true },
       { type: 'text', name: 'id', label: 'ID', required: true },
       { type: 'text', name: 'date', label: 'Date', required: true, help: 'As shown to users, e.g. 1 Dec 2026' },
@@ -179,6 +202,7 @@ export const COLLECTION_DEFS: CollectionDef[] = [
         { type: 'tags', name: 'cities', label: 'Cities (slugs)' },
       ] },
       { type: 'reference', name: 'guideSlug', label: 'Updated guide', collection: 'guides' },
+      sourcesField(),
     ],
   },
   {
@@ -202,8 +226,9 @@ export const COLLECTION_DEFS: CollectionDef[] = [
       { type: 'boolean', name: 'isPartner', label: 'Referral partner (we earn a commission)' },
       { type: 'url', name: 'referralUrl', label: 'Referral URL' },
       { type: 'date', name: 'lastChecked', label: 'Last checked' },
-      { type: 'number', name: 'feeSortKey', label: 'Fee rank (1 = cheapest)', help: 'Default sort, never by commission.' },
+      { type: 'number', name: 'feeSortKey', label: 'Fee rank (lower = cheaper)', help: 'Default sort, never by commission. E.g. the total cost in the first year.' },
       { type: 'number', name: 'speedSortKey', label: 'Speed rank (1 = fastest)' },
+      sourcesField('Where the fees were checked.'),
     ],
   },
   {
@@ -236,7 +261,12 @@ export const COLLECTION_DEFS: CollectionDef[] = [
       { type: 'localized', name: 'description', label: 'Description', multiline: true },
       { type: 'text', name: 'phone', label: 'Phone' },
       { type: 'url', name: 'url', label: 'Website' },
+      { type: 'text', name: 'email', label: 'Email' },
+      { type: 'text', name: 'address', label: 'Address' },
       { type: 'boolean', name: 'free', label: 'Free' },
+      { type: 'localized', name: 'cost', label: 'Cost (if not free)' },
+      { type: 'tags', name: 'topics', label: 'Topics', suggestions: TOPICS },
+      sourcesField(),
     ],
   },
   {
@@ -247,7 +277,9 @@ export const COLLECTION_DEFS: CollectionDef[] = [
     fields: [
       { type: 'localized', name: 'title', label: 'Title', required: true },
       { type: 'text', name: 'id', label: 'ID', required: true },
-      { type: 'localizedList', name: 'signs', label: 'What to do', itemLabel: 'point' },
+      { type: 'localizedList', name: 'signs', label: 'Warning signs', itemLabel: 'sign' },
+      { type: 'localizedList', name: 'actions', label: 'What to do', itemLabel: 'point' },
+      sourcesField(),
     ],
   },
   {
@@ -261,6 +293,10 @@ export const COLLECTION_DEFS: CollectionDef[] = [
       { type: 'text', name: 'country', label: 'Country key', required: true, help: 'Matches the nationality in the user profile, e.g. nepal' },
       { type: 'text', name: 'phone', label: 'Phone' },
       { type: 'url', name: 'url', label: 'Website' },
+      { type: 'text', name: 'address', label: 'Address' },
+      { type: 'text', name: 'email', label: 'Email' },
+      { type: 'localized', name: 'note', label: 'Note', multiline: true },
+      sourcesField(),
     ],
   },
 ];

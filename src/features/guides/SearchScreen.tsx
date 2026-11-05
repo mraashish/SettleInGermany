@@ -11,13 +11,14 @@ import { SearchField } from './GuidesScreen';
 import { matchGuide } from './search';
 
 const TOOLS = [
-  { title: 'Compare blocked accounts', href: '/tools/compare/blocked-accounts', keys: 'sperrkonto blocked account' },
-  { title: 'Compare bank accounts', href: '/tools/compare/bank-accounts', keys: 'girokonto bank' },
-  { title: 'Budget planner', href: '/tools/budget', keys: 'budget money rent' },
-  { title: 'Net pay calculator', href: '/tools/net-pay', keys: 'net pay salary minijob mini job' },
-  { title: 'Work-day limit', href: '/tools/work-limit', keys: 'work limit days student job' },
-  { title: 'Phrasebook', href: '/tools/phrasebook', keys: 'phrase german words speak' },
-];
+  { key: 'tools.compareBlocked', href: '/tools/compare/blocked-accounts', keys: 'sperrkonto blocked account' },
+  { key: 'tools.compareBank', href: '/tools/compare/bank-accounts', keys: 'girokonto bank konto' },
+  { key: 'tools.budget', href: '/tools/budget', keys: 'budget money rent miete geld' },
+  { key: 'tools.netpay', href: '/tools/net-pay', keys: 'net pay salary minijob mini job lohn werkstudent' },
+  { key: 'tools.worklimit', href: '/tools/work-limit', keys: 'work limit days student job arbeitstage' },
+  { key: 'tools.phrasebook', href: '/tools/phrasebook', keys: 'phrase german words speak sprache' },
+  { key: 'tools.safety', href: '/tools/safety', keys: 'emergency police 112 notruf scam betrug embassy' },
+]
 
 /** Search guides, tools and German words — forgiving of misspellings ("anmeldun"). */
 export function SearchScreen() {
@@ -28,7 +29,7 @@ export function SearchScreen() {
   const { data: guides = [] } = useGuides();
   const { data: phrases = [] } = usePhrases();
   const g = q ? guides.filter((x) => matchGuide(x, q, l)) : [];
-  const tools = q ? TOOLS.filter((x) => `${x.title} ${x.keys}`.toLowerCase().includes(q.toLowerCase())) : [];
+  const tools = q ? TOOLS.filter((x) => `${t(x.key)} ${x.keys}`.toLowerCase().includes(q.toLowerCase())) : [];
   const words = q ? phrases.filter((p) => p.german.toLowerCase().includes(q.toLowerCase()) || l(p.meaning).toLowerCase().includes(q.toLowerCase())) : [];
   return (
     <Screen title={t('nav.search')} back={{ label: t('nav.home'), href: '/' }} large={false}>
@@ -43,14 +44,14 @@ export function SearchScreen() {
           {tools.map((x) => (
             <Link key={x.href} href={x.href as never} asChild>
               <Pressable accessibilityRole="link" style={{ minHeight: 52, flexDirection: 'row', alignItems: 'center', gap: 12, backgroundColor: c.surface, borderWidth: 1, borderColor: c.border, borderRadius: 12, paddingHorizontal: 14 }}>
-                <Icon icon={Calculator} color="primary" /><Text weight="600">{x.title}</Text>
+                <Icon icon={Calculator} color="primary" /><Text weight="600">{t(x.key)}</Text>
               </Pressable>
             </Link>
           ))}
         </View>
       ) : null}
       {words.length ? (
-        <View style={{ gap: 8 }}><Overline>German words</Overline>
+        <View style={{ gap: 8 }}><Overline>{t('guides.germanWords')}</Overline>
           {words.map((p) => <Card key={p.id}><Text lang="de" weight="600">{p.german}</Text><Text color="muted">{l(p.meaning)}</Text></Card>)}
         </View>
       ) : null}

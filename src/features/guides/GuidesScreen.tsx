@@ -80,7 +80,7 @@ export function GuidesScreen() {
 
   return (
     <Screen title={t('guides.title')} crumbs={[{ label: t('nav.home'), href: '/' }, { label: t('guides.title') }]}
-      description="Step-by-step guides for living in Germany: registration, residence permit, bank account, tax ID and more — in English, Nepali and Hindi."
+      description={t('guides.description')}
       onRefresh={() => void refetch()} refreshing={isRefetching} plainMain>
       <SearchField value={q} onChange={setQ} />
       <View accessibilityRole="tablist" style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 8 }}>
@@ -106,7 +106,7 @@ export function GuidesScreen() {
           {list.length === 0 ? (
             filter === 'saved' && !q
               ? <EmptyState icon={Bookmark} title={t('guides.noSaved')} body={t('guides.noSavedBody')} actionLabel={t('guides.all')} onAction={() => setFilter('all')} />
-              : <EmptyState icon={Search} title={t('guides.noResults', { q })} body="Try a German word like “Anmeldung”, or browse all guides." actionLabel={t('guides.all')} onAction={() => { setQ(''); setFilter('all'); }} />
+              : <EmptyState icon={Search} title={t('guides.noResults', { q })} body={t('guides.noResultsBody')} actionLabel={t('guides.all')} onAction={() => { setQ(''); setFilter('all'); }} />
           ) : <GuideList guides={list} />}
         </>
       )}

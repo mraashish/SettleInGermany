@@ -10,7 +10,7 @@ insert into public.cms_editors (user_id, email, role) values
   ('00000000-0000-0000-0000-00000000000a', 'admin@example.com', 'admin'),
   ('00000000-0000-0000-0000-00000000000e', 'editor@example.com', 'editor');
 
--- 1. Seed: one release, valid documents live, incomplete ones kept as drafts
+-- 1. Seed: one release; the bundled Leipzig content is complete, so every document is live
 do $$
 declare v bigint; live int; drafts int;
 begin
@@ -18,7 +18,7 @@ begin
   if v <> 1 then raise exception 'seed should publish exactly one release, version=%', v; end if;
   select count(*) into live from public.published_content where collection = 'guides';
   select count(*) into drafts from public.content_documents where collection = 'guides' and status = 'draft';
-  if live < 1 or drafts < 1 then raise exception 'expected live and draft guides, got % live / % draft', live, drafts; end if;
+  if live < 1 or drafts <> 0 then raise exception 'expected all guides live, got % live / % draft', live, drafts; end if;
   if not exists (select 1 from public.published_content where collection = 'rules' and key = 'default') then
     raise exception 'rules singleton not published';
   end if;
@@ -128,7 +128,9 @@ begin
   update public.content_documents set data = jsonb_set(data, '{summary,en}', '"Edited"') where id = rc;
   if (select data #>> '{summary,en}' from public.published_content where document_id = rc) <> 'Test change' then raise exception 'edit leaked before publish'; end if;
   if not (select has_changes from public.content_documents where id = rc) then raise exception 'pending change not flagged'; end if;
-  -- publish_all_changes skips incomplete drafts (seed guides without sources) instead of failing
+  -- publish_all_changes skips incomplete drafts (a guide without sources) instead of failing
+  insert into public.content_documents (collection, key, data)
+  values ('guides', 'x', '{"slug":"incomplete-guide","title":{"en":"Incomplete"},"stage":"first30","sources":[]}');
   v2 := public.publish_all_changes('Second release');
   if not exists (select 1 from public.content_documents where collection = 'guides' and status = 'draft') then
     raise exception 'incomplete drafts must not be published';

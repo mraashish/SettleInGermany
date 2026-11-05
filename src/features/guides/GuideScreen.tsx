@@ -43,6 +43,8 @@ function Steps({ guide }: { guide: Guide }) {
             <Text size={16} lineHeight={22} weight="600" heading>{l(s.title)}</Text>
             <Text color="text2">{l(s.body)}</Text>
             {s.term ? <GermanTerm term={s.term} audio /> : null}
+            {s.where ? <Text size={14} color="text2"><Text size={14} weight="600">{t('guides.where')}: </Text>{l(s.where)}</Text> : null}
+            {s.documents?.length ? <Text size={14} color="text2"><Text size={14} weight="600">{t('guides.documents')}: </Text>{s.documents.map((d) => l(d)).join(' · ')}</Text> : null}
             {s.cost || s.wait ? (
               <View style={{ flexDirection: 'row', gap: 8 }}>
                 {s.cost ? <View style={{ flex: 1, backgroundColor: c.ground, borderRadius: 10, paddingVertical: 8, paddingHorizontal: 10 }}><Text size={13} color="muted">{t('guides.typicalCost')}</Text><Text size={14} weight="600">{l(s.cost)}</Text></View> : null}
@@ -80,7 +82,7 @@ function DocumentsChecklist({ guide }: { guide: Guide }) {
       <Button
         variant="secondary"
         style={{ marginTop: 8 }}
-        label={added ? t('roadmap.added') : Platform.OS === 'web' ? 'Add to my free checklist' : t('roadmap.addToRoadmap')}
+        label={added ? t('roadmap.added') : Platform.OS === 'web' ? t('guides.addToChecklist') : t('roadmap.addToRoadmap')}
         disabled={added}
         onPress={() => {
           if (!inRoadmap) addCustomTask({ title: l(guide.title), stage: guide.stage, deadline: null });
@@ -135,7 +137,7 @@ function GuideBody({ guide }: { guide: Guide }) {
       <View style={{ gap: 8 }}>
         <Text size={13} weight="700" color="primary" uppercase>{t('guides.stageLabel', { n: stageN, stage: t(`stages.${guide.stage}`) })}</Text>
         <Text size={Platform.OS === 'web' ? 32 : 28} lineHeight={Platform.OS === 'web' ? 38 : 34} weight="700" style={{ letterSpacing: -0.5 }} heading={1}>
-          {l(guide.title)}{Platform.OS === 'web' ? ' in Germany' : ''}
+          {Platform.OS === 'web' ? t('guides.titleInGermany', { title: l(guide.title) }) : l(guide.title)}
         </Text>
         <GermanTerm term={guide.term} audio />
         <Text variant="caption" color="muted">
@@ -158,9 +160,9 @@ function GuideBody({ guide }: { guide: Guide }) {
 
       {Platform.OS === 'web' && !onboarded ? (
         <View style={{ backgroundColor: c.primaryTint, borderRadius: 16, padding: 16, gap: 6 }}>
-          <Text weight="700">Get your personal checklist</Text>
-          <Text color="text2">Every step for your city and visa, with reminders before deadlines. Free.</Text>
-          <Link href="/onboarding/1"><Text weight="700" color="primary">Start free →</Text></Link>
+          <Text weight="700">{t('guides.ctaTitle')}</Text>
+          <Text color="text2">{t('guides.ctaBody')}</Text>
+          <Link href="/onboarding/1"><Text weight="700" color="primary">{t('guides.ctaStart')}</Text></Link>
         </View>
       ) : null}
 
@@ -228,12 +230,12 @@ function WebAside({ guide }: { guide: Guide }) {
   const { c } = useTheme();
   const toc = [
     { id: 'in-short', label: t('guides.inShort') }, { id: 'steps', label: t('guides.steps') },
-    { id: 'documents', label: t('guides.documents') }, { id: 'tips', label: 'Tips and mistakes' }, { id: 'sources', label: t('guides.sources') },
+    { id: 'documents', label: t('guides.documents') }, { id: 'tips', label: t('guides.tipsAndMistakes') }, { id: 'sources', label: t('guides.sources') },
   ];
   return (
     <>
       <Card style={{ gap: 4 }}>
-        <Text size={13} weight="700" color="muted" uppercase>On this page</Text>
+        <Text size={13} weight="700" color="muted" uppercase>{t('guides.onThisPage')}</Text>
         {toc.map((x) => (
           <Pressable key={x.id} accessibilityRole="link" onPress={() => { if (typeof document !== 'undefined') document.getElementById(x.id)?.scrollIntoView({ behavior: 'smooth' }); }} style={{ minHeight: 40, justifyContent: 'center' }}>
             <Text size={14} color="primary">{x.label}</Text>
@@ -241,9 +243,9 @@ function WebAside({ guide }: { guide: Guide }) {
         ))}
       </Card>
       <Card style={{ gap: 8, backgroundColor: c.primaryTint, borderColor: c.primaryTint }}>
-        <Text weight="700">Take it with you</Text>
-        <Text size={14} color="text2">Every step for your city and visa, in English, Nepali or Hindi — with reminders before each deadline. Free.</Text>
-        <Link href="/onboarding/1"><Text weight="700" color="primary">Start free on the web →</Text></Link>
+        <Text weight="700">{t('guides.takeItTitle')}</Text>
+        <Text size={14} color="text2">{t('guides.takeItBody')}</Text>
+        <Link href="/onboarding/1"><Text weight="700" color="primary">{t('guides.startWeb')}</Text></Link>
         {/* TODO(product owner): official App Store / Google Play badge artwork (HANDOFF §12) */}
         <View style={{ flexDirection: 'row', gap: 8 }}>
           <View style={{ flex: 1, height: 40, borderRadius: 8, borderWidth: 1, borderColor: c.borderStrong, alignItems: 'center', justifyContent: 'center' }}><Text size={11} color="muted">[App Store badge]</Text></View>
@@ -261,7 +263,7 @@ function WebAside({ guide }: { guide: Guide }) {
               </Pressable>
             </Link>
           ))}
-          {guide.city ? <Link href={`/guides/city/${guide.city}`}><Text size={15} weight="600" color="primary">City page</Text></Link> : null}
+          {guide.city ? <Link href={`/guides/city/${guide.city}`}><Text size={15} weight="600" color="primary">{t('guides.cityPage')}</Text></Link> : null}
         </Card>
       ) : null}
     </>
@@ -278,7 +280,7 @@ export function GuideScreen({ slug }: { slug: string }) {
   if (!guide) {
     return (
       <Screen title={t('guides.title')} back={{ label: t('guides.title'), href: '/guides' }} large={false}>
-        {isLoading ? <Skeleton lines={8} /> : <EmptyState title="We couldn’t find this guide" body="It may have moved." actionLabel={t('guides.all')} onAction={() => router.replace('/guides')} />}
+        {isLoading ? <Skeleton lines={8} /> : <EmptyState title={t('guides.notFound')} body={t('guides.notFoundBody')} actionLabel={t('guides.all')} onAction={() => router.replace('/guides')} />}
       </Screen>
     );
   }

@@ -13,13 +13,7 @@ import { useTheme } from '@/theme/ThemeProvider';
 import { elevation2 } from '@/theme/tokens';
 import { Button, Icon, Pill, Text } from '@/ui';
 
-const FEATURES = [
-  'Scan every letter — no monthly limit',
-  'Formal German replies, with a translation',
-  'Ask questions in Nepali, Hindi or English',
-  'Check flat listings and rental contracts',
-  'No ads anywhere',
-];
+const FEATURES = [1, 2, 3, 4, 5] as const;
 
 /**
  * Paywall (Paywall / WebPaywall): price after trial stated clearly, cancel note,
@@ -38,13 +32,13 @@ export function PaywallScreen() {
   useEffect(() => { void getPackages().then(setPkgs).catch(() => undefined); }, []);
   const [trialEndDate] = useState(() => new Date(Date.now() + 7 * 86400000));
   const trialEnd = formatDate(trialEndDate, i18n.language, { day: 'numeric', month: 'long' });
-  const price = plan === 'annual' ? '€29.99 a year' : '€3.99 a month';
+  const price = plan === 'annual' ? t('paywall.priceYear') : t('paywall.priceMonth');
   const close = () => (router.canGoBack() ? router.back() : router.replace('/assist'));
   const buy = async () => {
     const p = plan === 'annual' ? pkgs.annual : pkgs.monthly;
-    if (!p) { setMsg('Purchases aren’t available right now. Please try again later.'); return; }
+    if (!p) { setMsg(t('paywall.unavailable')); return; }
     setBusy(true);
-    try { if (await purchase(p)) close(); } catch { setMsg('The purchase didn’t go through. You haven’t been charged.'); } finally { setBusy(false); }
+    try { if (await purchase(p)) close(); } catch { setMsg(t('paywall.failed')); } finally { setBusy(false); }
   };
 
   const option = (id: 'annual' | 'monthly', title: string, sub: string, badge?: string) => {
@@ -66,10 +60,10 @@ export function PaywallScreen() {
       <View style={{ alignItems: 'center', gap: 10 }}>
         <View style={{ width: 64, height: 64, borderRadius: 20, backgroundColor: c.accent, alignItems: 'center', justifyContent: 'center' }}><Icon icon={Sparkles} size={32} color="onAccent" /></View>
         <Pill label={t('common.premium')} tone="accent" center />
-        <Text size={26} lineHeight={32} weight="700" align="center" heading={1}>Understand every German letter in seconds</Text>
+        <Text size={26} lineHeight={32} weight="700" align="center" heading={1}>{t('paywall.headline')}</Text>
       </View>
       <View style={{ gap: 10 }}>
-        {FEATURES.map((f) => (
+        {FEATURES.map((n) => t(`paywall.f${n}`)).map((f) => (
           <View key={f} style={{ flexDirection: 'row', gap: 10, alignItems: 'center' }}>
             <View style={{ width: 24, height: 24, borderRadius: 12, backgroundColor: c.successBg, alignItems: 'center', justifyContent: 'center' }}><Icon icon={Check} size={14} color="successText" strokeWidth={3} /></View>
             <Text style={{ flex: 1 }}>{f}</Text>
@@ -77,19 +71,19 @@ export function PaywallScreen() {
         ))}
       </View>
       <View accessibilityRole="radiogroup" style={{ gap: 10 }}>
-        {option('annual', 'Yearly · €29.99', '€2.50 a month, billed once a year', 'Save 37%')}
-        {option('monthly', 'Monthly · €3.99', 'Billed every month')}
+        {option('annual', t('paywall.yearlyTitle'), t('paywall.yearlySub'), t('paywall.save'))}
+        {option('monthly', t('paywall.monthlyTitle'), t('paywall.monthlySub'))}
       </View>
-      <Button size="large" label="Start 7-day free trial" loading={busy} onPress={buy} />
-      <Text size={14} align="center" color="text2">Free until {trialEnd}, then {price}.{'\n'}Cancel any time before then and you pay nothing.</Text>
+      <Button size="large" label={t('paywall.trial')} loading={busy} onPress={buy} />
+      <Text size={14} align="center" color="text2">{t('paywall.freeUntil', { date: trialEnd, price })}</Text>
       <Text variant="caption" align="center" color="muted">
-        {Platform.OS === 'web' ? 'Cancel any time in Me › Subscription.' : `Cancel in your ${storeName} settings.`}
+        {Platform.OS === 'web' ? t('paywall.cancelWeb') : t('paywall.cancelStore', { store: storeName })}
       </Text>
       {msg ? <Text size={14} align="center" color="danger" accessibilityRole="alert">{msg}</Text> : null}
       <View style={{ flexDirection: 'row', justifyContent: 'center', gap: 16, flexWrap: 'wrap' }}>
-        {Platform.OS !== 'web' ? <Button variant="text" fullWidth={false} label={t('paywall.restore')} onPress={async () => { if (await restore()) close(); else setMsg('No purchases to restore on this account.'); }} /> : null}
+        {Platform.OS !== 'web' ? <Button variant="text" fullWidth={false} label={t('paywall.restore')} onPress={async () => { if (await restore()) close(); else setMsg(t('paywall.nothingToRestore')); }} /> : null}
         <Button variant="text" fullWidth={false} label={t('me.terms')} onPress={() => router.push('/terms')} />
-        <Button variant="text" fullWidth={false} label="Privacy" onPress={() => router.push('/privacy-policy')} />
+        <Button variant="text" fullWidth={false} label={t('me.privacyPolicy')} onPress={() => router.push('/privacy-policy')} />
       </View>
       <Text variant="caption" align="center" color="muted">{t('paywall.freeStays')}</Text>
     </View>

@@ -13,12 +13,13 @@ import { Text } from './Text';
 export function PremiumTile({
   title, sub, href, locked,
 }: { title: string; sub: string; href: string; locked: boolean }) {
+  const { t: tr } = useTranslation();
   const t = useTheme();
   return (
     <Link href={href as never} asChild>
       <Pressable
         accessibilityRole="link"
-        accessibilityLabel={locked ? `${title}. Premium` : title}
+        accessibilityLabel={locked ? `${title}. ${tr('common.premium')}` : title}
         style={{
           flex: 1, minHeight: 92, borderWidth: 1, borderColor: t.c.border, borderRadius: t.shape.card,
           backgroundColor: t.c.surface, padding: 12, gap: 4,
@@ -26,7 +27,7 @@ export function PremiumTile({
       >
         <Text size={15} weight="600" style={{ paddingRight: locked ? 64 : 0 }}>{title}</Text>
         <Text variant="caption" color="muted">{sub}</Text>
-        {locked ? <View style={{ position: 'absolute', top: 8, right: 8 }}><Pill label="Premium" tone="accent" /></View> : null}
+        {locked ? <View style={{ position: 'absolute', top: 8, right: 8 }}><Pill label={tr('common.premium')} tone="accent" /></View> : null}
       </Pressable>
     </Link>
   );

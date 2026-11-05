@@ -57,7 +57,7 @@ The CMS demo mode has a browser copy of these rules. `npm run db:test` checks th
    npx supabase db push
    psql "<connection string>" -f supabase/seed.sql
    ```
-   The seed publishes everything that passes validation as release v1. Guides without official sources stay as drafts for editors to finish.
+   The seed publishes everything that passes validation as release v1: the complete Leipzig content (18 guides, roadmap, city page, rules, providers, phrasebook, help services, safety). Each item lists its official sources and the date it was checked.
 3. **Make yourself an admin.** Create your user in *Authentication → Users*, then run:
    ```sql
    insert into public.cms_editors (user_id, email, role)
@@ -95,6 +95,22 @@ The CMS demo mode has a browser copy of these rules. `npm run db:test` checks th
    npm run cms:build   # static files in cms/dist → host on a separate domain, e.g. cms.example.com
    ```
    Security comes from the database's row-level security, not from hiding the CMS URL.
+
+### User accounts (onboarding step 8)
+
+The app's “Continue with Email / Google / Apple” buttons sign in with the same Supabase project. Without Supabase settings the app says that accounts aren't available yet and offers “Continue without an account”.
+
+1. **Email code.** *Authentication → Providers → Email*: enable it. In *Authentication → Email Templates → Magic Link*, include the 6-digit code so people can type it into the app:
+   ```html
+   <p>Your code for Settle in Germany: <strong>{{ .Token }}</strong></p>
+   ```
+   Set up your own SMTP server (*Authentication → SMTP Settings*); the built-in one is limited to a few emails an hour.
+2. **Google.** Create an OAuth client (type *Web application*) in Google Cloud Console with the redirect URI `https://<project-ref>.supabase.co/auth/v1/callback`. Enter the client ID and secret in *Authentication → Providers → Google*.
+3. **Redirect URLs.** In *Authentication → URL Configuration*, add:
+   - `settleingermany://auth/callback` (iOS and Android apps);
+   - `https://<your web domain>/onboarding/8` (website);
+   - `http://localhost:8081/onboarding/8` (local development).
+4. **Apple (iOS only).** Enable *Sign in with Apple* for the bundle ID in your Apple Developer account and add the bundle ID to *Authentication → Providers → Apple*.
 
 Without Supabase settings:
 - the apps use the bundled seed content;

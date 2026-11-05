@@ -32,14 +32,14 @@ export function AppBar({
   if (th.platform === 'android') {
     return (
       <View style={{ backgroundColor: c.ground, paddingHorizontal: 4 }}>
-        <View style={{ height: 64, flexDirection: 'row', alignItems: 'center', gap: 4 }}>
+        <View style={{ minHeight: 64, flexDirection: 'row', alignItems: 'center', gap: 4 }}>
           {back ? (
             <Pressable accessibilityRole="button" accessibilityLabel={t('nav.backTo', { name: back.label })} onPress={() => goBack(back)}
               style={{ width: 48, height: 48, alignItems: 'center', justifyContent: 'center', borderRadius: 999 }}>
               <Icon icon={ArrowLeft} color="text" />
             </Pressable>
           ) : null}
-          <Text size={22} lineHeight={28} weight="500" numberOfLines={1} style={{ flex: 1, paddingLeft: back ? 0 : 12 }} heading={large ? undefined : 1}>
+          <Text size={22} lineHeight={28} weight="500" numberOfLines={1} maxFontSizeMultiplier={1.4} style={{ flex: 1, minWidth: 0, paddingLeft: back ? 0 : 12 }} heading={large ? undefined : 1}>
             {large ? '' : title}
           </Text>
           {actions.map((a) => <IconButton key={a.label} icon={a.icon} label={a.label} onPress={a.onPress} color="text" badge={a.badge} />)}
@@ -51,18 +51,24 @@ export function AppBar({
   }
   return (
     <View style={{ backgroundColor: c.ground, paddingHorizontal: 8, borderBottomWidth: large && !below ? 0 : 1, borderColor: c.border }}>
-      <View style={{ height: 48, flexDirection: 'row', alignItems: 'center' }}>
-        <View style={{ flex: 1, flexDirection: 'row' }}>
+      {/* Three columns that never overlap: the back link and the actions keep their own space,
+          the small title gets the middle and is truncated instead of running into the back link. */}
+      <View style={{ minHeight: 48, flexDirection: 'row', alignItems: 'center' }}>
+        <View style={{ flex: 1, minWidth: 0, flexDirection: 'row' }}>
           {back ? (
             <Pressable accessibilityRole="button" accessibilityLabel={t('nav.backTo', { name: back.label })} onPress={() => goBack(back)}
-              style={{ height: 44, flexDirection: 'row', alignItems: 'center' }}>
+              style={{ minHeight: 44, flexDirection: 'row', alignItems: 'center', flexShrink: 1, minWidth: 0 }}>
               <Icon icon={ChevronLeft} size={28} color="primary" />
-              <Text size={17} color="primary" numberOfLines={1}>{back.label}</Text>
+              <Text size={17} color="primary" numberOfLines={1} maxFontSizeMultiplier={1.4} style={{ flexShrink: 1 }}>{back.label}</Text>
             </Pressable>
           ) : null}
         </View>
-        <Text size={17} weight="600" align="center" numberOfLines={1} heading={large ? undefined : 1}>{large ? '' : title}</Text>
-        <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-end' }}>
+        <View style={{ flex: 1.6, minWidth: 0, alignItems: 'center' }}>
+          {large ? null : (
+            <Text size={17} weight="600" align="center" numberOfLines={1} maxFontSizeMultiplier={1.4} heading={1}>{title}</Text>
+          )}
+        </View>
+        <View style={{ flex: 1, minWidth: 0, flexDirection: 'row', justifyContent: 'flex-end' }}>
           {actions.map((a) => <IconButton key={a.label} icon={a.icon} label={a.label} onPress={a.onPress} badge={a.badge} />)}
         </View>
       </View>

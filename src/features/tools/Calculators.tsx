@@ -1,159 +1,224 @@
-import { Minus, Plus, Trash2 } from 'lucide-react-native';
+import { Minus, Plus, RotateCcw, Trash2 } from 'lucide-react-native';
 import React, { useMemo, useState } from 'react';
-import { Pressable, View } from 'react-native';
+import { Pressable, TextInput, View } from 'react-native';
 import { useTranslation } from 'react-i18next';
 
-import { useCities, useRules } from '@/content/client';
+import { useMyCity } from '@/content/city';
+import { useL, useRules } from '@/content/client';
+import type { Localized } from '@/content/types';
 import { createPersistedStore } from '@/lib/createStore';
 import { formatDate } from '@/lib/deadline';
-import { usePrefs } from '@/store/prefs';
 import { useTheme } from '@/theme/ThemeProvider';
-import { AdSlot, Button, Card, Chip, Icon, ProgressBar, Screen, SectionTitle, Text, TextField } from '@/ui';
+import { fonts } from '@/theme/tokens';
+import { AdSlot, Button, Card, Chip, Icon, ProgressBar, Screen, SectionTitle, SourcesList, Text, TextField, ToggleRow } from '@/ui';
 
-const back = { label: 'Tools', href: '/tools' };
-const crumbs = (title: string) => [{ label: 'Tools', href: '/tools' }, { label: 'Calculators' }, { label: title }];
-const eur = (n: number) => `€${n.toLocaleString('de-DE', { maximumFractionDigits: 0 })}`;
+const eur = (n: number, digits = 0) => `€${n.toLocaleString('de-DE', { minimumFractionDigits: digits, maximumFractionDigits: digits })}`;
+const num = (s: string) => {
+  const n = parseFloat(s.replace(/\s/g, '').replace(',', '.'));
+  return Number.isFinite(n) ? n : 0;
+};
 
-function Stepper({ label, value, onChange, step = 10 }: { label: string; value: number; onChange: (n: number) => void; step?: number }) {
-  const { c } = useTheme();
+function useBack() {
+  const { t } = useTranslation();
+  return {
+    back: { label: t('tools.title'), href: '/tools' },
+    crumbs: (title: string) => [{ label: t('tools.title'), href: '/tools' }, { label: t('tools.calculators') }, { label: title }],
+  };
+}
+
+/** A euro amount you can type directly, or nudge with − / +. */
+function MoneyRow({ label, value, onChange, step = 10 }: { label: string; value: number; onChange: (n: number) => void; step?: number }) {
+  const { t } = useTranslation();
+  const th = useTheme();
+  const { c } = th;
+  const [text, setText] = useState<string | null>(null);
   const btn = (icon: typeof Plus, d: number, a11y: string) => (
-    <Pressable accessibilityRole="button" accessibilityLabel={`${a11y} ${label}`} onPress={() => onChange(Math.max(0, value + d))}
+    <Pressable accessibilityRole="button" accessibilityLabel={`${a11y}: ${label}`} onPress={() => { setText(null); onChange(Math.max(0, Math.round((value + d) * 100) / 100)); }}
       style={{ width: 44, height: 44, borderRadius: 22, borderWidth: 1, borderColor: c.border, backgroundColor: c.surface, alignItems: 'center', justifyContent: 'center' }}>
       <Icon icon={icon} size={18} color="primary" />
     </Pressable>
   );
   return (
-    <View accessibilityRole="adjustable" accessibilityLabel={`${label}, ${value} euros per month`} accessibilityValue={{ text: eur(value) }}
-      accessibilityActions={[{ name: 'increment' }, { name: 'decrement' }]}
-      onAccessibilityAction={(e) => onChange(Math.max(0, value + (e.nativeEvent.actionName === 'increment' ? step : -step)))}
-      style={{ flexDirection: 'row', alignItems: 'center', gap: 10, minHeight: 56, borderTopWidth: 1, borderColor: c.divider }}>
+    <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8, minHeight: 60, borderTopWidth: 1, borderColor: c.divider, paddingVertical: 6 }}>
       <Text style={{ flex: 1 }}>{label}</Text>
-      {btn(Minus, -step, 'Less')}
-      <Text weight="700" style={{ minWidth: 64, textAlign: 'center' }}>{eur(value)}</Text>
-      {btn(Plus, step, 'More')}
+      {btn(Minus, -step, t('tools.less'))}
+      <View style={{ flexDirection: 'row', alignItems: 'center', borderWidth: 1, borderColor: c.fieldBorder, borderRadius: th.shape.field, backgroundColor: c.surface, paddingHorizontal: 8, minHeight: 44, width: 96 }}>
+        <Text color="muted">€</Text>
+        <TextInput
+          accessibilityLabel={t('tools.amountFor', { label })}
+          value={text ?? String(value)}
+          onChangeText={(s) => { setText(s); onChange(Math.max(0, num(s))); }}
+          onBlur={() => setText(null)}
+          keyboardType="decimal-pad"
+          inputMode="decimal"
+          selectTextOnFocus
+          maxFontSizeMultiplier={1.6}
+          style={{ flex: 1, minWidth: 0, fontFamily: fonts.bold, fontSize: 16, color: c.text, textAlign: 'right', paddingVertical: 8 }}
+        />
+      </View>
+      {btn(Plus, step, t('tools.more'))}
     </View>
   );
 }
 
-/** Starting values are placeholders until the CMS provides typical costs per city. */
-const DEFAULT_BUDGET = { Rent: 0, 'Health insurance': 0, Food: 0, Phone: 0, Transit: 0, 'Broadcasting fee': 0, Other: 0 };
+const budgetStore = createPersistedStore<{ city: string | null; items: { label: Localized; value: number }[] }>('budget.v2', { city: null, items: [] });
 
 export function BudgetScreen() {
+  const { t } = useTranslation();
   const th = useTheme();
   const { c } = th;
-  const profile = usePrefs((s) => s.profile);
-  const { data: cities = [] } = useCities();
+  const l = useL();
+  const { back, crumbs } = useBack();
+  const { name, page, slug } = useMyCity();
+  const defaults = page?.budget ?? [];
+  const saved = budgetStore.useStore();
+  const items = saved.city === slug && saved.items.length ? saved.items : defaults;
+  const set = (i: number, value: number) => budgetStore.set({ city: slug, items: items.map((x, j) => (j === i ? { ...x, value } : x)) });
+  const total = items.reduce((a, b) => a + b.value, 0);
   const { data: rules } = useRules();
-  const city = cities.find((x) => x.slug === profile.city)?.name ?? '[city]';
-  const [items, setItems] = useState<Record<string, number>>(DEFAULT_BUDGET);
-  const total = Object.values(items).reduce((a, b) => a + b, 0);
   return (
-    <Screen title="Budget planner" large={false} back={back} crumbs={crumbs('Budget planner')}>
-      <View style={{ flexDirection: 'row', gap: 8 }}><Chip label={`City: ${city}`} selected /><Chip label="Living: shared flat" /></View>
-      <Card padded={false} style={{ paddingHorizontal: 16 }}>
-        {Object.entries(items).map(([k, v]) => <Stepper key={k} label={k} value={v} onChange={(n) => setItems((x) => ({ ...x, [k]: n }))} />)}
-      </Card>
-      <View style={{ backgroundColor: c.heroBg, borderRadius: th.shape.card, padding: 16, gap: 4 }} accessibilityLiveRegion="polite">
-        <Text color={c.heroSub}>Your month in {city}</Text>
+    <Screen title={t('tools.budget')} large={false} back={back} crumbs={crumbs(t('tools.budget'))}>
+      <Text color="text2">{t('tools.budgetIntro')}</Text>
+      {name ? <Chip label={t('tools.cityChip', { city: name })} selected /> : null}
+      {items.length === 0 ? (
+        <Card><Text color="text2">{t('tools.budgetNoCity')}</Text></Card>
+      ) : (
+        <Card padded={false} style={{ paddingHorizontal: 16 }}>
+          {items.map((it, i) => <MoneyRow key={it.label.en} label={l(it.label)} value={it.value} onChange={(n) => set(i, n)} />)}
+        </Card>
+      )}
+      <View accessibilityLiveRegion="polite" style={{ backgroundColor: c.heroBg, borderRadius: th.shape.card, padding: 16, gap: 4 }}>
+        <Text color={c.heroSub}>{name ? t('tools.yourMonthIn', { city: name }) : t('tools.yourMonth')}</Text>
         <Text size={32} lineHeight={38} weight="700" color={c.heroText}>{eur(total)}</Text>
-        <Text size={14} color={c.heroSub}>Compare: your blocked account pays out {rules?.blockedAccountMonthly ? eur(rules.blockedAccountMonthly) : '[€ monthly amount]'}.</Text>
+        {rules?.blockedAccountMonthly ? (
+          <Text size={14} color={c.heroSub}>{t('tools.blockedCompare', { amount: eur(rules.blockedAccountMonthly) })}</Text>
+        ) : null}
       </View>
-      <Text variant="caption" color="muted">Starting values are typical for {city} · checked {rules?.lastVerified ?? '[date]'}. Change them to match your life.</Text>
+      {saved.items.length ? <Button variant="text" fullWidth={false} icon={RotateCcw} label={t('tools.resetValues')} onPress={() => budgetStore.reset()} /> : null}
+      <Text variant="caption" color="muted">{t('tools.budgetNote')}</Text>
       <AdSlot format="banner" placement="budget-results" />
+      <SourcesList sources={page?.sources?.filter((s) => /budget|leben|living|studentenwerk|kranken|semester|rundfunk/i.test(s.title + s.url))} lastVerified={page?.lastVerified} />
     </Screen>
   );
 }
 
+type JobType = 'mini' | 'student';
+
 export function NetPayScreen() {
+  const { t } = useTranslation();
   const { c } = useTheme();
-  const { data: rules } = useRules();
-  const [wage, setWage] = useState('14.00');
+  const { back, crumbs } = useBack();
+  const { data: r } = useRules();
+  const [wage, setWage] = useState(r?.minimumWage ? r.minimumWage.toFixed(2).replace('.', ',') : '');
   const [hours, setHours] = useState('10');
-  const [kind, setKind] = useState<'mini' | 'student' | 'unsure'>('mini');
-  const gross = (parseFloat(wage.replace(',', '.')) || 0) * (parseFloat(hours) || 0) * 4.33;
-  // TODO(product owner): deduction rates come from the CMS Rules; without them we only show gross.
-  const known = !!rules?.miniJobLimitMonthly;
+  const [optOut, setOptOut] = useState(false);
+  const gross = num(wage) * num(hours) * (52 / 12);
+  const limit = r?.miniJobLimitMonthly ?? 0;
+  const type: JobType = limit && gross <= limit ? 'mini' : 'student';
+  const pensionPct = type === 'mini' ? (optOut ? 0 : (r?.miniJobPensionPercent ?? 0)) : (r?.studentPensionPercent ?? 0);
+  const pension = (gross * pensionPct) / 100;
+  const yearly = gross * 12;
+  const taxFree = !r?.basicTaxAllowance || yearly <= r.basicTaxAllowance;
+  const net = gross - pension;
+  const belowMinimum = r?.minimumWage && num(wage) > 0 && num(wage) < r.minimumWage;
+  const tooManyHours = r?.studentWeeklyHours && num(hours) > r.studentWeeklyHours;
   return (
-    <Screen title="Net pay" large={false} back={back} crumbs={crumbs('Net pay')}>
-      <Text color="text2">See what reaches your bank account from a student job.</Text>
+    <Screen title={t('tools.netpay')} large={false} back={back} crumbs={crumbs(t('tools.netpay'))}>
+      <Text color="text2">{t('tools.netpayIntro')}</Text>
       <View style={{ flexDirection: 'row', gap: 12 }}>
-        <View style={{ flex: 1 }}><TextField label="Hourly wage (€)" value={wage} onChangeText={setWage} keyboardType="decimal-pad" /></View>
-        <View style={{ flex: 1 }}><TextField label="Hours a week" value={hours} onChangeText={setHours} keyboardType="number-pad" /></View>
+        <View style={{ flex: 1 }}><TextField label={t('tools.hourlyWage')} value={wage} onChangeText={setWage} keyboardType="decimal-pad" /></View>
+        <View style={{ flex: 1 }}><TextField label={t('tools.hoursPerWeek')} value={hours} onChangeText={setHours} keyboardType="decimal-pad" /></View>
       </View>
-      <View accessibilityRole="radiogroup" accessibilityLabel="Type of job" style={{ gap: 8 }}>
-        <Text size={14} weight="600">Type of job</Text>
-        <View style={{ flexDirection: 'row', gap: 8, flexWrap: 'wrap' }}>
-          <Chip label="Mini job" selected={kind === 'mini'} onPress={() => setKind('mini')} />
-          <Chip label="Working student" selected={kind === 'student'} onPress={() => setKind('student')} />
-          <Chip label="Not sure" selected={kind === 'unsure'} onPress={() => setKind('unsure')} />
-        </View>
-      </View>
+      {belowMinimum ? <Text size={14} color="danger">{t('tools.belowMinimumWage', { wage: eur(r!.minimumWage!, 2) })}</Text> : null}
       <Card style={{ gap: 8 }}>
-        <Text color="muted">You keep about</Text>
-        <Text size={28} weight="700">{known ? eur(gross) : '€[net]'} / month</Text>
-        {[['Gross pay', eur(gross)], ['Tax', '€[—]'], ['Pension contribution', '€[—]']].map(([k, v]) => (
-          <View key={k} style={{ flexDirection: 'row', justifyContent: 'space-between', borderTopWidth: 1, borderColor: c.divider, paddingTop: 8 }}><Text color="text3">{k}</Text><Text weight="600">{v}</Text></View>
+        <Text weight="700">{type === 'mini' ? t('tools.miniJob') : t('tools.workingStudent')}</Text>
+        <Text size={14} color="text2">{type === 'mini' ? t('tools.miniJobExplain', { limit: eur(limit) }) : t('tools.workingStudentExplain', { limit: eur(limit) })}</Text>
+        {type === 'mini' ? <ToggleRow title={t('tools.pensionOptOut')} body={t('tools.pensionOptOutBody')} value={optOut} onChange={setOptOut} /> : null}
+      </Card>
+      <Card style={{ gap: 8 }} accessibilityLiveRegion="polite">
+        <Text color="muted">{t('tools.youKeep')}</Text>
+        <Text size={28} weight="700">{t('tools.perMonth', { amount: eur(net) })}</Text>
+        {[
+          [t('tools.grossPay'), eur(gross)],
+          [t('tools.pension', { pct: pensionPct.toLocaleString('de-DE') }), `− ${eur(pension)}`],
+          [t('tools.incomeTax'), taxFree ? eur(0) : t('tools.taxDepends')],
+        ].map(([k, v]) => (
+          <View key={k} style={{ flexDirection: 'row', justifyContent: 'space-between', gap: 12, borderTopWidth: 1, borderColor: c.divider, paddingTop: 8 }}>
+            <Text color="text3" style={{ flex: 1 }}>{k}</Text><Text weight="600">{v}</Text>
+          </View>
         ))}
       </Card>
-      <Text size={14} color="text2">In plain words: [One or two sentences on why these deductions apply, from the content system.]</Text>
-      <Text variant="caption" color="muted">Estimate only, not tax advice. Limits and rates checked {rules?.lastVerified ?? '[date]'}.</Text>
+      <Text size={14} color="text2">{taxFree ? t('tools.taxFreeExplain', { allowance: eur(r?.basicTaxAllowance ?? 0) }) : t('tools.taxRefundExplain', { allowance: eur(r?.basicTaxAllowance ?? 0) })}</Text>
+      {tooManyHours ? <Text size={14} color="warningText">{t('tools.over20Hours', { hours: r!.studentWeeklyHours })}</Text> : null}
+      <Text variant="caption" color="muted">{t('tools.estimateOnly')}</Text>
       <AdSlot format="banner" placement="netpay-results" />
+      <SourcesList sources={r?.sources} lastVerified={r?.lastVerified} />
     </Screen>
   );
 }
 
 type WorkDay = { id: string; date: string; place: string; hours: number };
 const workStore = createPersistedStore<{ days: WorkDay[] }>('workdays.v1', { days: [] });
-
-/** Two half days (≤ 4 h) count as one full day. */
-const weight = (h: number) => (h > 4 ? 1 : h > 0 ? 0.5 : 0);
+const newId = () => `w${Date.now()}`;
+const todayIso = () => new Date().toISOString().slice(0, 10);
 
 export function WorkLimitScreen() {
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { c } = useTheme();
-  const { data: rules } = useRules();
+  const { back, crumbs } = useBack();
+  const { data: r } = useRules();
   const { days } = workStore.useStore();
   const [place, setPlace] = useState('');
   const [hours, setHours] = useState('');
+  const fullDay = r?.fullDayHours ?? 4;
+  /** More than `fullDay` hours = a full day; up to that = half a day (two half days = one full day). */
+  const weight = (h: number) => (h > fullDay ? 1 : h > 0 ? 0.5 : 0);
   const year = new Date().getFullYear();
-  const used = useMemo(() => days.filter((d) => d.date.startsWith(String(year))).reduce((a, d) => a + weight(d.hours), 0), [days, year]);
-  const limit = rules?.studentWorkFullDays ?? 0;
+  const used = useMemo(() => days.filter((d) => d.date.startsWith(String(year))).reduce((a, d) => a + weight(d.hours), 0), [days, year, fullDay]); // eslint-disable-line react-hooks/exhaustive-deps
+  const limit = r?.studentWorkFullDays ?? 0;
+  const left = Math.max(0, limit - used);
   const log = () => {
-    const h = parseFloat(hours);
+    const h = num(hours);
     if (!h) return;
-    workStore.set((s) => ({ days: [{ id: `w${Date.now()}`, date: new Date().toISOString().slice(0, 10), place: place || 'Work', hours: h }, ...s.days] }));
+    workStore.set((s) => ({ days: [{ id: newId(), date: todayIso(), place: place || t('tools.work'), hours: h }, ...s.days] }));
     setHours(''); setPlace('');
   };
   return (
-    <Screen title="Work-day limit" large={false} back={back} crumbs={crumbs('Work-day limit')}>
+    <Screen title={t('tools.worklimit')} large={false} back={back} crumbs={crumbs(t('tools.worklimit'))}>
       <Card style={{ gap: 10 }}>
-        <Text color="muted">This year you’ve used · 1 Jan – 31 Dec {year}</Text>
-        <Text size={24} weight="700">{used} of {limit || '[limit]'} full days</Text>
-        <ProgressBar value={used} max={limit || 1} label={limit && used / limit >= 0.8 ? `Close to your limit. ${limit - used} full days left this year.` : 'Two half days count as one full day.'} />
-        <Text variant="caption" color="muted">Limit for your permit, from our rules · checked {rules?.lastVerified ?? '[date]'}</Text>
+        <Text color="muted">{t('tools.usedThisYear', { year })}</Text>
+        <Text size={24} weight="700">{t('tools.usedOfLimit', { used, limit })}</Text>
+        <ProgressBar value={used} max={limit || 1} label={limit && used / limit >= 0.8 ? t('tools.closeToLimit', { left }) : t('tools.daysLeft', { left })} />
+        <Text size={14} color="text2">{t('tools.workRuleExplain', { full: limit, half: r?.studentWorkHalfDays ?? 0, hours: fullDay, weekly: r?.studentWeeklyHours ?? 20 })}</Text>
       </Card>
-      <SectionTitle>Log a work day</SectionTitle>
+      <SectionTitle>{t('tools.logWorkDay')}</SectionTitle>
       <View style={{ flexDirection: 'row', gap: 12 }}>
-        <View style={{ flex: 2 }}><TextField label="Where" value={place} onChangeText={setPlace} placeholder="Café" /></View>
-        <View style={{ flex: 1 }}><TextField label="Hours" value={hours} onChangeText={setHours} keyboardType="decimal-pad" /></View>
+        <View style={{ flex: 2 }}><TextField label={t('tools.where')} value={place} onChangeText={setPlace} placeholder={t('tools.wherePlaceholder')} /></View>
+        <View style={{ flex: 1 }}><TextField label={t('tools.hours')} value={hours} onChangeText={setHours} keyboardType="decimal-pad" /></View>
       </View>
-      <Button label="Log a work day" onPress={log} />
+      <Button label={t('tools.logWorkDay')} onPress={log} disabled={!num(hours)} />
       {days.length ? (
         <>
-          <SectionTitle>Recent days</SectionTitle>
+          <SectionTitle>{t('tools.recentDays')}</SectionTitle>
           <Card padded={false} style={{ paddingHorizontal: 16 }}>
-            {days.slice(0, 10).map((d, i) => (
+            {days.slice(0, 20).map((d, i) => (
               <View key={d.id} style={{ minHeight: 56, flexDirection: 'row', alignItems: 'center', gap: 8, borderTopWidth: i ? 1 : 0, borderColor: c.divider }}>
-                <View style={{ flex: 1 }}><Text weight="600">{formatDate(d.date, i18n.language, { weekday: 'short', day: 'numeric', month: 'short' })}</Text><Text variant="caption" color="muted">{d.place} · {d.hours} hours</Text></View>
-                <Text size={13} weight="600" color={weight(d.hours) === 1 ? 'text' : 'muted'}>{weight(d.hours) === 1 ? 'Full day' : 'Half day'}</Text>
-                <Pressable accessibilityRole="button" accessibilityLabel="Delete day" onPress={() => workStore.set((s) => ({ days: s.days.filter((x) => x.id !== d.id) }))} style={{ width: 44, height: 44, alignItems: 'center', justifyContent: 'center' }}><Icon icon={Trash2} size={18} color="muted" /></Pressable>
+                <View style={{ flex: 1 }}>
+                  <Text weight="600">{formatDate(d.date, i18n.language, { weekday: 'short', day: 'numeric', month: 'short' })}</Text>
+                  <Text variant="caption" color="muted">{d.place} · {t('tools.hoursCount', { count: d.hours })}</Text>
+                </View>
+                <Text size={13} weight="600" color={weight(d.hours) === 1 ? 'text' : 'muted'}>{weight(d.hours) === 1 ? t('tools.fullDay') : t('tools.halfDay')}</Text>
+                <Pressable accessibilityRole="button" accessibilityLabel={t('tools.deleteDay')} onPress={() => workStore.set((s) => ({ days: s.days.filter((x) => x.id !== d.id) }))} style={{ width: 44, height: 44, alignItems: 'center', justifyContent: 'center' }}>
+                  <Icon icon={Trash2} size={18} color="muted" />
+                </Pressable>
               </View>
             ))}
           </Card>
         </>
       ) : null}
-      <Text size={14} color="text2">[Short rule on which university jobs don’t count, from the content system.]</Text>
+      <Text variant="caption" color="muted">{t('tools.workLimitNote')}</Text>
       <AdSlot format="banner" placement="worklimit-results" />
+      <SourcesList sources={r?.sources} lastVerified={r?.lastVerified} />
     </Screen>
   );
 }

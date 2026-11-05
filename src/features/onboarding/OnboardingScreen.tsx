@@ -1,22 +1,28 @@
-import * as AppleAuthentication from 'expo-apple-authentication';
 import { router } from 'expo-router';
-import { Bell, CalendarClock, Check, ChevronLeft, ChevronRight, Compass, ArrowLeft, Mail, Search } from 'lucide-react-native';
+import { ArrowLeft, Bell, CalendarClock, Check, ChevronLeft, ChevronRight, Compass, Mail } from 'lucide-react-native';
 import React, { useMemo, useState } from 'react';
-import { Platform, Pressable, ScrollView, TextInput, View } from 'react-native';
+import { Platform, Pressable, ScrollView, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useTranslation } from 'react-i18next';
 
-import { useCities } from '@/content/client';
+import { useMyCity } from '@/content/city';
 import { LANGUAGES, setLanguage } from '@/i18n';
 import { formatDate } from '@/lib/deadline';
 import { useLayout } from '@/lib/useLayout';
-import { signInWithAppleToken } from '@/services/auth';
 import { registerForRuleChangePush, requestPermission } from '@/services/notifications';
 import { prefsStore, setProfile, type StageId, usePrefs } from '@/store/prefs';
 import { useTheme } from '@/theme/ThemeProvider';
-import { fonts } from '@/theme/tokens';
-import { Button, Checkbox, Icon, SelectCard, SiteHeader, Text } from '@/ui';
+import { Button, Icon, SelectCard, SiteHeader, Text } from '@/ui';
 import { useRoadmapData } from '../roadmap/useRoadmapData';
+import { AccountStep } from './AccountStep';
+import { CityStep } from './CityStep';
+
+/** Mon–Sun short names in the UI language. */
+function weekdays(lang: string) {
+  const monday = new Date(Date.UTC(2024, 0, 1));
+  return Array.from({ length: 7 }, (_, i) =>
+    new Intl.DateTimeFormat(lang === 'en' ? 'en-GB' : lang, { weekday: 'short', timeZone: 'UTC' }).format(new Date(monday.getTime() + i * 86400000)));
+}
 
 const TOTAL = 9;
 
@@ -121,7 +127,7 @@ function Choice<T extends string>({ value, options, onPick }: { value: T | null;
 }
 
 function CalendarPicker({ value, onChange }: { value: string | null; onChange: (iso: string) => void }) {
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { c } = useTheme();
   const init = value ? new Date(value) : new Date();
   const [month, setMonth] = useState(new Date(init.getFullYear(), init.getMonth(), 1));
@@ -135,12 +141,12 @@ function CalendarPicker({ value, onChange }: { value: string | null; onChange: (
   return (
     <View style={{ backgroundColor: c.surface, borderWidth: 1, borderColor: c.border, borderRadius: 16, padding: 12, gap: 8 }}>
       <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
-        <Pressable accessibilityRole="button" accessibilityLabel="Previous month" onPress={() => shift(-1)} style={{ width: 44, height: 44, alignItems: 'center', justifyContent: 'center' }}><Icon icon={ChevronLeft} color="primary" /></Pressable>
+        <Pressable accessibilityRole="button" accessibilityLabel={t('onboarding.prevMonth')} onPress={() => shift(-1)} style={{ width: 44, height: 44, alignItems: 'center', justifyContent: 'center' }}><Icon icon={ChevronLeft} color="primary" /></Pressable>
         <Text weight="600" accessibilityLiveRegion="polite">{formatDate(month, i18n.language, { month: 'long', year: 'numeric' })}</Text>
-        <Pressable accessibilityRole="button" accessibilityLabel="Next month" onPress={() => shift(1)} style={{ width: 44, height: 44, alignItems: 'center', justifyContent: 'center' }}><Icon icon={ChevronRight} color="primary" /></Pressable>
+        <Pressable accessibilityRole="button" accessibilityLabel={t('onboarding.nextMonth')} onPress={() => shift(1)} style={{ width: 44, height: 44, alignItems: 'center', justifyContent: 'center' }}><Icon icon={ChevronRight} color="primary" /></Pressable>
       </View>
       <View style={{ flexDirection: 'row' }}>
-        {['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'].map((d) => <Text key={d} size={12} color="muted" align="center" style={{ flex: 1 }}>{d}</Text>)}
+        {weekdays(i18n.language).map((d) => <Text key={d} size={12} color="muted" align="center" style={{ flex: 1 }}>{d}</Text>)}
       </View>
       <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
         {days.map((d, i) => {
@@ -168,9 +174,7 @@ export function OnboardingScreen({ step }: { step: number }) {
   const { c } = th;
   const { webWide } = useLayout();
   const profile = usePrefs((s) => s.profile);
-  const age = usePrefs((s) => s.ageConfirmed16);
-  const { data: cities = [] } = useCities();
-  const [q, setQ] = useState('');
+  const myCity = useMyCity();
   const { next3, stats } = useRoadmapData(profile.stage);
 
   let body: React.ReactNode = null;
@@ -188,7 +192,7 @@ export function OnboardingScreen({ step }: { step: number }) {
         <>
           <Title title={t('onboarding.fromTitle')} sub={t('onboarding.fromSub')} />
           <Choice value={profile.nationality} onPick={(v) => setProfile({ nationality: v })} options={[
-            { id: 'nepal', title: 'Nepal  ·  नेपाल' }, { id: 'india', title: 'India  ·  भारत' }, { id: 'other', title: t('onboarding.otherCountry') },
+            { id: 'nepal', title: t('onboarding.nepal') }, { id: 'india', title: t('onboarding.india') }, { id: 'other', title: t('onboarding.otherCountry') },
           ]} />
         </>
       );
@@ -198,40 +202,31 @@ export function OnboardingScreen({ step }: { step: number }) {
         <>
           <Title title={t('onboarding.statusTitle')} sub={t('onboarding.statusSub')} />
           <Choice value={profile.status} onPick={(v) => setProfile({ status: v })} options={[
-            { id: 'student', title: 'Student', sub: 'University or language course' },
-            { id: 'trainee', title: 'Vocational trainee', term: 'Ausbildung' },
-            { id: 'worker', title: 'Skilled worker', sub: 'You have a job or a job offer' },
-            { id: 'family', title: 'Family member', sub: 'Joining a partner or parent' },
+            { id: 'student', title: t('onboarding.student'), sub: t('onboarding.studentSub') },
+            { id: 'trainee', title: t('onboarding.trainee'), term: 'Ausbildung' },
+            { id: 'worker', title: t('onboarding.worker'), sub: t('onboarding.workerSub') },
+            { id: 'family', title: t('onboarding.family'), sub: t('onboarding.familySub') },
           ]} />
         </>
       );
       break;
-    case 4: {
-      const list = cities.filter((x) => x.name.toLowerCase().includes(q.toLowerCase()));
+    case 4:
       body = (
         <>
           <Title title={t('onboarding.cityTitle')} sub={t('onboarding.citySub')} />
-          <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8, minHeight: 48, borderRadius: th.shape.field, borderWidth: 1, borderColor: c.fieldBorder, backgroundColor: c.surface, paddingHorizontal: 12 }}>
-            <Icon icon={Search} size={20} color="muted" />
-            <TextInput value={q} onChangeText={setQ} placeholder={t('onboarding.searchCities')} placeholderTextColor={c.muted} accessibilityLabel={t('onboarding.searchCities')}
-              style={{ flex: 1, fontFamily: fonts.regular, fontSize: 16, color: c.text, minHeight: 44 }} />
-          </View>
-          <Choice value={profile.city} onPick={(v) => setProfile({ city: v })} options={[
-            ...list.map((x) => ({ id: x.slug, title: x.name })), { id: 'undecided', title: t('onboarding.undecided') },
-          ]} />
+          <CityStep />
         </>
       );
       break;
-    }
     case 5:
       body = (
         <>
           <Title title={t('onboarding.stageTitle')} sub={t('onboarding.stageSub')} />
           <Choice<StageId> value={profile.stage} onPick={(v) => setProfile({ stage: v })} options={[
-            { id: 'before', title: 'Still at home, preparing' },
-            { id: 'first30', title: 'Arrived recently', sub: 'Less than 3 months ago' },
-            { id: 'living', title: 'Living here over 3 months' },
-            { id: 'career', title: 'Finishing my studies' },
+            { id: 'before', title: t('onboarding.stageBefore') },
+            { id: 'first30', title: t('onboarding.stageFirst30'), sub: t('onboarding.stageFirst30Sub') },
+            { id: 'living', title: t('onboarding.stageLiving') },
+            { id: 'career', title: t('onboarding.stageCareer') },
           ]} />
         </>
       );
@@ -280,32 +275,7 @@ export function OnboardingScreen({ step }: { step: number }) {
       body = (
         <>
           <Title title={t('onboarding.accountTitle')} sub={t('onboarding.accountSub')} />
-          <View style={{ gap: 10 }}>
-            {Platform.OS === 'ios' ? (
-              <AppleAuthentication.AppleAuthenticationButton
-                buttonType={AppleAuthentication.AppleAuthenticationButtonType.CONTINUE}
-                buttonStyle={th.scheme === 'dark' ? AppleAuthentication.AppleAuthenticationButtonStyle.WHITE : AppleAuthentication.AppleAuthenticationButtonStyle.BLACK}
-                cornerRadius={12}
-                style={{ height: 52, opacity: age ? 1 : 0.5 }}
-                onPress={async () => {
-                  if (!age) return;
-                  try {
-                    const cred = await AppleAuthentication.signInAsync({ requestedScopes: [AppleAuthentication.AppleAuthenticationScope.EMAIL] });
-                    if (cred.identityToken) await signInWithAppleToken(cred.identityToken);
-                    prefsStore.set({ accountMode: 'account' });
-                    goStep(9);
-                  } catch { /* cancelled */ }
-                }}
-              />
-            ) : null}
-            {/* TODO: wire Google + email sign-in screens to services/auth once Supabase is configured. */}
-            <Button variant="secondary" label={t('onboarding.google')} disabled={!age} onPress={() => goStep(9)} />
-            <Button variant="secondary" label={t('onboarding.email')} icon={Mail} disabled={!age} onPress={() => goStep(9)} />
-          </View>
-          <View style={{ flexDirection: 'row', gap: 12, alignItems: 'flex-start' }}>
-            <Checkbox checked={age} onChange={(v) => prefsStore.set({ ageConfirmed16: v })} label={t('onboarding.age')} />
-            <Text style={{ flex: 1 }} color="text2" onPress={() => prefsStore.set({ ageConfirmed16: !age })}>{t('onboarding.age')}</Text>
-          </View>
+          <AccountStep onDone={() => goStep(9)} />
         </>
       );
       primary = { label: t('onboarding.noAccount'), onPress: () => { prefsStore.set({ accountMode: 'local' }); goStep(9); } };
@@ -313,7 +283,7 @@ export function OnboardingScreen({ step }: { step: number }) {
       break;
     case 9: {
       const s = stats(profile.stage);
-      const city = cities.find((x) => x.slug === profile.city)?.name ?? '—';
+      const city = myCity.name || '—';
       body = (
         <>
           <View style={{ alignItems: 'center' }}>

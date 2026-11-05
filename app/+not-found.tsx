@@ -1,13 +1,15 @@
 import { router } from 'expo-router';
 import { Compass } from 'lucide-react-native';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { EmptyState, Screen } from '@/ui';
 
 export default function NotFound() {
+  const { t } = useTranslation();
   return (
-    <Screen title="Page not found" back={{ label: 'Home', href: '/' }}>
-      <EmptyState icon={Compass} title="We couldn’t find this page" body="It may have moved. Your roadmap and saved guides are still here." actionLabel="Go home" onAction={() => router.replace('/')} />
+    <Screen title={t('states.pageNotFound')} back={{ label: t('nav.home'), href: '/' }}>
+      <EmptyState icon={Compass} title={t('states.pageNotFoundTitle')} body={t('states.pageNotFoundBody')} actionLabel={t('nav.home')} onAction={() => router.replace('/')} />
     </Screen>
   );
 }

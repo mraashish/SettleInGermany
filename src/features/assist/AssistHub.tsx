@@ -13,17 +13,18 @@ import { AILabel, Button, Card, EmptyState, Icon, PremiumTile, Screen, SectionTi
 import { AiDisclaimer, NeedsInternet } from './AiScaffold';
 
 export const AI_TOOLS = [
-  { id: 'reply', title: 'Write a reply', sub: 'A formal German letter or email', href: '/assist/reply' },
-  { id: 'chat', title: 'Ask a question', sub: 'Answers from our guides', href: '/assist/ask' },
-  { id: 'scam', title: 'Housing scam checker', sub: 'Paste a listing or message', href: '/assist/scam-check' },
-  { id: 'contract', title: 'Rental contract explainer', sub: 'Clause by clause', href: '/assist/contract' },
-  { id: 'form', title: 'Form assistant', sub: 'Fill official forms field by field', href: '/assist/forms/anmeldung' },
-  { id: 'jobkit', title: 'Job application kit', sub: 'CV, cover letter, interview', href: '/assist/job-kit' },
-  { id: 'practice', title: 'Conversation practice', sub: 'Role-play the immigration office or a flat viewing', href: '/assist/practice' },
-];
+  { id: 'reply', href: '/assist/reply' },
+  { id: 'chat', href: '/assist/ask' },
+  { id: 'scam', href: '/assist/scam-check' },
+  { id: 'contract', href: '/assist/contract' },
+  { id: 'form', href: '/assist/forms/anmeldung' },
+  { id: 'jobkit', href: '/assist/job-kit' },
+  { id: 'practice', href: '/assist/practice' },
+]
 
 /** Free scan dots + "N free scans left this month" — shown BEFORE a scan starts. */
 export function ScanQuota({ compact }: { compact?: boolean }) {
+  const { t } = useTranslation();
   const { c } = useTheme();
   const usage = useUsage().data;
   const { premium } = useEntitlement();
@@ -32,13 +33,13 @@ export function ScanQuota({ compact }: { compact?: boolean }) {
   const per = usage?.scansPerMonth ?? 3;
   return (
     <View style={{ flexDirection: 'row', alignItems: 'center', gap: 10, flexWrap: 'wrap' }}>
-      <View accessible accessibilityRole="image" accessibilityLabel={`${left} of ${per} free scans left`} style={{ flexDirection: 'row', gap: 4 }}>
+      <View accessible accessibilityRole="image" accessibilityLabel={t('assist.scansLeftA11y', { left, per })} style={{ flexDirection: 'row', gap: 4 }}>
         {Array.from({ length: per }).map((_, i) => (
           <View key={i} style={{ width: 10, height: 10, borderRadius: 5, backgroundColor: i < left ? c.accent : c.divider, borderWidth: 1, borderColor: i < left ? c.accent : c.borderStrong }} />
         ))}
       </View>
-      <Text size={14} weight="600" style={{ flex: compact ? undefined : 1 }}>{left} free scans left this month</Text>
-      {!compact ? <Link href="/premium"><Text size={14} weight="700" color="primary">See Premium</Text></Link> : null}
+      <Text size={14} weight="600" style={{ flex: compact ? undefined : 1 }}>{t('assist.scansLeftMonth', { count: left })}</Text>
+      {!compact ? <Link href="/premium"><Text size={14} weight="700" color="primary">{t('assist.seePremium')}</Text></Link> : null}
     </View>
   );
 }
@@ -60,22 +61,22 @@ export function AssistHub() {
       <View style={{ backgroundColor: c.heroBg, borderRadius: th.shape.card, padding: 20, gap: 12 }}>
         <View style={{ width: 48, height: 48, borderRadius: 14, backgroundColor: c.accent, alignItems: 'center', justifyContent: 'center' }}><Icon icon={FileText} color="onAccent" /></View>
         <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}>
-          <Text size={20} lineHeight={26} weight="700" color={c.heroText} heading>Scan a letter</Text>
+          <Text size={20} lineHeight={26} weight="700" color={c.heroText} heading>{t('assist.scanTitle')}</Text>
           <AILabel />
         </View>
-        <Text color={c.heroSub}>Who sent it, what they want, your deadline and what to do — in plain words.</Text>
-        <Button variant="premium" label="Start scan" disabled={!online} onPress={() => router.push('/assist/scan')} />
+        <Text color={c.heroSub}>{t('assist.scanHeroBody')}</Text>
+        <Button variant="premium" label={t('assist.startScan')} disabled={!online} onPress={() => router.push('/assist/scan')} />
       </View>
-      <SectionTitle>More help</SectionTitle>
+      <SectionTitle>{t('assist.moreHelp')}</SectionTitle>
       {rows.map((r, i) => (
         <View key={i} style={{ flexDirection: 'row', gap: 10 }}>
-          {r.map((x) => <PremiumTile key={x.id} title={x.title} sub={x.sub} href={x.href} locked={!premium} />)}
+          {r.map((x) => <PremiumTile key={x.id} title={t(`assist.tools.${x.id}`)} sub={t(`assist.tools.${x.id}Sub`)} href={x.href} locked={!premium} />)}
           {r.length < cols ? Array.from({ length: cols - r.length }).map((_, k) => <View key={k} style={{ flex: 1 }} />) : null}
         </View>
       ))}
-      <SectionTitle>Recent</SectionTitle>
+      <SectionTitle>{t('assist.recent')}</SectionTitle>
       <Card>
-        <EmptyState icon={FileText} title="Nothing saved yet" body="Letters and replies you choose to save show up here. We don’t keep anything unless you ask." />
+        <EmptyState icon={FileText} title={t('assist.nothingSaved')} body={t('assist.nothingSavedBody')} />
       </Card>
       <AiDisclaimer />
     </Screen>

@@ -10,7 +10,7 @@ export function AILabel() {
   const { t } = useTranslation();
   const { c } = useTheme();
   return (
-    <View accessible accessibilityLabel="AI generated" style={{ backgroundColor: c.accent, borderRadius: 4, paddingHorizontal: 5, paddingVertical: 1, alignSelf: 'center' }}>
+    <View accessible accessibilityLabel={t('common.aiGenerated')} style={{ backgroundColor: c.accent, borderRadius: 4, paddingHorizontal: 5, paddingVertical: 1, alignSelf: 'center' }}>
       <Text size={10} lineHeight={14} weight="700" color="onAccent" devanagari={false}>{t('common.ai')}</Text>
     </View>
   );

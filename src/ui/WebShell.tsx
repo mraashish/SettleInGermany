@@ -35,7 +35,7 @@ function Avatar({ size }: { size: number }) {
   const name = usePrefs((s) => s.profile.name);
   return (
     <Link href="/me" asChild>
-      <Pressable accessibilityRole="link" accessibilityLabel={name ? `Your account: ${name}` : t('nav.account')} style={{ width: 44, height: 44, alignItems: 'center', justifyContent: 'center' }}>
+      <Pressable accessibilityRole="link" accessibilityLabel={name ? t('nav.yourAccount', { name }) : t('nav.account')} style={{ width: 44, height: 44, alignItems: 'center', justifyContent: 'center' }}>
         <View style={{ width: size, height: size, borderRadius: 999, backgroundColor: c.primary, alignItems: 'center', justifyContent: 'center' }}>
           <Text size={size > 36 ? 16 : 14} weight="700" color={c.onPrimary}>{(name ?? '?').slice(0, 1).toUpperCase()}</Text>
         </View>
@@ -141,7 +141,7 @@ export function SiteFooter() {
   const { t } = useTranslation();
   const links = [
     { label: t('me.impressum'), href: '/impressum' },
-    { label: 'Privacy', href: '/privacy-policy' },
+    { label: t('me.privacyPolicy'), href: '/privacy-policy' },
     { label: t('me.terms'), href: '/terms' },
     { label: t('common.howWeMakeMoney'), href: '/how-we-make-money' },
   ];

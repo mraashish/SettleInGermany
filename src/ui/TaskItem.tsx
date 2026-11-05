@@ -1,4 +1,4 @@
-import { Link } from 'expo-router';
+import { Link, router } from 'expo-router';
 import { EyeOff } from 'lucide-react-native';
 import React, { useState } from 'react';
 import { AccessibilityInfo, Animated, Pressable, StyleSheet, View } from 'react-native';
@@ -22,6 +22,8 @@ export interface TaskItemProps {
   timingNote?: string;
   doneLabel?: string;
   guideHref?: string;
+  /** Page opened by tapping the title (guide or task page). */
+  href?: string;
   state: TaskState;
   onToggle?: (done: boolean) => void;
   onHide?: () => void;
@@ -29,7 +31,7 @@ export interface TaskItemProps {
 }
 
 /** TaskItem (RoadmapScreen, Library): checkbox, title, DE term, deadline chip, guide link. */
-export function TaskItem({ title, term, effort, due, timingNote, doneLabel, guideHref, state, onToggle, onHide, first }: TaskItemProps) {
+export function TaskItem({ title, term, effort, due, timingNote, doneLabel, guideHref, href, state, onToggle, onHide, first }: TaskItemProps) {
   const { t } = useTranslation();
   const { c } = useTheme();
   const [burst] = useState(() => new Animated.Value(0));
@@ -62,15 +64,22 @@ export function TaskItem({ title, term, effort, due, timingNote, doneLabel, guid
         />
       </View>
       <View style={styles.body}>
-        <Text
-          size={16}
-          lineHeight={21}
-          weight="600"
-          color={done || hidden ? 'muted' : 'text'}
-          style={done ? { textDecorationLine: 'line-through' } : undefined}
+        <Pressable
+          accessibilityRole={href ? 'link' : undefined}
+          disabled={!href}
+          onPress={() => href && router.push(href as never)}
+          hitSlop={4}
         >
-          {title}
-        </Text>
+          <Text
+            size={16}
+            lineHeight={21}
+            weight="600"
+            color={done || hidden ? 'muted' : 'text'}
+            style={done ? { textDecorationLine: 'line-through' } : undefined}
+          >
+            {title}
+          </Text>
+        </Pressable>
         {done ? (
           doneLabel ? <Text variant="caption" color="successText" weight="600">{doneLabel}</Text> : null
         ) : (

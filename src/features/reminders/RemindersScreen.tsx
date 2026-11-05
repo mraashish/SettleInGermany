@@ -10,10 +10,10 @@ import { useTheme } from '@/theme/ThemeProvider';
 import { Button, DeadlineChip, DueChip, EmptyState, Icon, Overline, Screen, Text } from '@/ui';
 import { useRoadmapData } from '../roadmap/useRoadmapData';
 
-type Row = { id: string; title: string; date: string; reminder?: Reminder };
+type Row = { id: string; title: string; date: string; reminder?: Reminder; href?: string };
 
 function Group({ title, rows, valid }: { title: string; rows: Row[]; valid?: boolean }) {
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
   const th = useTheme();
   const { c } = th;
   if (!rows.length) return null;
@@ -22,14 +22,14 @@ function Group({ title, rows, valid }: { title: string; rows: Row[]; valid?: boo
       <Overline>{title}</Overline>
       <View style={{ backgroundColor: c.surface, borderWidth: 1, borderColor: c.border, borderRadius: th.shape.card, paddingHorizontal: 16 }}>
         {rows.map((r, i) => (
-          <Pressable key={r.id} accessibilityRole={r.reminder ? 'button' : undefined} disabled={!r.reminder}
-            onPress={() => r.reminder && router.push(`/me/reminders/new?id=${r.reminder.id}`)}
+          <Pressable key={r.id} accessibilityRole="button"
+            onPress={() => router.push((r.reminder ? `/me/reminders/new?id=${r.reminder.id}` : r.href ?? '/me/reminders') as never)}
             style={{ minHeight: 60, flexDirection: 'row', alignItems: 'center', gap: 12, borderTopWidth: i ? 1 : 0, borderColor: c.divider, paddingVertical: 8 }}>
             <View style={{ flex: 1 }}>
               <Text size={15} weight="600">{r.title}</Text>
-              <Text variant="caption" color="muted">{valid ? `Expires ${formatDate(r.date, i18n.language)}` : formatDate(r.date, i18n.language, { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' })}</Text>
+              <Text variant="caption" color="muted">{valid ? t('reminders.expires', { date: formatDate(r.date, i18n.language) }) : formatDate(r.date, i18n.language, { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' })}</Text>
             </View>
-            {valid ? <DeadlineChip tone="done" icon={Check} label="Valid" /> : <DueChip due={r.date} compact={toneForDays(daysUntil(r.date)) === 'neutral'} />}
+            {valid ? <DeadlineChip tone="done" icon={Check} label={t('reminders.validChip')} /> : <DueChip due={r.date} compact={toneForDays(daysUntil(r.date)) === 'neutral'} />}
           </Pressable>
         ))}
       </View>
@@ -44,7 +44,7 @@ export function RemindersScreen() {
   const reminders = useReminders();
   const { deadlines } = useRoadmapData();
   const rows: Row[] = [
-    ...deadlines.map((v) => ({ id: `task-${v.id}`, title: v.title, date: v.due! })),
+    ...deadlines.map((v) => ({ id: `task-${v.id}`, title: v.title, date: v.due!, href: v.href })),
     ...reminders.map((r) => ({ id: r.id, title: r.title, date: r.date, reminder: r })),
   ].sort((a, b) => daysUntil(a.date) - daysUntil(b.date));
   const attention = rows.filter((r) => daysUntil(r.date) <= 30);
@@ -61,18 +61,18 @@ export function RemindersScreen() {
       crumbs={[{ label: t('nav.me'), href: '/me' }, { label: t('reminders.title') }]}
     >
       {rows.length === 0 ? (
-        <EmptyState icon={BellPlus} title={t('reminders.empty')} body={t('reminders.emptyBody')} actionLabel="Add your visa expiry date" onAction={add} />
+        <EmptyState icon={BellPlus} title={t('reminders.empty')} body={t('reminders.emptyBody')} actionLabel={t('reminders.addVisa')} onAction={add} />
       ) : (
         <>
-          <Text color="text2">{t('reminders.emptyBody').replace('Add a deadline and we’ll remind', 'We remind')}</Text>
+          <Text color="text2">{t('reminders.intro')}</Text>
           <View style={{ backgroundColor: c.divider, borderRadius: 12, padding: 12 }}>
             <Text size={13} color="text3">{t('reminders.freeNote')}</Text>
           </View>
-          <Group title="Needs attention" rows={attention} />
-          <Group title="Coming up" rows={coming} />
-          <Group title="Valid" rows={valid} valid />
+          <Group title={t('reminders.needsAttention')} rows={attention} />
+          <Group title={t('reminders.comingUp')} rows={coming} />
+          <Group title={t('reminders.valid')} rows={valid} valid />
           {Platform.OS === 'web' ? <Button label={t('reminders.add')} icon={Plus} onPress={add} fullWidth={false} /> : null}
-          {th.platform === 'ios' ? <Button variant="secondary" label="Add a custom reminder" icon={Plus} onPress={add} /> : null}
+          {th.platform === 'ios' ? <Button variant="secondary" label={t('reminders.addCustom')} icon={Plus} onPress={add} /> : null}
         </>
       )}
       {android ? (

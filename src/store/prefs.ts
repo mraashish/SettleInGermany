@@ -10,6 +10,8 @@ export interface Profile {
   nationality: string | null;
   status: string | null;
   city: string | null;
+  /** Display name for cities without a page (typed or picked from the list). */
+  cityName?: string | null;
   stage: StageId;
   arrivalDate: string | null; // ISO date
   name: string | null;

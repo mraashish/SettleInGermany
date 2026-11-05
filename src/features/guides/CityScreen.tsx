@@ -1,12 +1,12 @@
 import * as WebBrowser from 'expo-web-browser';
-import { MapPin } from 'lucide-react-native';
+import { MapPin, Phone } from 'lucide-react-native';
 import React, { useState } from 'react';
-import { Pressable, View } from 'react-native';
+import { Linking, Pressable, View } from 'react-native';
 import { useTranslation } from 'react-i18next';
 
 import { useCities, useL } from '@/content/client';
 import { useTheme } from '@/theme/ThemeProvider';
-import { Card, Chip, EmptyState, Icon, Screen, SectionTitle, Text } from '@/ui';
+import { Card, Chip, EmptyState, Icon, Screen, SectionTitle, SourcesList, Text } from '@/ui';
 
 export function CityScreen({ slug }: { slug: string }) {
   const { t } = useTranslation();
@@ -15,32 +15,46 @@ export function CityScreen({ slug }: { slug: string }) {
   const l = useL();
   const { data: cities = [] } = useCities();
   const city = cities.find((x) => x.slug === slug);
-  const [kind, setKind] = useState('All');
-  if (!city) return <Screen title={t('tools.city')} back={{ label: t('guides.title'), href: '/guides' }}><EmptyState icon={MapPin} title="City not found" body="Choose your city in Me › Profile." /></Screen>;
-  const kinds = ['All', ...new Set(city.community.map((p) => l(p.kind)))];
-  const report = <Text size={13} weight="600" color="primary" onPress={() => void WebBrowser.openBrowserAsync(`mailto:content@settleingermany.app?subject=${encodeURIComponent(`Change: ${city.name}`)}`)}>{t('guides.reportChange')}</Text>;
+  const [kind, setKind] = useState<string>('all');
+  const back = { label: t('guides.title'), href: '/guides' };
+  if (!city || (!city.facts.length && !city.appointments.length)) {
+    return (
+      <Screen title={city?.name ?? t('tools.city')} back={back}>
+        <EmptyState icon={MapPin} title={t('city.noPage', { city: city?.name ?? '' })} body={t('city.noPageBody')} />
+      </Screen>
+    );
+  }
+  const kinds = [...new Set(city.community.map((p) => p.kind.en))];
+  const report = (
+    <Text size={13} weight="600" color="primary" onPress={() => void Linking.openURL(`mailto:content@settleingermany.app?subject=${encodeURIComponent(`Change: ${city.name}`)}`)}>
+      {t('guides.reportChange')}
+    </Text>
+  );
+  const link = (url: string, label: string) => (
+    <Pressable accessibilityRole="link" onPress={() => void WebBrowser.openBrowserAsync(url)} style={{ minHeight: 44, justifyContent: 'center' }}>
+      <Text weight="700" color="primary">{label} ↗</Text>
+    </Pressable>
+  );
   return (
-    <Screen title={city.name} back={{ label: t('guides.title'), href: '/guides' }} crumbs={[{ label: t('guides.title'), href: '/guides' }, { label: city.name }]}
-      description={`Living in ${city.name}: rent, transit, citizen’s office and immigration office appointments, and community places.`}>
+    <Screen title={city.name} back={back} crumbs={[{ label: t('guides.title'), href: '/guides' }, { label: city.name }]}
+      description={t('city.description', { city: city.name })}>
       <Text size={13} weight="700" color="primary" uppercase>{t('tools.city')}</Text>
-      {city.facts.length ? (
-        <Card style={{ gap: 12 }}>
-          {city.facts.map((f, i) => (
-            <View key={i} style={{ gap: 2 }}>
-              <Text size={13} color="muted">{l(f.label)}</Text>
-              <Text weight="600">{l(f.value)}</Text>
-            </View>
-          ))}
-        </Card>
-      ) : null}
+      <Card style={{ gap: 12 }}>
+        {city.facts.map((f, i) => (
+          <View key={i} style={{ gap: 2, borderTopWidth: i ? 1 : 0, borderColor: c.divider, paddingTop: i ? 10 : 0 }}>
+            <Text size={13} color="muted">{l(f.label)}</Text>
+            <Text weight="600">{l(f.value)}</Text>
+          </View>
+        ))}
+      </Card>
       {city.appointments.length ? (
         <View style={{ gap: 8 }}>
-          <SectionTitle>Appointments</SectionTitle>
+          <SectionTitle>{t('city.appointments')}</SectionTitle>
           {city.appointments.map((a, i) => (
             <Card key={i} style={{ gap: 8 }}>
               <Text weight="700">{l(a.title)}</Text>
               <Text color="text2">{l(a.body)}</Text>
-              {a.url ? <Pressable accessibilityRole="link" onPress={() => void WebBrowser.openBrowserAsync(a.url!)} style={{ minHeight: 44, justifyContent: 'center' }}><Text weight="700" color="primary">Book on the city website ↗</Text></Pressable> : null}
+              {a.url ? link(a.url, t('city.bookOnline')) : null}
               {report}
             </Card>
           ))}
@@ -48,22 +62,35 @@ export function CityScreen({ slug }: { slug: string }) {
       ) : null}
       {city.community.length ? (
         <View style={{ gap: 8 }}>
-          <SectionTitle>Community and culture</SectionTitle>
-          <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 8 }}>{kinds.map((k) => <Chip key={k} label={k} selected={kind === k} onPress={() => setKind(k)} />)}</View>
-          {/* TODO: map with pins once a map provider is chosen; list is the accessible fallback. */}
-          <Card padded={false} style={{ paddingHorizontal: 16 }}>
-            {city.community.filter((p) => kind === 'All' || l(p.kind) === kind).map((p, i) => (
-              <View key={p.name} style={{ minHeight: 56, flexDirection: 'row', alignItems: 'center', gap: 12, borderTopWidth: i ? 1 : 0, borderColor: c.divider }}>
-                <View style={{ width: 28, height: 28, borderRadius: 14, backgroundColor: c.primary, alignItems: 'center', justifyContent: 'center' }}><Text size={13} weight="700" color={c.onPrimary}>{i + 1}</Text></View>
-                <View style={{ flex: 1 }}><Text weight="600">{p.name}</Text><Text variant="caption" color="muted">{l(p.kind)}</Text></View>
-                <Icon icon={MapPin} size={18} color="muted" />
+          <SectionTitle>{t('city.community')}</SectionTitle>
+          <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 8 }}>
+            <Chip label={t('guides.all')} selected={kind === 'all'} onPress={() => setKind('all')} />
+            {kinds.map((k) => <Chip key={k} label={l(city.community.find((p) => p.kind.en === k)?.kind)} selected={kind === k} onPress={() => setKind(k)} />)}
+          </View>
+          {city.community.filter((p) => kind === 'all' || p.kind.en === kind).map((p) => (
+            <Card key={p.name} style={{ gap: 6 }}>
+              <View style={{ flexDirection: 'row', gap: 8, alignItems: 'center' }}>
+                <Icon icon={MapPin} size={18} color="primary" />
+                <Text weight="700" style={{ flex: 1 }}>{p.name}</Text>
+                <Text size={12} color="muted">{l(p.kind)}</Text>
               </View>
-            ))}
-          </Card>
+              {p.description ? <Text size={14} color="text2">{l(p.description)}</Text> : null}
+              {p.address ? <Text size={14} color="text2">{p.address}</Text> : null}
+              <View style={{ flexDirection: 'row', gap: 16, flexWrap: 'wrap' }}>
+                {p.phone ? (
+                  <Pressable accessibilityRole="button" onPress={() => void Linking.openURL(`tel:${p.phone!.replace(/[^\d+]/g, '')}`)} style={{ minHeight: 44, flexDirection: 'row', gap: 6, alignItems: 'center' }}>
+                    <Icon icon={Phone} size={16} color="primary" /><Text weight="600" color="primary">{p.phone}</Text>
+                  </Pressable>
+                ) : null}
+                {p.url ? link(p.url, t('common.website')) : null}
+                {p.mapUrl ? link(p.mapUrl, t('city.map')) : null}
+              </View>
+            </Card>
+          ))}
           {report}
         </View>
       ) : null}
-      <Text variant="caption" color="muted">Last verified on [date] · Sources</Text>
+      <SourcesList sources={city.sources} lastVerified={city.lastVerified} />
     </Screen>
   );
 }
