@@ -81,7 +81,8 @@
     "content:snapshot": "tsx scripts/content-snapshot.ts",
     "eas-build-post-install": "npm run content:snapshot",
     "cms:dev": "npm --prefix cms run dev",
-    "cms:build": "npm --prefix cms run build"
+    "cms:build": "npm --prefix cms run build",
+    "ios:free-team": "scripts/ios-free-team.sh"
   },
   "private": true,
   "jest": {
