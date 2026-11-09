@@ -41,11 +41,11 @@ if ! command -v psql >/dev/null 2>&1; then
   exit 1
 fi
 
-echo "Generating SQL from src/content/seed.ts…"
+echo "Generating SQL from src/content/seed.ts..."
 (cd "$ROOT" && npx tsx scripts/content-seed-sql.ts >/dev/null)
 
-echo "Applying supabase/$FILE…"
-psql "$URL" -v ON_ERROR_STOP=1 -q -X -f "$ROOT/supabase/$FILE"
+echo "Applying supabase/${FILE}..."
+psql "$URL" -v ON_ERROR_STOP=1 -q -X -f "$ROOT/supabase/${FILE}"
 
 psql "$URL" -X -q -A -t -c "select 'Live content: ' || count(*) || ' documents · release v' || (select version from public.content_state) from public.published_content;"
 echo "Done. The apps and the website pick up the new release automatically."
