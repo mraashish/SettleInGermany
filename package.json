@@ -78,6 +78,7 @@
     "test": "jest",
     "db:seed-sql": "tsx scripts/content-seed-sql.ts",
     "db:test": "scripts/test-db.sh",
+    "db:update-content": "scripts/db-update-content.sh",
     "content:snapshot": "tsx scripts/content-snapshot.ts",
     "eas-build-post-install": "npm run content:snapshot",
     "cms:dev": "npm --prefix cms run dev",
