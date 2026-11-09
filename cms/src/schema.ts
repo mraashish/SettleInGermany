@@ -156,6 +156,15 @@ export const COLLECTION_DEFS: CollectionDef[] = [
         { type: 'localized', name: 'description', label: 'Description' }, { type: 'text', name: 'address', label: 'Address' },
         { type: 'text', name: 'phone', label: 'Phone' }, { type: 'url', name: 'url', label: 'Website' }, { type: 'url', name: 'mapUrl', label: 'Map link' },
       ] },
+      { type: 'list', name: 'places', label: 'Important places', itemLabel: 'place', summary: (p) => `${p.kind ?? ''}: ${p.name ?? ''}`, fields: [
+        { type: 'select', name: 'kind', label: 'Kind', options: [
+          { value: 'cityHall', label: 'City hall / citizens’ office' }, { value: 'immigration', label: 'Foreigners’ office' },
+          { value: 'church', label: 'Church' }, { value: 'tourist', label: 'Tourist information' }, { value: 'station', label: 'Main train station' },
+          { value: 'airport', label: 'Airport' }, { value: 'bank', label: 'Bank' },
+        ] },
+        { type: 'text', name: 'name', label: 'Name' }, { type: 'text', name: 'address', label: 'Address (only if checked)' },
+        { type: 'localized', name: 'note', label: 'Note' }, { type: 'url', name: 'url', label: 'Website' }, { type: 'url', name: 'mapUrl', label: 'Map link' },
+      ] },
       { type: 'list', name: 'budget', label: 'Budget planner starting values (€ a month)', itemLabel: 'item', summary: (b) => `${L(b, 'label')}: €${b.value ?? ''}`, fields: [
         { type: 'localized', name: 'label', label: 'Item' }, { type: 'number', name: 'value', label: 'Typical € a month' },
       ] },
@@ -222,6 +231,7 @@ export const COLLECTION_DEFS: CollectionDef[] = [
       { type: 'text', name: 'openingTime', label: 'Opening time' },
       { type: 'text', name: 'payout', label: 'Payout terms' },
       { type: 'localizedList', name: 'facts', label: 'Facts', itemLabel: 'fact' },
+      { type: 'localized', name: 'notice', label: 'Important notice (shown highlighted)', help: 'e.g. Not taking new customers' },
       { type: 'url', name: 'url', label: 'Website', required: true },
       { type: 'boolean', name: 'isPartner', label: 'Referral partner (we earn a commission)' },
       { type: 'url', name: 'referralUrl', label: 'Referral URL' },

@@ -71,12 +71,26 @@ export interface RoadmapTask {
   statuses?: string[];
 }
 
+export type PlaceKind = 'cityHall' | 'immigration' | 'church' | 'tourist' | 'station' | 'airport' | 'bank';
+
+export interface CityPlace {
+  kind: PlaceKind;
+  name: string;
+  address?: string;
+  note?: Localized;
+  url?: string;
+  /** Map link (a live map search when no checked address is stored). */
+  mapUrl?: string;
+}
+
 export interface City {
   slug: string;
   name: string;
   facts: { label: Localized; value: Localized }[];
   appointments: { title: Localized; body: Localized; url?: string }[];
   community: { name: string; kind: Localized; description?: Localized; address?: string; phone?: string; url?: string; mapUrl?: string }[];
+  /** Places newcomers need: city hall, foreigners' office, church, tourist info, station, airport, banks. */
+  places?: CityPlace[];
   /** Starting values for the budget planner (EUR per month). */
   budget?: { label: Localized; value: number }[];
   lastVerified?: string;
@@ -137,6 +151,8 @@ export interface Provider {
   speedSortKey: number;
   /** Where the fees were checked. */
   sources?: Source[];
+  /** Important caveat shown highlighted on the card (e.g. not taking new customers). */
+  notice?: Localized;
 }
 
 export interface Phrase {

@@ -1,7 +1,8 @@
+import * as Device from 'expo-device';
 import { router } from 'expo-router';
-import { Camera, FileUp, Upload, X } from 'lucide-react-native';
+import { Camera, ChevronLeft, FileUp, Upload, X } from 'lucide-react-native';
 import React, { useState } from 'react';
-import { Platform, Pressable, View } from 'react-native';
+import { Alert, Platform, Pressable, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useTranslation } from 'react-i18next';
 
@@ -14,6 +15,15 @@ import { AiScreen, NeedsInternet } from './AiScaffold';
 import { ScanQuota } from './AssistHub';
 
 let pending: ScannedPage[] = [];
+
+/** Leave the scanner: back if there is somewhere to go back to, otherwise to the Assist tab. */
+export function leaveScan() {
+  if (router.canGoBack()) router.back();
+  else router.replace('/assist' as never);
+}
+
+/** Simulators and emulators have no real camera: the system scanner would open a black screen. */
+const hasCamera = Platform.OS !== 'web' && Device.isDevice;
 export const takePendingPages = () => { const p = pending; pending = []; return p; };
 
 function start(pages: ScannedPage[], lang: string) {
@@ -71,9 +81,14 @@ export function ScanScreen() {
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: '#121614' }}>
       <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingHorizontal: 8, minHeight: 56 }}>
-        <Pressable accessibilityRole="button" accessibilityLabel={t('nav.close')} onPress={() => router.back()} style={{ width: 48, height: 48, alignItems: 'center', justifyContent: 'center' }}><Icon icon={X} color="#ECEAE5" /></Pressable>
+        <Pressable accessibilityRole="button" accessibilityLabel={t('nav.back')} onPress={leaveScan} hitSlop={8}
+          style={{ minWidth: 88, height: 48, flexDirection: 'row', alignItems: 'center', gap: 2 }}>
+          <Icon icon={ChevronLeft} color="#ECEAE5" />
+          <Text size={17} color="#ECEAE5">{t('nav.back')}</Text>
+        </Pressable>
         <View style={{ flexDirection: 'row', gap: 8, alignItems: 'center' }}><Text size={17} weight="600" color="#ECEAE5">{t('assist.scanTitle')}</Text><AILabel /></View>
-        <View style={{ width: 48 }} />
+        <Pressable accessibilityRole="button" accessibilityLabel={t('nav.close')} onPress={leaveScan} hitSlop={8}
+          style={{ minWidth: 88, height: 48, alignItems: 'flex-end', justifyContent: 'center' }}><Icon icon={X} color="#ECEAE5" /></Pressable>
       </View>
       <View style={{ flex: 1, margin: 24, borderRadius: 16, borderWidth: 2, borderColor: '#5CC8C2', alignItems: 'center', justifyContent: 'center', gap: 12, padding: 24 }}>
         <Icon icon={Camera} size={48} color="#5CC8C2" />
@@ -87,7 +102,16 @@ export function ScanScreen() {
             <Text size={12} color="#ECEAE5" align="center">{t('assist.uploadShort')}</Text>
           </Pressable>
           <Pressable accessibilityRole="button" accessibilityLabel={t('assist.scanPages')} disabled={!!outOfScans}
-            onPress={async () => { try { add(await scanDocument()); } catch { /* cancelled */ } }}
+            onPress={async () => {
+              if (!hasCamera) {
+                Alert.alert(t('assist.noCamera'), t('assist.noCameraBody'), [
+                  { text: t('nav.cancel'), style: 'cancel' },
+                  { text: t('assist.uploadShort'), onPress: async () => add(await pickFiles()) },
+                ]);
+                return;
+              }
+              try { add(await scanDocument()); } catch { /* cancelled */ }
+            }}
             style={{ width: 76, height: 76, borderRadius: 38, borderWidth: 4, borderColor: '#ECEAE5', alignItems: 'center', justifyContent: 'center' }}>
             <View style={{ width: 60, height: 60, borderRadius: 30, backgroundColor: '#ECEAE5' }} />
           </Pressable>
@@ -98,6 +122,9 @@ export function ScanScreen() {
           </Pressable>
         </View>
         {outOfScans ? <Button variant="premium" label={t('assist.seePremium')} onPress={() => router.push('/premium')} /> : null}
+        <Pressable accessibilityRole="button" onPress={leaveScan} style={{ minHeight: 44, alignItems: 'center', justifyContent: 'center' }}>
+          <Text size={15} weight="600" color="#ECEAE5">{t('nav.cancel')}</Text>
+        </Pressable>
       </View>
     </SafeAreaView>
   );

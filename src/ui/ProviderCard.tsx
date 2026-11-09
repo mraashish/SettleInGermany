@@ -72,6 +72,11 @@ export function ProviderCard({ provider, highlighted, badge }: { provider: Provi
         </View>
         {badge ? <Pill label={badge} tone="tint" /> : null}
       </View>
+      {provider.notice ? (
+        <View style={{ backgroundColor: c.warningBg, borderRadius: 10, paddingVertical: 8, paddingHorizontal: 10 }}>
+          <Text size={13} weight="600" color="warningText">{l(provider.notice)}</Text>
+        </View>
+      ) : null}
       {provider.facts.length ? (
         <View style={{ gap: 4 }}>
           {provider.facts.map((f, i) => <Text key={i} size={13} color="text2">• {l(f)}</Text>)}
@@ -118,6 +123,7 @@ export function ProviderTable({ providers }: { providers: Provider[] }) {
         {providers.map((p, i) => (
           <View key={p.id} accessibilityRole={'columnheader' as never} style={[col, { gap: 4 }]}>
             <Text weight="700">{p.name}</Text>
+            {p.notice ? <Text variant="caption" color="warningText">{l(p.notice)}</Text> : null}
             {p.facts.map((f, k) => <Text key={k} variant="caption" color="muted">• {l(f)}</Text>)}
             {i === 0 ? <Pill label={t('tools.sortFees')} /> : null}
           </View>

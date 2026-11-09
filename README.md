@@ -31,7 +31,7 @@ npx eas-cli@latest build --profile development -p all
 | `npm run cms:dev` / `npm run cms:build` | Content management app (`cms/`, run `npm --prefix cms install` first) |
 | `npm run db:test` | Database schema + publish workflow tests on a throwaway local PostgreSQL |
 | `npm run content:snapshot` | Bake the latest published content into the build (runs automatically in `build:web` and EAS builds) |
-| `npm run db:seed-sql` | Regenerate `supabase/seed.sql` from `src/content/seed.ts` |
+| `npm run db:seed-sql` | Regenerate `supabase/seed.sql` (new database) and `supabase/seed-update.sql` (bring an existing database up to date) from `src/content/seed.ts` |
 
 Copy `.env.example` to `.env.local` to connect the content database (Supabase), the AI backend, RevenueCat and the ad units. **With no env at all the app still runs**: it uses the bundled seed content, AI demo responses (bracketed placeholders) and fixed-size ad placeholders, and the CMS runs in demo mode.
 

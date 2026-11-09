@@ -296,6 +296,14 @@ export const guidesLater: Guide[] = [
     ],
     callouts: [
       {
+        kind: 'tip',
+        text: L(
+          'Set a reminder about 8 weeks before your permit ends — the Me › Reminders tool can do this for you.',
+          'अनुमतिपत्रको म्याद सकिनुभन्दा करिब ८ हप्ताअघि रिमाइन्डर राख्नुहोस् — Me › Reminders ले यो गर्न सक्छ।',
+          'परमिट ख़त्म होने से लगभग 8 हफ़्ते पहले रिमाइंडर लगाएं — Me › Reminders यह कर सकता है।',
+        ),
+      },
+      {
         kind: 'warning',
         text: L(
           'Your passport must also be valid. Renew it at your embassy in time — a Nepali passport can take 1–2 months.',

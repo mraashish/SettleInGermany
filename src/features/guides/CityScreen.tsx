@@ -1,12 +1,18 @@
 import * as WebBrowser from 'expo-web-browser';
-import { MapPin, Phone } from 'lucide-react-native';
+import { Banknote, Church, IdCard, Info, Landmark, MapPin, Phone, Plane, TrainFront } from 'lucide-react-native';
 import React, { useState } from 'react';
 import { Linking, Pressable, View } from 'react-native';
 import { useTranslation } from 'react-i18next';
 
 import { useCities, useL } from '@/content/client';
+import type { PlaceKind } from '@/content/types';
 import { useTheme } from '@/theme/ThemeProvider';
 import { Card, Chip, EmptyState, Icon, Screen, SectionTitle, SourcesList, Text } from '@/ui';
+
+const PLACE_ICON: Record<PlaceKind, typeof MapPin> = {
+  cityHall: Landmark, immigration: IdCard, church: Church, tourist: Info, station: TrainFront, airport: Plane, bank: Banknote,
+};
+const PLACE_ORDER: PlaceKind[] = ['cityHall', 'immigration', 'church', 'tourist', 'station', 'airport', 'bank'];
 
 export function CityScreen({ slug }: { slug: string }) {
   const { t } = useTranslation();
@@ -47,6 +53,31 @@ export function CityScreen({ slug }: { slug: string }) {
           </View>
         ))}
       </Card>
+      {city.places?.length ? (
+        <View style={{ gap: 8 }}>
+          <SectionTitle>{t('city.places')}</SectionTitle>
+          {PLACE_ORDER.filter((k) => city.places!.some((p) => p.kind === k)).map((k) => (
+            <Card key={k} style={{ gap: 6 }}>
+              <View style={{ flexDirection: 'row', gap: 8, alignItems: 'center' }}>
+                <Icon icon={PLACE_ICON[k]} size={18} color="primary" />
+                <Text size={13} weight="700" color="primary" uppercase style={{ flex: 1 }}>{t(`city.kinds.${k}`)}</Text>
+              </View>
+              {city.places!.filter((p) => p.kind === k).map((p) => (
+                <View key={p.name} style={{ gap: 2 }}>
+                  <Text weight="700">{p.name}</Text>
+                  {p.address ? <Text size={14} color="text2">{p.address}</Text> : null}
+                  {p.note ? <Text size={14} color="text2">{l(p.note)}</Text> : null}
+                  <View style={{ flexDirection: 'row', gap: 16, flexWrap: 'wrap' }}>
+                    {p.mapUrl ? link(p.mapUrl, t('city.map')) : null}
+                    {p.url ? link(p.url, t('common.website')) : null}
+                  </View>
+                </View>
+              ))}
+            </Card>
+          ))}
+          <Text variant="caption" color="muted">{t('city.placesNote')}</Text>
+        </View>
+      ) : null}
       {city.appointments.length ? (
         <View style={{ gap: 8 }}>
           <SectionTitle>{t('city.appointments')}</SectionTitle>

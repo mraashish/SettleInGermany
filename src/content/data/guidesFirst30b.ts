@@ -276,6 +276,14 @@ export const guidesFirst30b: Guide[] = [
     documents: [L('Passport', 'राहदानी', 'पासपोर्ट'), L('German address', 'जर्मन ठेगाना', 'जर्मन पता'), L('German bank account (for contracts)', 'जर्मन बैंक खाता (सम्झौताका लागि)', 'जर्मन बैंक खाता (अनुबंध के लिए)')],
     callouts: [
       {
+        kind: 'tip',
+        text: L(
+          'Need a number before you arrive? Many providers sell eSIMs online — you still have to verify your identity with your passport before the SIM works.',
+          'आइपुग्नुअघि नै नम्बर चाहियो? धेरै प्रदायकले अनलाइन eSIM बेच्छन् — SIM चल्नुअघि राहदानीसहित पहिचान पुष्टि गर्नैपर्छ।',
+          'पहुंचने से पहले नंबर चाहिए? कई प्रदाता ऑनलाइन eSIM बेचते हैं — SIM चालू होने से पहले पासपोर्ट से पहचान सत्यापित करनी ही होगी।',
+        ),
+      },
+      {
         kind: 'mistake',
         text: L(
           'Don’t sign a 24-month contract in your first week. Prepaid lets you test the network in your area first.',
@@ -345,6 +353,14 @@ export const guidesFirst30b: Guide[] = [
     ],
     documents: [L('German bank account for the direct debit', 'स्वचालित कटौतीका लागि जर्मन बैंक खाता', 'ऑटो डेबिट के लिए जर्मन बैंक खाता')],
     callouts: [
+      {
+        kind: 'tip',
+        text: L(
+          'Keep the ticket in the app on your phone and carry your ID: inspectors may ask for both.',
+          'टिकट फोनको एपमा राख्नुहोस् र परिचयपत्र साथमा बोक्नुहोस्: जाँचकीले दुवै माग्न सक्छ।',
+          'टिकट फ़ोन के ऐप में रखें और पहचान-पत्र साथ रखें: जांच करने वाले दोनों मांग सकते हैं।',
+        ),
+      },
       {
         kind: 'warning',
         text: L(

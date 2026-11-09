@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 
-import { useGuides, useL, useTasks } from '@/content/client';
+import { useGuideSlugs, useL, useTasks } from '@/content/client';
 import type { RoadmapTask } from '@/content/types';
 import { daysUntil, taskDueDate } from '@/lib/deadline';
 import { STAGES, type StageId, usePrefs } from '@/store/prefs';
@@ -26,7 +26,7 @@ const HOURS_PER_TASK = 1.2;
 
 export function useRoadmapData(stage?: StageId) {
   const { data: tasks = [] } = useTasks();
-  const { data: guides = [] } = useGuides();
+  const liveGuides = useGuideSlugs();
   const profile = usePrefs((s) => s.profile);
   const { done, hidden, custom } = useRoadmap();
   const l = useL();
@@ -36,7 +36,6 @@ export function useRoadmapData(stage?: StageId) {
       ...tasks.filter((t) => !t.statuses?.length || (profile.status && t.statuses.includes(profile.status))),
       ...custom.map((c): RoadmapTask => ({ id: c.id, stage: c.stage, group: { en: 'My tasks' }, title: { en: c.title }, deadlineDate: c.deadline ?? undefined })),
     ];
-    const liveGuides = new Set(guides.map((g) => g.slug));
     const view = (t: RoadmapTask): TaskView => {
       const due = taskDueDate(t, profile.arrivalDate);
       const isDone = done.includes(t.id);
@@ -59,7 +58,7 @@ export function useRoadmapData(stage?: StageId) {
       .filter((v) => v.due && v.state !== 'done' && v.state !== 'hidden')
       .sort((a, b) => daysUntil(a.due!) - daysUntil(b.due!));
     return { byStage, stats, current, next3: open.slice(0, 3), deadlines };
-  }, [tasks, guides, profile, done, hidden, custom, l, stage]);
+  }, [tasks, liveGuides, profile, done, hidden, custom, l, stage]);
 }
 
 export const stageIndex = (s: StageId) => STAGES.indexOf(s) + 1;

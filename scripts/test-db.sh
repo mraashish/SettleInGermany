@@ -20,4 +20,11 @@ for f in "$ROOT"/supabase/migrations/*.sql; do "${PSQL[@]}" -f "$f"; done
 "${PSQL[@]}" -f "$ROOT/supabase/tests/content_cms_test.sql"
 (cd "$ROOT" && npx tsx scripts/validate-parity-sql.ts) > "$DIR/parity.sql"
 "${PSQL[@]}" -f "$DIR/parity.sql"
+# The update script must run on a database that already has content, and publish it.
+"${PSQL[@]}" -f "$ROOT/supabase/seed-update.sql"
+"${PSQL[@]}" -c "do \$\$ begin
+  if exists (select 1 from public.content_documents d where d.collection = 'guides' and d.key = 'register-your-address' and d.has_changes) then
+    raise exception 'seed-update.sql left unpublished changes';
+  end if;
+end \$\$;"
 echo "Database tests passed."

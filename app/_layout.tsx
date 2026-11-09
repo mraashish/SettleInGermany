@@ -16,6 +16,7 @@ import { useContentSync } from '@/content/sync';
 import { ConsentHost } from '@/features/consent/ConsentHost';
 import { useNotificationLinks } from '@/services/notifications';
 import { tabForPath } from '@/lib/navigation';
+import { CONTENT_VERSION } from '@/content/client';
 import { persister, queryClient } from '@/lib/queryClient';
 import { useLayout } from '@/lib/useLayout';
 import { useAdsBootstrap } from '@/services/ads';
@@ -59,7 +60,7 @@ function Shell() {
         <Stack screenOptions={{ headerShown: false, contentStyle: { backgroundColor: t.c.ground }, animation: Platform.OS === 'android' ? 'fade_from_bottom' : 'default' }}>
           <Stack.Screen name="premium" options={{ presentation: Platform.OS === 'ios' ? 'formSheet' : 'fullScreenModal', sheetGrabberVisible: true }} />
           <Stack.Screen name="me/reminders/new" options={{ presentation: Platform.OS === 'ios' ? 'formSheet' : 'transparentModal', sheetGrabberVisible: true, sheetAllowedDetents: [0.75, 1] }} />
-          <Stack.Screen name="assist/scan/index" options={{ presentation: 'fullScreenModal' }} />
+          <Stack.Screen name="assist/scan/index" options={{ presentation: 'fullScreenModal', gestureEnabled: true }} />
         </Stack>
       </View>
       {showTabs ? <TabBar active={tab} variant={Platform.OS === 'web' ? 'ios' : undefined} /> : null}
@@ -79,7 +80,7 @@ export default function RootLayout() {
   if (!loaded && !error && Platform.OS !== 'web') return null;
   return (
     <SafeAreaProvider>
-      <PersistQueryClientProvider client={queryClient} persistOptions={{ persister, maxAge: 1000 * 60 * 60 * 24 * 21 }}>
+      <PersistQueryClientProvider client={queryClient} persistOptions={{ persister, maxAge: 1000 * 60 * 60 * 24 * 21, buster: CONTENT_VERSION }}>
         <ThemeProvider>
           <Shell />
         </ThemeProvider>

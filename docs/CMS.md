@@ -57,6 +57,7 @@ The CMS demo mode has a browser copy of these rules. `npm run db:test` checks th
    npx supabase db push
    psql "<connection string>" -f supabase/seed.sql
    ```
+   Already have a database with older content? Run `psql "<connection string>" -f supabase/seed-update.sql` instead. It replaces documents that have the same key with the bundled version and publishes them in one release (earlier versions stay in the history).
    The seed publishes everything that passes validation as release v1: the complete Leipzig content (18 guides, roadmap, city page, rules, providers, phrasebook, help services, safety). Each item lists its official sources and the date it was checked.
 3. **Make yourself an admin.** Create your user in *Authentication → Users*, then run:
    ```sql

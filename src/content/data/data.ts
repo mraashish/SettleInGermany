@@ -1,4 +1,5 @@
 import type { City, EmbassyContact, HelpService, Phrase, Provider, RoadmapTask, RuleChange, Rules, ScamWarning } from '../types';
+import { generatedCities, leipzigPlaces } from './cities';
 import { CHECKED, L, S } from './util';
 
 const G = {
@@ -115,6 +116,7 @@ export const cities: City[] = [
         url: S.mieterverein.url,
       },
     ],
+    places: leipzigPlaces,
     budget: [
       { label: L('Rent (dorm average, all-inclusive)', 'भाडा (छात्रावास औसत, सबै समावेश)', 'किराया (हॉस्टल औसत, सब शामिल)'), value: 310 },
       { label: L('Health insurance (student rate)', 'स्वास्थ्य बीमा (विद्यार्थी दर)', 'स्वास्थ्य बीमा (छात्र दर)'), value: 141 },
@@ -125,6 +127,7 @@ export const cities: City[] = [
     ],
     sources: [S.leipzigBuergerbueros, S.leipzigOttoSchill, S.leipzigForeignersAuthority, S.leipzigWelcome, S.swHousingSurvey, S.leipzigRentIndex, S.uniFeeOverview, S.uniStart, S.bahnDticket],
   },
+  ...generatedCities,
 ];
 
 export const rules: Rules = {
@@ -141,7 +144,7 @@ export const rules: Rules = {
   broadcastingFeeMonthly: 18.36,
   deutschlandticketMonthly: 63,
   lastVerified: CHECKED,
-  sources: [S.skilledImmigration, S.daadSideJobs, S.aaFunds, S.kathmanduStudy, S.drvMinijob603, S.minijobPension, S.minijobStudents, S.bmfTax2026, S.rundfunkPayment, S.bundesregDticket],
+  sources: [S.skilledImmigration, S.daadSideJobs, S.aaFunds, S.kathmanduStudy, S.drvMinijob603, S.minijobPension, S.minijobStudents, S.bmfTax2026, S.estg32a, S.lsth2026, S.solzg, S.rundfunkPayment, S.bundesregDticket],
 };
 
 export const ruleChanges: RuleChange[] = [
@@ -230,19 +233,22 @@ const blockedFacts = (setup: string, monthly: string) => [
   L('Pays your monthly amount into your German current account', 'तपाईंको जर्मन चल्ती खातामा मासिक रकम पठाउँछ', 'आपके जर्मन चालू खाते में हर महीने की रकम भेजता है'),
 ];
 
+const FREE_STUDENT = (age: string) => L(`Free for students up to ${age}`, `${age} वर्षसम्मका विद्यार्थीका लागि निःशुल्क`, `${age} साल तक के छात्रों के लिए मुफ़्त`);
+
+/**
+ * Comparison data. No referral links: every provider is a non-partner and the list is
+ * sorted by the cost for a student in the first year (feeSortKey), never by commission.
+ */
 export const providers: Provider[] = [
-  {
-    id: 'coracle', category: 'blocked', name: 'Coracle', setupFee: '€99', monthlyFee: '€0', openingTime: '', payout: '',
-    facts: [
-      L('One-time fee, no monthly fee', 'एकपटकको शुल्क, मासिक शुल्क छैन', 'एक बार की फ़ीस, कोई मासिक फ़ीस नहीं'),
-      L('€50 fee if you close early and get the money back (e.g. visa refused)', 'चाँडै बन्द गरी पैसा फिर्ता लिँदा €५० शुल्क (जस्तै भिसा अस्वीकृत)', 'जल्दी बंद करके पैसा वापस लेने पर €50 फ़ीस (जैसे वीज़ा अस्वीकार)'),
-      L('Fees from Coracle’s published terms (2023) — check before you sign up', 'Coracle का प्रकाशित सर्तबाट लिइएको शुल्क (२०२३) — दर्ता गर्नुअघि जाँच्नुहोस्', 'Coracle की प्रकाशित शर्तों (2023) से फ़ीस — साइन अप से पहले जांचें'),
-    ],
-    isPartner: false, url: 'https://www.coracle.de/', lastChecked: CHECKED, feeSortKey: 99, speedSortKey: 0, sources: [S.coracle, S.coracleTerms],
-  },
+  // ── Blocked accounts ─────────────────────────────────────────────
   {
     id: 'expatrio', category: 'blocked', name: 'Expatrio', setupFee: '€119', monthlyFee: '€9', openingTime: '', payout: '',
-    facts: blockedFacts('€119', '€9'), isPartner: false, url: 'https://www.expatrio.com/blocked-account', lastChecked: CHECKED, feeSortKey: 227, speedSortKey: 0, sources: [S.expatrio],
+    facts: [
+      ...blockedFacts('€119', '€9'),
+      L('Adds a €100 buffer to your transfer; the unused part is paid back with the last payout', 'ट्रान्सफरमा €१०० बफर थप्छ; नचलेको भाग अन्तिम भुक्तानीसँग फिर्ता हुन्छ', 'ट्रांसफ़र में €100 बफ़र जोड़ता है; बचा हुआ हिस्सा आख़िरी भुगतान के साथ लौटता है'),
+      L('Prices for applications from 7 July 2026', '७ जुलाई २०२६ देखिका आवेदनको मूल्य', '7 जुलाई 2026 से आवेदनों की कीमत'),
+    ],
+    isPartner: false, url: 'https://www.expatrio.com/blocked-account', lastChecked: CHECKED, feeSortKey: 227, speedSortKey: 0, sources: [S.expatrio, S.expatrioFees],
   },
   {
     id: 'fintiba', category: 'blocked', name: 'Fintiba', setupFee: '€159', monthlyFee: '€9.90', openingTime: '', payout: '',
@@ -250,13 +256,63 @@ export const providers: Provider[] = [
     isPartner: false, url: 'https://www.fintiba.com/', lastChecked: CHECKED, feeSortKey: 277.8, speedSortKey: 0, sources: [S.fintiba, S.fintibaNews],
   },
   {
-    id: 'sparkasse-leipzig', category: 'bank', name: 'Sparkasse Leipzig — GiroFlex', setupFee: '€0', monthlyFee: '€0 (students up to 26)', openingTime: '', payout: '',
+    id: 'deutsche-bank-blocked', category: 'blocked', name: 'Deutsche Bank', setupFee: '€150', monthlyFee: '', openingTime: '', payout: '',
     facts: [
-      L('Branches across Leipzig — advice in person', 'लाइपजिगभर शाखा — आमनेसामने सल्लाह', 'पूरे लाइपज़िग में शाखाएं — आमने-सामने सलाह'),
-      L('Free for students up to and including age 26', '२६ वर्षसम्मका विद्यार्थीका लागि निःशुल्क', '26 साल तक के छात्रों के लिए मुफ़्त'),
+      L('€150 for the blocking agreement, €150 again for every change', 'ब्लक सम्झौताका लागि €१५०, हरेक परिवर्तनमा फेरि €१५०', 'ब्लॉकिंग समझौते के लिए €150, हर बदलाव पर फिर €150'),
+      L('A normal Deutsche Bank current account with the block on top — account fees apply', 'Deutsche Bank को सामान्य चल्ती खातामा ब्लक — खाता शुल्क लाग्छ', 'Deutsche Bank के सामान्य चालू खाते पर ब्लॉक — खाता फ़ीस लगती है'),
+      L('Opening from abroad needs your signature certified at a German embassy (fee)', 'विदेशबाट खोल्दा जर्मन दूतावासमा हस्ताक्षर प्रमाणित गराउनुपर्छ (शुल्क लाग्छ)', 'विदेश से खोलने पर जर्मन दूतावास में हस्ताक्षर प्रमाणित कराने होते हैं (फ़ीस लगती है)'),
+    ],
+    notice: L('Paper-based and slower than the online providers. Check with Deutsche Bank before you apply.', 'कागजमा आधारित र अनलाइन प्रदायकभन्दा ढिलो। आवेदन दिनुअघि Deutsche Bank सँग सोध्नुहोस्।', 'काग़ज़ पर आधारित और ऑनलाइन प्रदाताओं से धीमा। आवेदन से पहले Deutsche Bank से पूछें।'),
+    isPartner: false, url: S.dbBlocked.url, lastChecked: CHECKED, feeSortKey: 150 + 12 * 6.9, speedSortKey: 0, sources: [S.dbBlocked, S.aaBlockedItaly],
+  },
+  {
+    id: 'coracle', category: 'blocked', name: 'Coracle', setupFee: '€99', monthlyFee: '€0', openingTime: '', payout: '',
+    facts: [
+      L('One-time fee, no monthly fee (published terms, 2023)', 'एकपटकको शुल्क, मासिक शुल्क छैन (प्रकाशित सर्त, २०२३)', 'एक बार की फ़ीस, कोई मासिक फ़ीस नहीं (प्रकाशित शर्तें, 2023)'),
+    ],
+    notice: L('Not accepting new blocked-account applications since August 2025. Check coracle.de before you rely on it.', 'अगस्ट २०२५ देखि नयाँ ब्लक्ड खाताको आवेदन लिइरहेको छैन। भर पर्नुअघि coracle.de हेर्नुहोस्।', 'अगस्त 2025 से नए ब्लॉक्ड अकाउंट आवेदन नहीं ले रहा। भरोसा करने से पहले coracle.de देखें।'),
+    isPartner: false, url: 'https://www.coracle.de/', lastChecked: CHECKED, feeSortKey: 9999, speedSortKey: 0, sources: [S.coracle, S.coracleTerms, S.bankdatenBlocked],
+  },
+  // ── Current accounts ─────────────────────────────────────────────
+  {
+    id: 'sparkasse', category: 'bank', name: 'Sparkasse (local savings bank)', setupFee: '€0', monthlyFee: '€0', openingTime: '', payout: '',
+    facts: [
+      L('Each city has its own Sparkasse with its own prices', 'हरेक सहरको आफ्नै Sparkasse र आफ्नै मूल्य हुन्छ', 'हर शहर की अपनी Sparkasse और अपनी कीमतें होती हैं'),
+      L('Examples: Sparkasse Leipzig free up to 26, Berliner Sparkasse free until your 25th birthday', 'उदाहरण: Sparkasse Leipzig २६ वर्षसम्म, Berliner Sparkasse २५ औं जन्मदिनसम्म निःशुल्क', 'उदाहरण: Sparkasse Leipzig 26 साल तक, Berliner Sparkasse 25वें जन्मदिन तक मुफ़्त'),
+      L('Branches and ATMs everywhere — advice in person', 'जताततै शाखा र ATM — आमनेसामने सल्लाह', 'हर जगह शाखाएं और ATM — आमने-सामने सलाह'),
       L('Bring your enrolment certificate', 'भर्ना प्रमाणपत्र लैजानुहोस्', 'दाख़िला प्रमाणपत्र साथ लाएं'),
     ],
-    isPartner: false, url: S.sparkasseStudents.url, lastChecked: CHECKED, feeSortKey: 0, speedSortKey: 0, sources: [S.sparkasseStudents, S.sparkasseGiroflex],
+    isPartner: false, url: 'https://www.sparkasse.de/pk/produkte/konten-und-karten/girokonto/studenten-und-auszubildende', lastChecked: CHECKED, feeSortKey: 0, speedSortKey: 0,
+    sources: [S.sparkasseDe, S.sparkasseStudents, S.berlinerSparkasse],
+  },
+  {
+    id: 'volksbank', category: 'bank', name: 'Volksbank (local cooperative bank)', setupFee: '€0', monthlyFee: '€0', openingTime: '', payout: '',
+    facts: [
+      L('Each Volksbank sets its own prices — many are free for students up to 27', 'हरेक Volksbank ले आफ्नै मूल्य तोक्छ — धेरै २७ वर्षसम्मका विद्यार्थीका लागि निःशुल्क', 'हर Volksbank अपनी कीमतें तय करता है — कई 27 साल तक के छात्रों के लिए मुफ़्त हैं'),
+      L('Branches and ATMs across Germany — advice in person', 'जर्मनीभर शाखा र ATM — आमनेसामने सल्लाह', 'पूरे जर्मनी में शाखाएं और ATM — आमने-सामने सलाह'),
+      L('Bring your enrolment certificate', 'भर्ना प्रमाणपत्र लैजानुहोस्', 'दाख़िला प्रमाणपत्र साथ लाएं'),
+    ],
+    notice: L('Check the price list of the Volksbank in your city before you open the account.', 'खाता खोल्नुअघि आफ्नो सहरको Volksbank को मूल्य सूची हेर्नुहोस्।', 'खाता खोलने से पहले अपने शहर के Volksbank की मूल्य सूची देखें।'),
+    isPartner: false, url: 'https://www.vr.de/privatkunden/unsere-produkte/konten-und-karten/girokonten.html', lastChecked: CHECKED, feeSortKey: 0, speedSortKey: 0,
+    sources: [S.vbMittelhessen, S.vzNiedersachsen],
+  },
+  {
+    id: 'commerzbank', category: 'bank', name: 'Commerzbank StartKonto', setupFee: '€0', monthlyFee: '€0', openingTime: '', payout: '',
+    facts: [
+      L('Free for students, trainees and interns until their 28th birthday (with proof of studies)', '२८ औं जन्मदिनसम्म विद्यार्थी, तालिमार्थी र इन्टर्नका लागि निःशुल्क (पढाइको प्रमाणसहित)', '28वें जन्मदिन तक छात्रों, प्रशिक्षुओं और इंटर्न के लिए मुफ़्त (पढ़ाई के सबूत के साथ)'),
+      L('Account is run digitally; free cash at Commerzbank and Cash Group ATMs', 'खाता डिजिटल रूपमा चल्छ; Commerzbank र Cash Group ATM मा निःशुल्क नगद', 'खाता डिजिटल चलता है; Commerzbank और Cash Group ATM पर मुफ़्त नकद'),
+      L('Switches to a paid account automatically at 28', '२८ वर्षमा आफैं सशुल्क खातामा बदलिन्छ', '28 साल पर अपने आप शुल्क वाले खाते में बदल जाता है'),
+    ],
+    isPartner: false, url: S.commerzStart.url, lastChecked: CHECKED, feeSortKey: 0, speedSortKey: 0, sources: [S.commerzStart, S.commerzStudents],
+  },
+  {
+    id: 'deutsche-bank', category: 'bank', name: 'Deutsche Bank — Das Junge Konto', setupFee: '€0', monthlyFee: '€0', openingTime: '', payout: '',
+    facts: [
+      FREE_STUDENT('30'),
+      L('Needs a registered address in the EU', 'EU मा दर्ता भएको ठेगाना चाहिन्छ', 'EU में पंजीकृत पता चाहिए'),
+      L('Afterwards it becomes an AktivKonto for €6.90 a month', 'त्यसपछि महिनाको €६.९० को AktivKonto बन्छ', 'उसके बाद यह €6.90 प्रति माह का AktivKonto बन जाता है'),
+    ],
+    isPartner: false, url: S.dbYoung.url, lastChecked: CHECKED, feeSortKey: 0, speedSortKey: 0, sources: [S.dbYoung, S.dbYoungPrices],
   },
   {
     id: 'n26', category: 'bank', name: 'N26 Standard', setupFee: '€0', monthlyFee: '€0', openingTime: '', payout: '',
@@ -264,8 +320,19 @@ export const providers: Provider[] = [
       L('Online bank, opened in the app with a video call', 'अनलाइन बैंक, भिडियो कलसहित एपमै खोलिन्छ', 'ऑनलाइन बैंक, वीडियो कॉल के साथ ऐप में खुलता है'),
       L('App in English', 'अंग्रेजीमा एप', 'अंग्रेज़ी में ऐप'),
       L('Cash: 2 free withdrawals a month in euros, then €2 each', 'नगद: महिनामा २ पटक युरोमा निःशुल्क, त्यसपछि प्रत्येक €२', 'नकद: हर महीने यूरो में 2 बार मुफ़्त निकासी, फिर हर बार €2'),
+      L('Card payments in other currencies: 1.7% fee', 'अन्य मुद्रामा कार्ड भुक्तानी: १.७% शुल्क', 'दूसरी मुद्राओं में कार्ड भुगतान: 1.7% फ़ीस'),
     ],
     isPartner: false, url: S.n26Plans.url, lastChecked: CHECKED, feeSortKey: 0, speedSortKey: 0, sources: [S.n26Plans, S.n26Withdrawals],
+  },
+  {
+    id: 'revolut', category: 'bank', name: 'Revolut Standard', setupFee: '€0', monthlyFee: '€0', openingTime: '', payout: '',
+    facts: [
+      L('Online bank, opened in the app', 'अनलाइन बैंक, एपमै खोलिन्छ', 'ऑनलाइन बैंक, ऐप में खुलता है'),
+      L('Cash: free up to 5 withdrawals or €200 a month, then 2% (at least €1)', 'नगद: महिनामा ५ पटक वा €२०० सम्म निःशुल्क, त्यसपछि २% (कम्तीमा €१)', 'नकद: हर महीने 5 निकासी या €200 तक मुफ़्त, फिर 2% (कम से कम €1)'),
+      L('Currency exchange: €1,000 a month without fee on weekdays', 'मुद्रा सटही: हप्ताका दिनमा महिनामा €१,००० सम्म शुल्कविना', 'मुद्रा विनिमय: कार्यदिवसों पर हर महीने €1,000 तक बिना फ़ीस'),
+    ],
+    notice: L('Some landlords and employers prefer a German bank — check the IBAN you get.', 'केही घरधनी र रोजगारदाता जर्मन बैंक रुचाउँछन् — पाउने IBAN जाँच्नुहोस्।', 'कुछ मकान मालिक और नियोक्ता जर्मन बैंक पसंद करते हैं — मिलने वाला IBAN जांचें।'),
+    isPartner: false, url: S.revolutFees.url, lastChecked: CHECKED, feeSortKey: 0, speedSortKey: 0, sources: [S.revolutFees, S.revolutAtm],
   },
   {
     id: 'ing', category: 'bank', name: 'ING Girokonto', setupFee: '€0', monthlyFee: '€0 / €4.90', openingTime: '', payout: '',

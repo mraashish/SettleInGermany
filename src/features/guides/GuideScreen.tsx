@@ -116,7 +116,7 @@ function Feedback({ guide }: { guide: Guide }) {
   );
 }
 
-function GuideBody({ guide }: { guide: Guide }) {
+export function GuideBody({ guide }: { guide: Guide }) {
   const { t, i18n } = useTranslation();
   const th = useTheme();
   const { c } = th;

@@ -12,6 +12,7 @@
  * guides working offline (HANDOFF §7.3).
  */
 import { useQuery } from '@tanstack/react-query';
+import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { supabase } from '@/services/auth';
@@ -26,6 +27,17 @@ const SEED: Collections = {
   guides: seed.guides, tasks: seed.tasks, cities: seed.cities, rules: seed.rules, ruleChanges: seed.ruleChanges,
   providers: seed.providers, phrases: seed.phrases, helpServices: seed.helpServices, scamWarnings: seed.scamWarnings, embassies: seed.embassies,
 };
+
+/**
+ * Changes whenever the bundled content changes. Used as the cache "buster" so a
+ * phone never keeps showing content cached by an older version of the app.
+ */
+export const CONTENT_VERSION = (() => {
+  const text = JSON.stringify(SEED);
+  let h = 5381;
+  for (let i = 0; i < text.length; i++) h = ((h << 5) + h + text.charCodeAt(i)) | 0;
+  return `seed-${(h >>> 0).toString(36)}`;
+})();
 
 const SNAPSHOT = snapshot as unknown as { generatedAt: string | null; collections: Partial<Collections> };
 const SNAPSHOT_AT = SNAPSHOT.generatedAt ? Date.parse(SNAPSHOT.generatedAt) : 0;
@@ -66,7 +78,8 @@ const useCollection = <K extends CollectionName>(name: K) =>
     initialData: baseline(name),
     // Snapshot/seed data counts as old, so the live version is fetched right away.
     initialDataUpdatedAt: SNAPSHOT.collections[name] ? SNAPSHOT_AT : 0,
-    staleTime: 1000 * 60 * 30,
+    // Without a database the bundled content is the truth: always use the current build's copy.
+    staleTime: CMS_LIVE ? 1000 * 60 * 30 : 0,
   });
 
 export const useGuides = () => useCollection('guides');
@@ -82,7 +95,15 @@ export const useEmbassies = () => useCollection('embassies');
 
 export function useGuide(slug: string | undefined) {
   const q = useGuides();
-  return { ...q, data: q.data?.find((x) => x.slug === slug) };
+  // A guide that the database doesn't have (yet) falls back to the bundled copy,
+  // so roadmap items never open an empty page.
+  return { ...q, data: q.data?.find((x) => x.slug === slug) ?? seed.guides.find((x) => x.slug === slug) };
+}
+
+/** Slugs of every guide the app can show (database + bundled fallback). */
+export function useGuideSlugs() {
+  const { data } = useGuides();
+  return useMemo(() => new Set([...(data ?? []).map((g) => g.slug), ...seed.guides.map((g) => g.slug)]), [data]);
 }
 
 /** Resolve a localized field to the current UI language (falls back to English). */

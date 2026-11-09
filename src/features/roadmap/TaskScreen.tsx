@@ -4,7 +4,8 @@ import React, { useState } from 'react';
 import { View } from 'react-native';
 import { useTranslation } from 'react-i18next';
 
-import { useL } from '@/content/client';
+import { useGuide, useL } from '@/content/client';
+import { GuideBody } from '../guides/GuideScreen';
 import { formatDate } from '@/lib/deadline';
 import { deleteCustomTask, toggleHidden, updateCustomTask } from '@/store/roadmap';
 import { Button, Card, DueChip, EmptyState, GermanTerm, Screen, Text, TextField } from '@/ui';
@@ -21,6 +22,7 @@ export function TaskScreen({ id }: { id: string }) {
   const v = Object.values(byStage).flat().find((x) => x.id === id);
   const [deadline, setDeadline] = useState(v?.task.deadlineDate ? v.task.deadlineDate.split('-').reverse().join('.') : '');
   const [title, setTitle] = useState(v?.title ?? '');
+  const { data: guide } = useGuide(v?.task.guideSlug);
 
   if (!v) {
     return (
@@ -36,11 +38,16 @@ export function TaskScreen({ id }: { id: string }) {
   return (
     <Screen title={v.title} back={back} large={false}
       crumbs={[{ label: t('roadmap.title'), href: `/roadmap/${v.task.stage}` }, { label: v.title }]}>
-      <Text size={13} weight="700" color="primary" uppercase>
-        {t('guides.stageLabel', { n: stageIndex(v.task.stage), stage: t(`stages.${v.task.stage}`) })} · {v.group}
-      </Text>
-      <Text size={26} lineHeight={32} weight="700" heading={1}>{v.title}</Text>
-      {v.task.term ? <GermanTerm term={v.task.term} audio /> : null}
+      {/* With a guide, its own header (stage, title, German term) follows below — don't repeat it. */}
+      {!guide ? (
+        <>
+          <Text size={13} weight="700" color="primary" uppercase>
+            {t('guides.stageLabel', { n: stageIndex(v.task.stage), stage: t(`stages.${v.task.stage}`) })} · {v.group}
+          </Text>
+          <Text size={26} lineHeight={32} weight="700" heading={1}>{v.title}</Text>
+          {v.task.term ? <GermanTerm term={v.task.term} audio /> : null}
+        </>
+      ) : null}
       <Card style={{ gap: 10 }}>
         {v.due ? (
           <View style={{ gap: 6 }}>
@@ -60,7 +67,7 @@ export function TaskScreen({ id }: { id: string }) {
       </Card>
 
       <Button icon={Check} label={done ? t('roadmap.markNotDone') : t('roadmap.markDone')} variant={done ? 'secondary' : 'primary'} onPress={() => toggle(v, !done)} />
-      {v.guideHref ? <Button variant="secondary" icon={BookOpen} label={t('roadmap.readGuide')} onPress={() => router.push(v.guideHref as never)} /> : null}
+      {v.guideHref && !guide ? <Button variant="secondary" icon={BookOpen} label={t('roadmap.readGuide')} onPress={() => router.push(v.guideHref as never)} /> : null}
 
       {v.custom ? (
         <Card style={{ gap: 12 }}>
@@ -75,6 +82,8 @@ export function TaskScreen({ id }: { id: string }) {
       ) : (
         <Button variant="text" icon={hidden ? Eye : EyeOff} label={hidden ? t('roadmap.unhide') : t('roadmap.hide')} onPress={() => toggleHidden(v.id)} />
       )}
+      {/* Every roadmap item shows the full guide: summary, steps, documents, tips, related, sources. */}
+      {guide ? <GuideBody guide={guide} /> : null}
     </Screen>
   );
 }
