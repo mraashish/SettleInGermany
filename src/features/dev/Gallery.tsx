@@ -37,7 +37,7 @@ function Column() {
         <Button label="Loading…" loading />
       </Section>
       <Section title="Task item">
-        <TaskItem first title="Register your address" term={{ term: 'Anmeldung' }} due={soon(21)} state="open" guideHref="/guides/register-your-address" />
+        <TaskItem first title="Register your address" term={{ term: 'Anmeldung' }} due={soon(21)} state="open" href="/guides/register-your-address" />
         <TaskItem title="Open a bank account" state="done" doneLabel="Done · just now" />
         <TaskItem title="Pay the broadcasting fee" term={{ term: 'Rundfunkbeitrag' }} due={soon(-3)} state="overdue" />
         <TaskItem title="Driving licence exchange" term={{ term: 'Führerschein' }} state="hidden" onHide={() => undefined} />

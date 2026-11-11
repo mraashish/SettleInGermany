@@ -49,7 +49,7 @@ const hi: Strings = {
     groupProgress: '{{group}} · {{total}} में से {{done}}', doneOn: 'पूरा · {{date}}', justNow: 'अभी-अभी',
     hiddenShow: '{{count}} छिपे काम · दिखाएँ', hiddenHide: 'छिपे काम छिपाएँ', addOwn: 'अपना काम जोड़ें',
     hide: 'यह काम छिपाएँ', unhide: 'यह काम दिखाएँ', hiddenChip: 'छिपा हुआ · लागू नहीं',
-    newTaskTitle: 'काम का नाम', addToRoadmap: 'मेरे रोडमैप में जोड़ें', added: 'आपके रोडमैप में जोड़ा गया',
+    newTaskTitle: 'काम का नाम', openInRoadmap: 'मेरे रोडमैप में खोलें', addToRoadmap: 'मेरे रोडमैप में जोड़ें', added: 'आपके रोडमैप में जोड़ा गया',
     markDone: 'पूरा हुआ चिह्नित करें', markNotDone: 'पूरा नहीं हुआ', readGuide: 'चरण-दर-चरण गाइड पढ़ें', deleteTask: 'यह काम हटाएँ',
     noDeadline: 'कोई तय समय-सीमा नहीं।', effort: 'समय: {{effort}}', countedFromArrival: 'आपके आने की तारीख से गिना गया ({{count}} दिन)।',
     addArrivalForDeadline: 'समय-सीमा: आने के {{count}} दिन के भीतर। तारीख देखने के लिए मेरा खाता › बदलें में आने की तारीख डालें।',

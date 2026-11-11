@@ -47,7 +47,7 @@ const en = {
     groupProgress: '{{group}} · {{done}} of {{total}}', doneOn: 'Done · {{date}}', justNow: 'just now',
     hiddenShow: '{{count}} hidden tasks · Show', hiddenHide: 'Hide hidden tasks', addOwn: 'Add your own task',
     hide: 'Hide this task', unhide: 'Show this task', hiddenChip: 'Hidden · doesn’t apply',
-    newTaskTitle: 'Task title', addToRoadmap: 'Add to my roadmap', added: 'Added to your roadmap',
+    newTaskTitle: 'Task title', openInRoadmap: 'Open in my roadmap', addToRoadmap: 'Add to my roadmap', added: 'Added to your roadmap',
     markDone: 'Mark as done', markNotDone: 'Mark as not done', readGuide: 'Read the step-by-step guide', deleteTask: 'Delete this task',
     noDeadline: 'No fixed deadline.', effort: 'Effort: {{effort}}', countedFromArrival: 'Counted from your arrival date ({{count}} days).',
     addArrivalForDeadline: 'Deadline: {{count}} days after you arrive. Add your arrival date in Me › Edit to see the date.',

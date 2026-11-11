@@ -80,7 +80,6 @@ export function RoadmapScreen({ stage }: { stage: StageId }) {
                   due={v.due}
                   state={v.state}
                   doneLabel={v.state === 'done' ? t('roadmap.doneOn', { date: lastDone === v.title ? t('roadmap.justNow') : formatDate(new Date(), i18n.language, { day: 'numeric', month: 'short' }) }) : undefined}
-                  guideHref={v.guideHref}
                   href={v.href}
                   onToggle={(d) => toggle(v, d)}
                   onHide={() => toggleHidden(v.id)}

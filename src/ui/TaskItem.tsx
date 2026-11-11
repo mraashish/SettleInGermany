@@ -1,5 +1,5 @@
-import { Link, router } from 'expo-router';
-import { EyeOff } from 'lucide-react-native';
+import { router } from 'expo-router';
+import { ChevronRight, EyeOff } from 'lucide-react-native';
 import React, { useState } from 'react';
 import { AccessibilityInfo, Animated, Pressable, StyleSheet, View } from 'react-native';
 import { useTranslation } from 'react-i18next';
@@ -21,7 +21,6 @@ export interface TaskItemProps {
   due?: string | null;
   timingNote?: string;
   doneLabel?: string;
-  guideHref?: string;
   /** Page opened by tapping the title (guide or task page). */
   href?: string;
   state: TaskState;
@@ -31,7 +30,7 @@ export interface TaskItemProps {
 }
 
 /** TaskItem (RoadmapScreen, Library): checkbox, title, DE term, deadline chip, guide link. */
-export function TaskItem({ title, term, effort, due, timingNote, doneLabel, guideHref, href, state, onToggle, onHide, first }: TaskItemProps) {
+export function TaskItem({ title, term, effort, due, timingNote, doneLabel, href, state, onToggle, onHide, first }: TaskItemProps) {
   const { t } = useTranslation();
   const { c } = useTheme();
   const [burst] = useState(() => new Animated.Value(0));
@@ -69,16 +68,18 @@ export function TaskItem({ title, term, effort, due, timingNote, doneLabel, guid
           disabled={!href}
           onPress={() => href && router.push(href as never)}
           hitSlop={4}
+          style={{ flexDirection: 'row', alignItems: 'center', gap: 4 }}
         >
           <Text
             size={16}
             lineHeight={21}
             weight="600"
             color={done || hidden ? 'muted' : 'text'}
-            style={done ? { textDecorationLine: 'line-through' } : undefined}
+            style={[{ flexShrink: 1 }, done ? { textDecorationLine: 'line-through' } : null]}
           >
             {title}
           </Text>
+          {href ? <Icon icon={ChevronRight} size={18} color="muted" /> : null}
         </Pressable>
         {done ? (
           doneLabel ? <Text variant="caption" color="successText" weight="600">{doneLabel}</Text> : null
@@ -97,13 +98,6 @@ export function TaskItem({ title, term, effort, due, timingNote, doneLabel, guid
                 <DueChip due={due} />
               ) : timingNote ? (
                 <DeadlineChip tone="neutral" label={timingNote} />
-              ) : null}
-              {guideHref ? (
-                <Link href={guideHref as never} asChild>
-                  <Pressable accessibilityRole="link" hitSlop={8}>
-                    <Text size={14} weight="600" color="primary" style={{ textDecorationLine: 'underline' }}>{t('common.howTo')}</Text>
-                  </Pressable>
-                </Link>
               ) : null}
             </View>
           </>

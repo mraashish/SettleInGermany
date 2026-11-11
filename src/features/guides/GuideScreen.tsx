@@ -5,12 +5,13 @@ import React, { useState } from 'react';
 import { Platform, Pressable, Share, View } from 'react-native';
 import { useTranslation } from 'react-i18next';
 
-import { isOutdated, useGuide, useL, useTasks } from '@/content/client';
+import { isOutdated, useGuide, useL } from '@/content/client';
 import type { Guide } from '@/content/types';
 import { formatDate } from '@/lib/deadline';
 import { useLayout } from '@/lib/useLayout';
 import { usePrefs } from '@/store/prefs';
-import { addCustomTask, toggleSavedGuide, useRoadmap } from '@/store/roadmap';
+import { addCustomTask, toggleDocChecked, toggleSavedGuide, unhide, useRoadmap } from '@/store/roadmap';
+import { useRoadmapData } from '../roadmap/useRoadmapData';
 import { useTheme } from '@/theme/ThemeProvider';
 import {
   AdSlot, AILabel, Button, Callout, Card, Checkbox, EmptyState, GermanTerm, Icon, OutdatedBanner, Pill, Screen, SectionTitle, Skeleton, Text,
@@ -61,17 +62,31 @@ function Steps({ guide }: { guide: Guide }) {
 function DocumentsChecklist({ guide }: { guide: Guide }) {
   const { t } = useTranslation();
   const l = useL();
-  const { data: tasks = [] } = useTasks();
-  const [checked, setChecked] = useState<number[]>([]);
-  const [added, setAdded] = useState(false);
-  const inRoadmap = tasks.some((x) => x.guideSlug === guide.slug);
+  const onboarded = usePrefs((s) => s.onboarded);
+  const checked = useRoadmap((s) => s.docsChecked?.[guide.slug] ?? []);
+  const { byStage } = useRoadmapData();
+  // The roadmap item for this guide: a built-in task, or one the user added from here.
+  const task = Object.values(byStage).flat().find((v) => v.task.guideSlug === guide.slug);
+  const [justAdded, setJustAdded] = useState(false);
   if (!guide.documents.length) return null;
+  const open = (id: string) => router.push(`/roadmap/task/${id}` as never);
+  const onPress = () => {
+    if (task) {
+      if (task.state === 'hidden') unhide(task.id);
+      open(task.id);
+      return;
+    }
+    const id = addCustomTask({ title: l(guide.title), stage: guide.stage, deadline: null, guideSlug: guide.slug });
+    setJustAdded(true);
+    if (!onboarded) router.push('/onboarding/1');
+    else if (Platform.OS !== 'web') open(id);
+  };
   return (
     <Card nativeID="documents" style={{ gap: 4 }}>
       <SectionTitle>{t('guides.documents')}</SectionTitle>
       {guide.documents.map((d, i) => {
         const on = checked.includes(i);
-        const toggle = () => setChecked((x) => (on ? x.filter((y) => y !== i) : [...x, i]));
+        const toggle = () => toggleDocChecked(guide.slug, i);
         return (
           <View key={i} style={{ flexDirection: 'row', gap: 12, alignItems: 'center', minHeight: 44 }}>
             <Checkbox checked={on} onChange={toggle} label={l(d)} />
@@ -79,15 +94,12 @@ function DocumentsChecklist({ guide }: { guide: Guide }) {
           </View>
         );
       })}
+      {justAdded ? <Text size={14} weight="600" color="successText" accessibilityLiveRegion="polite">{t('roadmap.added')}</Text> : null}
       <Button
         variant="secondary"
         style={{ marginTop: 8 }}
-        label={added ? t('roadmap.added') : Platform.OS === 'web' ? t('guides.addToChecklist') : t('roadmap.addToRoadmap')}
-        disabled={added}
-        onPress={() => {
-          if (!inRoadmap) addCustomTask({ title: l(guide.title), stage: guide.stage, deadline: null });
-          setAdded(true);
-        }}
+        label={task ? t('roadmap.openInRoadmap') : t('roadmap.addToRoadmap')}
+        onPress={onPress}
       />
     </Card>
   );

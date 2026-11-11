@@ -34,7 +34,7 @@ export function useRoadmapData(stage?: StageId) {
   return useMemo(() => {
     const all: RoadmapTask[] = [
       ...tasks.filter((t) => !t.statuses?.length || (profile.status && t.statuses.includes(profile.status))),
-      ...custom.map((c): RoadmapTask => ({ id: c.id, stage: c.stage, group: { en: 'My tasks' }, title: { en: c.title }, deadlineDate: c.deadline ?? undefined })),
+      ...custom.map((c): RoadmapTask => ({ id: c.id, stage: c.stage, group: { en: 'My tasks', ne: 'मेरा कामहरू', hi: 'मेरे काम' }, title: { en: c.title }, deadlineDate: c.deadline ?? undefined, guideSlug: c.guideSlug })),
     ];
     const view = (t: RoadmapTask): TaskView => {
       const due = taskDueDate(t, profile.arrivalDate);

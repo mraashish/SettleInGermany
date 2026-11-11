@@ -7,6 +7,10 @@
 #   npm run db:update-content                 # uses SUPABASE_DB_URL from the environment or .env.local
 #   npm run db:update-content -- "<url>"      # or pass the connection string
 #   npm run db:update-content -- --initial    # first import into an empty database (seed.sql)
+#   npm run db:update-content -- --prune      # also delete EVERY document that is not in the bundle
+#
+# The update always removes old sample documents from earlier app versions
+# (placeholders such as "[Bank A]" or "[date]", example.com links, empty city pages).
 #
 # The connection string is in Supabase: Project › Connect › "Session pooler"
 # (postgresql://postgres.<ref>:<password>@<host>:5432/postgres). It contains the
@@ -19,10 +23,12 @@ ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 
 FILE="seed-update.sql"
 URL=""
+PRUNE=""
 for arg in "$@"; do
   case "$arg" in
     --initial) FILE="seed.sql" ;;
-    -h|--help) sed -n '2,16p' "$0"; exit 0 ;;
+    --prune) PRUNE=1 ;;
+    -h|--help) sed -n '2,20p' "$0"; exit 0 ;;
     *) URL="$arg" ;;
   esac
 done
@@ -43,6 +49,11 @@ fi
 
 echo "Generating SQL from src/content/seed.ts..."
 (cd "$ROOT" && npx tsx scripts/content-seed-sql.ts >/dev/null)
+
+if [ -n "$PRUNE" ]; then
+  echo "Removing documents that are not in the bundled content..."
+  psql "$URL" -v ON_ERROR_STOP=1 -q -X -f "$ROOT/supabase/seed-prune.sql"
+fi
 
 echo "Applying supabase/${FILE}..."
 psql "$URL" -v ON_ERROR_STOP=1 -q -X -f "$ROOT/supabase/${FILE}"

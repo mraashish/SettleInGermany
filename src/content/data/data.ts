@@ -8,6 +8,7 @@ const G = {
   health: L('Health', 'स्वास्थ्य', 'स्वास्थ्य'),
   housing: L('Housing', 'आवास', 'आवास'),
   work: L('Work', 'काम', 'काम'),
+  everyday: L('Everyday life', 'दैनिक जीवन', 'रोज़मर्रा का जीवन'),
 };
 
 export const tasks: RoadmapTask[] = [
@@ -30,7 +31,18 @@ export const tasks: RoadmapTask[] = [
   // Living
   { id: 'jobs', stage: 'living', group: G.work, title: L('Understand your work limit', 'आफ्नो कामको सीमा बुझ्नुहोस्', 'अपनी काम की सीमा समझें'), term: { term: 'Nebenjob' }, statuses: ['student'], guideSlug: 'student-jobs' },
   { id: 'tax-return', stage: 'living', group: G.money, title: L('File your tax return', 'कर विवरण बुझाउनुहोस्', 'टैक्स रिटर्न भरें'), term: { term: 'Steuererklärung' }, effort: L('about 2 h', 'करिब २ घण्टा', 'लगभग 2 घंटे'), timingNote: L('Once a year', 'वर्षमा एकपटक', 'साल में एक बार'), guideSlug: 'file-tax-return' },
+  { id: 'liability', stage: 'living', group: G.money, title: L('Get liability insurance', 'दायित्व बीमा लिनुहोस्', 'देयता बीमा लें'), term: { term: 'Haftpflichtversicherung' }, effort: L('30 min', '३० मिनेट', '30 मिनट'), guideSlug: 'get-liability-insurance' },
+  { id: 'german', stage: 'living', group: G.everyday, title: L('Learn German', 'जर्मन भाषा सिक्नुहोस्', 'जर्मन सीखें'), term: { term: 'Deutschkurs' }, timingNote: L('Start in your first semester', 'पहिलो सेमेस्टरमै सुरु गर्नुहोस्', 'पहले सेमेस्टर में शुरू करें'), guideSlug: 'learn-german' },
+  { id: 'waste', stage: 'living', group: G.everyday, title: L('Separate your waste', 'फोहोर छुट्याउनुहोस्', 'कचरा अलग करें'), term: { term: 'Mülltrennung' }, effort: L('5 min', '५ मिनेट', '5 मिनट'), guideSlug: 'separate-your-waste' },
+  { id: 'utility-bill', stage: 'living', group: G.housing, title: L('Check your utility bill', 'उपयोगिता बिल जाँच्नुहोस्', 'उपयोगिता बिल जांचें'), term: { term: 'Nebenkostenabrechnung' }, timingNote: L('When the yearly statement arrives', 'वार्षिक हिसाब आएपछि', 'जब सालाना हिसाब आए'), guideSlug: 'check-your-utility-bill' },
+  { id: 'driving', stage: 'living', group: G.everyday, title: L('Use or convert your driving licence', 'ड्राइभिङ लाइसेन्स प्रयोग वा रूपान्तरण गर्नुहोस्', 'ड्राइविंग लाइसेंस इस्तेमाल करें या बदलवाएं'), term: { term: 'Führerschein' }, timingNote: L('Within 6 months, if you drive', 'गाडी चलाउनुहुन्छ भने ६ महिनाभित्र', 'गाड़ी चलाते हैं तो 6 महीने में'), guideSlug: 'convert-your-driving-licence' },
   // Career
+  { id: 'cv', stage: 'career', group: G.work, title: L('Write a German CV and application', 'जर्मन CV र आवेदन लेख्नुहोस्', 'जर्मन CV और आवेदन लिखें'), term: { term: 'Lebenslauf' }, effort: L('about 3 h', 'करिब ३ घण्टा', 'लगभग 3 घंटे'), guideSlug: 'write-a-german-cv' },
+  { id: 'internship', stage: 'career', group: G.work, title: L('Find an internship', 'इन्टर्नसिप खोज्नुहोस्', 'इंटर्नशिप खोजें'), term: { term: 'Praktikum' }, statuses: ['student'], guideSlug: 'find-an-internship' },
+  { id: 'recognition', stage: 'career', group: G.paperwork, title: L('Get your degree recognised', 'डिग्री मान्यता लिनुहोस्', 'अपनी डिग्री की मान्यता लें'), term: { term: 'Anerkennung' }, timingNote: L('Allow up to 3 months', '३ महिनासम्म समय राख्नुहोस्', '3 महीने तक का समय रखें'), guideSlug: 'get-your-degree-recognised' },
+  { id: 'jobcenter', stage: 'career', group: G.work, title: L('Register with the employment agency', 'रोजगार एजेन्सीमा दर्ता गर्नुहोस्', 'रोज़गार एजेंसी में पंजीकरण करें'), term: { term: 'Agentur für Arbeit' }, effort: L('20 min', '२० मिनेट', '20 मिनट'), guideSlug: 'register-as-job-seeker' },
+  { id: 'bluecard', stage: 'career', group: G.paperwork, title: L('Get an EU Blue Card', 'EU Blue Card लिनुहोस्', 'EU Blue Card लें'), term: { term: 'Blaue Karte EU' }, timingNote: L('When you have a job offer', 'कामको प्रस्ताव पाएपछि', 'नौकरी का ऑफ़र मिलने पर'), guideSlug: 'get-an-eu-blue-card' },
+  { id: 'settlement', stage: 'career', group: G.paperwork, title: L('Get a settlement permit', 'स्थायी बसोबास अनुमति लिनुहोस्', 'स्थायी निवास परमिट लें'), term: { term: 'Niederlassungserlaubnis' }, timingNote: L('After 2 years of qualified work', 'योग्यताअनुसारको २ वर्षको कामपछि', '2 साल के योग्य काम के बाद'), guideSlug: 'get-a-settlement-permit' },
   { id: 'extend', stage: 'career', group: G.paperwork, title: L('Extend your residence permit', 'आवास अनुमतिपत्र नवीकरण गर्नुहोस्', 'निवास परमिट बढ़वाएं'), term: { term: 'Verlängerung' }, timingNote: L('Before your permit ends', 'अनुमतिपत्रको म्याद सकिनुअघि', 'परमिट ख़त्म होने से पहले'), guideSlug: 'extend-your-residence-permit' },
   { id: 'jobseeker', stage: 'career', group: G.work, title: L('Plan your job search after graduation', 'स्नातकपछि काम खोजको योजना बनाउनुहोस्', 'स्नातक के बाद नौकरी खोज की योजना बनाएं'), term: { term: 'Aufenthaltserlaubnis zur Arbeitsplatzsuche' }, statuses: ['student'], guideSlug: 'job-search-after-graduation' },
 ];
@@ -349,6 +361,14 @@ const BUERGER = L('Citizens’ office', 'नागरिक कार्या�
 const DOCTOR = L('Doctor', 'डाक्टर', 'डॉक्टर');
 const FLAT = L('Housing', 'आवास', 'आवास');
 const PHONE = L('On the phone', 'फोनमा', 'फ़ोन पर');
+const EVERYDAY = L('Everyday', 'दैनिक', 'रोज़मर्रा');
+const SHOP = L('Shopping', 'किनमेल', 'ख़रीदारी');
+const TRANSPORT = L('Bus and train', 'बस र रेल', 'बस और ट्रेन');
+const BANK = L('Bank', 'बैंक', 'बैंक');
+const PHARMACY = L('Pharmacy', 'फार्मेसी', 'फ़ार्मेसी');
+const UNI = L('University', 'विश्वविद्यालय', 'विश्वविद्यालय');
+const WORK = L('Work', 'काम', 'काम');
+const EMERGENCY = L('Emergency', 'आपतकाल', 'आपात स्थिति');
 
 export const phrases: Phrase[] = [
   { id: 'p1', situation: OFFICE, german: 'Ich habe einen Termin um 10 Uhr.', transliteration: { ne: 'इश हाबे आइनेन टेर्मीन उम त्सेन ऊर', hi: 'इश हाबे आइनेन टेरमीन उम त्सेन ऊर' }, meaning: L('I have an appointment at 10.', 'मेरो १० बजे अपोइन्टमेन्ट छ।', 'मेरी 10 बजे अपॉइंटमेंट है।') },
@@ -366,6 +386,45 @@ export const phrases: Phrase[] = [
   { id: 'p13', situation: FLAT, german: 'Wann kann ich die Wohnung besichtigen?', transliteration: { ne: 'वान कान इश डी वोनुङ बेज़िश्टिगेन?', hi: 'वान कान इश डी वोनुंग बेज़िश्टिगेन?' }, meaning: L('When can I view the flat?', 'म फ्ल्याट कहिले हेर्न सक्छु?', 'मैं फ़्लैट कब देख सकता/सकती हूँ?') },
   { id: 'p14', situation: PHONE, german: 'Können Sie das bitte buchstabieren?', transliteration: { ne: 'क्योनेन ज़ी दास बिटे बुखश्टाबीरेन?', hi: 'क्योनेन ज़ी दास बिटे बूख़श्टाबीरेन?' }, meaning: L('Could you spell that, please?', 'कृपया हिज्जे गरेर भन्न सक्नुहुन्छ?', 'क्या आप कृपया इसकी स्पेलिंग बता सकते हैं?') },
   { id: 'p15', situation: PHONE, german: 'Ich rufe wegen meines Termins an.', transliteration: { ne: 'इश रूफे वेगेन माइनेस टेर्मीन्स आन', hi: 'इश रूफ़े वेगेन माइनेस टेरमीन्स आन' }, meaning: L('I’m calling about my appointment.', 'म मेरो अपोइन्टमेन्टबारे फोन गर्दैछु।', 'मैं अपनी अपॉइंटमेंट के बारे में कॉल कर रहा/रही हूँ।') },
+  // Everyday
+  { id: 'p16', situation: EVERYDAY, german: 'Guten Tag! Entschuldigung, sprechen Sie Englisch?', transliteration: { ne: 'गुटेन ताग! एन्टशुल्डिगुङ, श्प्रेशेन ज़ी एङ्लिश?', hi: 'गूटेन टाग! एंटशुल्डिगुंग, श्प्रेशेन ज़ी एंग्लिश?' }, meaning: L('Hello! Excuse me, do you speak English?', 'नमस्ते! माफ गर्नुहोस्, तपाईं अंग्रेजी बोल्नुहुन्छ?', 'नमस्ते! माफ़ कीजिए, क्या आप अंग्रेज़ी बोलते हैं?') },
+  { id: 'p17', situation: EVERYDAY, german: 'Ich spreche nur ein bisschen Deutsch.', transliteration: { ne: 'इश श्प्रेशे नूर आइन बिसशेन डोइच', hi: 'इश श्प्रेशे नूर आइन बिसशेन डॉइच' }, meaning: L('I only speak a little German.', 'म थोरै मात्र जर्मन बोल्छु।', 'मैं थोड़ी-सी ही जर्मन बोलता/बोलती हूँ।') },
+  { id: 'p18', situation: EVERYDAY, german: 'Können Sie das bitte wiederholen?', transliteration: { ne: 'क्योनेन ज़ी दास बिटे वीडरहोलेन?', hi: 'क्योनेन ज़ी दास बिटे वीडरहोलेन?' }, meaning: L('Could you repeat that, please?', 'कृपया फेरि भन्न सक्नुहुन्छ?', 'क्या आप कृपया इसे दोहरा सकते हैं?') },
+  { id: 'p19', situation: EVERYDAY, german: 'Vielen Dank für Ihre Hilfe.', transliteration: { ne: 'फीलेन दाङ्क फ्युर ईरे हिल्फे', hi: 'फ़ीलेन डांक फ़्यूर ईरे हिल्फ़े' }, meaning: L('Thank you very much for your help.', 'सहयोगका लागि धेरै धन्यवाद।', 'आपकी मदद के लिए बहुत धन्यवाद।') },
+  // Shopping
+  { id: 'p20', situation: SHOP, german: 'Kann ich mit Karte zahlen?', transliteration: { ne: 'कान इश मिट कार्टे त्सालेन?', hi: 'कान इश मिट कार्टे त्सालेन?' }, meaning: L('Can I pay by card?', 'कार्डबाट तिर्न मिल्छ?', 'क्या मैं कार्ड से भुगतान कर सकता/सकती हूँ?') },
+  { id: 'p21', situation: SHOP, german: 'Wo finde ich Reis?', transliteration: { ne: 'वो फिन्डे इश राइस?', hi: 'वो फ़िंडे इश राइस?' }, meaning: L('Where can I find rice?', 'चामल कहाँ पाइन्छ?', 'चावल कहाँ मिलेगा?') },
+  { id: 'p22', situation: SHOP, german: 'Eine Tüte, bitte.', transliteration: { ne: 'आइने ट्युटे, बिटे', hi: 'आइने ट्यूटे, बिटे' }, meaning: L('A bag, please.', 'एउटा झोला दिनुहोस्।', 'एक थैली, कृपया।') },
+  { id: 'p23', situation: SHOP, german: 'Ich möchte das zurückgeben.', transliteration: { ne: 'इश म्योश्टे दास त्सुरुकगेबेन', hi: 'इश म्योश्टे दास त्सुरुकगेबेन' }, meaning: L('I would like to return this.', 'म यो फिर्ता गर्न चाहन्छु।', 'मैं इसे वापस करना चाहता/चाहती हूँ।') },
+  // Transport
+  { id: 'p24', situation: TRANSPORT, german: 'Fährt dieser Zug nach Leipzig Hauptbahnhof?', transliteration: { ne: 'फेर्ट डीज़र त्सुग नाख लाइप्त्सिश हाउप्टबानहोफ?', hi: 'फ़ेर्ट डीज़र त्सूग नाख़ लाइप्त्सिश हाउप्टबानहोफ़?' }, meaning: L('Does this train go to Leipzig main station?', 'के यो रेल लाइपजिग मुख्य स्टेसन जान्छ?', 'क्या यह ट्रेन लाइपज़िग मुख्य स्टेशन जाती है?') },
+  { id: 'p25', situation: TRANSPORT, german: 'Wo muss ich umsteigen?', transliteration: { ne: 'वो मुस इश उमश्टाइगेन?', hi: 'वो मुस इश उमश्टाइगेन?' }, meaning: L('Where do I have to change?', 'मैले कहाँ गाडी फेर्नुपर्छ?', 'मुझे कहाँ गाड़ी बदलनी होगी?') },
+  { id: 'p26', situation: TRANSPORT, german: 'Ist dieser Platz frei?', transliteration: { ne: 'इस्ट डीज़र प्लात्स फ्राइ?', hi: 'इस्ट डीज़र प्लात्स फ़्राइ?' }, meaning: L('Is this seat free?', 'के यो सिट खाली छ?', 'क्या यह सीट ख़ाली है?') },
+  { id: 'p27', situation: TRANSPORT, german: 'Ich habe ein Deutschlandticket.', transliteration: { ne: 'इश हाबे आइन डोइचलान्टटिकेट', hi: 'इश हाबे आइन डॉइचलांटटिकेट' }, meaning: L('I have a Deutschlandticket.', 'मसँग Deutschlandticket छ।', 'मेरे पास Deutschlandticket है।') },
+  // Bank
+  { id: 'p28', situation: BANK, german: 'Ich möchte ein Girokonto eröffnen.', transliteration: { ne: 'इश म्योश्टे आइन जिरोकोन्टो एरओफ्नेन', hi: 'इश म्योश्टे आइन ज़ीरोकोंटो एरऑफ़नेन' }, meaning: L('I would like to open a current account.', 'म चल्ती खाता खोल्न चाहन्छु।', 'मैं एक चालू खाता खोलना चाहता/चाहती हूँ।') },
+  { id: 'p29', situation: BANK, german: 'Meine Karte ist verloren gegangen.', transliteration: { ne: 'माइने कार्टे इस्ट फेरलोरेन गेगाङेन', hi: 'माइने कार्टे इस्ट फ़ेरलोरेन गेगांगेन' }, meaning: L('I have lost my card.', 'मेरो कार्ड हरायो।', 'मेरा कार्ड खो गया है।') },
+  { id: 'p30', situation: BANK, german: 'Wie hoch sind die Kontogebühren?', transliteration: { ne: 'वी होख ज़िन्ड डी कोन्टोगेब्युरेन?', hi: 'वी होख़ ज़िंट डी कोंटोगेब्यूरेन?' }, meaning: L('How much are the account fees?', 'खाताको शुल्क कति हो?', 'खाते की फ़ीस कितनी है?') },
+  // Pharmacy
+  { id: 'p31', situation: PHARMACY, german: 'Ich brauche etwas gegen Kopfschmerzen.', transliteration: { ne: 'इश ब्राउखे एट्वास गेगेन कोप्फश्मेर्त्सेन', hi: 'इश ब्राउख़े एटवास गेगेन कॉप्फ़श्मेर्त्सेन' }, meaning: L('I need something for a headache.', 'मलाई टाउको दुखाइको औषधि चाहियो।', 'मुझे सिरदर्द के लिए कुछ चाहिए।') },
+  { id: 'p32', situation: PHARMACY, german: 'Hier ist mein Rezept.', transliteration: { ne: 'हिअर इस्ट माइन रेत्सेप्ट', hi: 'हीर इस्ट माइन रेत्सेप्ट' }, meaning: L('Here is my prescription.', 'यो मेरो प्रेस्क्रिप्सन हो।', 'यह मेरा पर्चा है।') },
+  { id: 'p33', situation: PHARMACY, german: 'Wie oft muss ich das nehmen?', transliteration: { ne: 'वी ओफ्ट मुस इश दास नेमेन?', hi: 'वी ऑफ़्ट मुस इश दास नेमेन?' }, meaning: L('How often do I have to take this?', 'यो कति पटक खानुपर्छ?', 'मुझे इसे कितनी बार लेना है?') },
+  // University
+  { id: 'p34', situation: UNI, german: 'Wo ist das Studierendensekretariat?', transliteration: { ne: 'वो इस्ट दास श्टुडीरेन्डेनसेक्रेटारियाट?', hi: 'वो इस्ट दास श्टूडीरेंडेनज़ेक्रेटारियाट?' }, meaning: L('Where is the student registry office?', 'विद्यार्थी कार्यालय कहाँ छ?', 'छात्र कार्यालय कहाँ है?') },
+  { id: 'p35', situation: UNI, german: 'Ich brauche eine Immatrikulationsbescheinigung.', transliteration: { ne: 'इश ब्राउखे आइने इमात्रिकुलात्सिओन्सबेशाइनिगुङ', hi: 'इश ब्राउख़े आइने इमात्रिकुलात्सियोंसबेशाइनिगुंग' }, meaning: L('I need an enrolment certificate.', 'मलाई भर्ना प्रमाणपत्र चाहियो।', 'मुझे दाख़िला प्रमाणपत्र चाहिए।') },
+  { id: 'p36', situation: UNI, german: 'Wann ist die Sprechstunde?', transliteration: { ne: 'वान इस्ट डी श्प्रेशश्टुन्डे?', hi: 'वान इस्ट डी श्प्रेशश्टुंडे?' }, meaning: L('When are the office hours?', 'भेट्ने समय कहिले हो?', 'मिलने का समय कब है?') },
+  // Work
+  { id: 'p37', situation: WORK, german: 'Ich bin heute krank und kann nicht arbeiten.', transliteration: { ne: 'इश बिन होइटे क्राङ्क उन्ट कान निश्ट आर्बाइटेन', hi: 'इश बिन हॉइटे क्रांक उंट कान निश्ट आर्बाइटेन' }, meaning: L('I am ill today and can’t work.', 'आज म बिरामी छु र काम गर्न सक्दिनँ।', 'मैं आज बीमार हूँ और काम नहीं कर सकता/सकती।') },
+  { id: 'p38', situation: WORK, german: 'Wann bekomme ich meinen Lohn?', transliteration: { ne: 'वान बेकोमे इश माइनेन लोन?', hi: 'वान बेकॉमे इश माइनेन लोन?' }, meaning: L('When do I get my pay?', 'मैले तलब कहिले पाउँछु?', 'मुझे मेरा वेतन कब मिलेगा?') },
+  { id: 'p39', situation: WORK, german: 'Kann ich bitte einen schriftlichen Arbeitsvertrag bekommen?', transliteration: { ne: 'कान इश बिटे आइनेन श्रिफ्टलिशेन आर्बाइट्सफेर्ट्राग बेकोमेन?', hi: 'कान इश बिटे आइनेन श्रिफ़्टलिशेन आर्बाइट्सफ़ेर्ट्राग बेकॉमेन?' }, meaning: L('Can I please get a written employment contract?', 'कृपया मलाई लिखित रोजगार सम्झौता दिन सक्नुहुन्छ?', 'क्या मुझे कृपया लिखित रोज़गार अनुबंध मिल सकता है?') },
+  // Emergency
+  { id: 'p40', situation: EMERGENCY, german: 'Hilfe! Rufen Sie einen Krankenwagen!', transliteration: { ne: 'हिल्फे! रूफेन ज़ी आइनेन क्राङ्केनवागेन!', hi: 'हिल्फ़े! रूफ़ेन ज़ी आइनेन क्रांकेनवागेन!' }, meaning: L('Help! Call an ambulance!', 'सहयोग! एम्बुलेन्स बोलाउनुहोस्!', 'मदद! एम्बुलेंस बुलाइए!') },
+  { id: 'p41', situation: EMERGENCY, german: 'Ich wurde bestohlen.', transliteration: { ne: 'इश वुर्डे बेश्टोलेन', hi: 'इश वुर्डे बेश्टोलेन' }, meaning: L('I have been robbed.', 'मेरो सामान चोरी भयो।', 'मेरा सामान चोरी हो गया।') },
+  { id: 'p42', situation: EMERGENCY, german: 'Wo ist das nächste Krankenhaus?', transliteration: { ne: 'वो इस्ट दास नेक्स्टे क्राङ्केनहाउस?', hi: 'वो इस्ट दास नेक्स्टे क्रांकेनहाउस?' }, meaning: L('Where is the nearest hospital?', 'सबैभन्दा नजिकको अस्पताल कहाँ छ?', 'सबसे नज़दीकी अस्पताल कहाँ है?') },
+  // Housing (more)
+  { id: 'p43', situation: FLAT, german: 'Die Heizung funktioniert nicht.', transliteration: { ne: 'डी हाइत्सुङ फुङ्क्सिओनीर्ट निश्ट', hi: 'डी हाइत्सुंग फ़ुंक्त्सियोनीर्ट निश्ट' }, meaning: L('The heating doesn’t work.', 'तताउने यन्त्र चलेको छैन।', 'हीटिंग काम नहीं कर रही।') },
+  { id: 'p44', situation: FLAT, german: 'Wie hoch ist die Kaution?', transliteration: { ne: 'वी होख इस्ट डी काउत्सिओन?', hi: 'वी होख़ इस्ट डी काउत्सियोन?' }, meaning: L('How much is the deposit?', 'धरौटी कति हो?', 'जमानत राशि कितनी है?') },
+  { id: 'p45', situation: FLAT, german: 'Können Sie mir die Wohnungsgeberbestätigung geben?', transliteration: { ne: 'क्योनेन ज़ी मिअर डी वोनुङ्सगेबरबेश्टेटिगुङ गेबेन?', hi: 'क्योनेन ज़ी मीर डी वोनुंग्सगेबरबेश्टेटिगुंग गेबेन?' }, meaning: L('Can you give me the landlord’s confirmation?', 'मलाई घरधनीको पुष्टि-पत्र दिन सक्नुहुन्छ?', 'क्या आप मुझे मकान मालिक का पुष्टि-पत्र दे सकते हैं?') },
 ];
 
 export const helpServices: HelpService[] = [

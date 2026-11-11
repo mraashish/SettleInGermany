@@ -49,7 +49,7 @@ const ne: Strings = {
     groupProgress: '{{group}} · {{total}} मध्ये {{done}}', doneOn: 'पूरा · {{date}}', justNow: 'भर्खरै',
     hiddenShow: '{{count}} लुकाइएका काम · देखाउनुहोस्', hiddenHide: 'लुकाइएका काम लुकाउनुहोस्', addOwn: 'आफ्नै काम थप्नुहोस्',
     hide: 'यो काम लुकाउनुहोस्', unhide: 'यो काम देखाउनुहोस्', hiddenChip: 'लुकाइएको · लागू हुँदैन',
-    newTaskTitle: 'कामको नाम', addToRoadmap: 'मेरो रोडम्यापमा थप्नुहोस्', added: 'तपाईंको रोडम्यापमा थपियो',
+    newTaskTitle: 'कामको नाम', openInRoadmap: 'मेरो रोडम्यापमा खोल्नुहोस्', addToRoadmap: 'मेरो रोडम्यापमा थप्नुहोस्', added: 'तपाईंको रोडम्यापमा थपियो',
     markDone: 'पूरा भयो भनी चिनो लगाउनुहोस्', markNotDone: 'पूरा भएको छैन', readGuide: 'चरणबद्ध गाइड पढ्नुहोस्', deleteTask: 'यो काम मेटाउनुहोस्',
     noDeadline: 'तोकिएको म्याद छैन।', effort: 'समय: {{effort}}', countedFromArrival: 'तपाईं आइपुगेको मितिबाट गनिएको ({{count}} दिन)।',
     addArrivalForDeadline: 'म्याद: आइपुगेको {{count}} दिनभित्र। मिति हेर्न मेरो › सम्पादनमा आइपुगेको मिति थप्नुहोस्।',

@@ -12,8 +12,10 @@ import type { Guide } from './types';
 import { guidesBefore } from './data/guidesBefore';
 import { guidesFirst30a } from './data/guidesFirst30a';
 import { guidesFirst30b } from './data/guidesFirst30b';
+import { guidesCareer2 } from './data/guidesCareer2';
 import { guidesLater } from './data/guidesLater';
+import { guidesLiving2 } from './data/guidesLiving2';
 
 export { cities, embassies, helpServices, phrases, providers, ruleChanges, rules, scamWarnings, tasks } from './data/data';
 
-export const guides: Guide[] = [...guidesBefore, ...guidesFirst30a, ...guidesFirst30b, ...guidesLater];
+export const guides: Guide[] = [...guidesBefore, ...guidesFirst30a, ...guidesFirst30b, ...guidesLater, ...guidesLiving2, ...guidesCareer2];

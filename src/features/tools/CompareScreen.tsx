@@ -29,7 +29,7 @@ export function CompareScreen({ topic }: { topic: string }) {
   const cfg = TOPICS[topic] ?? TOPICS['blocked-accounts'];
   const { data = [], isLoading } = useProviders();
   const { data: rules } = useRules();
-  const list = useMemo(() => data.filter((p) => p.category === cfg.cat).sort((a, b) => a.feeSortKey - b.feeSortKey), [data, cfg.cat]);
+  const list = useMemo(() => data.filter((p) => p.category === cfg.cat && !/\[.+\]/.test(p.name)).sort((a, b) => a.feeSortKey - b.feeSortKey), [data, cfg.cat]);
   const title = t(`tools.${cfg.key}`);
   const checked = list.map((p) => p.lastChecked).sort().pop();
   const monthly = rules?.blockedAccountMonthly ?? 0;
