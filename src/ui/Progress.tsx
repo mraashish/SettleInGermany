@@ -2,6 +2,9 @@ import React from 'react';
 import { View } from 'react-native';
 import Svg, { Circle } from 'react-native-svg';
 
+import { useTranslation } from 'react-i18next';
+
+import { digits } from '@/lib/format';
 import { useTheme } from '@/theme/ThemeProvider';
 import { Text } from './Text';
 
@@ -10,6 +13,7 @@ export function ProgressRing({
   value, total, size = 56, onHero, label,
 }: { value: number; total: number; size?: number; onHero?: boolean; label?: string }) {
   const { c } = useTheme();
+  const { i18n } = useTranslation();
   const stroke = 6;
   const r = (size - stroke) / 2;
   const circ = 2 * Math.PI * r;
@@ -31,7 +35,7 @@ export function ProgressRing({
         />
       </Svg>
       <Text size={size > 50 ? 14 : 12} weight="700" color={onHero ? c.heroText : c.text}>
-        {value}/{total}
+        {digits(`${value}/${total}`, i18n.language)}
       </Text>
     </View>
   );

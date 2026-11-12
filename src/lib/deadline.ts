@@ -1,4 +1,5 @@
 import type { RoadmapTask } from '@/content/types';
+import { formatDateParts } from './format';
 
 export type DeadlineTone = 'neutral' | 'warning' | 'danger' | 'done';
 
@@ -38,11 +39,15 @@ export function addDays(iso: string, n: number) {
 }
 
 export function formatDate(iso: string | Date, lang = 'en', opts: Intl.DateTimeFormatOptions = { day: 'numeric', month: 'short', year: 'numeric' }) {
-  const d = typeof iso === 'string' ? new Date(iso) : iso;
+  // "2026-11-23" is a calendar date: read it as a local date, not UTC midnight.
+  const d = typeof iso === 'string'
+    ? (/^\d{4}-\d{2}-\d{2}$/.test(iso) ? new Date(+iso.slice(0, 4), +iso.slice(5, 7) - 1, +iso.slice(8, 10)) : new Date(iso))
+    : iso;
   if (Number.isNaN(d.getTime())) return typeof iso === 'string' ? iso : '';
-  try {
-    return new Intl.DateTimeFormat(lang === 'en' ? 'en-GB' : lang, opts).format(d);
-  } catch {
-    return d.toDateString();
-  }
+  return formatDateParts(d, lang, {
+    weekday: opts.weekday === 'long' ? 'long' : opts.weekday ? 'short' : undefined,
+    day: opts.day ? 'numeric' : undefined,
+    month: opts.month === 'long' ? 'long' : opts.month ? 'short' : undefined,
+    year: opts.year ? 'numeric' : undefined,
+  });
 }

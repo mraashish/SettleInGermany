@@ -41,6 +41,15 @@ export const guidesCareer2: Guide[] = [
         term: { term: 'Bewerbungsfoto' },
       },
       {
+        title: L('Use this structure', 'यो ढाँचा प्रयोग गर्नुहोस्', 'यह ढांचा इस्तेमाल करें'),
+        body: L(
+          '1. Personal details: name, address in Germany, phone, email (date of birth, nationality and photo are optional). 2. Work experience: month/year – month/year, job title, company, city, 2–3 results. 3. Education: degree, university, city, years, grade or focus. 4. Skills: languages with levels (e.g. German B1, English C1, Nepali/Hindi native), software and tools. 5. Optional: projects, volunteering, interests that fit the job. End with place, date and your name.',
+          '१. व्यक्तिगत विवरण: नाम, जर्मनीको ठेगाना, फोन, इमेल (जन्ममिति, राष्ट्रियता र फोटो ऐच्छिक)। २. कामको अनुभव: महिना/वर्ष – महिना/वर्ष, पद, कम्पनी, सहर, २–३ उपलब्धि। ३. शिक्षा: डिग्री, विश्वविद्यालय, सहर, वर्ष, ग्रेड वा विषय। ४. सीप: तहसहित भाषा (जस्तै जर्मन B1, अंग्रेजी C1, नेपाली/हिन्दी मातृभाषा), सफ्टवेयर र उपकरण। ५. ऐच्छिक: परियोजना, स्वयंसेवा, कामसँग मिल्ने रुचि। अन्त्यमा ठाउँ, मिति र आफ्नो नाम लेख्नुहोस्।',
+          '1. व्यक्तिगत विवरण: नाम, जर्मनी का पता, फ़ोन, ईमेल (जन्मतिथि, राष्ट्रीयता और फ़ोटो वैकल्पिक)। 2. कार्य अनुभव: महीना/साल – महीना/साल, पद, कंपनी, शहर, 2–3 उपलब्धियां। 3. शिक्षा: डिग्री, विश्वविद्यालय, शहर, साल, ग्रेड या विषय। 4. कौशल: स्तर के साथ भाषाएं (जैसे जर्मन B1, अंग्रेज़ी C1, नेपाली/हिंदी मातृभाषा), सॉफ़्टवेयर और टूल। 5. वैकल्पिक: प्रोजेक्ट, स्वयंसेवा, नौकरी से जुड़ी रुचियां। अंत में जगह, तारीख और अपना नाम लिखें।',
+        ),
+        term: { term: 'Aufbau des Lebenslaufs' },
+      },
+      {
         title: L('Write a cover letter for this job', 'यो कामका लागि आवेदन पत्र लेख्नुहोस्', 'इस नौकरी के लिए कवर लेटर लिखें'),
         body: L(
           'At most one page. Say why this job and this company, with examples that match the advert. Avoid “würde” and “könnte” — write confidently.',

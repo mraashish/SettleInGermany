@@ -5,17 +5,22 @@ import { useTranslation } from 'react-i18next';
 
 import { useMyCity } from '@/content/city';
 import { useCities, useL, useRules } from '@/content/client';
+import { searchCities } from '@/content/germanCities';
 import type { Localized } from '@/content/types';
 import { createPersistedStore } from '@/lib/createStore';
 import { formatDate } from '@/lib/deadline';
+import { formatMoney, toAsciiDigits } from '@/lib/format';
 import { wageTaxClass1 } from '@/lib/incomeTax';
+import { parseDate } from '../reminders/dates';
+import i18n from '@/i18n';
 import { useTheme } from '@/theme/ThemeProvider';
 import { fonts } from '@/theme/tokens';
 import { AdSlot, Button, Card, Chip, Icon, ProgressBar, Screen, SectionTitle, SourcesList, Text, TextField, ToggleRow } from '@/ui';
 
-const eur = (n: number, digits = 0) => `€${n.toLocaleString('de-DE', { minimumFractionDigits: digits, maximumFractionDigits: digits })}`;
+/** Euro amounts in the reader's language (€1,172.68 · €१,१७२.६८). */
+const eur = (n: number, digits = 0) => formatMoney(n, i18n.language, digits);
 const num = (s: string) => {
-  const n = parseFloat(s.replace(/\s/g, '').replace(',', '.'));
+  const n = parseFloat(toAsciiDigits(s).replace(/\s/g, '').replace(',', '.'));
   return Number.isFinite(n) ? n : 0;
 };
 
@@ -73,8 +78,9 @@ function CityPicker({ value, onChange }: { value: string | null; onChange: (slug
   const [open, setOpen] = useState(false);
   const [q, setQ] = useState('');
   const current = cities.find((x) => x.slug === value);
-  const norm = (x: string) => x.toLowerCase().normalize('NFKD').replace(/[\u0300-\u036f]/g, '');
-  const matches = cities.filter((x) => x.budget?.length && norm(x.name).includes(norm(q))).slice(0, 8);
+  const withBudget = cities.filter((x) => x.budget?.length);
+  const names = searchCities(withBudget.map((x) => x.name), q).slice(0, 8);
+  const matches = names.map((n) => withBudget.find((x) => x.name === n)!).filter(Boolean);
   return (
     <View style={{ gap: 8 }}>
       <View style={{ flexDirection: 'row', gap: 8, alignItems: 'center', flexWrap: 'wrap' }}>
@@ -84,6 +90,7 @@ function CityPicker({ value, onChange }: { value: string | null; onChange: (slug
       {open ? (
         <Card style={{ gap: 4 }}>
           <TextField label={t('tools.searchCity')} value={q} onChangeText={setQ} autoFocus placeholder="Berlin" />
+          {q.trim() && !matches.length ? <Text size={14} color="text2">{t('tools.noCityFound', { city: q.trim() })}</Text> : null}
           {matches.map((x) => (
             <Pressable key={x.slug} accessibilityRole="button" onPress={() => { onChange(x.slug); setOpen(false); setQ(''); }} style={{ minHeight: 44, justifyContent: 'center' }}>
               <Text weight={x.slug === value ? '700' : '400'}>{x.name}</Text>
@@ -188,7 +195,7 @@ export function NetPayScreen() {
   const tooManyHours = r?.studentWeeklyHours && num(hours) > r.studentWeeklyHours;
   const rows: [string, string][] = [
     [t('tools.grossPay'), eur(gross, 2)],
-    [t('tools.pension', { pct: pensionPct.toLocaleString('de-DE') }), `− ${eur(pension, 2)}`],
+    [t('tools.pension', { pct: String(pensionPct) }), `− ${eur(pension, 2)}`],
     [t('tools.incomeTax'), `− ${eur(tax.incomeTaxMonthly, 2)}`],
     ...(tax.soliMonthly ? [[t('tools.solidarity'), `− ${eur(tax.soliMonthly, 2)}`] as [string, string]] : []),
     ...(church && type !== 'mini' ? [[t('tools.churchTax'), `− ${eur(tax.churchTaxMonthly, 2)}`] as [string, string]] : []),
@@ -232,7 +239,12 @@ export function NetPayScreen() {
 type WorkDay = { id: string; date: string; place: string; hours: number };
 const workStore = createPersistedStore<{ days: WorkDay[] }>('workdays.v1', { days: [] });
 const newId = () => `w${Date.now()}`;
-const todayIso = () => new Date().toISOString().slice(0, 10);
+/** Local calendar date, n days ago, as yyyy-mm-dd. */
+const localIso = (daysAgo = 0) => {
+  const d = new Date();
+  d.setDate(d.getDate() - daysAgo);
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+};
 
 export function WorkLimitScreen() {
   const { t, i18n } = useTranslation();
@@ -242,6 +254,9 @@ export function WorkLimitScreen() {
   const { days } = workStore.useStore();
   const [place, setPlace] = useState('');
   const [hours, setHours] = useState('');
+  const [when, setWhen] = useState<'today' | 'yesterday' | 'other'>('today');
+  const [otherDate, setOtherDate] = useState('');
+  const date = when === 'today' ? localIso(0) : when === 'yesterday' ? localIso(1) : parseDate(otherDate);
   const fullDay = r?.fullDayHours ?? 4;
   /** More than `fullDay` hours = a full day; up to that = half a day (two half days = one full day). */
   const weight = (h: number) => (h > fullDay ? 1 : h > 0 ? 0.5 : 0);
@@ -251,9 +266,9 @@ export function WorkLimitScreen() {
   const left = Math.max(0, limit - used);
   const log = () => {
     const h = num(hours);
-    if (!h) return;
-    workStore.set((s) => ({ days: [{ id: newId(), date: todayIso(), place: place || t('tools.work'), hours: h }, ...s.days] }));
-    setHours(''); setPlace('');
+    if (!h || !date) return;
+    workStore.set((s) => ({ days: [{ id: newId(), date, place: place || t('tools.work'), hours: h }, ...s.days].sort((a, b) => b.date.localeCompare(a.date)) }));
+    setHours(''); setPlace(''); setWhen('today'); setOtherDate('');
   };
   return (
     <Screen title={t('tools.worklimit')} large={false} back={back} crumbs={crumbs(t('tools.worklimit'))}>
@@ -268,7 +283,17 @@ export function WorkLimitScreen() {
         <View style={{ flex: 2 }}><TextField label={t('tools.where')} value={place} onChangeText={setPlace} placeholder={t('tools.wherePlaceholder')} /></View>
         <View style={{ flex: 1 }}><TextField label={t('tools.hours')} value={hours} onChangeText={setHours} keyboardType="decimal-pad" /></View>
       </View>
-      <Button label={t('tools.logWorkDay')} onPress={log} disabled={!num(hours)} />
+      <View style={{ gap: 8 }}>
+        <Text size={14} weight="600">{t('tools.workDate')}</Text>
+        <View style={{ flexDirection: 'row', gap: 8, flexWrap: 'wrap' }}>
+          {(['today', 'yesterday', 'other'] as const).map((w) => <Chip key={w} label={t(`tools.date_${w}`)} selected={when === w} onPress={() => setWhen(w)} />)}
+        </View>
+        {when === 'other' ? (
+          <TextField label={t('reminders.date')} value={otherDate} onChangeText={setOtherDate} placeholder="10.11.2026"
+            hint={otherDate.length >= 8 && !date ? t('reminders.dateError') : t('reminders.dateHint')} keyboardType="numbers-and-punctuation" />
+        ) : null}
+      </View>
+      <Button label={t('tools.logWorkDay')} onPress={log} disabled={!num(hours) || !date} />
       {days.length ? (
         <>
           <SectionTitle>{t('tools.recentDays')}</SectionTitle>

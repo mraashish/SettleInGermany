@@ -110,6 +110,12 @@ export const COLLECTION_DEFS: CollectionDef[] = [
       },
       sourcesField('Required: every guide shows its sources.'),
       {
+        type: 'list', name: 'actions', label: 'Main official links (buttons)', itemLabel: 'button', summary: (a) => L(a, 'label'), help: 'e.g. “Book an appointment online”. The first one is the main button.', fields: [
+          { type: 'localized', name: 'label', label: 'Button text' },
+          { type: 'url', name: 'url', label: 'Official URL' },
+        ],
+      },
+      {
         type: 'group', name: 'compareLink', label: 'Comparison link on the guide card', optional: true, fields: [
           { type: 'localized', name: 'label', label: 'Label' },
           { type: 'text', name: 'href', label: 'Link', placeholder: '/tools/compare/bank-accounts' },

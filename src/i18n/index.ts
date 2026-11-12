@@ -1,9 +1,10 @@
 /* eslint-disable import/no-named-as-default-member -- i18next's default instance is the documented API */
 import { getLocales } from 'expo-localization';
 import { Platform } from 'react-native';
-import i18n from 'i18next';
+import i18n, { type PostProcessorModule } from 'i18next';
 import { initReactI18next } from 'react-i18next';
 
+import { localizeDigits } from '@/lib/format';
 import { type Language, prefsStore } from '@/store/prefs';
 import en from './locales/en';
 import hi from './locales/hi';
@@ -24,7 +25,15 @@ function initialLanguage(): Language {
   return device === 'ne' || device === 'hi' ? device : 'en';
 }
 
-void i18n.use(initReactI18next).init({
+/** Nepali UI text uses Devanagari digits throughout (interpolated numbers included). */
+const localDigits: PostProcessorModule = {
+  type: 'postProcessor',
+  name: 'localDigits',
+  process: (value: string, _key: string | string[], _options: unknown, translator: { language?: string }) => localizeDigits(value, translator?.language),
+};
+
+void i18n.use(initReactI18next).use(localDigits).init({
+  postProcess: ['localDigits'],
   resources: { en: { translation: en }, ne: { translation: ne }, hi: { translation: hi } },
   lng: initialLanguage(),
   fallbackLng: 'en',

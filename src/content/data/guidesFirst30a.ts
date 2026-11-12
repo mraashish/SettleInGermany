@@ -97,6 +97,10 @@ export const guidesFirst30a: Guide[] = [
       { kind: 'guide', title: L('Open a bank account', 'बैंक खाता खोल्नुहोस्', 'बैंक खाता खोलें'), href: '/guides/open-a-bank-account' },
       { kind: 'guide', title: L('Get your tax ID', 'आफ्नो कर आईडी लिनुहोस्', 'अपनी टैक्स आईडी पाएं'), href: '/guides/get-your-tax-id' },
     ],
+    actions: [
+      { label: L('Book an appointment online', 'अनलाइन अपोइन्टमेन्ट बुक गर्नुहोस्', 'ऑनलाइन अपॉइंटमेंट बुक करें'), url: S.leipzigBooking.url },
+      { label: L('Landlord’s confirmation form', 'घरधनीको पुष्टि-पत्र फारम', 'मकान मालिक पुष्टि-पत्र फ़ॉर्म'), url: S.leipzigLandlordForm.url },
+    ],
     sources: [S.leipzigRegister, S.leipzigRegisterEn, S.leipzigLandlordForm, S.leipzigOttoSchill, S.leipzigBooking, S.bmgRegister],
   },
   {
@@ -277,6 +281,9 @@ export const guidesFirst30a: Guide[] = [
       { kind: 'guide', title: L('Register your address', 'आफ्नो ठेगाना दर्ता गर्नुहोस्', 'अपना पता पंजीकृत करें'), href: '/guides/register-your-address' },
       { kind: 'guide', title: L('Extend your residence permit', 'आवास अनुमतिपत्र नवीकरण गर्नुहोस्', 'निवास परमिट बढ़वाएं'), href: '/guides/extend-your-residence-permit' },
     ],
+    actions: [
+      { label: L('Apply online', 'अनलाइन आवेदन दिनुहोस्', 'ऑनलाइन आवेदन करें'), url: S.leipzigOnlineStudy.url },
+    ],
     sources: [S.leipzigPermitStudy, S.leipzigPermitStudyEn, S.leipzigOnlineStudy, S.leipzigForeignersAuthority],
   },
   {
@@ -427,6 +434,9 @@ export const guidesFirst30a: Guide[] = [
     related: [
       { kind: 'guide', title: L('Register your address', 'आफ्नो ठेगाना दर्ता गर्नुहोस्', 'अपना पता पंजीकृत करें'), href: '/guides/register-your-address' },
       { kind: 'tool', title: L('Plan your monthly budget', 'मासिक बजेट योजना बनाउनुहोस्', 'मासिक बजट की योजना बनाएं'), href: '/tools/budget' },
+    ],
+    actions: [
+      { label: L('Apply for a dorm room', 'छात्रावासका लागि आवेदन दिनुहोस्', 'हॉस्टल के लिए आवेदन करें'), url: S.swHousingApply.url },
     ],
     sources: [S.swHousing, S.swHousingFaq, S.swHousingApply, S.leipzigRentIndex, S.bgbDeposit, S.vzFakeFlats, S.policeAdvance],
   },

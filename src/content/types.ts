@@ -49,6 +49,8 @@ export interface Guide {
   sources: Source[];
   /** Shown as "Updated" chip in lists. */
   updatedRecently?: boolean;
+  /** Main official links shown as buttons under "In short" (e.g. "Book an appointment"). */
+  actions?: { label: Localized; url: string }[];
   /** Comparison tool linked from the guide card ("Compare banks"). */
   compareLink?: { label: Localized; href: string };
 }
@@ -153,6 +155,14 @@ export interface Provider {
   sources?: Source[];
   /** Important caveat shown highlighted on the card (e.g. not taking new customers). */
   notice?: Localized;
+  /** Bank accounts: free for students up to and including this age (none = free at any age). */
+  freeUpToAge?: number;
+  /** Monthly fee once the free period ends (€). */
+  monthlyAfter?: number;
+  /** Conditions differ by local branch (Sparkasse, Volksbank): the age is an example. */
+  variesByBranch?: boolean;
+  /** Blocked accounts: total cost of the first year (€), shown on the card. */
+  yearOneCost?: number;
 }
 
 export interface Phrase {

@@ -5,6 +5,7 @@ import { ActivityIndicator, View } from 'react-native';
 
 import { useTranslation } from 'react-i18next';
 
+import { digits } from '@/lib/format';
 import { ai, ApiError } from '@/services/ai';
 import { useTheme } from '@/theme/ThemeProvider';
 import { Button, ErrorState, Icon, Text } from '@/ui';
@@ -15,7 +16,7 @@ const STEPS = ['assist.step1', 'assist.step2', 'assist.step3'];
 
 /** Calm, step-by-step progress (LetterFlow step=processing). */
 export function ProcessingScreen() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { c } = useTheme();
   const { lang } = useLocalSearchParams<{ lang?: string }>();
   const [step, setStep] = useState(0);
@@ -55,7 +56,7 @@ export function ProcessingScreen() {
                 <View key={s} accessibilityRole={'listitem' as never} accessibilityLiveRegion={now ? 'polite' : 'none'}
                   style={{ flexDirection: 'row', alignItems: 'center', gap: 12, minHeight: 52, backgroundColor: c.surface, borderWidth: 1, borderColor: now ? c.primary : c.border, borderRadius: 14, paddingHorizontal: 14 }}>
                   <View style={{ width: 28, height: 28, borderRadius: 14, alignItems: 'center', justifyContent: 'center', backgroundColor: done ? c.successFill : now ? c.primaryTint : c.divider }}>
-                    {done ? <Icon icon={Check} size={16} color={c.onPrimary === '#FFFFFF' ? '#FFFFFF' : c.ground} strokeWidth={3} /> : now ? <ActivityIndicator size="small" color={c.primary} /> : <Text size={13} weight="700" color="muted">{i + 1}</Text>}
+                    {done ? <Icon icon={Check} size={16} color={c.onPrimary === '#FFFFFF' ? '#FFFFFF' : c.ground} strokeWidth={3} /> : now ? <ActivityIndicator size="small" color={c.primary} /> : <Text size={13} weight="700" color="muted">{digits(i + 1, i18n.language)}</Text>}
                   </View>
                   <Text weight={now ? '700' : '500'} style={{ flex: 1 }} color={i > step ? 'muted' : 'text'}>{t(s)}</Text>
                   <Text size={13} weight="600" color={done ? 'successText' : now ? 'primary' : 'muted'}>{done ? t('deadline.done') : now ? t('assist.now') : ''}</Text>

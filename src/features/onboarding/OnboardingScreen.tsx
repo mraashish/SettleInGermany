@@ -15,14 +15,11 @@ import { useTheme } from '@/theme/ThemeProvider';
 import { Button, Icon, SelectCard, SiteHeader, Text } from '@/ui';
 import { useRoadmapData } from '../roadmap/useRoadmapData';
 import { AccountStep } from './AccountStep';
+import { digits, weekdayName } from '@/lib/format';
 import { CityStep } from './CityStep';
 
 /** Mon–Sun short names in the UI language. */
-function weekdays(lang: string) {
-  const monday = new Date(Date.UTC(2024, 0, 1));
-  return Array.from({ length: 7 }, (_, i) =>
-    new Intl.DateTimeFormat(lang === 'en' ? 'en-GB' : lang, { weekday: 'short', timeZone: 'UTC' }).format(new Date(monday.getTime() + i * 86400000)));
-}
+const weekdays = (lang: string) => Array.from({ length: 7 }, (_, i) => weekdayName(i, lang));
 
 const TOTAL = 9;
 
@@ -157,7 +154,7 @@ function CalendarPicker({ value, onChange }: { value: string | null; onChange: (
                 <Pressable accessibilityRole="button" accessibilityState={{ selected: on }} accessibilityLabel={formatDate(iso(d), i18n.language, { weekday: 'long', day: 'numeric', month: 'long' })}
                   onPress={() => onChange(iso(d))}
                   style={{ flex: 1, borderRadius: 999, alignItems: 'center', justifyContent: 'center', backgroundColor: on ? c.primary : 'transparent' }}>
-                  <Text size={15} weight={on ? '700' : '400'} color={on ? c.onPrimary : c.text}>{d}</Text>
+                  <Text size={15} weight={on ? '700' : '400'} color={on ? c.onPrimary : c.text}>{digits(d, i18n.language)}</Text>
                 </Pressable>
               ) : null}
             </View>
@@ -293,7 +290,7 @@ export function OnboardingScreen({ step }: { step: number }) {
           <View style={{ backgroundColor: c.surface, borderWidth: 1, borderColor: c.border, borderRadius: th.shape.card, paddingHorizontal: 16 }}>
             {next3.map((v, i) => (
               <View key={v.id} style={{ flexDirection: 'row', gap: 12, alignItems: 'center', minHeight: 56, borderTopWidth: i ? 1 : 0, borderColor: c.divider }}>
-                <View style={{ width: 28, height: 28, borderRadius: 14, backgroundColor: c.primaryTint, alignItems: 'center', justifyContent: 'center' }}><Text size={14} weight="700" color="primary">{i + 1}</Text></View>
+                <View style={{ width: 28, height: 28, borderRadius: 14, backgroundColor: c.primaryTint, alignItems: 'center', justifyContent: 'center' }}><Text size={14} weight="700" color="primary">{digits(i + 1, i18n.language)}</Text></View>
                 <Text weight="600" style={{ flex: 1 }}>{v.title}</Text>
               </View>
             ))}

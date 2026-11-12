@@ -1,10 +1,11 @@
 import { Link, router } from 'expo-router';
 import * as WebBrowser from 'expo-web-browser';
-import { Bookmark, ChevronRight, Share2, ThumbsDown, ThumbsUp } from 'lucide-react-native';
+import { Bookmark, ChevronRight, ExternalLink, Share2, ThumbsDown, ThumbsUp } from 'lucide-react-native';
 import React, { useState } from 'react';
 import { Platform, Pressable, Share, View } from 'react-native';
 import { useTranslation } from 'react-i18next';
 
+import { digits } from '@/lib/format';
 import { isOutdated, useGuide, useL } from '@/content/client';
 import type { Guide } from '@/content/types';
 import { formatDate } from '@/lib/deadline';
@@ -29,7 +30,7 @@ function SummaryRow({ label, value, strong }: { label: string; value: string; st
 }
 
 function Steps({ guide }: { guide: Guide }) {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { c } = useTheme();
   const l = useL();
   return (
@@ -38,7 +39,7 @@ function Steps({ guide }: { guide: Guide }) {
       {guide.steps.map((s, i) => (
         <View key={i} style={{ flexDirection: 'row', gap: 12 }}>
           <View style={{ width: 32, height: 32, borderRadius: 999, backgroundColor: c.primary, alignItems: 'center', justifyContent: 'center' }}>
-            <Text size={15} weight="700" color={c.onPrimary}>{i + 1}</Text>
+            <Text size={15} weight="700" color={c.onPrimary}>{digits(i + 1, i18n.language)}</Text>
           </View>
           <View style={{ flex: 1, gap: 6 }}>
             <Text size={16} lineHeight={22} weight="600" heading>{l(s.title)}</Text>
@@ -130,6 +131,7 @@ function Feedback({ guide }: { guide: Guide }) {
 
 export function GuideBody({ guide }: { guide: Guide }) {
   const { t, i18n } = useTranslation();
+  const { desktop } = useLayout();
   const th = useTheme();
   const { c } = th;
   const l = useL();
@@ -170,6 +172,15 @@ export function GuideBody({ guide }: { guide: Guide }) {
         <SummaryRow label={t('guides.deadline')} value={l(guide.summary.deadline)} strong />
       </View>
 
+      {guide.actions?.length ? (
+        <View style={{ gap: 8 }}>
+          {guide.actions.map((a, i) => (
+            <Button key={a.url} variant={i === 0 ? 'primary' : 'secondary'} icon={ExternalLink} label={l(a.label)}
+              accessibilityHint={t('guides.opensOfficialSite')} onPress={() => void WebBrowser.openBrowserAsync(a.url)} />
+          ))}
+        </View>
+      ) : null}
+
       {Platform.OS === 'web' && !onboarded ? (
         <View style={{ backgroundColor: c.primaryTint, borderRadius: 16, padding: 16, gap: 6 }}>
           <Text weight="700">{t('guides.ctaTitle')}</Text>
@@ -186,7 +197,8 @@ export function GuideBody({ guide }: { guide: Guide }) {
 
       {tips.length ? <View nativeID="tips" style={{ gap: 10 }}>{tips.map((x, i) => <Callout key={i} kind={x.kind} text={l(x.text)} />)}</View> : null}
 
-      {guide.related.length && Platform.OS !== 'web' ? (
+      {/* On wide web screens the related links sit in the side column instead. */}
+      {guide.related.length && !(Platform.OS === 'web' && desktop) ? (
         <View style={{ gap: 8 }}>
           <SectionTitle>{t('guides.related')}</SectionTitle>
           <Card padded={false} style={{ paddingHorizontal: 16 }}>

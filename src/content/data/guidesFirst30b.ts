@@ -155,6 +155,9 @@ export const guidesFirst30b: Guide[] = [
       { kind: 'guide', title: L('Student jobs and work limits', 'विद्यार्थी काम र कामको सीमा', 'छात्र नौकरियां और काम की सीमा'), href: '/guides/student-jobs' },
       { kind: 'guide', title: L('File your tax return', 'कर विवरण बुझाउनुहोस्', 'टैक्स रिटर्न भरें'), href: '/guides/file-tax-return' },
     ],
+    actions: [
+      { label: L('Request your tax ID again', 'कर आईडी फेरि माग्नुहोस्', 'टैक्स आईडी दोबारा मांगें'), url: S.bzstResend.url },
+    ],
     sources: [S.bzstIdNr, S.bzstFaq, S.bzstResend],
   },
   {
@@ -225,6 +228,9 @@ export const guidesFirst30b: Guide[] = [
     related: [
       { kind: 'tool', title: L('Plan your monthly budget', 'मासिक बजेट योजना बनाउनुहोस्', 'मासिक बजट की योजना बनाएं'), href: '/tools/budget' },
       { kind: 'guide', title: L('Find a room in Leipzig', 'लाइपजिगमा कोठा खोज्नुहोस्', 'लाइपज़िग में कमरा खोजें'), href: '/guides/find-housing-leipzig' },
+    ],
+    actions: [
+      { label: L('Register online', 'अनलाइन दर्ता गर्नुहोस्', 'ऑनलाइन पंजीकरण करें'), url: S.rundfunkInfo.url },
     ],
     sources: [S.rundfunkStudents, S.rundfunkPayment, S.rundfunkInfo],
   },

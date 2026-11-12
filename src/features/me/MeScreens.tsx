@@ -20,7 +20,7 @@ import { useTheme } from '@/theme/ThemeProvider';
 import { Button, Card, Chip, LinkRow, Overline, Pill, Screen, Text, ToggleRow } from '@/ui';
 
 function ProfileCard() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const th = useTheme();
   const { c } = th;
   const p = usePrefs((s) => s.profile);
@@ -39,7 +39,7 @@ function ProfileCard() {
         </View>
         <Button variant="text" fullWidth={false} label={t('me.edit')} onPress={() => router.push('/onboarding/2')} />
       </View>
-      {premium ? <View style={{ flexDirection: 'row', gap: 8, alignItems: 'center' }}><Pill label={t('common.premium')} tone="accent" />{expires ? <Text variant="caption" color="muted">{t('me.renews', { date: formatDate(expires) })}</Text> : null}</View> : null}
+      {premium ? <View style={{ flexDirection: 'row', gap: 8, alignItems: 'center' }}><Pill label={t('common.premium')} tone="accent" />{expires ? <Text variant="caption" color="muted">{t('me.renews', { date: formatDate(expires, i18n.language) })}</Text> : null}</View> : null}
     </Card>
   );
 }
@@ -139,7 +139,7 @@ export function PrivacyScreen() {
 }
 
 export function SubscriptionScreen() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { c } = useTheme();
   const { premium, expires } = useEntitlement();
   const manageUrl = Platform.select({ ios: 'https://apps.apple.com/account/subscriptions', android: 'https://play.google.com/store/account/subscriptions', default: process.env.EXPO_PUBLIC_RC_WEB_PORTAL ?? '' });
@@ -149,7 +149,7 @@ export function SubscriptionScreen() {
         <>
           <Card style={{ gap: 10 }}>
             <View style={{ flexDirection: 'row', gap: 8, alignItems: 'center' }}><Pill label={t('common.premium')} tone="accent" /><Pill label={t('me.active')} tone="success" /></View>
-            {[[t('me.renewsOn'), expires ? formatDate(expires) : '—'], [t('me.paidThrough'), storeName ?? '']].map(([k, v]) => (
+            {[[t('me.renewsOn'), expires ? formatDate(expires, i18n.language) : '—'], [t('me.paidThrough'), storeName ?? '']].map(([k, v]) => (
               <View key={k} style={{ flexDirection: 'row', justifyContent: 'space-between', borderTopWidth: 1, borderColor: c.divider, paddingTop: 8 }}><Text color="text3">{k}</Text><Text weight="600">{v}</Text></View>
             ))}
           </Card>

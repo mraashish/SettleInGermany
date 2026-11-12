@@ -1,5 +1,8 @@
-/** dd.mm.yyyy (how German documents write it) or yyyy-mm-dd → ISO date, or null. */
-export function parseDate(s: string): string | null {
+import { toAsciiDigits } from '@/lib/format';
+
+/** dd.mm.yyyy (as on German documents) or yyyy-mm-dd → ISO date, or null. Latin or Devanagari digits. */
+export function parseDate(input: string): string | null {
+  const s = toAsciiDigits(input);
   const de = /^(\d{1,2})\.(\d{1,2})\.(\d{4})$/.exec(s.trim());
   const iso = /^(\d{4})-(\d{2})-(\d{2})$/.exec(s.trim());
   const parts = de ? [de[3], de[2], de[1]] : iso ? [iso[1], iso[2], iso[3]] : null;

@@ -50,6 +50,11 @@ export function ScanScreen() {
   if (Platform.OS === 'web') {
     return (
       <AiScreen title={t('assist.uploadTitle')} back={{ label: t('nav.assist'), href: '/assist' }}>
+        <Pressable accessibilityRole="link" onPress={leaveScan} hitSlop={8}
+          style={{ alignSelf: 'flex-start', flexDirection: 'row', alignItems: 'center', gap: 4, minHeight: 44, paddingRight: 8 }}>
+          <Icon icon={ChevronLeft} size={20} color="primary" />
+          <Text weight="600" color="primary">{t('nav.backTo', { name: t('nav.assist') })}</Text>
+        </Pressable>
         <Pressable accessibilityRole="button" accessibilityLabel={t('assist.chooseFile')} onPress={async () => add(await pickFiles())}
           style={{ minHeight: 220, borderWidth: 2, borderStyle: 'dashed', borderColor: c.borderStrong, borderRadius: 20, backgroundColor: c.surface, alignItems: 'center', justifyContent: 'center', gap: 10, padding: 24 }}>
           <View style={{ width: 56, height: 56, borderRadius: 16, backgroundColor: c.primaryTint, alignItems: 'center', justifyContent: 'center' }}><Icon icon={Upload} color="primary" /></View>
@@ -73,6 +78,7 @@ export function ScanScreen() {
         {outOfScans ? <Button variant="premium" label={t('assist.seePremium')} onPress={() => router.push('/premium')} /> : (
           <Button label={t('assist.explainThis')} disabled={!pages.length || !online} onPress={() => start(pages, i18n.language)} />
         )}
+        <Button variant="text" label={t('nav.cancel')} onPress={leaveScan} />
       </AiScreen>
     );
   }

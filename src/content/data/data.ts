@@ -1,4 +1,5 @@
 import type { City, EmbassyContact, HelpService, Phrase, Provider, RoadmapTask, RuleChange, Rules, ScamWarning } from '../types';
+import { toDevanagari } from '../../lib/format';
 import { generatedCities, leipzigPlaces } from './cities';
 import { CHECKED, L, S } from './util';
 
@@ -245,7 +246,7 @@ const blockedFacts = (setup: string, monthly: string) => [
   L('Pays your monthly amount into your German current account', 'तपाईंको जर्मन चल्ती खातामा मासिक रकम पठाउँछ', 'आपके जर्मन चालू खाते में हर महीने की रकम भेजता है'),
 ];
 
-const FREE_STUDENT = (age: string) => L(`Free for students up to ${age}`, `${age} वर्षसम्मका विद्यार्थीका लागि निःशुल्क`, `${age} साल तक के छात्रों के लिए मुफ़्त`);
+const FREE_STUDENT = (age: string) => L(`Free for students up to ${age}`, `${toDevanagari(age)} वर्षसम्मका विद्यार्थीका लागि निःशुल्क`, `${age} साल तक के छात्रों के लिए मुफ़्त`);
 
 /**
  * Comparison data. No referral links: every provider is a non-partner and the list is
@@ -260,12 +261,12 @@ export const providers: Provider[] = [
       L('Adds a €100 buffer to your transfer; the unused part is paid back with the last payout', 'ट्रान्सफरमा €१०० बफर थप्छ; नचलेको भाग अन्तिम भुक्तानीसँग फिर्ता हुन्छ', 'ट्रांसफ़र में €100 बफ़र जोड़ता है; बचा हुआ हिस्सा आख़िरी भुगतान के साथ लौटता है'),
       L('Prices for applications from 7 July 2026', '७ जुलाई २०२६ देखिका आवेदनको मूल्य', '7 जुलाई 2026 से आवेदनों की कीमत'),
     ],
-    isPartner: false, url: 'https://www.expatrio.com/blocked-account', lastChecked: CHECKED, feeSortKey: 227, speedSortKey: 0, sources: [S.expatrio, S.expatrioFees],
+    yearOneCost: 227, isPartner: false, url: 'https://www.expatrio.com/blocked-account', lastChecked: CHECKED, feeSortKey: 227, speedSortKey: 0, sources: [S.expatrio, S.expatrioFees],
   },
   {
     id: 'fintiba', category: 'blocked', name: 'Fintiba', setupFee: '€159', monthlyFee: '€9.90', openingTime: '', payout: '',
     facts: [...blockedFacts('€159', '€9.90'), L('Prices for accounts opened from 3 November 2025', '३ नोभेम्बर २०२५ देखि खोलिएका खाताको मूल्य', '3 नवंबर 2025 से खुले खातों की कीमत')],
-    isPartner: false, url: 'https://www.fintiba.com/', lastChecked: CHECKED, feeSortKey: 277.8, speedSortKey: 0, sources: [S.fintiba, S.fintibaNews],
+    yearOneCost: 277.8, isPartner: false, url: 'https://www.fintiba.com/', lastChecked: CHECKED, feeSortKey: 277.8, speedSortKey: 0, sources: [S.fintiba, S.fintibaNews],
   },
   {
     id: 'deutsche-bank-blocked', category: 'blocked', name: 'Deutsche Bank', setupFee: '€150', monthlyFee: '', openingTime: '', payout: '',
@@ -283,7 +284,7 @@ export const providers: Provider[] = [
       L('One-time fee, no monthly fee (published terms, 2023)', 'एकपटकको शुल्क, मासिक शुल्क छैन (प्रकाशित सर्त, २०२३)', 'एक बार की फ़ीस, कोई मासिक फ़ीस नहीं (प्रकाशित शर्तें, 2023)'),
     ],
     notice: L('Not accepting new blocked-account applications since August 2025. Check coracle.de before you rely on it.', 'अगस्ट २०२५ देखि नयाँ ब्लक्ड खाताको आवेदन लिइरहेको छैन। भर पर्नुअघि coracle.de हेर्नुहोस्।', 'अगस्त 2025 से नए ब्लॉक्ड अकाउंट आवेदन नहीं ले रहा। भरोसा करने से पहले coracle.de देखें।'),
-    isPartner: false, url: 'https://www.coracle.de/', lastChecked: CHECKED, feeSortKey: 9999, speedSortKey: 0, sources: [S.coracle, S.coracleTerms, S.bankdatenBlocked],
+    yearOneCost: 99, isPartner: false, url: 'https://www.coracle.de/', lastChecked: CHECKED, feeSortKey: 9999, speedSortKey: 0, sources: [S.coracle, S.coracleTerms, S.bankdatenBlocked],
   },
   // ── Current accounts ─────────────────────────────────────────────
   {
@@ -294,7 +295,7 @@ export const providers: Provider[] = [
       L('Branches and ATMs everywhere — advice in person', 'जताततै शाखा र ATM — आमनेसामने सल्लाह', 'हर जगह शाखाएं और ATM — आमने-सामने सलाह'),
       L('Bring your enrolment certificate', 'भर्ना प्रमाणपत्र लैजानुहोस्', 'दाख़िला प्रमाणपत्र साथ लाएं'),
     ],
-    isPartner: false, url: 'https://www.sparkasse.de/pk/produkte/konten-und-karten/girokonto/studenten-und-auszubildende', lastChecked: CHECKED, feeSortKey: 0, speedSortKey: 0,
+    freeUpToAge: 26, variesByBranch: true, isPartner: false, url: 'https://www.sparkasse.de/pk/produkte/konten-und-karten/girokonto/studenten-und-auszubildende', lastChecked: CHECKED, feeSortKey: 0, speedSortKey: 0,
     sources: [S.sparkasseDe, S.sparkasseStudents, S.berlinerSparkasse],
   },
   {
@@ -305,7 +306,7 @@ export const providers: Provider[] = [
       L('Bring your enrolment certificate', 'भर्ना प्रमाणपत्र लैजानुहोस्', 'दाख़िला प्रमाणपत्र साथ लाएं'),
     ],
     notice: L('Check the price list of the Volksbank in your city before you open the account.', 'खाता खोल्नुअघि आफ्नो सहरको Volksbank को मूल्य सूची हेर्नुहोस्।', 'खाता खोलने से पहले अपने शहर के Volksbank की मूल्य सूची देखें।'),
-    isPartner: false, url: 'https://www.vr.de/privatkunden/unsere-produkte/konten-und-karten/girokonten.html', lastChecked: CHECKED, feeSortKey: 0, speedSortKey: 0,
+    freeUpToAge: 27, variesByBranch: true, isPartner: false, url: 'https://www.vr.de/privatkunden/unsere-produkte/konten-und-karten/girokonten.html', lastChecked: CHECKED, feeSortKey: 0, speedSortKey: 0,
     sources: [S.vbMittelhessen, S.vzNiedersachsen],
   },
   {
@@ -315,7 +316,7 @@ export const providers: Provider[] = [
       L('Account is run digitally; free cash at Commerzbank and Cash Group ATMs', 'खाता डिजिटल रूपमा चल्छ; Commerzbank र Cash Group ATM मा निःशुल्क नगद', 'खाता डिजिटल चलता है; Commerzbank और Cash Group ATM पर मुफ़्त नकद'),
       L('Switches to a paid account automatically at 28', '२८ वर्षमा आफैं सशुल्क खातामा बदलिन्छ', '28 साल पर अपने आप शुल्क वाले खाते में बदल जाता है'),
     ],
-    isPartner: false, url: S.commerzStart.url, lastChecked: CHECKED, feeSortKey: 0, speedSortKey: 0, sources: [S.commerzStart, S.commerzStudents],
+    freeUpToAge: 27, monthlyAfter: 9.9, isPartner: false, url: S.commerzStart.url, lastChecked: CHECKED, feeSortKey: 0, speedSortKey: 0, sources: [S.commerzStart, S.commerzStudents],
   },
   {
     id: 'deutsche-bank', category: 'bank', name: 'Deutsche Bank — Das Junge Konto', setupFee: '€0', monthlyFee: '€0', openingTime: '', payout: '',
@@ -324,7 +325,7 @@ export const providers: Provider[] = [
       L('Needs a registered address in the EU', 'EU मा दर्ता भएको ठेगाना चाहिन्छ', 'EU में पंजीकृत पता चाहिए'),
       L('Afterwards it becomes an AktivKonto for €6.90 a month', 'त्यसपछि महिनाको €६.९० को AktivKonto बन्छ', 'उसके बाद यह €6.90 प्रति माह का AktivKonto बन जाता है'),
     ],
-    isPartner: false, url: S.dbYoung.url, lastChecked: CHECKED, feeSortKey: 0, speedSortKey: 0, sources: [S.dbYoung, S.dbYoungPrices],
+    freeUpToAge: 30, monthlyAfter: 6.9, isPartner: false, url: S.dbYoung.url, lastChecked: CHECKED, feeSortKey: 0, speedSortKey: 0, sources: [S.dbYoung, S.dbYoungPrices],
   },
   {
     id: 'n26', category: 'bank', name: 'N26 Standard', setupFee: '€0', monthlyFee: '€0', openingTime: '', payout: '',
@@ -352,7 +353,7 @@ export const providers: Provider[] = [
       L('Online bank, opened online with identity check', 'अनलाइन बैंक, पहिचान जाँचसहित अनलाइन खोलिन्छ', 'ऑनलाइन बैंक, पहचान जांच के साथ ऑनलाइन खुलता है'),
       L('€0 under 28 or with at least €1,000 incoming a month — otherwise €4.90', '२८ वर्षमुनि वा महिनामा कम्तीमा €१,००० आउने भए €०, नत्र €४.९०', '28 से कम उम्र या हर महीने कम से कम €1,000 आने पर €0, वरना €4.90'),
     ],
-    isPartner: false, url: S.ingConditions.url, lastChecked: CHECKED, feeSortKey: 0, speedSortKey: 0, sources: [S.ingConditions],
+    freeUpToAge: 27, monthlyAfter: 4.9, isPartner: false, url: S.ingConditions.url, lastChecked: CHECKED, feeSortKey: 0, speedSortKey: 0, sources: [S.ingConditions],
   },
 ];
 
@@ -435,7 +436,7 @@ export const helpServices: HelpService[] = [
       'लाइपजिग सहरको स्वागत केन्द्रले बसाइ, काम, भाषा कक्षा र दैनिक जीवनबारे प्रारम्भिक सल्लाह दिन्छ र सही कार्यालयमा पठाउँछ।',
       'लाइपज़िग शहर का स्वागत केंद्र निवास, काम, भाषा कोर्स और रोज़मर्रा के जीवन पर शुरुआती सलाह देता है और सही कार्यालय तक भेजता है।',
     ),
-    phone: '+493411232676', address: 'Otto-Schill-Straße 2, 04109 Leipzig', url: S.leipzigWelcome.url, topics: ['visa', 'work', 'housing'], sources: [S.leipzigWelcome, S.leipzigWelcomeAdvice],
+    phone: '+49 341 1232676', address: 'Otto-Schill-Straße 2, 04109 Leipzig', url: S.leipzigWelcome.url, topics: ['visa', 'work', 'housing'], sources: [S.leipzigWelcome, S.leipzigWelcomeAdvice],
   },
   {
     id: 'studentenwerk', name: 'Studentenwerk Leipzig — Social counselling', kind: L('For students', 'विद्यार्थीका लागि', 'छात्रों के लिए'), free: true,
@@ -453,7 +454,7 @@ export const helpServices: HelpService[] = [
       'करिब २७ वर्षमाथिका वयस्कका लागि आवास अनुमतिपत्र, सरकारी चिठी, काम र भाषा कक्षामा सहयोग।',
       'लगभग 27 साल से ऊपर के वयस्कों के लिए निवास परमिट, सरकारी पत्र, काम और भाषा कोर्स में मदद।',
     ),
-    phone: '+493419636125', email: 'migrantenhilfe@caritas-leipzig.de', address: 'Ruth-Pfau-Straße 2, 04107 Leipzig', url: S.caritasMbe.url, topics: ['visa', 'work'], sources: [S.caritasMbe],
+    phone: '+49 341 9636125', email: 'migrantenhilfe@caritas-leipzig.de', address: 'Ruth-Pfau-Straße 2, 04107 Leipzig', url: S.caritasMbe.url, topics: ['visa', 'work'], sources: [S.caritasMbe],
   },
   {
     id: 'naomi-jmd', name: 'Diakonie Leipzig — Jugendmigrationsdienst Naomi', kind: L('Migration counselling, 12–27', 'आप्रवासन परामर्श, १२–२७', 'प्रवासन परामर्श, 12–27'), free: true,
@@ -462,7 +463,7 @@ export const helpServices: HelpService[] = [
       '१२ देखि २७ वर्षका लागि युवा आप्रवासन सेवा: बसाइ, पढाइ, तालिम, काम र दैनिक प्रश्न।',
       '12 से 27 साल के लोगों के लिए युवा प्रवासन सेवा: निवास, पढ़ाई, प्रशिक्षण, नौकरी और रोज़मर्रा के सवाल।',
     ),
-    phone: '+4934168709124', email: 'jmd@diakonie-leipzig.de', address: 'Eisenbahnstraße 66, 04315 Leipzig', url: S.naomiJmd.url, topics: ['visa', 'study', 'work'], sources: [S.naomiJmd],
+    phone: '+49 341 68709124', email: 'jmd@diakonie-leipzig.de', address: 'Eisenbahnstraße 66, 04315 Leipzig', url: S.naomiJmd.url, topics: ['visa', 'study', 'work'], sources: [S.naomiJmd],
   },
   {
     id: 'mieterverein', name: 'Mieterverein Leipzig', kind: L('Tenants’ association', 'भाडावाल संघ', 'किरायेदार संघ'), free: false,
@@ -472,7 +473,7 @@ export const helpServices: HelpService[] = [
       'भाडा सम्झौता, धरौटी र सेवा शुल्कको बिल जाँच्छ, र घरधनीसँगको विवादमा सदस्यलाई सल्लाह दिन्छ।',
       'किराया अनुबंध, जमानत और सेवा शुल्क के बिल जांचता है, और मकान मालिक से विवाद में सदस्यों को सलाह देता है।',
     ),
-    phone: '+493412131277', url: S.mieterverein.url, topics: ['housing'], sources: [S.mieterverein, S.mietervereinFaq],
+    phone: '+49 341 2131277', url: S.mieterverein.url, topics: ['housing'], sources: [S.mieterverein, S.mietervereinFaq],
   },
   {
     id: 'p116117', name: '116117 — Patient service', kind: L('Doctor at night and weekends', 'राति र सप्ताहान्तमा डाक्टर', 'रात और सप्ताहांत में डॉक्टर'), free: true,
@@ -490,7 +491,7 @@ export const helpServices: HelpService[] = [
       'धेरै दबाब वा एक्लो महसुस भइरहेको छ? दिन होस् वा रात, जुनसुकै बेला गोप्य र निःशुल्क रूपमा कसैसँग कुरा गर्नुहोस्।',
       'बहुत दबाव या अकेलापन महसूस हो रहा है? दिन हो या रात, कभी भी गुमनाम और मुफ़्त में किसी से बात करें।',
     ),
-    phone: '08001110111', url: 'https://www.telefonseelsorge.de/', topics: ['health'], sources: [{ title: 'TelefonSeelsorge Deutschland', url: 'https://www.telefonseelsorge.de/' }],
+    phone: '0800 111 0 111', url: 'https://www.telefonseelsorge.de/', topics: ['health'], sources: [{ title: 'TelefonSeelsorge Deutschland', url: 'https://www.telefonseelsorge.de/' }],
   },
 ];
 

@@ -4,7 +4,7 @@ import { Pressable, TextInput, View } from 'react-native';
 import { useTranslation } from 'react-i18next';
 
 import { useCities } from '@/content/client';
-import { citySlug, GERMAN_CITIES } from '@/content/germanCities';
+import { citySlug, GERMAN_CITIES, normalizeCity, searchCities } from '@/content/germanCities';
 import { setProfile, usePrefs } from '@/store/prefs';
 import { useTheme } from '@/theme/ThemeProvider';
 import { fonts } from '@/theme/tokens';
@@ -21,12 +21,14 @@ export function CityStep() {
   const [q, setQ] = useState('');
   const withGuide = pages.filter((p) => p.facts.length || p.appointments.length);
 
+  // Cities with a hand-written page (official appointments) first, then all others A–Z.
+  const featured = pages.filter((p) => p.appointments.length).map((p) => p.name);
   const list = useMemo(() => {
-    const query = q.trim().toLowerCase();
-    const names = new Set([...withGuide.map((p) => p.name), ...GERMAN_CITIES]);
-    return [...names].filter((n) => !query || n.toLowerCase().includes(query)).slice(0, query ? 40 : 12);
-  }, [q, withGuide]);
-  const exact = list.some((n) => n.toLowerCase() === q.trim().toLowerCase());
+    const names = [...new Set([...featured, ...withGuide.map((p) => p.name), ...GERMAN_CITIES])];
+    return q.trim() ? searchCities(names, q).slice(0, 40) : names.slice(0, 12);
+  }, [q, withGuide, featured]);
+  // Offer the typed name only when nothing in the list matches it.
+  const exact = list.some((n) => normalizeCity(n) === normalizeCity(q)) || (q.trim().length > 1 && list.length > 0);
   const pick = (name: string) => setProfile({ city: citySlug(name), cityName: name });
   const selectedName = city && city !== 'undecided' ? (withGuide.find((p) => p.slug === city)?.name ?? cityName ?? city) : null;
 
@@ -46,8 +48,8 @@ export function CityStep() {
       <View accessibilityRole="radiogroup" style={{ gap: 10 }}>
         {list.map((name) => {
           const slug = citySlug(name);
-          const hasGuide = withGuide.some((p) => p.slug === slug);
-          return <SelectCard key={slug} title={name} sub={hasGuide ? t('onboarding.cityGuideAvailable') : undefined} selected={city === slug} onPress={() => pick(name)} />;
+          const full = featured.includes(name);
+          return <SelectCard key={slug} title={name} sub={full ? t('onboarding.cityGuideAvailable') : undefined} selected={city === slug} onPress={() => pick(name)} />;
         })}
         {q.trim().length > 1 && !exact ? (
           <Pressable accessibilityRole="button" onPress={() => pick(q.trim())}

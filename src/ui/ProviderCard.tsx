@@ -5,6 +5,8 @@ import { Pressable, View } from 'react-native';
 import { useTranslation } from 'react-i18next';
 
 import { useL } from '@/content/client';
+import i18n from '@/i18n';
+import { formatMoney, localizeDigits } from '@/lib/format';
 import type { Provider } from '@/content/types';
 import { useTheme } from '@/theme/ThemeProvider';
 import { Pill } from './Chip';
@@ -17,11 +19,12 @@ const isPlaceholder = (v: string) => v.includes('[');
 
 export function rowsFor(p: Provider, t: (k: string) => string): ProviderRow[] {
   return [
+    { label: t('tools.firstYear'), value: p.yearOneCost != null ? formatMoney(p.yearOneCost, i18n.language, p.yearOneCost % 1 ? 2 : 0) : '' },
     { label: t('tools.setupFee'), value: p.setupFee ?? '' },
     { label: t('tools.monthlyFee'), value: p.monthlyFee },
     { label: t('tools.openingTime'), value: p.openingTime },
     { label: t('tools.payout'), value: p.payout ?? '' },
-  ].filter((r) => r.value);
+  ].filter((r) => r.value).map((r) => ({ ...r, value: localizeDigits(r.value.replace(/(\d),(\d{2})\b/, '$1.$2'), i18n.language) }));
 }
 
 function Value({ row }: { row: ProviderRow }) {
@@ -52,7 +55,11 @@ export function openProvider(p: Provider) {
 }
 
 /** ProviderCard: default, highlighted, referral (ComparePage). */
-export function ProviderCard({ provider, highlighted, badge }: { provider: Provider; highlighted?: boolean; badge?: string }) {
+export function ProviderCard({ provider, highlighted, badge, forYou }: {
+  provider: Provider; highlighted?: boolean; badge?: string;
+  /** What this costs the person (bank comparison with an age). */
+  forYou?: { tone: 'success' | 'warning' | 'neutral'; label: string };
+}) {
   const { t } = useTranslation();
   const th = useTheme();
   const { c } = th;
@@ -72,6 +79,12 @@ export function ProviderCard({ provider, highlighted, badge }: { provider: Provi
         </View>
         {badge ? <Pill label={badge} tone="tint" /> : null}
       </View>
+      {forYou ? (
+        <View style={{ alignSelf: 'flex-start', borderRadius: 8, paddingVertical: 4, paddingHorizontal: 10,
+          backgroundColor: forYou.tone === 'success' ? c.successBg : forYou.tone === 'warning' ? c.warningBg : c.divider }}>
+          <Text size={13} weight="700" color={forYou.tone === 'success' ? 'successText' : forYou.tone === 'warning' ? 'warningText' : 'text2'}>{forYou.label}</Text>
+        </View>
+      ) : null}
       {provider.notice ? (
         <View style={{ backgroundColor: c.warningBg, borderRadius: 10, paddingVertical: 8, paddingHorizontal: 10 }}>
           <Text size={13} weight="600" color="warningText">{l(provider.notice)}</Text>

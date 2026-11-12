@@ -6,16 +6,23 @@ import { useTranslation } from 'react-i18next';
 import { useProviders, useRules } from '@/content/client';
 import type { ProviderCategory, Source } from '@/content/types';
 import { formatDate } from '@/lib/deadline';
+import { createPersistedStore } from '@/lib/createStore';
+import { digits, formatMoney, toAsciiDigits } from '@/lib/format';
+import i18n from '@/i18n';
 import { useLayout } from '@/lib/useLayout';
 import { useTheme } from '@/theme/ThemeProvider';
-import { AdSlot, DETag, ProviderCard, ProviderTable, Screen, Skeleton, SourcesList, Text } from '@/ui';
+import { AdSlot, DETag, ProviderCard, ProviderTable, Screen, Skeleton, SourcesList, Text, TextField } from '@/ui';
+import { type ForYou, providerForAge, yearlyCostForAge } from './providerForYou';
 
 const TOPICS: Record<string, { cat: ProviderCategory; key: 'blocked' | 'bank'; de: string; guide: string }> = {
   'blocked-accounts': { cat: 'blocked', key: 'blocked', de: 'Sperrkonto', guide: '/guides/open-a-blocked-account' },
   'bank-accounts': { cat: 'bank', key: 'bank', de: 'Girokonto', guide: '/guides/open-a-bank-account' },
 };
 
-const eur = (n: number) => `€${n.toLocaleString('de-DE')}`;
+const eur = (n: number, d = 0) => formatMoney(n, i18n.language, d);
+
+/** The age typed on the bank comparison, remembered on this device. */
+const compareStore = createPersistedStore<{ age: number | null }>('compare.v1', { age: null });
 
 /**
  * Comparisons: referral links are labelled, the ranking is never by commission
@@ -29,7 +36,20 @@ export function CompareScreen({ topic }: { topic: string }) {
   const cfg = TOPICS[topic] ?? TOPICS['blocked-accounts'];
   const { data = [], isLoading } = useProviders();
   const { data: rules } = useRules();
-  const list = useMemo(() => data.filter((p) => p.category === cfg.cat && !/\[.+\]/.test(p.name)).sort((a, b) => a.feeSortKey - b.feeSortKey), [data, cfg.cat]);
+  const { age } = compareStore.useStore();
+  const isBank = cfg.cat === 'bank';
+  const forAge = isBank && age != null;
+  const list = useMemo(() => data
+    .filter((p) => p.category === cfg.cat && !/\[.+\]/.test(p.name))
+    .sort((a, b) => (forAge ? yearlyCostForAge(a, age) - yearlyCostForAge(b, age) : 0) || a.feeSortKey - b.feeSortKey), [data, cfg.cat, forAge, age]);
+  // "Lowest fees" only when one provider really is cheaper than the next.
+  const cost = (p: (typeof list)[number]) => (forAge ? yearlyCostForAge(p, age) : p.yearOneCost ?? p.feeSortKey);
+  const uniqueCheapest = list.length > 1 && cost(list[0]) < cost(list[1]) && !(isBank && !forAge);
+  const forYouLabel = (f: ForYou) =>
+    f.kind === 'free' ? { tone: 'success' as const, label: t('compare.freeForYou') }
+    : f.kind === 'paid' ? { tone: 'warning' as const, label: t('compare.paidForYou', { amount: eur(f.monthly, 2) }) }
+    : f.kind === 'check' ? { tone: 'neutral' as const, label: t('compare.checkBranch', { age: f.age }) }
+    : undefined;
   const title = t(`tools.${cfg.key}`);
   const checked = list.map((p) => p.lastChecked).sort().pop();
   const monthly = rules?.blockedAccountMonthly ?? 0;
@@ -55,17 +75,28 @@ export function CompareScreen({ topic }: { topic: string }) {
         <Text size={13} weight="700" color="primary" uppercase heading>{t('compare.whatMatters')}</Text>
         {matters.map((m, i) => (
           <View key={m.head} style={{ flexDirection: 'row', gap: 10 }}>
-            <View style={{ width: 24, height: 24, borderRadius: 12, backgroundColor: c.primaryTint, alignItems: 'center', justifyContent: 'center' }}><Text size={13} weight="700" color="primary">{i + 1}</Text></View>
+            <View style={{ width: 24, height: 24, borderRadius: 12, backgroundColor: c.primaryTint, alignItems: 'center', justifyContent: 'center' }}><Text size={13} weight="700" color="primary">{digits(i + 1, i18n.language)}</Text></View>
             <Text style={{ flex: 1 }} size={14}><Text size={14} weight="700">{m.head}</Text> {m.body}</Text>
           </View>
         ))}
         <Link href={cfg.guide as never}><Text size={14} weight="600" color="primary">{t(`compare.${cfg.key}.guideLink`)}</Text></Link>
       </View>
 
-      <Text weight="600">{t('compare.count', { count: list.length })} · {t('compare.sortedBy')}</Text>
+      {isBank ? (
+        <View style={{ gap: 6 }}>
+          <View style={{ maxWidth: 200 }}>
+            <TextField label={t('compare.ageLabel')} value={age == null ? '' : String(age)} keyboardType="number-pad" inputMode="numeric"
+              onChangeText={(v) => { const n = parseInt(toAsciiDigits(v), 10); compareStore.set({ age: Number.isFinite(n) && n > 0 && n < 100 ? n : null }); }} />
+          </View>
+          <Text size={14} color="text2">{forAge ? t('compare.ageSet') : t('compare.agePrompt')}</Text>
+        </View>
+      ) : null}
+
+      <Text weight="600">{t('compare.count', { count: list.length })} · {forAge ? t('compare.sortedForYou') : t('compare.sortedBy')}</Text>
 
       {isLoading ? <Skeleton /> : desktop ? <ProviderTable providers={list} /> : list.map((p, i) => (
-        <ProviderCard key={p.id} provider={p} highlighted={i === 0} badge={i === 0 ? t('tools.sortFees') : undefined} />
+        <ProviderCard key={p.id} provider={p} highlighted={i === 0 && uniqueCheapest} badge={i === 0 && uniqueCheapest ? t('tools.sortFees') : undefined}
+          forYou={forAge ? forYouLabel(providerForAge(p, age)) : undefined} />
       ))}
 
       <Text variant="caption" color="muted">{t('compare.rankingNote')}</Text>

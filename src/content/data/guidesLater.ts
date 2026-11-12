@@ -67,6 +67,9 @@ export const guidesLater: Guide[] = [
       { kind: 'guide', title: L('Activate your health insurance', 'स्वास्थ्य बीमा सक्रिय गर्नुहोस्', 'स्वास्थ्य बीमा सक्रिय करें'), href: '/guides/activate-health-insurance' },
       { kind: 'tool', title: L('Safety and emergency numbers', 'सुरक्षा र आपतकालीन नम्बर', 'सुरक्षा और आपातकालीन नंबर'), href: '/tools/safety' },
     ],
+    actions: [
+      { label: L('Find a doctor on 116117', '116117 मा डाक्टर खोज्नुहोस्', '116117 पर डॉक्टर खोजें'), url: S.p116117.url },
+    ],
     sources: [S.p116117, S.p116117Duty, S.kbv116117],
   },
   {
@@ -238,6 +241,9 @@ export const guidesLater: Guide[] = [
       { kind: 'tool', title: L('Net pay calculator', 'खुद तलब क्याल्कुलेटर', 'शुद्ध वेतन कैलकुलेटर'), href: '/tools/net-pay' },
       { kind: 'guide', title: L('Get your tax ID', 'आफ्नो कर आईडी लिनुहोस्', 'अपनी टैक्स आईडी पाएं'), href: '/guides/get-your-tax-id' },
     ],
+    actions: [
+      { label: L('Open ELSTER', 'ELSTER खोल्नुहोस्', 'ELSTER खोलें'), url: S.elster.url },
+    ],
     sources: [S.elster, S.bmfTax2026, S.bmfAoDeadlines],
   },
   {
@@ -317,6 +323,9 @@ export const guidesLater: Guide[] = [
       { kind: 'guide', title: L('Stay and look for work after graduation', 'स्नातकपछि बसेर काम खोज्नुहोस्', 'स्नातक के बाद रहकर नौकरी खोजें'), href: '/guides/job-search-after-graduation' },
       { kind: 'guide', title: L('Apply for your residence permit', 'आवास अनुमतिपत्रका लागि आवेदन दिनुहोस्', 'निवास परमिट के लिए आवेदन करें'), href: '/guides/book-residence-permit-appointment' },
     ],
+    actions: [
+      { label: L('Apply online', 'अनलाइन आवेदन दिनुहोस्', 'ऑनलाइन आवेदन करें'), url: S.leipzigOnlineStudy.url },
+    ],
     sources: [S.leipzigPermitStudy, S.leipzigOnlineStudy, S.leipzigPermitStudyEn, S.nepalEmbassy],
   },
   {
@@ -384,6 +393,9 @@ export const guidesLater: Guide[] = [
     related: [
       { kind: 'guide', title: L('Extend your residence permit', 'आवास अनुमतिपत्र नवीकरण गर्नुहोस्', 'निवास परमिट बढ़वाएं'), href: '/guides/extend-your-residence-permit' },
       { kind: 'tool', title: L('Net pay calculator', 'खुद तलब क्याल्कुलेटर', 'शुद्ध वेतन कैलकुलेटर'), href: '/tools/net-pay' },
+    ],
+    actions: [
+      { label: L('Apply online', 'अनलाइन आवेदन दिनुहोस्', 'ऑनलाइन आवेदन करें'), url: S.leipzigOnlineWork.url },
     ],
     sources: [S.leipzigJobSearch, S.leipzigOnlineWork, S.bamfGraduates, S.mkigAfterStudies],
   },
